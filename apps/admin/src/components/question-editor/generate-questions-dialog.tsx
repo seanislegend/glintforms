@@ -53,7 +53,9 @@ const GenerateQuestionsDialog: React.FC<Props> = ({isPending, surveyId}) => {
                 const updatedQuestions = [...currentQuestions, ...generatedQuestions];
                 setValue('questions', updatedQuestions);
                 highlight('questions-list');
-                toast.success(`Generated ${generatedQuestions.length} questions`);
+                toast.success(
+                    `Generated ${generatedQuestions.length} questions, please review them and save the survey.`
+                );
                 setIsOpen(false);
                 generateFormMethods.reset();
             },
