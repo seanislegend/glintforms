@@ -1,0 +1,87 @@
+---
+globs: api/**/*.ts,trpc/**/*.ts
+alwaysApply: false
+---
+
+# APIs & data fetching
+
+- **TRPC**: Use TRPC for type-safe API calls
+- **Route handlers**: Use Next.js App Router API routes
+- **Error handling**: Implement proper error handling in API routes
+- **Validation**: Use Zod for API input/output validation
+- **Caching**: Use TanStack Query for client-side caching
+
+## TRPC patterns
+
+- **Type safety**: Leverage TRPC for end-to-end type safety
+- **Routers**: Organise routers by feature
+- **Procedures**: Use public and protected procedures
+- **Error handling**: Use TRPCError for consistent error handling
+- **Context**: Pass user context to procedures
+
+## TRPC setup
+
+```typescript
+// Router setup
+export const surveysRouter = {
+  list: protectedProcedure.query(async ({ctx}) => {
+    const data = await ctx.db
+      .select()
+      .from(surveys)
+      .where(eq(surveys.userId, ctx.user.id));
+    return data;
+  }),
+  
+  create: protectedProcedure
+    .input(surveyInsertSchema)
+    .mutation(async ({input, ctx}) => {
+      const [data] = await ctx.db
+        .insert(surveys)
+        .values({
+          ...input,
+          userId: ctx.user.id
+        })
+        .returning();
+      return data;
+    })
+};
+
+// Client usage
+const {data: surveys} = useQuery(trpc.surveys.getAll.queryOptions());
+const createSurvey = useMutation(trpc.surveys.create.mutationOptions());
+```
+
+## API route handlers
+
+```typescript
+// Next.js API route
+export const OPTIONS = () => {
+  const response = new Response(null, {status: 204});
+  setCorsHeaders(response);
+  return response;
+};
+
+const handler = async (req: NextRequest) => {
+  const response = await fetchRequestHandler({
+    endpoint: '/api/trpc',
+    router: appRouter,
+    req,
+    createContext: () => createTRPCContext({headers: req.headers}),
+    onError({error, path}) {
+      console.error(`>>> tRPC Error on '${path}'`, error);
+    }
+  });
+
+  setCorsHeaders(response);
+  return response;
+};
+```
+
+## Error handling
+
+- **TRPCError**: Use TRPCError for consistent error handling
+- **Validation errors**: Handle Zod validation errors
+- **Database errors**: Handle database errors gracefully
+- **Network errors**: Handle network errors in client
+- **User feedback**: Provide meaningful error messages
+- **User Feedback**: Provide meaningful error messages

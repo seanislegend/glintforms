@@ -1,0 +1,70 @@
+---
+globs: app/**/*.ts,app/**/*.tsx
+alwaysApply: false
+---
+
+# State management
+
+- **Global state**: Use Jotai for global state management
+- **Local state**: Use React's `useState` for component-local state
+- **Context**: Use React Context for deeply nested state sharing
+- **Server state**: Use TanStack Query for server state management
+- **Atom structure**: Define atoms in `src/lib/store.ts`
+
+## State patterns
+
+- **Jotai atoms**: Use atoms for global state
+- **TanStack Query**: Use for server state and caching
+- **Local state**: Use useState for component-specific state
+- **Context**: Use for deeply nested state sharing
+- **Derived state**: Use computed atoms for derived state
+
+## Jotai patterns
+
+```typescript
+// Define atoms
+import {atom} from 'jotai';
+
+export interface BreadcrumbItem {
+  href?: string;
+  label: string;
+}
+
+export const breadcrumbsAtom = atom<BreadcrumbItem[]>([]);
+export const highlightsAtom = atom<Record<string, number>>({});
+
+// Derived atoms
+export const hasHighlightsAtom = atom((get) => {
+  const highlights = get(highlightsAtom);
+  return Object.keys(highlights).length > 0;
+});
+```
+
+## TanStack Query patterns
+
+```typescript
+// Query hooks
+const {data: surveys, isLoading} = useQuery(trpc.surveys.getAll.queryOptions());
+
+// Mutations
+const createSurvey = useMutation(
+  trpc.surveys.create.mutationOptions({
+    onSuccess: async (data) => {
+      await queryClient.invalidateQueries({
+        queryKey: trpc.surveys.getAll.queryKey()
+      });
+      toast.success('Survey created successfully');
+      router.push(`/surveys/${data?.id}`);
+    }
+  })
+);
+```
+
+## State organisation
+
+- **Global atoms**: Define in `src/lib/store.ts`
+- **Feature atoms**: Define in feature-specific files
+- **Server state**: Use TRPC with TanStack Query
+- **Form state**: Use React Hook Form
+- **UI state**: Use local state for UI-specific state
+- **UI State**: Use local state for UI-specific state

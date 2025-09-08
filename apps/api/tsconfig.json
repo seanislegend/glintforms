@@ -1,0 +1,13 @@
+{
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+        "baseUrl": ".",
+        "outDir": "./dist",
+        "paths": {
+            "@/*": ["./src/*"],
+            "@glint/database": ["../../packages/database/src/index.ts"]
+        }
+    },
+    "include": ["src/**/*", "tests/routes/surveys.test.ts", "tests/setup.ts"],
+    "exclude": ["node_modules", "dist"]
+}

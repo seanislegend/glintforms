@@ -1,0 +1,144 @@
+---
+alwaysApply: true
+---
+
+# Code quality
+
+- **Biome**: Use Biome for linting and formatting
+- **Type checking**: Run `tsc --noEmit` for type checking
+- **Import organisation**: Use Biome's organise imports feature
+- **Code style**: Follow consistent code style with Biome configuration
+- **Comments**: Write clear, lowercase comments where necessary
+
+## Code style
+
+- **Formatting**: Use Biome for consistent formatting
+- **Linting**: Use Biome's linting rules
+- **Import sorting**: Organise imports automatically
+- **Code comments**: Write clear, concise comments
+- **Naming**: Use descriptive, consistent naming
+
+## Biome configuration
+
+```json
+{
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 4,
+    "lineWidth": 100
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true
+    }
+  },
+  "assist": {
+    "enabled": true,
+    "actions": {
+      "source": {
+        "organiseImports": "on"
+      }
+    }
+  }
+}
+```
+
+## Type checking
+
+```bash
+# Type checking
+tsc --noEmit
+
+# Type checking with strict mode
+tsc --noEmit --strict
+```
+
+## Code review guidelines
+
+- **Type safety**: Ensure all code is type-safe
+- **Error handling**: Implement proper error handling
+- **Performance**: Consider performance implications
+- **Accessibility**: Ensure accessibility standards
+- **Testing**: Write tests for critical functionality
+- **Documentation**: Document complex logic
+
+## Best practices
+
+- **DRY principle**: Don't repeat yourself
+- **Single responsibility**: Each function/component has one responsibility
+- **Clean code**: Write readable, maintainable code
+- **Consistent patterns**: Use consistent patterns throughout the codebase
+- **Error boundaries**: Implement proper error boundaries
+- **Error Boundaries**: Implement proper error boundaries
+# Code quality
+
+- **Biome**: Use Biome for linting and formatting
+- **Type checking**: Run `tsc --noEmit` for type checking
+- **Import organisation**: Use Biome's organise imports feature
+- **Code style**: Follow consistent code style with Biome configuration
+- **Comments**: Write clear, lowercase comments where necessary
+
+## Code style
+
+- **Formatting**: Use Biome for consistent formatting
+- **Linting**: Use Biome's linting rules
+- **Import sorting**: Organise imports automatically
+- **Code comments**: Write clear, concise comments
+- **Naming**: Use descriptive, consistent naming
+
+## Biome configuration
+
+```json
+{
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 4,
+    "lineWidth": 100
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true
+    }
+  },
+  "assist": {
+    "enabled": true,
+    "actions": {
+      "source": {
+        "organiseImports": "on"
+      }
+    }
+  }
+}
+```
+
+## Type checking
+
+```bash
+# Type checking
+tsc --noEmit
+
+# Type checking with strict mode
+tsc --noEmit --strict
+```
+
+## Code review guidelines
+
+- **Type safety**: Ensure all code is type-safe
+- **Error handling**: Implement proper error handling
+- **Performance**: Consider performance implications
+- **Accessibility**: Ensure accessibility standards
+- **Testing**: Write tests for critical functionality
+- **Documentation**: Document complex logic
+
+## Best practices
+
+- **DRY principle**: Don't repeat yourself
+- **Single responsibility**: Each function/component has one responsibility
+- **Clean code**: Write readable, maintainable code
+- **Consistent patterns**: Use consistent patterns throughout the codebase
+- **Error boundaries**: Implement proper error boundaries
+- **Error Boundaries**: Implement proper error boundaries

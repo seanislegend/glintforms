@@ -1,0 +1,50 @@
+---
+globs: app/**/*.tsx,*.css
+alwaysApply: false
+---
+
+# CSS & Tailwind
+
+- **Tailwind CSS v4**: Use latest Tailwind with `@tailwindcss/postcss`
+- **CSS variables**: Define design tokens in CSS custom properties
+- **Dark mode**: Use `@custom-variant dark (&:is(.dark *))` for dark mode
+- **Component styling**: Use Tailwind classes with semantic naming
+- **Responsive design**: Use Tailwind's responsive prefixes
+- **Custom CSS**: Minimise custom CSS, prefer Tailwind utilities
+
+## CSS architecture
+
+- **Design tokens**: Define all design tokens as CSS custom properties
+- **Component classes**: Use Tailwind utilities for component styling
+- **Layout classes**: Use Tailwind's layout utilities (flex, grid, etc.)
+- **Spacing system**: Use Tailwind's spacing scale consistently
+- **Color system**: Use semantic color names with CSS variables
+
+## Dark mode implementation
+
+```css
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.1448 0 0);
+  --primary: oklch(0.2603 0 0);
+  --primary-foreground: oklch(0.9851 0 0);
+}
+
+.dark {
+  --background: oklch(0.1448 0 0);
+  --foreground: oklch(0.9851 0 0);
+  --primary: oklch(0.5555 0 0);
+  --primary-foreground: oklch(0.9851 0 0);
+}
+```
+
+## Utility classes
+
+- **cn() function**: Use `cn()` utility for combining Tailwind classes
+- **Conditional classes**: Use conditional logic for dynamic classes
+- **Component variants**: Use cva for component variant styling
+- **Responsive classes**: Use Tailwind's responsive prefixes (sm:, md:, lg:)
+- **State classes**: Use Tailwind's state variants (hover:, focus:, active:)
+- **State Classes**: Use Tailwind's state variants (hover:, focus:, active:)

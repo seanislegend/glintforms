@@ -1,0 +1,164 @@
+---
+alwaysApply: true
+---
+
+# Writing style guidelines
+
+This file defines the writing style and tone for all copy, code comments, and documentation in the Glint project. The AI must follow these guidelines to maintain consistency and professionalism across the codebase.
+
+## High-level overview
+
+The AI should write in clear, professional British English using active voice. All text should be concise, accessible, and follow consistent formatting patterns. The goal is to create documentation and code that is easy to read, understand, and maintain.
+
+## Core principles
+
+- Use British English spelling and terminology
+- Use consistent punctuation throughout
+- Use consistent formatting and spacing
+- Use consistent naming conventions
+- Use consistent indentation in code
+- Prefer active voice over passive voice
+- Use sentence case for all titles and headings
+- Never use all caps for titles and headings
+- Avoid negative passive constructions
+- Write clear, concise sentences
+- Use consistent terminology across the application
+
+## Deprecated patterns (DO NOT USE)
+
+❌ **Avoid these patterns:**
+- "The user is not able to login"
+- "The user is unable to login"
+- "A Page Title"
+- "The system will not allow access"
+- "Data cannot be saved"
+- "The form is not valid"
+- "An Error Occurred"
+- "Please Wait While Loading"
+- "The survey has not been completed"
+- "Responses are not being collected"
+- "The user is not authenticated"
+- "The file cannot be uploaded"
+- "The system does not support this feature"
+
+## Correct patterns (USE THESE)
+
+✅ **Use these patterns instead:**
+- "The user can log in"
+- "A page title"
+- "The system allows access"
+- "Data saves successfully"
+- "The form is valid"
+- "An error occurred"
+- "Please wait while loading"
+- "The survey is incomplete"
+- "Responses are being collected"
+- "The question requires an answer"
+- "The response has been submitted"
+- "The survey is now live"
+- "The campaign is active"
+- "The export is ready"
+- "The import completed successfully"
+- "The settings have been updated"
+- "The user has been authenticated"
+- "The data has been processed"
+- "The file has been uploaded"
+- "The system supports this feature"
+- "The user can access the dashboard"
+- "The form validates input automatically"
+
+## Verification steps
+
+Before completing any writing task, the AI must verify:
+
+1. **British English check**: All text uses British English spelling (e.g., "organisation" not "organization")
+2. **Active voice check**: No negative passive constructions are used
+3. **Sentence case check**: All headings and titles use sentence case
+4. **Consistency check**: Terminology is consistent throughout the text
+5. **Clarity check**: All sentences are clear and concise
+
+**Consequences of verification failures:**
+- Text that doesn't follow British English conventions will appear unprofessional
+- Negative passive voice makes content harder to read and understand
+- Inconsistent terminology confuses users and developers
+- Poor formatting reduces readability and maintainability
+# Writing style guidelines
+
+This file defines the writing style and tone for all copy, code comments, and documentation in the Glint project. The AI must follow these guidelines to maintain consistency and professionalism across the codebase.
+
+## High-level overview
+
+The AI should write in clear, professional British English using active voice. All text should be concise, accessible, and follow consistent formatting patterns. The goal is to create documentation and code that is easy to read, understand, and maintain.
+
+## Core principles
+
+- Use British English spelling and terminology
+- Use consistent punctuation throughout
+- Use consistent formatting and spacing
+- Use consistent naming conventions
+- Use consistent indentation in code
+- Prefer active voice over passive voice
+- Use sentence case for all titles and headings
+- Never use all caps for titles and headings
+- Avoid negative passive constructions
+- Write clear, concise sentences
+- Use consistent terminology across the application
+
+## Deprecated patterns (DO NOT USE)
+
+❌ **Avoid these patterns:**
+- "The user is not able to login"
+- "The user is unable to login"
+- "A Page Title"
+- "The system will not allow access"
+- "Data cannot be saved"
+- "The form is not valid"
+- "An Error Occurred"
+- "Please Wait While Loading"
+- "The survey has not been completed"
+- "Responses are not being collected"
+- "The user is not authenticated"
+- "The file cannot be uploaded"
+- "The system does not support this feature"
+
+## Correct patterns (USE THESE)
+
+✅ **Use these patterns instead:**
+- "The user can log in"
+- "A page title"
+- "The system allows access"
+- "Data saves successfully"
+- "The form is valid"
+- "An error occurred"
+- "Please wait while loading"
+- "The survey is incomplete"
+- "Responses are being collected"
+- "The question requires an answer"
+- "The response has been submitted"
+- "The survey is now live"
+- "The campaign is active"
+- "The export is ready"
+- "The import completed successfully"
+- "The settings have been updated"
+- "The user has been authenticated"
+- "The data has been processed"
+- "The file has been uploaded"
+- "The system supports this feature"
+- "The user can access the dashboard"
+- "The form validates input automatically"
+
+## Verification steps
+
+Before completing any writing task, the AI must verify:
+
+1. **British English check**: All text uses British English spelling (e.g., "organisation" not "organization")
+2. **Active voice check**: No negative passive constructions are used
+3. **Sentence case check**: All headings and titles use sentence case
+4. **Consistency check**: Terminology is consistent throughout the text
+5. **Clarity check**: All sentences are clear and concise
+
+**Consequences of verification failures:**
+- Text that doesn't follow British English conventions will appear unprofessional
+- Negative passive voice makes content harder to read and understand
+- Inconsistent terminology confuses users and developers
+- Poor formatting reduces readability and maintainability

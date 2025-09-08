@@ -1,0 +1,133 @@
+---
+globs: .tsx,database/src/**/*.ts,api/**/*.ts
+alwaysApply: false
+---
+# Security considerations
+
+- **Authentication**: Use Better Auth with magic links
+- **Authorization**: Implement protected routes with middleware
+- **Input validation**: Use Zod schemas for all input validation
+- **SQL injection**: Use parameterised queries with Drizzle ORM
+- **CORS**: Configure CORS headers in API routes
+- **Environment variables**: Use `.env.example` for environment configuration
+
+## Authentication & authorisation
+
+- **Better Auth**: Use Better Auth for authentication system
+- **Magic links**: Implement passwordless authentication with magic links
+- **Session management**: Use server-side session management
+- **Protected routes**: Use middleware for route protection
+- **Auth context**: Provide auth context throughout the application
+
+## Security patterns
+
+```typescript
+// Middleware for route protection
+export const middleware = async (request: NextRequest) => {
+  const session = await auth.api.getSession({
+    headers: await headers()
+  });
+
+  if (!session) {
+    if (request.nextUrl.pathname !== '/auth/sign-in') {
+      return NextResponse.redirect(new URL('/auth/sign-in', request.url));
+    }
+  }
+
+  return NextResponse.next();
+};
+
+// Protected TRPC procedures
+export const protectedProcedure = t.procedure.use(({ctx, next}) => {
+  if (!ctx.user) {
+    throw new TRPCError({code: 'UNAUTHORIZED'});
+  }
+  return next({
+    ctx: {...ctx, user: ctx.user}
+  });
+});
+```
+
+## Input validation
+
+- **Zod schemas**: Use Zod for all input validation
+- **Type safety**: Leverage TypeScript for compile-time safety
+- **Sanitisation**: Sanitise user inputs
+- **Rate limiting**: Implement rate limiting for API endpoints
+- **CSRF protection**: Use CSRF tokens where appropriate
+
+## Environment security
+
+- **Environment variables**: Store sensitive data in environment variables
+- **Secrets management**: Use proper secrets management
+- **Configuration**: Use `.env.example` for configuration templates
+- **Production**: Use production-specific configurations
+- **Database URLs**: Use secure connection strings
+
+- **Production**: Use production-specific configurations
+- **Database URLs**: Use secure connection strings
+
+# Security considerations
+
+- **Authentication**: Use Better Auth with magic links
+- **Authorization**: Implement protected routes with middleware
+- **Input validation**: Use Zod schemas for all input validation
+- **SQL injection**: Use parameterised queries with Drizzle ORM
+- **CORS**: Configure CORS headers in API routes
+- **Environment variables**: Use `.env.example` for environment configuration
+
+## Authentication & authorisation
+
+- **Better Auth**: Use Better Auth for authentication system
+- **Magic links**: Implement passwordless authentication with magic links
+- **Session management**: Use server-side session management
+- **Protected routes**: Use middleware for route protection
+- **Auth context**: Provide auth context throughout the application
+
+## Security patterns
+
+```typescript
+// Middleware for route protection
+export const middleware = async (request: NextRequest) => {
+  const session = await auth.api.getSession({
+    headers: await headers()
+  });
+
+  if (!session) {
+    if (request.nextUrl.pathname !== '/auth/sign-in') {
+      return NextResponse.redirect(new URL('/auth/sign-in', request.url));
+    }
+  }
+
+  return NextResponse.next();
+};
+
+// Protected TRPC procedures
+export const protectedProcedure = t.procedure.use(({ctx, next}) => {
+  if (!ctx.user) {
+    throw new TRPCError({code: 'UNAUTHORIZED'});
+  }
+  return next({
+    ctx: {...ctx, user: ctx.user}
+  });
+});
+```
+
+## Input validation
+
+- **Zod schemas**: Use Zod for all input validation
+- **Type safety**: Leverage TypeScript for compile-time safety
+- **Sanitisation**: Sanitise user inputs
+- **Rate limiting**: Implement rate limiting for API endpoints
+- **CSRF protection**: Use CSRF tokens where appropriate
+
+## Environment security
+
+- **Environment variables**: Store sensitive data in environment variables
+- **Secrets management**: Use proper secrets management
+- **Configuration**: Use `.env.example` for configuration templates
+- **Production**: Use production-specific configurations
+- **Database URLs**: Use secure connection strings
+
+- **Production**: Use production-specific configurations
+- **Database URLs**: Use secure connection strings

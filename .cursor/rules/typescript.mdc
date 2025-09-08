@@ -1,0 +1,247 @@
+---
+globs: .ts,.tsx
+alwaysApply: false
+---
+
+# TypeScript development guidelines
+
+This file defines the TypeScript patterns and conventions for the Glint project. The AI must follow these guidelines to ensure type-safe, maintainable, and consistent TypeScript code.
+
+## High-level overview
+
+The AI should write TypeScript code with strict type checking, proper type definitions, and consistent patterns. All code should be type-safe, use proper interfaces and types, and follow established naming conventions.
+
+## Essential code elements
+
+- Always use strict TypeScript configuration
+- Always provide explicit return types for functions
+- Always use interfaces for object shapes, types for unions/primitives
+- Always place types in `src/types/` directory with `.d.ts` extension
+- Always use Zod for runtime validation and type inference
+
+## Core patterns
+
+- **Strict mode**: Always use strict TypeScript configuration
+- **Type definitions**: Place types in `src/types/` directory with `.d.ts` extension
+- **Schema types**: Use Zod for runtime validation and type inference
+- **TRPC types**: Leverage TRPC for type-safe API calls
+- **Import sorting**: Use alphabetical import sorting
+- **Type annotations**: Always provide explicit return types for functions
+
+## Type safety patterns
+
+- **Interface vs type**: Use interfaces for object shapes, types for unions/primitives
+- **Generic types**: Use generics for reusable type-safe components
+- **Utility types**: Leverage TypeScript utility types (Pick, Omit, Partial, etc.)
+- **Type guards**: Use type guards for runtime type checking
+- **Discriminated unions**: Use discriminated unions for complex state management
+
+## Configuration
+
+```json
+{
+  "compilerOptions": {
+    "strict": true,
+    "strictNullChecks": true,
+    "noUncheckedIndexedAccess": true,
+    "moduleResolution": "nodenext",
+    "target": "ES2022"
+  }
+}
+```
+
+## Import organisation
+
+```typescript
+// External libraries (alphabetical)
+import {zod} from 'zod';
+import {useState} from 'react';
+
+// Internal imports (alphabetical)
+import {Button} from '@glint/ui/button';
+import {useTRPC} from '@/lib/trpc/react';
+
+// Relative imports (alphabetical)
+import {ComponentProps} from './types';
+```
+
+## Deprecated patterns (DO NOT USE)
+
+❌ **Avoid these patterns:**
+```typescript
+// Any types
+const data: any = fetchData();
+
+// Implicit any
+function processData(data) {
+  return data.map(item => item.name);
+}
+
+// Non-strict configuration
+{
+  "compilerOptions": {
+    "strict": false,
+    "noImplicitAny": false
+  }
+}
+
+// Mixed import styles
+import React from 'react';
+import {Button} from '@glint/ui/button';
+import * as utils from './utils';
+import {ComponentProps} from './types';
+```
+
+## Common pitfalls and solutions
+
+**Problem**: Using `any` type
+**Solution**: Use proper TypeScript types or `unknown` for truly unknown data
+
+**Problem**: Implicit return types
+**Solution**: Always provide explicit return types for functions
+
+**Problem**: Non-strict TypeScript configuration
+**Solution**: Use strict mode with all strict flags enabled
+
+**Problem**: Inconsistent import organisation
+**Solution**: Use alphabetical sorting with clear grouping
+
+**Problem**: Missing type definitions
+**Solution**: Always define proper interfaces and types
+
+## Verification steps
+
+Before completing any TypeScript task, the AI must verify:
+
+1. **Strict mode check**: Code works with strict TypeScript configuration
+2. **Type safety check**: No `any` types or implicit any
+3. **Import organisation check**: Imports are sorted alphabetically and grouped
+4. **Return type check**: All functions have explicit return types
+5. **Interface usage check**: Object shapes use interfaces, unions use types
+
+**Consequences of verification failures:**
+- Code with `any` types loses type safety benefits
+- Non-strict configuration allows unsafe code patterns
+- Poor import organisation makes code harder to maintain
+- Missing return types reduce code clarity and type safety
+# TypeScript development guidelines
+
+This file defines the TypeScript patterns and conventions for the Glint project. The AI must follow these guidelines to ensure type-safe, maintainable, and consistent TypeScript code.
+
+## High-level overview
+
+The AI should write TypeScript code with strict type checking, proper type definitions, and consistent patterns. All code should be type-safe, use proper interfaces and types, and follow established naming conventions.
+
+## Essential code elements
+
+- Always use strict TypeScript configuration
+- Always provide explicit return types for functions
+- Always use interfaces for object shapes, types for unions/primitives
+- Always place types in `src/types/` directory with `.d.ts` extension
+- Always use Zod for runtime validation and type inference
+
+## Core patterns
+
+- **Strict mode**: Always use strict TypeScript configuration
+- **Type definitions**: Place types in `src/types/` directory with `.d.ts` extension
+- **Schema types**: Use Zod for runtime validation and type inference
+- **TRPC types**: Leverage TRPC for type-safe API calls
+- **Import sorting**: Use alphabetical import sorting
+- **Type annotations**: Always provide explicit return types for functions
+
+## Type safety patterns
+
+- **Interface vs type**: Use interfaces for object shapes, types for unions/primitives
+- **Generic types**: Use generics for reusable type-safe components
+- **Utility types**: Leverage TypeScript utility types (Pick, Omit, Partial, etc.)
+- **Type guards**: Use type guards for runtime type checking
+- **Discriminated unions**: Use discriminated unions for complex state management
+
+## Configuration
+
+```json
+{
+  "compilerOptions": {
+    "strict": true,
+    "strictNullChecks": true,
+    "noUncheckedIndexedAccess": true,
+    "moduleResolution": "NodeNext",
+    "target": "ES2022"
+  }
+}
+```
+
+## Import organisation
+
+```typescript
+// External libraries (alphabetical)
+import {zod} from 'zod';
+import {useState} from 'react';
+
+// Internal imports (alphabetical)
+import {Button} from '@glint/ui/button';
+import {useTRPC} from '@/lib/trpc/react';
+
+// Relative imports (alphabetical)
+import {ComponentProps} from './types';
+```
+
+## Deprecated patterns (DO NOT USE)
+
+❌ **Avoid these patterns:**
+```typescript
+// Any types
+const data: any = fetchData();
+
+// Implicit any
+function processData(data) {
+  return data.map(item => item.name);
+}
+
+// Non-strict configuration
+{
+  "compilerOptions": {
+    "strict": false,
+    "noImplicitAny": false
+  }
+}
+
+// Mixed import styles
+import React from 'react';
+import {Button} from '@glint/ui/button';
+import * as utils from './utils';
+import {ComponentProps} from './types';
+```
+
+## Common pitfalls and solutions
+
+**Problem**: Using `any` type
+**Solution**: Use proper TypeScript types or `unknown` for truly unknown data
+
+**Problem**: Implicit return types
+**Solution**: Always provide explicit return types for functions
+
+**Problem**: Non-strict TypeScript configuration
+**Solution**: Use strict mode with all strict flags enabled
+
+**Problem**: Inconsistent import organisation
+**Solution**: Use alphabetical sorting with clear grouping
+
+**Problem**: Missing type definitions
+**Solution**: Always define proper interfaces and types
+
+## Verification steps
+
+Before completing any TypeScript task, the AI must verify:
+
+1. **Strict mode check**: Code works with strict TypeScript configuration
+2. **Type safety check**: No `any` types or implicit any
+3. **Import organisation check**: Imports are sorted alphabetically and grouped
+4. **Return type check**: All functions have explicit return types
+5. **Interface usage check**: Object shapes use interfaces, unions use types
+
+**Consequences of verification failures:**
+- Code with `any` types loses type safety benefits
+- Non-strict configuration allows unsafe code patterns
+- Poor import organisation makes code harder to maintain
+- Missing return types reduce code clarity and type safety

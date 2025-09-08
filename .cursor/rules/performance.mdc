@@ -1,0 +1,77 @@
+---
+globs: app/**/*.ts,app/**/*.tsx
+alwaysApply: false
+---
+
+# Performance
+
+- **TanStack Query**: Use TanStack Query for data fetching and caching
+- **Server components**: Use React Server Components where appropriate
+- **Code splitting**: Use dynamic imports for code splitting
+- **Image optimisation**: Use Next.js Image component
+- **Bundle analysis**: Monitor bundle size and performance
+
+## Performance patterns
+
+- **Data fetching**: Use TanStack Query for efficient data fetching
+- **Caching**: Implement proper caching strategies
+- **Code splitting**: Split code by routes and features
+- **Lazy loading**: Lazy load non-critical components
+- **Optimisation**: Use React.memo and useMemo where appropriate
+
+## TanStack Query optimisation
+
+```typescript
+// Optimised queries
+const {data: surveys, isLoading} = useQuery({
+  queryKey: ['surveys'],
+  queryFn: () => trpc.surveys.getAll.query(),
+  staleTime: 5 * 60 * 1000, // 5 minutes
+  cacheTime: 10 * 60 * 1000, // 10 minutes
+  refetchOnWindowFocus: false
+});
+
+// Optimistic updates
+const updateSurvey = useMutation({
+  mutationFn: trpc.surveys.update.mutate,
+  onMutate: async (newSurvey) => {
+    await queryClient.cancelQueries(['surveys']);
+    const previousSurveys = queryClient.getQueryData(['surveys']);
+    queryClient.setQueryData(['surveys'], (old) => 
+      old?.map(survey => 
+        survey.id === newSurvey.id ? {...survey, ...newSurvey} : survey
+      )
+    );
+    return {previousSurveys};
+  },
+  onError: (err, newSurvey, context) => {
+    queryClient.setQueryData(['surveys'], context?.previousSurveys);
+  }
+});
+```
+
+## Code splitting
+
+```typescript
+// Dynamic imports
+const DynamicComponent = dynamic(() => import('./HeavyComponent'), {
+  loading: () => <Spinner />,
+  ssr: false
+});
+
+// Route-based splitting
+const SurveyEditor = dynamic(() => import('@/components/survey-editor'), {
+  loading: () => <div>Loading editor...</div>
+});
+```
+
+## Bundle optimisation
+
+- **Tree shaking**: Ensure proper tree shaking
+- **Bundle analysis**: Use bundle analysers
+- **Dependencies**: Minimise dependencies
+- **Imports**: Use specific imports instead of wildcard imports
+- **Compression**: Enable compression in production
+
+- **Imports**: Use specific imports instead of wildcard imports
+- **Compression**: Enable compression in production

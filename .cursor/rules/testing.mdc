@@ -1,0 +1,72 @@
+# Testing
+
+- **Playwright**: Use Playwright for end-to-end testing
+- **Vitest**: Use Vitest for unit testing, never use Bun test
+- **Test structure**: Place tests in `tests/e2e/` directory
+- **Test data**: Use `@faker-js/faker` for generating test data
+- **Test scripts**: Use `bun run scripts/add-survey-test-data.ts` for test data
+
+Never use Bun for testing, always use Vitest.
+```bash
+bun run test:run
+```
+
+## Testing patterns
+
+- **E2E tests**: Write comprehensive end-to-end tests
+- **Unit tests**: Write unit tests for functions and components
+- **Test data generation**: Use Faker.js for realistic test data
+- **Test isolation**: Ensure tests are isolated and don't depend on each other
+- **Test coverage**: Aim for high test coverage of critical paths
+- **Visual testing**: Use Playwright for visual regression testing
+
+## Test structure
+
+```typescript
+// E2E test example
+import {test, expect} from '@playwright/test';
+
+test('user can create a survey', async ({page}) => {
+  await page.goto('/surveys/create');
+  await page.fill('[name="title"]', 'Test Survey');
+  await page.fill('[name="description"]', 'Test Description');
+  await page.click('button[type="submit"]');
+  await expect(page).toHaveURL(/\/surveys\/[a-zA-Z0-9-]+/);
+  await expect(page.locator('h1')).toContainText('Test Survey');
+});
+```
+
+```typescript
+// Unit test example
+import {describe, expect, it} from 'vitest';
+
+describe('survey', () => {
+  it('should be created', () => {
+    expect(true).toBe(true);
+  });
+});
+```
+
+## Test data generation
+
+```typescript
+// Using Faker.js for test data
+import {faker} from '@faker-js/faker';
+
+const generateSurveyData = () => ({
+  title: faker.lorem.words(3),
+  description: faker.lorem.paragraph(),
+  campaignTitle: faker.company.name()
+});
+
+// Test data script
+bun run scripts/add-survey-test-data.ts
+```
+
+## Testing best practices
+
+- **Page object model**: Use page objects for test organisation
+- **Test hooks**: Use beforeEach/afterEach for test setup/cleanup
+- **Assertions**: Use descriptive assertions with clear error messages
+- **Test naming**: Use descriptive test names that explain the scenario
+- **Performance**: Keep tests fast and efficient

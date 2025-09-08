@@ -1,0 +1,145 @@
+'use client';
+
+import RelativeDate from '@glint/ui/relative-date';
+import TextLink from '@glint/ui/text-link';
+import type {ColumnDef} from '@tanstack/react-table';
+import Link from 'next/link';
+import {DataTableColumnHeader} from '@/components/data-table/column-header';
+import {DataTableRowActions} from '@/components/data-table/row-actions';
+import RecordId from '@/components/record-id';
+import type {RespondentList} from '@/lib/schemas/respondents';
+import {humanise} from '@/utils/humanise';
+
+export const columns: ColumnDef<RespondentList>[] = [
+    {
+        accessorKey: 'id',
+        header: ({column}) => <DataTableColumnHeader column={column} title="ID" />,
+        cell: ({row}) => {
+            const id = row.getValue('id') as string;
+            return <RecordId href={`/surveys/${id}`} id={id} />;
+        },
+        enableSorting: false
+    },
+    {
+        accessorKey: 'name',
+        header: ({column}) => <DataTableColumnHeader column={column} title="Name" />,
+        cell: ({row}) => (
+            <Link
+                href={`/respondents/${row.original.id}`}
+                className="max-w-[500px] underline hover:decoration-2 underline-offset-2 truncate font-medium"
+            >
+                {row.getValue('name')}
+            </Link>
+        )
+    },
+    {
+        accessorKey: 'email',
+        header: ({column}) => <DataTableColumnHeader column={column} title="Email" />,
+        cell: ({row}) => (
+            <span className="max-w-[300px] truncate text-muted-foreground">
+                {row.getValue('email')}
+            </span>
+        )
+    },
+    {
+        accessorKey: 'campaigns',
+        header: ({column}) => <DataTableColumnHeader column={column} title="Campaigns" />,
+        cell: ({row}) => {
+            const surveys = row.getValue('surveys') as RespondentList['surveys'];
+            if (!surveys || surveys.length === 0) {
+                return <span className="text-muted-foreground">—</span>;
+            }
+
+            const campaigns = surveys
+                .filter(survey => survey.campaignId && survey.campaignTitle)
+                .map(survey => ({id: survey.campaignId, title: survey.campaignTitle}));
+            if (campaigns.length === 0) {
+                return <span className="text-muted-foreground">—</span>;
+            }
+
+            return (
+                <span className="max-w-[300px] truncate text-muted-foreground">
+                    {campaigns.map(campaign => (
+                        <TextLink href={`/campaigns/${campaign.id}`} key={campaign.id}>
+                            {campaign.title}
+                        </TextLink>
+                    ))}
+                </span>
+            );
+        },
+        filterFn: (row, _, value) => {
+            const surveys = row.getValue('surveys') as RespondentList['surveys'];
+            if (!surveys || surveys.length === 0) {
+                return false;
+            }
+
+            const campaignIds = surveys
+                .filter(survey => survey.campaignId)
+                .map(survey => survey.campaignId);
+            // check if any of the selected campaign ids match any of the respondent's campaigns
+            return value.some((selectedCampaignId: string) =>
+                campaignIds.includes(selectedCampaignId)
+            );
+        }
+    },
+    {
+        accessorKey: 'surveys',
+        header: ({column}) => <DataTableColumnHeader column={column} title="Surveys" />,
+        cell: ({row}) => {
+            const surveys = row.getValue('surveys') as RespondentList['surveys'];
+            if (!surveys || surveys.length === 0) {
+                return <span className="text-muted-foreground">—</span>;
+            }
+            return (
+                <span className="max-w-[300px] truncate text-muted-foreground">
+                    {surveys.map(survey => (
+                        <TextLink href={`/surveys/${survey.id}`} key={survey.id}>
+                            {survey.title}
+                        </TextLink>
+                    ))}
+                </span>
+            );
+        },
+        filterFn: (row, _, value) => {
+            const surveys = row.getValue('surveys') as RespondentList['surveys'];
+            if (!surveys || surveys.length === 0) {
+                return false;
+            }
+            const surveyIds = surveys.map(survey => survey.id);
+            return value.some((selectedSurveyId: string) => surveyIds.includes(selectedSurveyId));
+        }
+    },
+    {
+        accessorKey: 'gender',
+        header: ({column}) => <DataTableColumnHeader column={column} title="Gender" />,
+        cell: ({row}) => {
+            const gender = row.getValue('gender') as string;
+            return gender ? (
+                <span>{humanise(gender)}</span>
+            ) : (
+                <span className="text-muted-foreground">—</span>
+            );
+        },
+        filterFn: (row, id, value) => {
+            return value.includes(row.getValue(id));
+        }
+    },
+    {
+        accessorKey: 'updatedAt',
+        header: ({column}) => <DataTableColumnHeader column={column} title="Updated at" />,
+        cell: ({row}) => {
+            const updatedAt = row.getValue('updatedAt') as string;
+            return <RelativeDate className="text-muted-foreground" date={new Date(updatedAt)} />;
+        }
+    },
+    {
+        id: 'actions',
+        cell: ({row}) => (
+            <DataTableRowActions
+                detailsUrl={`/respondents/${row.original.id}`}
+                row={row}
+                editUrl={`/respondents/${row.original.id}/edit`}
+            />
+        )
+    }
+];

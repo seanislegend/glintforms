@@ -1,0 +1,163 @@
+---
+globs: app/**/*.tsx
+alwaysApply: false
+---
+
+# Form handling and validation guidelines
+
+This file defines the form patterns and validation conventions for the Glint project. The AI must follow these guidelines to ensure consistent, accessible, and type-safe form handling.
+
+## High-level overview
+
+The AI should create forms using React Hook Form with Zod validation, proper error handling, and consistent patterns. Forms should be accessible, provide clear feedback, and handle all edge cases gracefully.
+
+## Essential code elements
+
+- Always use `react-hook-form` for form state management
+- Always use `@hookform/resolvers/zod` for form validation
+- Always use `@glint/form/*` components for form fields
+- Always use `handleFormError` utility for form error handling
+- Always use `FormProvider` wrapper for form context
+
+## Core patterns
+
+- **React Hook Form**: Use `react-hook-form` for form state management
+- **Zod validation**: Use `@hookform/resolvers/zod` for form validation
+- **Form components**: Use `@glint/form/*` components for form fields
+- **Error handling**: Use `handleFormError` utility for form error handling
+- **Form structure**: Use `FormProvider` wrapper for form context
+
+## Form patterns
+
+- **Schema validation**: Define Zod schemas for form validation
+- **Field components**: Use consistent field components from `@glint/form`
+- **Error display**: Display field-level and form-level errors
+- **Loading states**: Show loading states during form submission
+- **Success handling**: Handle successful form submissions
+
+## Form structure pattern
+
+```tsx
+import {FormProvider, useForm} from 'react-hook-form';
+import {zodResolver} from '@hookform/resolvers/zod';
+import {FormField} from '@glint/form/fields';
+import {handleFormError} from '@glint/form/utils';
+
+const Form: React.FC = () => {
+  const methods = useForm<FormData>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      title: '',
+      description: ''
+    }
+  });
+
+  const handleSubmit: SubmitHandler<FormData> = async (data) => {
+    // handle form submission
+  };
+
+  return (
+    <FormProvider {...methods}>
+      <form onSubmit={methods.handleSubmit(handleSubmit, handleFormError)}>
+        <FormField
+          control={methods.control}
+          fieldType="input"
+          label="Title"
+          name="title"
+        />
+        <FormField
+          control={methods.control}
+          fieldType="textarea"
+          label="Description"
+          name="description"
+        />
+        <Button type="submit" pending={isPending}>
+          Submit
+        </Button>
+      </form>
+    </FormProvider>
+  );
+};
+```
+
+## Validation patterns
+
+```typescript
+// Zod schema
+const formSchema = z.object({
+  title: z.string().min(2, 'Title is too short').max(200, 'Title is too long'),
+  description: z.string().max(1000, 'Description is too long').optional(),
+  campaignId: z.string().optional()
+});
+
+// Custom validation
+const surveySettingsSchema = z.object({
+  maxResponses: z.string()
+    .refine(val => val === '' || !Number.isNaN(Number(val)), {
+      message: 'Maximum responses must be a number'
+    })
+    .refine(val => val === '' || Number(val) <= MAX_RESPONSE_HARD_LIMIT, {
+      message: `Maximum responses must be less than ${MAX_RESPONSE_HARD_LIMIT}`
+    })
+});
+```
+
+## Deprecated patterns (DO NOT USE)
+
+❌ **Avoid these patterns:**
+```tsx
+// Manual form state
+const [title, setTitle] = useState('');
+const [description, setDescription] = useState('');
+
+// Manual validation
+const validateForm = () => {
+  if (!title) return 'Title is required';
+  if (title.length < 2) return 'Title is too short';
+};
+
+// Inline error handling
+const handleSubmit = async (data) => {
+  try {
+    await submitData(data);
+  } catch (error) {
+    setError(error.message);
+  }
+};
+
+// Non-accessible form fields
+<input type="text" name="title" />
+```
+
+## Common pitfalls and solutions
+
+**Problem**: Manual form state management
+**Solution**: Use React Hook Form for efficient state management
+
+**Problem**: Manual validation logic
+**Solution**: Use Zod schemas for type-safe validation
+
+**Problem**: Inconsistent error handling
+**Solution**: Use `handleFormError` utility for consistent error handling
+
+**Problem**: Non-accessible form fields
+**Solution**: Use `@glint/form` components with proper accessibility
+
+**Problem**: Missing loading states
+**Solution**: Always show loading states during form submission
+
+## Verification steps
+
+Before completing any form task, the AI must verify:
+
+1. **Form library check**: Form uses React Hook Form with proper setup
+2. **Validation check**: Form uses Zod schemas for validation
+3. **Error handling check**: Form uses `handleFormError` utility
+4. **Accessibility check**: Form fields include proper labels and ARIA attributes
+5. **Loading state check**: Form shows loading states during submission
+
+**Consequences of verification failures:**
+- Forms without proper validation allow invalid data submission
+- Missing error handling creates poor user experience
+- Non-accessible forms exclude users with disabilities
+- Missing loading states confuse users about form status

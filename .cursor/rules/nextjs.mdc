@@ -1,0 +1,91 @@
+---
+globs: app/**/*.ts,app/**/*.tsx
+alwaysApply: false
+---
+
+# Next.js app router
+
+- **Route groups**: Use route groups for organising routes
+- **Layouts**: Use nested layouts for shared UI
+- **Loading states**: Implement loading states with Suspense
+- **Error boundaries**: Use error boundaries for error handling
+- **Metadata**: Use metadata API for SEO optimisation
+- **Server actions**: Use server actions for form submissions
+
+## App router patterns
+
+- **Route groups**: Use parentheses for route groups `(app)`, `(auth)`
+- **Layouts**: Create nested layouts for shared UI
+- **Pages**: Use page.tsx for route pages
+- **Loading**: Use loading.tsx for loading states
+- **Error**: Use error.tsx for error boundaries
+- **Not found**: Use not-found.tsx for 404 pages
+
+## Route structure
+
+```
+app/
+├── (app)/
+│   ├── layout.tsx
+│   ├── page.tsx
+│   ├── surveys/
+│   │   ├── [surveyId]/
+│   │   │   ├── layout.tsx
+│   │   │   ├── page.tsx
+│   │   │   ├── questions/
+│   │   │   └── responses/
+│   │   ├── create/
+│   │   └── page.tsx
+│   └── campaigns/
+├── (auth)/
+│   └── auth/
+└── api/
+    └── trpc/
+```
+
+## Server components
+
+```typescript
+// Server component
+const SurveyDetailsPage: React.FC<Props> = async ({params}) => {
+  const {surveyId} = await params;
+  prefetch(trpc.surveys.get.queryOptions(surveyId));
+
+  return (
+    <HydrateClient>
+      <Container>
+        <SurveyOverview surveyId={surveyId} />
+      </Container>
+    </HydrateClient>
+  );
+};
+```
+
+## Client components
+
+```typescript
+'use client';
+
+// Client component
+const Form: React.FC = () => {
+  const methods = useForm<FormData>({
+    resolver: zodResolver(formSchema)
+  });
+
+  return (
+    <FormProvider {...methods}>
+      <form onSubmit={methods.handleSubmit(handleSubmit)}>
+        {/* form fields */}
+      </form>
+    </FormProvider>
+  );
+};
+```
+
+## Loading & error states
+
+- **Loading states**: Use Suspense for loading states
+- **Error boundaries**: Implement error boundaries for error handling
+- **Skeleton loading**: Use skeleton components for better UX
+- **Error recovery**: Provide error recovery options
+- **Progressive enhancement**: Ensure graceful degradation

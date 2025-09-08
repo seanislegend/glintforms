@@ -1,0 +1,51 @@
+# Project structure
+
+- **Monorepo**: Use Turborepo for monorepo management
+- **Package structure**: 
+  - `apps/admin/` - Main admin application
+  - `packages/ui/` - Shared UI components
+  - `packages/database/` - Database schema and operations
+  - `packages/form/` - Form components and utilities
+  - `packages/tsconfig/` - Shared TypeScript configurations
+- **App router**: Use Next.js App Router with route groups
+- **File organisation**: Group related files in feature directories
+
+## Directory structure
+
+```
+glint/
+├── apps/
+│   └── admin/
+│       ├── src/
+│       │   ├── app/           # Next.js App Router
+│       │   ├── components/    # Shared components
+│       │   ├── lib/          # Utilities and helpers
+│       │   ├── schemas/      # Zod schemas
+│       │   ├── trpc/         # TRPC routers and setup
+│       │   └── types/        # TypeScript type definitions
+│       └── tests/
+│           └── e2e/          # End-to-end tests
+├── packages/
+│   ├── database/             # Database schema and operations
+│   ├── form/                # Form components
+│   ├── tsconfig/            # Shared TypeScript configs
+│   └── ui/                  # UI components
+```
+
+## File organisation
+
+- **Feature-based**: Group files by feature rather than type
+- **Co-location**: Keep related files close together
+- **Index files**: Use index files for clean exports
+- **Route groups**: Use Next.js route groups for organisation
+- **Shared code**: Extract shared code to packages
+
+## Naming conventions
+
+- **Files**: Use kebab-case for file names
+- **Components**: Use PascalCase for component names
+- **Functions**: Use camelCase for function names
+- **Constants**: Use UPPER_SNAKE_CASE for constants
+- **Types**: Use PascalCase for type and interface names
+- **Directories**: Use kebab-case for directory names
+- **Routes**: Use kebab-case for route segments

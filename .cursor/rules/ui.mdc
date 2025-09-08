@@ -1,0 +1,263 @@
+---
+globs: .tsx
+alwaysApply: false
+---
+
+# UI building and design system guidelines
+
+This file defines the UI component patterns and design system conventions for the Glint project. The AI must follow these guidelines to ensure consistent, accessible, and maintainable UI components.
+
+## High-level overview
+
+The AI should create UI components using the established design system with proper variants, consistent styling, and accessibility features. Components should be reusable, composable, and follow the established patterns for spacing, colours, and typography.
+
+## Essential code elements
+
+- Always use `@glint/ui/*` components for custom components
+- Always use `class-variance-authority` (cva) for component variants
+- Always use `cn()` utility for combining Tailwind classes
+- Always use `@phosphor-icons/react` for icons
+- Always export components individually from UI package
+
+## Core patterns
+
+- **Base UI components**: Use `@base-ui-components/react` for core components
+- **Glint UI package**: Import from `@glint/ui/*` for custom components
+- **Component variants**: Use `class-variance-authority` (cva) for component variants
+- **Utility classes**: Use `cn()` utility for combining Tailwind classes
+- **Icons**: Use `@phosphor-icons/react` for icons
+- **Component exports**: Export components individually from UI package
+
+## Design system patterns
+
+- **Component variants**: Define variants using cva with semantic naming
+- **Spacing system**: Use consistent spacing with Tailwind utilities
+- **Color system**: Use CSS custom properties for theming
+- **Typography**: Use consistent font scales and weights
+- **Responsive design**: Use Tailwind's responsive prefixes
+- **Accessibility**: Include proper ARIA attributes and keyboard navigation
+
+## Component structure pattern
+
+```tsx
+// Define variants
+const componentVariants = cva(
+  "base-classes",
+  {
+    variants: {
+      variant: {
+        default: "default-classes",
+        secondary: "secondary-classes"
+      },
+      size: {
+        sm: "small-classes",
+        lg: "large-classes"
+      }
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default"
+    }
+  }
+);
+
+// Component implementation
+const Component: React.FC<ComponentProps> = ({className, variant, size, ...props}) => {
+  return (
+    <div className={cn(componentVariants({variant, size}), className)} {...props} />
+  );
+};
+```
+
+## Deprecated patterns (DO NOT USE)
+
+❌ **Avoid these patterns:**
+```tsx
+// Inline styles
+const Component = () => {
+  return <div style={{color: 'red', fontSize: '16px'}}>...</div>;
+};
+
+// Hardcoded classes without variants
+const Component = ({variant}) => {
+  const classes = variant === 'primary' ? 'bg-blue-500' : 'bg-gray-500';
+  return <div className={classes}>...</div>;
+};
+
+// Missing accessibility attributes
+const Button = ({children}) => {
+  return <button>{children}</button>;
+};
+
+// Inconsistent spacing
+const Component = () => {
+  return (
+    <div className="p-4">
+      <h1 className="mb-2">Title</h1>
+      <p className="mt-6">Content</p>
+    </div>
+  );
+};
+```
+
+## Common pitfalls and solutions
+
+**Problem**: Inline styles instead of Tailwind classes
+**Solution**: Use Tailwind utility classes for consistent styling
+
+**Problem**: Hardcoded variant logic
+**Solution**: Use cva for proper variant management
+
+**Problem**: Missing accessibility attributes
+**Solution**: Always include proper ARIA attributes and keyboard navigation
+
+**Problem**: Inconsistent spacing
+**Solution**: Use Tailwind's spacing scale consistently
+
+**Problem**: Non-semantic colour usage
+**Solution**: Use CSS custom properties for theming
+
+## Verification steps
+
+Before completing any UI component task, the AI must verify:
+
+1. **Design system check**: Component uses established design system patterns
+2. **Variant check**: Component uses cva for variants if needed
+3. **Accessibility check**: Component includes proper ARIA attributes
+4. **Responsive check**: Component uses responsive design patterns
+5. **Consistency check**: Component follows established spacing and colour patterns
+
+**Consequences of verification failures:**
+- Components without proper variants are harder to maintain
+- Missing accessibility features exclude users with disabilities
+- Inconsistent styling creates poor user experience
+- Non-responsive components don't work on all devices
+# UI building and design system guidelines
+
+This file defines the UI component patterns and design system conventions for the Glint project. The AI must follow these guidelines to ensure consistent, accessible, and maintainable UI components.
+
+## High-level overview
+
+The AI should create UI components using the established design system with proper variants, consistent styling, and accessibility features. Components should be reusable, composable, and follow the established patterns for spacing, colours, and typography.
+
+## Essential code elements
+
+- Always use `@glint/ui/*` components for custom components
+- Always use `class-variance-authority` (cva) for component variants
+- Always use `cn()` utility for combining Tailwind classes
+- Always use `@phosphor-icons/react` for icons
+- Always export components individually from UI package
+
+## Core patterns
+
+- **Base UI components**: Use `@base-ui-components/react` for core components
+- **Glint UI package**: Import from `@glint/ui/*` for custom components
+- **Component variants**: Use `class-variance-authority` (cva) for component variants
+- **Utility classes**: Use `cn()` utility for combining Tailwind classes
+- **Icons**: Use `@phosphor-icons/react` for icons
+- **Component exports**: Export components individually from UI package
+
+## Design system patterns
+
+- **Component variants**: Define variants using cva with semantic naming
+- **Spacing system**: Use consistent spacing with Tailwind utilities
+- **Color system**: Use CSS custom properties for theming
+- **Typography**: Use consistent font scales and weights
+- **Responsive design**: Use Tailwind's responsive prefixes
+- **Accessibility**: Include proper ARIA attributes and keyboard navigation
+
+## Component structure pattern
+
+```tsx
+// Define variants
+const componentVariants = cva(
+  "base-classes",
+  {
+    variants: {
+      variant: {
+        default: "default-classes",
+        secondary: "secondary-classes"
+      },
+      size: {
+        sm: "small-classes",
+        lg: "large-classes"
+      }
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default"
+    }
+  }
+);
+
+// Component implementation
+const Component: React.FC<ComponentProps> = ({className, variant, size, ...props}) => {
+  return (
+    <div className={cn(componentVariants({variant, size}), className)} {...props} />
+  );
+};
+```
+
+## Deprecated patterns (DO NOT USE)
+
+❌ **Avoid these patterns:**
+```tsx
+// Inline styles
+const Component = () => {
+  return <div style={{color: 'red', fontSize: '16px'}}>...</div>;
+};
+
+// Hardcoded classes without variants
+const Component = ({variant}) => {
+  const classes = variant === 'primary' ? 'bg-blue-500' : 'bg-gray-500';
+  return <div className={classes}>...</div>;
+};
+
+// Missing accessibility attributes
+const Button = ({children}) => {
+  return <button>{children}</button>;
+};
+
+// Inconsistent spacing
+const Component = () => {
+  return (
+    <div className="p-4">
+      <h1 className="mb-2">Title</h1>
+      <p className="mt-6">Content</p>
+    </div>
+  );
+};
+```
+
+## Common pitfalls and solutions
+
+**Problem**: Inline styles instead of Tailwind classes
+**Solution**: Use Tailwind utility classes for consistent styling
+
+**Problem**: Hardcoded variant logic
+**Solution**: Use cva for proper variant management
+
+**Problem**: Missing accessibility attributes
+**Solution**: Always include proper ARIA attributes and keyboard navigation
+
+**Problem**: Inconsistent spacing
+**Solution**: Use Tailwind's spacing scale consistently
+
+**Problem**: Non-semantic colour usage
+**Solution**: Use CSS custom properties for theming
+
+## Verification steps
+
+Before completing any UI component task, the AI must verify:
+
+1. **Design system check**: Component uses established design system patterns
+2. **Variant check**: Component uses cva for variants if needed
+3. **Accessibility check**: Component includes proper ARIA attributes
+4. **Responsive check**: Component uses responsive design patterns
+5. **Consistency check**: Component follows established spacing and colour patterns
+
+**Consequences of verification failures:**
+- Components without proper variants are harder to maintain
+- Missing accessibility features exclude users with disabilities
+- Inconsistent styling creates poor user experience
+- Non-responsive components don't work on all devices

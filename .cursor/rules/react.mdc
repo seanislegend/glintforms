@@ -1,0 +1,231 @@
+---
+globs: .tsx
+alwaysApply: false
+---
+
+# React component development guidelines
+
+This file defines the React component patterns and conventions for the Glint project. The AI must follow these guidelines to ensure consistent, maintainable, and type-safe React components.
+
+## High-level overview
+
+The AI should create functional React components using TypeScript with proper type annotations, alphabetical prop sorting, and consistent patterns. Components should be composable, reusable, and follow the established design system patterns.
+
+## Essential code elements
+
+- Always use `React.FC<Props>` type annotation
+- Always define a `Props` interface with alphabetical property ordering
+- Always use functional components (never class components)
+- Always import React when using JSX
+- Always provide proper TypeScript types for all props
+
+## Core patterns
+
+- **Functional components only**: Use functional components with React.FC type annotation
+- **Alphabetical prop sorting**: Always sort component props alphabetically
+- **Prop types**: Use TypeScript interfaces for prop definitions, sorted alphabetically
+- **Component structure**: Follow the established component structure pattern
+
+## Component structure pattern
+
+```tsx
+interface Props {
+  // alphabetical props
+  className?: string;
+  children: React.ReactNode;
+  disabled?: boolean;
+  onClick?: () => void;
+  size?: 'sm' | 'md' | 'lg';
+  variant?: 'primary' | 'secondary';
+}
+
+const ComponentName: React.FC<Props> = ({
+  children,
+  className,
+  disabled = false,
+  onClick,
+  size = 'md',
+  variant = 'primary'
+}) => {
+  return <div>...</div>;
+};
+```
+
+## Component patterns
+
+- **Default exports**: Use default exports for components
+- **Named exports**: Use named exports for utilities and types
+- **Component composition**: Prefer composition over inheritance
+- **Props interface**: Always define Props interface for components
+- **Children props**: Use React.PropsWithChildren when needed
+- **Event handlers**: Use proper event handler types (e.g., React.MouseEvent)
+
+## Deprecated patterns (DO NOT USE)
+
+❌ **Avoid these patterns:**
+```tsx
+// Class components
+class MyComponent extends React.Component {
+  render() {
+    return <div>...</div>;
+  }
+}
+
+// Props without interface
+const Component = (props: any) => {
+  return <div>...</div>;
+};
+
+// Non-alphabetical props
+const Component: React.FC<Props> = ({size, variant, children, onClick}) => {
+  return <div>...</div>;
+};
+
+// Missing type annotations
+const Component = ({children}) => {
+  return <div>...</div>;
+};
+```
+
+## Common pitfalls and solutions
+
+**Problem**: Props interface not defined
+**Solution**: Always define a Props interface with proper TypeScript types
+
+**Problem**: Props not sorted alphabetically
+**Solution**: Use alphabetical ordering for all prop definitions and destructuring
+
+**Problem**: Missing React import
+**Solution**: Import React when using JSX or React types
+
+**Problem**: Using class components
+**Solution**: Use functional components with hooks for state management
+
+## Verification steps
+
+Before completing any React component task, the AI must verify:
+
+1. **Type safety check**: Component uses `React.FC<Props>` with proper interface
+2. **Alphabetical order check**: Props are sorted alphabetically in interface and destructuring
+3. **Functional component check**: Component is functional, not class-based
+4. **Import check**: React is imported when needed
+5. **Prop types check**: All props have proper TypeScript types
+
+**Consequences of verification failures:**
+- Components without proper types will cause TypeScript errors
+- Non-alphabetical props make code harder to read and maintain
+- Class components are deprecated and don't work with modern React patterns
+- Missing imports will cause compilation errors
+# React component development guidelines
+
+This file defines the React component patterns and conventions for the Glint project. The AI must follow these guidelines to ensure consistent, maintainable, and type-safe React components.
+
+## High-level overview
+
+The AI should create functional React components using TypeScript with proper type annotations, alphabetical prop sorting, and consistent patterns. Components should be composable, reusable, and follow the established design system patterns.
+
+## Essential code elements
+
+- Always use `React.FC<Props>` type annotation
+- Always define a `Props` interface with alphabetical property ordering
+- Always use functional components (never class components)
+- Always import React when using JSX
+- Always provide proper TypeScript types for all props
+
+## Core patterns
+
+- **Functional components only**: Use functional components with React.FC type annotation
+- **Alphabetical prop sorting**: Always sort component props alphabetically
+- **Prop types**: Use TypeScript interfaces for prop definitions, sorted alphabetically
+- **Component structure**: Follow the established component structure pattern
+
+## Component structure pattern
+
+```tsx
+interface Props {
+  // alphabetical props
+  className?: string;
+  children: React.ReactNode;
+  disabled?: boolean;
+  onClick?: () => void;
+  size?: 'sm' | 'md' | 'lg';
+  variant?: 'primary' | 'secondary';
+}
+
+const ComponentName: React.FC<Props> = ({
+  children,
+  className,
+  disabled = false,
+  onClick,
+  size = 'md',
+  variant = 'primary'
+}) => {
+  return <div>...</div>;
+};
+```
+
+## Component patterns
+
+- **Default exports**: Use default exports for components
+- **Named exports**: Use named exports for utilities and types
+- **Component composition**: Prefer composition over inheritance
+- **Props interface**: Always define Props interface for components
+- **Children props**: Use React.PropsWithChildren when needed
+- **Event handlers**: Use proper event handler types (e.g., React.MouseEvent)
+
+## Deprecated patterns (DO NOT USE)
+
+❌ **Avoid these patterns:**
+```tsx
+// Class components
+class MyComponent extends React.Component {
+  render() {
+    return <div>...</div>;
+  }
+}
+
+// Props without interface
+const Component = (props: any) => {
+  return <div>...</div>;
+};
+
+// Non-alphabetical props
+const Component: React.FC<Props> = ({size, variant, children, onClick}) => {
+  return <div>...</div>;
+};
+
+// Missing type annotations
+const Component = ({children}) => {
+  return <div>...</div>;
+};
+```
+
+## Common pitfalls and solutions
+
+**Problem**: Props interface not defined
+**Solution**: Always define a Props interface with proper TypeScript types
+
+**Problem**: Props not sorted alphabetically
+**Solution**: Use alphabetical ordering for all prop definitions and destructuring
+
+**Problem**: Missing React import
+**Solution**: Import React when using JSX or React types
+
+**Problem**: Using class components
+**Solution**: Use functional components with hooks for state management
+
+## Verification steps
+
+Before completing any React component task, the AI must verify:
+
+1. **Type safety check**: Component uses `React.FC<Props>` with proper interface
+2. **Alphabetical order check**: Props are sorted alphabetically in interface and destructuring
+3. **Functional component check**: Component is functional, not class-based
+4. **Import check**: React is imported when needed
+5. **Prop types check**: All props have proper TypeScript types
+
+**Consequences of verification failures:**
+- Components without proper types will cause TypeScript errors
+- Non-alphabetical props make code harder to read and maintain
+- Class components are deprecated and don't work with modern React patterns
+- Missing imports will cause compilation errors

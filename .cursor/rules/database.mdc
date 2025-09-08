@@ -1,0 +1,121 @@
+
+# Database & ORM
+
+- **Drizzle ORM**: Use Drizzle for database operations
+- **Schema location**: Database schemas in `packages/database/src/schema.ts`
+- **Migrations**: Use Drizzle Kit for migrations in `packages/database/migrations/`
+- **Supabase**: Use Supabase as the database provider
+- **Type safety**: Use `drizzle-zod` for schema validation
+- **Database package**: Import from `@glint/database` for database operations
+
+## Cross-package dependency management
+
+### Schema change propagation
+
+When making schema changes in `packages/database/`:
+
+1. **API app updates required**: Any schema changes must be reflected in `apps/api/` routes and types
+2. **Admin app review required**: All schema or functional changes must be reviewed for impact on `apps/admin/`
+3. **Type safety**: Ensure all apps use the latest database types from `@glint/database`
+4. **Migration coordination**: Coordinate migrations across all apps that use the database
+
+### Required actions for schema changes
+
+```bash
+# After schema changes in packages/database/
+# 1. Generate and run migrations
+bun drizzle-kit generate
+bun drizzle-kit migrate
+
+# 2. Update API app types and routes
+# Check apps/api/src/routes/ for affected endpoints
+# Update any hardcoded types to use @glint/database exports
+
+# 3. Review admin app impact
+# Check apps/admin/src/ for:
+# - TRPC routers using affected tables
+# - Components displaying affected data
+# - Forms creating/updating affected records
+# - Types that may need updating
+```
+
+### Database package responsibilities
+
+- **Schema definition**: Define all database schemas in `packages/database/src/schema.ts`
+- **Type exports**: Export all schema types for use in other packages
+- **Migration management**: Handle all database migrations
+- **Connection management**: Provide database connection utilities
+- **Validation schemas**: Export Zod schemas for data validation
+
+### API app responsibilities
+
+- **Route updates**: Update API routes when schema changes affect data structure
+- **Type imports**: Import types from `@glint/database` instead of defining local types
+- **Validation**: Use exported Zod schemas for request validation
+- **Error handling**: Handle database errors appropriately in API responses
+
+### Admin app responsibilities
+
+- **TRPC router updates**: Update TRPC routers when schema changes affect queries/mutations
+- **Component updates**: Update components that display or edit affected data
+- **Form validation**: Update form validation schemas to match database constraints
+- **Type imports**: Import types from `@glint/database` for consistency
+
+## Database patterns
+
+- **Schema definition**: Define schemas using Drizzle's schema builder
+- **Relationships**: Use proper foreign key relationships
+- **Indexes**: Add indexes for frequently queried columns
+- **Constraints**: Use database constraints for data integrity
+- **Soft deletes**: Implement soft deletes where appropriate
+
+## Migration management
+
+```bash
+# Generate migration
+bun drizzle-kit generate
+
+# Run migrations
+bun drizzle-kit migrate
+
+# View database
+bun drizzle-kit studio
+```
+
+## Query patterns
+
+```typescript
+// Basic query
+const data = await db
+  .select()
+  .from(users)
+  .where(eq(users.id, userId));
+
+// Join query
+const data = await db
+  .select({
+    id: surveys.id,
+    title: surveys.title,
+    campaignTitle: campaigns.title
+  })
+  .from(surveys)
+  .leftJoin(campaigns, eq(surveys.campaignId, campaigns.id))
+  .where(eq(surveys.userId, ctx.user.id));
+
+// Insert with returning
+const [newRecord] = await db
+  .insert(surveys)
+  .values({
+    title: input.title,
+    userId: ctx.user.id
+  })
+  .returning();
+```
+
+## Type safety
+
+- **Schema types**: Use Drizzle's inferred types
+- **Validation**: Use Zod schemas for input validation
+- **Error handling**: Handle database errors gracefully
+- **Transactions**: Use transactions for complex operations
+- **Transactions**: Use transactions for complex operations

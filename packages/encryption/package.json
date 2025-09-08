@@ -1,0 +1,16 @@
+{
+    "name": "@glint/encryption",
+    "version": "0.1.0",
+    "main": "./src/index.ts",
+    "private": true,
+    "scripts": {
+        "format": "biome format --write",
+        "lint": "biome lint .",
+        "test": "vitest",
+        "test:run": "vitest run",
+        "type-check": "tsc --noEmit"
+    },
+    "devDependencies": {
+        "vitest": "2.1.9"
+    }
+}

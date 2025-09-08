@@ -1,0 +1,60 @@
+# Development workflow
+
+- **Package manager**: Use Bun for package management
+- **Development server**: Use `bun run dev` for development
+- **Build process**: Use Turborepo for build orchestration
+- **Type checking**: Run type checking before commits
+- **Testing**: Run tests before deployment
+
+## Development commands
+
+```bash
+# Development
+bun run dev
+
+# Build
+bun run build
+
+# Type checking
+bun run type-check
+
+# Testing
+bun run test:e2e
+
+# Database
+bun run db:generate
+bun run db:migrate
+bun run db:studio
+```
+
+## Package management
+
+- **Bun**: Use Bun as the package manager
+- **Workspaces**: Use Turborepo for monorepo management
+- **Dependencies**: Keep dependencies up to date
+- **Lock files**: Commit lock files to version control
+- **Scripts**: Use consistent script naming
+
+## Development environment
+
+- **Environment variables**: Use `.env.example` for configuration
+- **Local development**: Use local development configurations
+- **Hot reloading**: Use Next.js hot reloading for development
+- **Debugging**: Use proper debugging tools
+- **Logging**: Use appropriate logging levels
+
+## Git workflow
+
+- **Branching**: Use feature branches for development
+- **Commits**: Write clear, descriptive commit messages
+- **Pull requests**: Use pull requests for code review
+- **Code review**: Review code before merging
+- **CI/CD**: Use continuous integration and deployment
+
+## Quality assurance
+
+- **Type checking**: Run type checking before commits
+- **Linting**: Run linting before commits
+- **Testing**: Run tests before deployment
+- **Code review**: Review code before merging
+- **Documentation**: Keep documentation up to date

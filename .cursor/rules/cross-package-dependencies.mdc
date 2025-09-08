@@ -1,0 +1,130 @@
+---
+globs: packages/database/**/*.ts,apps/api/**/*.ts,apps/admin/**/*.ts
+alwaysApply: true
+---
+
+# Cross-package dependencies
+
+## Database schema change workflow
+
+### When modifying `packages/database/`
+
+Any changes to database schemas, types, or functionality must trigger updates in dependent packages:
+
+1. **Schema changes**: Update `packages/database/src/schema.ts`
+2. **Generate migrations**: Run `bun drizzle-kit generate`
+3. **Update API app**: Review and update `apps/api/src/routes/`
+4. **Update admin app**: Review and update `apps/admin/src/`
+5. **Type consistency**: Ensure all packages use `@glint/database` exports
+
+### Required checklist for schema changes
+
+- [ ] Database schema updated in `packages/database/src/schema.ts`
+- [ ] Migration generated and tested
+- [ ] API routes reviewed for affected endpoints
+- [ ] Admin app TRPC routers updated
+- [ ] Admin app components reviewed for data display/editing
+- [ ] Type imports updated to use `@glint/database`
+- [ ] Validation schemas updated across all apps
+- [ ] Tests updated to reflect schema changes
+
+## Package responsibilities
+
+### Database package (`packages/database/`)
+
+- **Single source of truth**: All database schemas and types
+- **Migration management**: Handle all database migrations
+- **Type exports**: Export all schema types for other packages
+- **Validation schemas**: Export Zod schemas for data validation
+- **Connection utilities**: Provide database connection helpers
+
+### API app (`apps/api/`)
+
+- **Route updates**: Update routes when schema changes affect data structure
+- **Type imports**: Import types from `@glint/database` only
+- **Validation**: Use exported Zod schemas for request validation
+- **Error handling**: Handle database errors appropriately
+
+### Admin app (`apps/admin/`)
+
+- **TRPC updates**: Update TRPC routers for schema changes
+- **Component updates**: Update components displaying/editing affected data
+- **Form validation**: Update form schemas to match database constraints
+- **Type consistency**: Use `@glint/database` types throughout
+
+## Common patterns
+
+### Importing database types
+
+```typescript
+// ✅ Correct - import from database package
+import { surveys, campaigns } from '@glint/database/schema'
+import type { Survey, Campaign } from '@glint/database'
+
+// ❌ Incorrect - define local types
+interface Survey {
+  id: string
+  title: string
+  // ...
+}
+```
+
+### Using database schemas
+
+```typescript
+// ✅ Correct - use exported schemas
+import { surveys } from '@glint/database/schema'
+
+const data = await db
+  .select()
+  .from(surveys)
+  .where(eq(surveys.id, surveyId))
+
+// ❌ Incorrect - hardcode table names
+const data = await db.query('SELECT * FROM surveys WHERE id = ?', [surveyId])
+```
+
+### Validation with exported schemas
+
+```typescript
+// ✅ Correct - use exported validation schemas
+import { createSurveySchema } from '@glint/database/schemas'
+
+const validatedData = createSurveySchema.parse(input)
+
+// ❌ Incorrect - define local validation
+const schema = z.object({
+  title: z.string(),
+  // ...
+})
+```
+
+## Migration workflow
+
+1. **Make schema changes** in `packages/database/src/schema.ts`
+2. **Generate migration**: `bun drizzle-kit generate`
+3. **Review migration** in `packages/database/migrations/`
+4. **Test migration** locally
+5. **Update dependent packages**:
+   - Check API routes for affected endpoints
+   - Check admin app for affected components/routers
+   - Update type imports if needed
+6. **Run migration**: `bun drizzle-kit migrate`
+7. **Test all apps** to ensure they work with new schema
+
+## Breaking changes
+
+When making breaking schema changes:
+
+1. **Plan migration strategy**: Consider data migration needs
+2. **Update all dependent code**: API routes, admin components, TRPC routers
+3. **Test thoroughly**: Ensure all apps work with new schema
+4. **Document changes**: Update relevant documentation
+5. **Coordinate deployment**: Deploy database changes before app changes
+
+## Type safety enforcement
+
+- **No local types**: Never define database-related types in API or admin apps
+- **Import only**: Always import types from `@glint/database`
+- **Schema consistency**: Ensure all apps use the same schema definitions
+- **Validation consistency**: Use the same validation schemas across all apps

@@ -1,0 +1,6 @@
+{
+    "files": ["base.json"],
+    "name": "@glint/tsconfig",
+    "private": true,
+    "version": "1.0.0"
+}

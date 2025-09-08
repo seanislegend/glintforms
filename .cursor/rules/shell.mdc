@@ -1,0 +1,11 @@
+---
+alwaysApply: true
+---
+
+# Shell
+
+## When running commands
+
+- Always use `bun` instead of `npm` or `yarn` or `pnpm`
+- Always use `bunx` instead of `npx`
+- Always use `bun run` instead of `npm run` or `yarn run` or `pnpm run`

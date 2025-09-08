@@ -1,0 +1,62 @@
+# Environment & configuration
+
+- **Environment variables**: Use `.env.example` for configuration templates
+- **Database URLs**: Use Supabase connection strings
+- **API keys**: Store sensitive keys in environment variables
+- **Development**: Use local development configurations
+- **Production**: Use production-specific configurations
+
+## Environment setup
+
+- **Environment files**: Use `.env.example` for configuration templates
+- **Secrets management**: Store sensitive data in environment variables
+- **Configuration**: Use environment-specific configurations
+- **Validation**: Validate environment variables at startup
+- **Documentation**: Document required environment variables
+
+## Configuration patterns
+
+```typescript
+// Environment validation
+const requiredEnvVars = [
+  'DATABASE_URL',
+  'SUPABASE_URL',
+  'SUPABASE_ANON_KEY'
+] as const;
+
+for (const envVar of requiredEnvVars) {
+  if (!process.env[envVar]) {
+    throw new Error(`Missing required environment variable: ${envVar}`);
+  }
+}
+
+// Configuration object
+export const config = {
+  database: {
+    url: process.env.DATABASE_URL!,
+    connectionLimit: parseInt(process.env.DB_CONNECTION_LIMIT || '10')
+  },
+  supabase: {
+    url: process.env.SUPABASE_URL!,
+    anonKey: process.env.SUPABASE_ANON_KEY!
+  }
+} as const;
+```
+
+## Environment files
+
+```bash
+# .env.example
+DATABASE_URL=postgresql://user:password@localhost:5432/database
+SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_ANON_KEY=your-anon-key
+NODE_ENV=development
+```
+
+## Security considerations
+
+- **Secrets**: Never commit secrets to version control
+- **Environment variables**: Use environment variables for sensitive data
+- **Validation**: Validate environment variables at runtime
+- **Documentation**: Document required environment variables
+- **Production**: Use secure configuration management in production

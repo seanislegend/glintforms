@@ -1,0 +1,72 @@
+{
+    "$schema": "https://turbo.build/schema.json",
+    "globalDependencies": ["**/.env"],
+    "tasks": {
+        "start": {
+            "cache": false
+        },
+        "build": {
+            "env": [
+                "DATABASE_URL",
+                "BETTER_AUTH_SECRET",
+                "SUPABASE_URL",
+                "SUPABASE_ANON_KEY",
+                "OPENAI_API_KEY",
+                "AI_MODEL",
+                "TRIGGER_SECRET_KEY",
+                "TRIGGER_PROJECT_ID",
+                "SENTRY_ORG",
+                "SENTRY_AUTH_TOKEN",
+                "NEXT_PUBLIC_SENTRY_DSN"
+            ],
+            "dependsOn": ["^build"],
+            "outputs": [".next/**", "!.next/cache/**", "dist/**"]
+        },
+        "@glint/encryption#build": {
+            "outputs": ["dist/**"]
+        },
+        "@glint/form#build": {
+            "outputs": ["dist/**"]
+        },
+        "@glint/ui#build": {
+            "outputs": ["dist/**"]
+        },
+        "@glint/utils#build": {
+            "outputs": ["dist/**"]
+        },
+        "lint": {
+            "dependsOn": ["^lint"]
+        },
+        "type-check": {
+            "dependsOn": ["^type-check"]
+        },
+        "dev": {
+            "cache": false,
+            "inputs": ["$TURBO_DEFAULT$", ".env*"],
+            "persistent": true
+        },
+        "db:generate": {
+            "cache": false
+        },
+        "db:migrate": {
+            "inputs": ["$TURBO_DEFAULT$", ".env.local"],
+            "cache": false
+        },
+        "db:seed": {
+            "cache": false
+        },
+        "db:studio": {
+            "cache": false,
+            "persistent": true
+        },
+        "test:e2e": {
+            "cache": false,
+            "dependsOn": ["^dev"],
+            "outputs": ["playwright-report/**", "test-results/**"]
+        },
+        "test:run": {
+            "cache": false,
+            "outputs": []
+        }
+    }
+}
