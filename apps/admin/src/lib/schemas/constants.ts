@@ -84,6 +84,7 @@ export const EXPORT_FORMATS = {
 } as const;
 
 export const QUESTION_EXPORT_FIELDS = [
+    {key: 'id', label: 'ID', description: 'Unique identifier for the question'},
     {key: 'title', label: 'Title', description: 'Title of the question'},
     {key: 'description', label: 'Description', description: 'Description of the question'},
     {key: 'type', label: 'Type', description: 'Type of the question'},
