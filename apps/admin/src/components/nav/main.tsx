@@ -11,6 +11,7 @@ import {ClipboardTextIcon} from '@phosphor-icons/react/dist/ssr/ClipboardText';
 import {HouseIcon} from '@phosphor-icons/react/dist/ssr/House';
 import {MegaphoneIcon} from '@phosphor-icons/react/dist/ssr/Megaphone';
 import {UsersIcon} from '@phosphor-icons/react/dist/ssr/Users';
+import {UsersThreeIcon} from '@phosphor-icons/react/dist/ssr/UsersThree';
 import Link from 'next/link';
 import {usePathname} from 'next/navigation';
 import {Suspense} from 'react';
@@ -20,7 +21,8 @@ const data = [
     {href: '/', Icon: HouseIcon, title: 'Dashboard'},
     {href: '/campaigns', Icon: MegaphoneIcon, title: 'Campaigns', subnav: 'campaigns'},
     {href: '/surveys', Icon: ClipboardTextIcon, title: 'Surveys', subnav: 'surveys'},
-    {href: '/respondents', Icon: UsersIcon, title: 'Respondents', subnav: 'respondents'}
+    {href: '/respondents', Icon: UsersIcon, title: 'Respondents', subnav: 'respondents'},
+    {href: '/cohorts', Icon: UsersThreeIcon, title: 'Cohorts', subnav: 'cohorts'}
 ];
 
 export const NavMainLink: React.FC<{

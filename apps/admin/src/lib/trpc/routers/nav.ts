@@ -1,4 +1,4 @@
-import {campaigns, surveys} from '@glint/database';
+import {campaigns, cohorts, surveys} from '@glint/database';
 import {desc, eq} from 'drizzle-orm';
 import {protectedProcedure} from '../init';
 
@@ -18,8 +18,16 @@ export const navRouter = {
             .where(eq(surveys.tenantId, ctx.tenant))
             .limit(5);
 
+        const latestCohorts = await ctx.db
+            .select({id: cohorts.id, name: cohorts.name})
+            .from(cohorts)
+            .where(eq(cohorts.tenantId, ctx.tenant))
+            .orderBy(desc(cohorts.createdAt))
+            .limit(5);
+
         return {
             campaigns: latestCampaigns,
+            cohorts: latestCohorts,
             surveys: latestSurveys
         };
     })

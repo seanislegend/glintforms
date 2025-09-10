@@ -25,7 +25,7 @@ interface Props {
     title: string;
 }
 
-type ItemKey = 'campaigns' | 'surveys';
+type ItemKey = 'campaigns' | 'cohorts' | 'surveys';
 
 const SubNav: React.FC<Props> = ({href, id, Icon, title}) => {
     const pathname = usePathname();
@@ -84,7 +84,7 @@ const SubNav: React.FC<Props> = ({href, id, Icon, title}) => {
                                     <span
                                         className={cn(item.id === 'all' && 'text-muted-foreground')}
                                     >
-                                        {item.title}
+                                        {'title' in item ? item.title : item.name}
                                     </span>
                                 </SidebarMenuSubButton>
                             </SidebarMenuSubItem>
