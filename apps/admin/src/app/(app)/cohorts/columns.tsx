@@ -61,7 +61,12 @@ export const columns: ColumnDef<CohortList>[] = [
     },
     {
         id: 'actions',
-        cell: ({row}) => <DataTableRowActions row={row} />,
-        enableHiding: false
+        cell: ({row}) => (
+            <DataTableRowActions
+                detailsUrl={`/cohorts/${row.original.id}`}
+                editUrl={`/cohorts/${row.original.id}/edit`}
+                row={row}
+            />
+        )
     }
 ];
