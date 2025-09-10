@@ -121,6 +121,7 @@ export const surveys = pgTable(
 
 export const genderTypes = ['female', 'male', 'other', 'prefer_not_to_say'] as const;
 export const genderEnum = pgEnum('gender', genderTypes);
+
 export const respondents = pgTable(
     'respondents',
     {
@@ -144,6 +145,42 @@ export const respondents = pgTable(
         emailTenantIdx: index('respondent_email_tenant_idx').on(table.email, table.tenantId),
         signupSourceIdx: index('respondent_signup_source_idx').on(table.signupSource),
         tenantIdx: index('respondent_tenant_idx').on(table.tenantId)
+    })
+);
+
+export const cohorts = pgTable(
+    'cohorts',
+    {
+        createdAt: timestamp('created_at').defaultNow().notNull(),
+        description: text('description'),
+        id: uuid('id').primaryKey().defaultRandom(),
+        name: varchar('name', {length: 255}).notNull(),
+        tenantId: uuid('tenant_id')
+            .references(() => tenants.id, {onDelete: 'cascade'})
+            .notNull(),
+        updatedAt: timestamp('updated_at').defaultNow().notNull()
+    },
+    table => ({
+        tenantIdx: index('cohort_tenant_idx').on(table.tenantId)
+    })
+);
+
+export const respondentCohorts = pgTable(
+    'respondent_cohorts',
+    {
+        assignedAt: timestamp('assigned_at').defaultNow().notNull(),
+        assignedBy: text('assigned_by').references(() => user.id),
+        cohortId: uuid('cohort_id')
+            .references(() => cohorts.id, {onDelete: 'cascade'})
+            .notNull(),
+        respondentId: uuid('respondent_id')
+            .references(() => respondents.id, {onDelete: 'cascade'})
+            .notNull()
+    },
+    table => ({
+        cohortIdx: index('respondent_cohort_cohort_idx').on(table.cohortId),
+        respondentIdx: index('respondent_cohort_respondent_idx').on(table.respondentId),
+        primaryKey: index('respondent_cohort_pk').on(table.respondentId, table.cohortId)
     })
 );
 
@@ -328,6 +365,7 @@ export const surveySettingsRelations = relations(surveySettings, ({one}) => ({
 export const tenantsRelations = relations(tenants, ({many}) => ({
     activities: many(activities),
     campaigns: many(campaigns),
+    cohorts: many(cohorts),
     responses: many(responses),
     respondents: many(respondents),
     surveys: many(surveys),
@@ -338,6 +376,7 @@ export const userRelations = relations(user, ({one, many}) => ({
     accounts: many(account),
     activities: many(activities),
     authenticityScores: many(authenticityScores),
+    respondentCohorts: many(respondentCohorts),
     sessions: many(session),
     tenant: one(tenants, {
         fields: [user.tenantId],
@@ -407,6 +446,7 @@ export const activitiesRelations = relations(activities, ({one}) => ({
 }));
 
 export const respondentsRelations = relations(respondents, ({one, many}) => ({
+    cohorts: many(respondentCohorts),
     responses: many(responses),
     tenant: one(tenants, {
         fields: [respondents.tenantId],
@@ -443,5 +483,28 @@ export const authenticityScoresRelations = relations(authenticityScores, ({one})
     survey: one(surveys, {
         fields: [authenticityScores.surveyId],
         references: [surveys.id]
+    })
+}));
+
+export const cohortsRelations = relations(cohorts, ({one, many}) => ({
+    respondentCohorts: many(respondentCohorts),
+    tenant: one(tenants, {
+        fields: [cohorts.tenantId],
+        references: [tenants.id]
+    })
+}));
+
+export const respondentCohortsRelations = relations(respondentCohorts, ({one}) => ({
+    assignedByUser: one(user, {
+        fields: [respondentCohorts.assignedBy],
+        references: [user.id]
+    }),
+    cohort: one(cohorts, {
+        fields: [respondentCohorts.cohortId],
+        references: [cohorts.id]
+    }),
+    respondent: one(respondents, {
+        fields: [respondentCohorts.respondentId],
+        references: [respondents.id]
     })
 }));
