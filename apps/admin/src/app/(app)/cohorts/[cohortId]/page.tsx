@@ -6,14 +6,13 @@ import {HydrateClient, prefetch, trpc} from '@/lib/trpc/server';
 import CohortDetails from './cohort-details';
 
 interface Props {
-    params: {
-        cohortId: string;
-    };
+    params: Promise<{cohortId: string}>;
 }
 
 const Page: React.FC<Props> = async ({params}) => {
+    const {cohortId} = await params;
     prefetch(trpc.nav.getAll.queryOptions());
-    prefetch(trpc.cohorts.get.queryOptions(params.cohortId));
+    prefetch(trpc.cohorts.get.queryOptions(cohortId));
 
     return (
         <HydrateClient>
@@ -21,7 +20,7 @@ const Page: React.FC<Props> = async ({params}) => {
                 <SectionHeader title="Cohort details" />
                 <Spacer size="md" />
                 <Suspense>
-                    <CohortDetails cohortId={params.cohortId} />
+                    <CohortDetails cohortId={cohortId} />
                 </Suspense>
             </Container>
         </HydrateClient>
