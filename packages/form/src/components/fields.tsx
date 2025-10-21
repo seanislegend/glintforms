@@ -9,6 +9,7 @@ import {Controller} from 'react-hook-form';
 import {FormFieldContext, FormItemContext} from '../hooks/context';
 import useFormField from '../hooks/use-form-field';
 import Checkbox from './checkbox';
+import {CheckboxGroup, CheckboxGroupItem} from './checkbox-group';
 import Input from './input';
 import Label from './label';
 import PasswordInput from './password-input';
@@ -100,9 +101,48 @@ const getDefaultRender = (
                 ...fieldProps
             };
 
+            const handleGroupCheckboxChange = (checked: boolean, value: string) => {
+                console.log({field, value, checked});
+
+                if (!Array.isArray(field.value)) {
+                    field.onChange(checked ? [value] : undefined);
+                    return;
+                } else if (checked) {
+                    field.onChange([...field.value, value]);
+                } else {
+                    field.onChange(field.value.filter(v => v !== value));
+                }
+            };
+
             switch (type) {
                 case 'checkbox':
                     return <Checkbox {...sharedProps} {...field} {...fieldProps} />;
+                case 'checkbox-group':
+                    return (
+                        <CheckboxGroup {...sharedProps}>
+                            {options?.map(option => {
+                                const isChecked = Array.isArray(field.value)
+                                    ? field.value?.includes(option.value.toString())
+                                    : false;
+
+                                return (
+                                    <Label key={option.value}>
+                                        <CheckboxGroupItem
+                                            checked={isChecked}
+                                            onCheckedChange={e =>
+                                                handleGroupCheckboxChange(
+                                                    e,
+                                                    option.value.toString()
+                                                )
+                                            }
+                                            value={option.value.toString()}
+                                        />
+                                        {option.label}
+                                    </Label>
+                                );
+                            })}
+                        </CheckboxGroup>
+                    );
                 case 'input':
                     return <Input {...sharedProps} placeholder={placeholder} {...field} />;
                 case 'password-input':
@@ -124,7 +164,7 @@ const getDefaultRender = (
                     );
                 case 'select':
                     return (
-                        <Select onValueChange={field.onChange} value={field.value}>
+                        <Select onValueChange={field.onChange} value={field.value} {...sharedProps}>
                             <SelectTrigger className="bg-white w-full">
                                 <SelectValue>
                                     <span className="flex items-center gap-2">
@@ -202,9 +242,10 @@ interface FormFieldProps<
     TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
 > extends Omit<ControllerProps<TFieldValues, TName>, 'render'> {
     description?: string;
-    fieldProps?: Record<string, string>;
+    fieldProps?: Record<string, string | boolean>;
     fieldType?:
         | 'checkbox'
+        | 'checkbox-group'
         | 'input'
         | 'password-input'
         | 'radio-group'
