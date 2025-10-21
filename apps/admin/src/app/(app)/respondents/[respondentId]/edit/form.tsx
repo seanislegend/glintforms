@@ -3,12 +3,14 @@
 import {FormField} from '@glint/form/fields';
 import {handleFormError} from '@glint/form/utils';
 import Button from '@glint/ui/button';
+import EmptyPanel from '@glint/ui/empty-panel';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import {useRouter} from 'next/navigation';
 import {useCallback, useEffect} from 'react';
 import {FormProvider, type SubmitHandler, useForm} from 'react-hook-form';
 import {toast} from 'sonner';
+import RespondentCohorts from '@/app/(app)/respondents/[respondentId]/edit/cohorts';
 import {type RespondentUpdate, respondentUpdateSchema} from '@/lib/schemas/respondents';
 import {useTRPC} from '@/lib/trpc/react';
 
@@ -41,6 +43,7 @@ const Form: React.FC<FormProps> = ({respondentId}) => {
     const methods = useForm<RespondentUpdate>({
         resolver: zodResolver(respondentUpdateSchema),
         defaultValues: {
+            cohortIds: [],
             email: '',
             name: '',
             notes: '',
@@ -51,6 +54,7 @@ const Form: React.FC<FormProps> = ({respondentId}) => {
     useEffect(() => {
         if (respondent) {
             methods.reset({
+                cohortIds: respondent.cohortIds || [],
                 email: respondent.email,
                 name: respondent.name,
                 notes: respondent.notes || '',
@@ -70,11 +74,14 @@ const Form: React.FC<FormProps> = ({respondentId}) => {
     );
 
     if (isLoading) {
-        return <div>Loading...</div>;
-    }
-
-    if (!respondent) {
-        return <div>Respondent not found</div>;
+        return <div>Fetching details...</div>;
+    } else if (!respondent) {
+        return (
+            <EmptyPanel
+                text="The respondent you're looking for doesn't exist or has been removed."
+                title="Respondent not found"
+            />
+        );
     }
 
     return (
@@ -108,6 +115,7 @@ const Form: React.FC<FormProps> = ({respondentId}) => {
                         placeholder="any additional notes about this respondent"
                     />
                 </div>
+                <RespondentCohorts />
                 <div className="flex justify-end">
                     <Button
                         className="mt-4"
