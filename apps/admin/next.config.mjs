@@ -18,8 +18,8 @@ const nextConfig = {
     },
     experimental: {
         optimizePackageImports: ['@phosphor-icons/react'],
-        reactCompiler: true,
-        serverComponentsHmrCache: true
+        serverComponentsHmrCache: true,
+        turbopackFileSystemCacheForDev: true
     },
     images: {
         formats: ['image/avif', 'image/webp'],
@@ -29,6 +29,7 @@ const nextConfig = {
         maxInactiveAge: 15 * 60 * 1000,
         pagesBufferLength: 6
     },
+    reactCompiler: true,
     reactStrictMode: true,
     transpilePackages: ['@glint/database', '@glint/form', '@glint/ui']
 };
