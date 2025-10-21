@@ -1,6 +1,7 @@
 import {
     authenticityScores,
     campaigns,
+    cohorts,
     respondentCohorts,
     respondents,
     responses,
@@ -59,6 +60,19 @@ export const respondentsRouter = {
                 {} as Record<string, RespondentList>
             )
         );
+
+        for (const respondent of data) {
+            const cohortRows = await ctx.db
+                .select({
+                    id: cohorts.id,
+                    name: cohorts.name
+                })
+                .from(respondentCohorts)
+                .innerJoin(cohorts, eq(respondentCohorts.cohortId, cohorts.id))
+                .where(eq(respondentCohorts.respondentId, respondent.id));
+
+            respondent.cohorts = cohortRows;
+        }
 
         return data;
     }),

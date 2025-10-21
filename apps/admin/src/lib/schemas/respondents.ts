@@ -8,8 +8,8 @@ export type RespondentList = Pick<
     cohorts: Array<{
         id: string;
         name: string;
-        surveyId: string | null;
-        surveyTitle: string | null;
+        surveyId?: string | null;
+        surveyTitle?: string | null;
     }>;
     surveys: Array<{
         id: string;
