@@ -36,10 +36,8 @@ export const cohortsRouter = createTRPCRouter({
             .from(cohorts)
             .where(and(eq(cohorts.id, input), eq(cohorts.tenantId, ctx.tenant)))
             .limit(1);
-        if (!cohort) {
-            throw new Error('Cohort not found');
-        }
 
+        if (!cohort) return null;
         return cohort;
     }),
     create: protectedProcedure.input(cohortCreateSchema).mutation(async ({ctx, input}) => {
@@ -70,10 +68,7 @@ export const cohortsRouter = createTRPCRouter({
                 .where(and(eq(cohorts.id, input.id), eq(cohorts.tenantId, ctx.tenant)))
                 .returning();
 
-            if (!cohort) {
-                throw new Error('Cohort not found');
-            }
-
+            if (!cohort) return null;
             return cohort;
         })
 });
