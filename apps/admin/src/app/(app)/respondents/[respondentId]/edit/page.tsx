@@ -6,14 +6,11 @@ import {HydrateClient, prefetch, trpc} from '@/lib/trpc/server';
 import Form from './form';
 
 interface PageProps {
-    params: {
-        respondentId: string;
-    };
+    params: Promise<{respondentId: string}>;
 }
 
 const Page: React.FC<PageProps> = async ({params}) => {
-    const {respondentId} = params;
-
+    const {respondentId} = await params;
     prefetch(trpc.respondents.get.queryOptions(respondentId));
 
     return (
