@@ -5,6 +5,12 @@ export type RespondentList = Pick<
     typeof respondents.$inferSelect,
     'id' | 'name' | 'email' | 'gender' | 'updatedAt'
 > & {
+    cohorts: Array<{
+        id: string;
+        name: string;
+        surveyId: string | null;
+        surveyTitle: string | null;
+    }>;
     surveys: Array<{
         id: string;
         title: string;
@@ -14,6 +20,13 @@ export type RespondentList = Pick<
 };
 
 export type RespondentDetails = typeof respondents.$inferSelect & {
+    cohorts: Array<{
+        id: string;
+        name: string;
+        surveyId: string | null;
+        surveyTitle: string | null;
+        assignedAt: Date;
+    }>;
     surveys: Array<{
         id: string;
         title: string;
@@ -35,7 +48,9 @@ export const respondentInsertSchema = z.object({
     signupSource: z.string().optional()
 });
 
-export const respondentUpdateSchema = respondentInsertSchema.partial();
+export const respondentUpdateSchema = respondentInsertSchema.partial().extend({
+    cohortIds: z.array(z.string()).optional()
+});
 
 export type RespondentInsert = z.infer<typeof respondentInsertSchema>;
 export type RespondentUpdate = z.infer<typeof respondentUpdateSchema>;
