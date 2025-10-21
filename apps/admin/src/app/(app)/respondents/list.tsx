@@ -56,6 +56,20 @@ const RespondentsList: React.FC = () => {
                 .filter(survey => survey?.campaignId === c.id).length
         }))
     );
+    const uniqueCohorts = R.pipe(
+        respondents,
+        R.flatMap(r => r.cohorts ?? []),
+        R.filter(c => Boolean(c?.id && c?.name)),
+        // biome-ignore lint/style/noNonNullAssertion: wip
+        R.map(c => ({id: c.id!, name: c.name!, surveyId: c.surveyId, surveyTitle: c.surveyTitle})),
+        R.uniqueBy(c => c.id),
+        R.map(c => ({
+            label: c.surveyId ? `${c.name} (${c.surveyTitle})` : c.name,
+            value: c.id,
+            count: respondents.flatMap(r => r.cohorts ?? []).filter(cohort => cohort?.id === c.id)
+                .length
+        }))
+    );
 
     return (
         <DataTable
@@ -73,6 +87,14 @@ const RespondentsList: React.FC = () => {
                 campaigns: {
                     label: 'Campaign',
                     options: uniqueCampaigns.map(c => ({
+                        count: c.count,
+                        label: c.label,
+                        value: c.value
+                    }))
+                },
+                cohorts: {
+                    label: 'Cohort',
+                    options: uniqueCohorts.map(c => ({
                         count: c.count,
                         label: c.label,
                         value: c.value

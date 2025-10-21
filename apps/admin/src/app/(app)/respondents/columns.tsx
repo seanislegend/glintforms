@@ -33,13 +33,36 @@ export const columns: ColumnDef<RespondentList>[] = [
         )
     },
     {
-        accessorKey: 'email',
-        header: ({column}) => <DataTableColumnHeader column={column} title="Email" />,
-        cell: ({row}) => (
-            <span className="max-w-[300px] truncate text-muted-foreground">
-                {row.getValue('email')}
-            </span>
-        )
+        accessorKey: 'cohorts',
+        header: ({column}) => <DataTableColumnHeader column={column} title="Cohorts" />,
+        cell: ({row}) => {
+            const cohorts = row.getValue('cohorts') as RespondentList['cohorts'];
+            if (!cohorts || cohorts.length === 0) {
+                return <span className="text-muted-foreground">—</span>;
+            }
+
+            return (
+                <span className="max-w-[300px] truncate text-muted-foreground">
+                    {cohorts.map((cohort, index) => (
+                        <>
+                            <TextLink href={`/cohorts/${cohort.id}`} key={cohort.id}>
+                                {cohort.name}
+                            </TextLink>
+                            {index < cohorts.length - 1 && <span>, </span>}
+                        </>
+                    ))}
+                </span>
+            );
+        },
+        filterFn: (row, _, value) => {
+            const cohorts = row.getValue('cohorts') as RespondentList['cohorts'];
+            if (!cohorts || cohorts.length === 0) {
+                return false;
+            }
+
+            const cohortIds = cohorts.map(cohort => cohort.id);
+            return value.some((selectedCohortId: string) => cohortIds.includes(selectedCohortId));
+        }
     },
     {
         accessorKey: 'campaigns',
@@ -59,10 +82,13 @@ export const columns: ColumnDef<RespondentList>[] = [
 
             return (
                 <span className="max-w-[300px] truncate text-muted-foreground">
-                    {campaigns.map(campaign => (
-                        <TextLink href={`/campaigns/${campaign.id}`} key={campaign.id}>
-                            {campaign.title}
-                        </TextLink>
+                    {campaigns.map((campaign, index) => (
+                        <>
+                            <TextLink href={`/campaigns/${campaign.id}`} key={campaign.id}>
+                                {campaign.title}
+                            </TextLink>
+                            {index < campaigns.length - 1 && <span>, </span>}
+                        </>
                     ))}
                 </span>
             );
@@ -92,10 +118,13 @@ export const columns: ColumnDef<RespondentList>[] = [
             }
             return (
                 <span className="max-w-[300px] truncate text-muted-foreground">
-                    {surveys.map(survey => (
-                        <TextLink href={`/surveys/${survey.id}`} key={survey.id}>
-                            {survey.title}
-                        </TextLink>
+                    {surveys.map((survey, index) => (
+                        <>
+                            <TextLink href={`/surveys/${survey.id}`} key={survey.id}>
+                                {survey.title}
+                            </TextLink>
+                            {index < surveys.length - 1 && <span>, </span>}
+                        </>
                     ))}
                 </span>
             );
