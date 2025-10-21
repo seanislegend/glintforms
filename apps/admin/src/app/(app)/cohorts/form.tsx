@@ -5,7 +5,7 @@ import {handleFormError} from '@glint/form/utils';
 import Button from '@glint/ui/button';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {useMutation, useQueryClient} from '@tanstack/react-query';
-import {useRouter} from 'next/navigation';
+import {useQueryState} from 'nuqs';
 import {useCallback} from 'react';
 import {FormProvider, type SubmitHandler, useForm} from 'react-hook-form';
 import {toast} from 'sonner';
@@ -13,9 +13,10 @@ import {type CohortCreate, cohortCreateSchema} from '@/lib/schemas/cohorts';
 import {useTRPC} from '@/lib/trpc/react';
 
 const Form: React.FC = () => {
-    const router = useRouter();
     const trpc = useTRPC();
     const queryClient = useQueryClient();
+    const [, setRedirect] = useQueryState('redirect');
+    const [, setSuccess] = useQueryState('success');
 
     const methods = useForm<CohortCreate>({
         resolver: zodResolver(cohortCreateSchema),
@@ -32,7 +33,8 @@ const Form: React.FC = () => {
                     queryKey: trpc.cohorts.getAll.queryKey()
                 });
                 toast.success('Cohort created successfully');
-                router.replace(`/cohorts/${response?.id}?success=true`);
+                setSuccess('true');
+                setRedirect(`/cohorts/${response?.id}`);
             }
         })
     );

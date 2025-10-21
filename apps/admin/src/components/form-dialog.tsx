@@ -10,8 +10,9 @@ import {
     DialogTrigger
 } from '@glint/ui/dialog';
 import Spinner from '@glint/ui/spinner';
+import {useRouter} from 'next/navigation';
 import {useQueryState} from 'nuqs';
-import {Suspense, useEffect, useState} from 'react';
+import {Suspense, useCallback, useEffect, useState} from 'react';
 
 interface Props {
     description?: string;
@@ -25,15 +26,25 @@ const FormDialog: React.FC<React.PropsWithChildren<Props>> = ({
     title,
     trigger
 }) => {
+    const router = useRouter();
     const [isOpen, setIsOpen] = useState(false);
+    const [redirect, setRedirect] = useQueryState('redirect');
     const [success, setSuccess] = useQueryState('success');
+
+    const handleRedirect = useCallback(() => {
+        if (redirect) {
+            setTimeout(() => router.push(redirect));
+            setRedirect(null);
+        }
+    }, [redirect, router, setRedirect]);
 
     useEffect(() => {
         if (success) {
             setIsOpen(false);
             setSuccess(null);
+            handleRedirect();
         }
-    }, [success, setSuccess]);
+    }, [success, setSuccess, handleRedirect]);
 
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
