@@ -1,4 +1,11 @@
-import {authenticityScores, campaigns, respondents, responses, surveys} from '@glint/database';
+import {
+    authenticityScores,
+    campaigns,
+    respondentCohorts,
+    respondents,
+    responses,
+    surveys
+} from '@glint/database';
 import {and, desc, eq, sql} from 'drizzle-orm';
 import {z} from 'zod';
 import type {RespondentList} from '@/lib/schemas/respondents';
@@ -29,7 +36,7 @@ export const respondentsRouter = {
             rows.reduce(
                 (acc, row) => {
                     if (!acc[row.id]) {
-                        acc[row.id] = {...row, surveys: []};
+                        acc[row.id] = {...row, surveys: [], cohorts: []};
                     }
                     if (row.surveyId && acc[row.id] && acc[row.id]?.surveys) {
                         const respondent = acc[row.id];
@@ -61,7 +68,17 @@ export const respondentsRouter = {
             .from(respondents)
             .where(and(eq(respondents.id, input), eq(respondents.tenantId, ctx.tenant)))
             .limit(1);
-        return data || null;
+        if (!data) return null;
+
+        const cohortAssignments = await ctx.db
+            .select({cohortId: respondentCohorts.cohortId})
+            .from(respondentCohorts)
+            .where(eq(respondentCohorts.respondentId, input));
+
+        return {
+            ...data,
+            cohortIds: cohortAssignments.map(c => c.cohortId)
+        };
     }),
     getProfile: protectedProcedure.input(z.string()).query(async ({input: respondentId, ctx}) => {
         const [respondentData] = await ctx.db
@@ -109,6 +126,7 @@ export const respondentsRouter = {
 
         return {
             ...respondent,
+            cohorts: null,
             surveys: surveysData,
             avgAuthenticityScore: Math.round(avgAuthenticityScore),
             totalResponsesWithScores
@@ -143,16 +161,35 @@ export const respondentsRouter = {
                 email: z.string().email().optional(),
                 name: z.string().min(1).optional(),
                 notes: z.string().optional(),
-                signupSource: z.string().optional()
+                signupSource: z.string().optional(),
+                cohortIds: z.array(z.string()).optional()
             })
         )
         .mutation(async ({input, ctx}) => {
-            const {id, ...updateData} = input;
+            const {id, cohortIds, ...updateData} = input;
+
             const [updatedRespondent] = await ctx.db
                 .update(respondents)
                 .set(updateData)
                 .where(and(eq(respondents.id, id), eq(respondents.tenantId, ctx.tenant)))
                 .returning();
+
+            if (cohortIds !== undefined) {
+                await ctx.db
+                    .delete(respondentCohorts)
+                    .where(eq(respondentCohorts.respondentId, id));
+
+                if (cohortIds.length > 0) {
+                    await ctx.db.insert(respondentCohorts).values(
+                        cohortIds.map(cohortId => ({
+                            respondentId: id,
+                            cohortId,
+                            assignedBy: ctx.user.id
+                        }))
+                    );
+                }
+            }
+
             return updatedRespondent;
         })
 };
