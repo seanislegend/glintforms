@@ -1,13 +1,27 @@
 'use client';
 
+import Button from '@glint/ui/button';
 import RelativeDate from '@glint/ui/relative-date';
+import {EyeIcon} from '@phosphor-icons/react/dist/ssr/Eye';
 import type {ColumnDef} from '@tanstack/react-table';
 import Link from 'next/link';
+import {useQueryState} from 'nuqs';
 import CampaignStatusBadge from '@/components/badges/campaign-status';
 import {DataTableColumnHeader} from '@/components/data-table/column-header';
+import {DataTableRowActions} from '@/components/data-table/row-actions';
 import type {RespondentDetails} from '@/lib/schemas/respondents';
 
 type SurveyWithCampaign = RespondentDetails['surveys'][0];
+
+const QuickViewSurveyButton = ({surveyId}: {surveyId: string}) => {
+    const [, setSurveyId] = useQueryState('surveyId');
+    return (
+        <Button onClick={() => setSurveyId(surveyId)} size="sm" variant="outline">
+            <EyeIcon />
+            <span className="sr-only">Quick view</span>
+        </Button>
+    );
+};
 
 export const surveyColumns: ColumnDef<SurveyWithCampaign>[] = [
     {
@@ -73,5 +87,17 @@ export const surveyColumns: ColumnDef<SurveyWithCampaign>[] = [
                 />
             );
         }
+    },
+    {
+        id: 'actions',
+        cell: ({row}) => (
+            <DataTableRowActions
+                detailsUrl={`/surveys/${row.original.id}`}
+                editUrl={`/surveys/${row.original.id}/settings?tab=details`}
+                row={row}
+            >
+                <QuickViewSurveyButton surveyId={row.original.id} />
+            </DataTableRowActions>
+        )
     }
 ];

@@ -9,10 +9,12 @@ import {PencilIcon} from '@phosphor-icons/react/dist/ssr/Pencil';
 import {useSuspenseQuery} from '@tanstack/react-query';
 import Link from 'next/link';
 import {cohortColumns} from '@/app/(app)/respondents/[respondentId]/cohort-columns';
+import CohortQuickView from '@/app/(app)/respondents/[respondentId]/cohort-quick-view';
 import {DataTable} from '@/components/data-table';
 import ScoreBadge from '@/components/response-authenticity/score-badge';
 import {useTRPC} from '@/lib/trpc/react';
 import {surveyColumns} from './survey-columns';
+import SurveyQuickView from './survey-quick-view';
 
 interface Props {
     respondentId: string;
@@ -154,6 +156,8 @@ const RespondentDetails: React.FC<Props> = ({respondentId}) => {
                     />
                 )}
             </div>
+            <CohortQuickView />
+            <SurveyQuickView />
         </>
     );
 };
