@@ -4,6 +4,7 @@ import RelativeDate from '@glint/ui/relative-date';
 import TextLink from '@glint/ui/text-link';
 import type {ColumnDef} from '@tanstack/react-table';
 import Link from 'next/link';
+import {Fragment} from 'react';
 import {DataTableColumnHeader} from '@/components/data-table/column-header';
 import {DataTableRowActions} from '@/components/data-table/row-actions';
 import RecordId from '@/components/record-id';
@@ -44,12 +45,12 @@ export const columns: ColumnDef<RespondentList>[] = [
             return (
                 <span className="max-w-[300px] truncate text-muted-foreground">
                     {cohorts.map((cohort, index) => (
-                        <>
+                        <Fragment key={cohort.id}>
                             <TextLink href={`/cohorts/${cohort.id}`} key={cohort.id}>
                                 {cohort.name}
                             </TextLink>
                             {index < cohorts.length - 1 && <span>, </span>}
-                        </>
+                        </Fragment>
                     ))}
                 </span>
             );
@@ -83,12 +84,12 @@ export const columns: ColumnDef<RespondentList>[] = [
             return (
                 <span className="max-w-[300px] truncate text-muted-foreground">
                     {campaigns.map((campaign, index) => (
-                        <>
+                        <Fragment key={campaign.id}>
                             <TextLink href={`/campaigns/${campaign.id}`} key={campaign.id}>
                                 {campaign.title}
                             </TextLink>
                             {index < campaigns.length - 1 && <span>, </span>}
-                        </>
+                        </Fragment>
                     ))}
                 </span>
             );
