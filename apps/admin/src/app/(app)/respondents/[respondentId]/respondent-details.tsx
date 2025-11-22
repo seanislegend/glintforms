@@ -8,6 +8,7 @@ import RelativeDate from '@glint/ui/relative-date';
 import {PencilIcon} from '@phosphor-icons/react/dist/ssr/Pencil';
 import {useSuspenseQuery} from '@tanstack/react-query';
 import Link from 'next/link';
+import {cohortColumns} from '@/app/(app)/respondents/[respondentId]/cohort-columns';
 import {DataTable} from '@/components/data-table';
 import ScoreBadge from '@/components/response-authenticity/score-badge';
 import {useTRPC} from '@/lib/trpc/react';
@@ -121,6 +122,22 @@ const RespondentDetails: React.FC<Props> = ({respondentId}) => {
                     </div>
                 </CardContent>
             </Card>
+            <div className="mt-8">
+                <Heading3 className="mb-4">Cohorts</Heading3>
+                {respondent.cohorts.length > 0 ? (
+                    <DataTable
+                        columns={cohortColumns}
+                        data={respondent.cohorts}
+                        hasPagination={false}
+                        inputFilterKey={null}
+                    />
+                ) : (
+                    <EmptyPanel
+                        text="This respondent hasn't been assigned to any cohorts yet."
+                        title="No cohorts assigned"
+                    />
+                )}
+            </div>
             <div className="mt-8">
                 <Heading3 className="mb-4">Surveys</Heading3>
                 {respondent.surveys.length > 0 ? (

@@ -127,6 +127,16 @@ export const respondentsRouter = {
                 campaigns.isActive,
                 campaigns.createdAt
             );
+        const cohortsData = await ctx.db
+            .select({
+                id: cohorts.id,
+                name: cohorts.name,
+                description: cohorts.description,
+                assignedAt: respondentCohorts.assignedAt
+            })
+            .from(respondentCohorts)
+            .innerJoin(cohorts, eq(respondentCohorts.cohortId, cohorts.id))
+            .where(eq(respondentCohorts.respondentId, respondentId));
         const [authenticityData] = await ctx.db
             .select({
                 avgScore: sql<number>`avg(${authenticityScores.percentage})`,
@@ -140,7 +150,7 @@ export const respondentsRouter = {
 
         return {
             ...respondent,
-            cohorts: null,
+            cohorts: cohortsData,
             surveys: surveysData,
             avgAuthenticityScore: Math.round(avgAuthenticityScore),
             totalResponsesWithScores

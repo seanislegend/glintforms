@@ -21,11 +21,10 @@ export type RespondentList = Pick<
 
 export type RespondentDetails = typeof respondents.$inferSelect & {
     cohorts: Array<{
+        assignedAt: Date;
+        description: string | null;
         id: string;
         name: string;
-        surveyId: string | null;
-        surveyTitle: string | null;
-        assignedAt: Date;
     }>;
     surveys: Array<{
         id: string;
