@@ -1,7 +1,7 @@
 'use client';
 
 import {Avatar, AvatarFallback} from '@glint/ui/avatar';
-import {Menu, MenuItem, MenuLabel, MenuPopup, MenuSeparator, MenuTrigger} from '@glint/ui/menu';
+import {Menu, MenuGroup, MenuItem, MenuLabel, MenuPopup, MenuSeparator, MenuTrigger} from '@glint/ui/menu';
 import {SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar} from '@glint/ui/sidebar';
 import {CaretUpDownIcon} from '@phosphor-icons/react/dist/ssr/CaretUpDown';
 import {SignOutIcon} from '@phosphor-icons/react/dist/ssr/SignOut';
@@ -16,7 +16,6 @@ const NavUser: React.FC = () => {
     const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
 
     const user = session?.user;
-    if (!user) return null;
 
     const handleLogout = () => {
         // implement logout logic here
@@ -26,65 +25,71 @@ const NavUser: React.FC = () => {
     return (
         <>
             <SidebarMenu>
-                <SidebarMenuItem>
-                    <Menu>
-                        <MenuTrigger
-                            render={
-                                <SidebarMenuButton
-                                    size="lg"
-                                    className="rounded data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
-                                />
-                            }
-                        >
-                            <Avatar className="h-8 w-8 rounded-lg">
-                                <AvatarFallback className="rounded-lg">
-                                    {getInitials(user.name)}
-                                </AvatarFallback>
-                            </Avatar>
-                            <div className="grid flex-1 text-left text-sm leading-tight">
-                                <span className="truncate font-medium">{user.name}</span>
-                                <span className="truncate text-xs">{user.email}</span>
-                            </div>
-                            <CaretUpDownIcon className="ml-auto size-4" />
-                        </MenuTrigger>
-                        <MenuPopup
-                            className="min-w-56 rounded-lg"
-                            positionAlign="end"
-                            positionSide={isMobile ? 'bottom' : 'right'}
-                        >
-                            <MenuLabel className="p-0 font-normal">
-                                <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                                    <Avatar className="h-8 w-8 rounded-lg">
-                                        <AvatarFallback className="rounded-lg">
-                                            {getInitials(user.name)}
-                                        </AvatarFallback>
-                                    </Avatar>
-                                    <div className="grid flex-1 text-left text-sm leading-tight">
-                                        <span className="truncate font-medium">{user.name}</span>
-                                        <span className="truncate text-xs">{user.email}</span>
-                                    </div>
-                                </div>
-                            </MenuLabel>
-                            <MenuSeparator />
-                            <MenuItem
-                                variant="destructive"
-                                onClick={() => setShowLogoutConfirm(true)}
+                {user && (
+                    <SidebarMenuItem>
+                        <Menu>
+                            <MenuTrigger
+                                render={
+                                    <SidebarMenuButton
+                                        size="lg"
+                                        className="rounded data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+                                    />
+                                }
                             >
-                                <SignOutIcon />
-                                Log out
-                            </MenuItem>
-                        </MenuPopup>
-                    </Menu>
-                </SidebarMenuItem>
+                                <Avatar className="h-8 w-8 rounded-lg">
+                                    <AvatarFallback className="rounded-lg">
+                                        {getInitials(user.name)}
+                                    </AvatarFallback>
+                                </Avatar>
+                                <div className="grid flex-1 text-left text-sm leading-tight">
+                                    <span className="truncate font-medium">{user.name}</span>
+                                    <span className="truncate text-xs">{user.email}</span>
+                                </div>
+                                <CaretUpDownIcon className="ml-auto size-4" />
+                            </MenuTrigger>
+                            <MenuPopup
+                                className="min-w-56 rounded-lg"
+                                positionAlign="end"
+                                positionSide={isMobile ? 'bottom' : 'right'}
+                            >
+                                <MenuGroup>
+                                    <MenuLabel className="p-0 font-normal">
+                                        <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
+                                            <Avatar className="h-8 w-8 rounded-lg">
+                                                <AvatarFallback className="rounded-lg">
+                                                    {getInitials(user.name)}
+                                                </AvatarFallback>
+                                            </Avatar>
+                                            <div className="grid flex-1 text-left text-sm leading-tight">
+                                                <span className="truncate font-medium">{user.name}</span>
+                                                <span className="truncate text-xs">{user.email}</span>
+                                            </div>
+                                        </div>
+                                    </MenuLabel>
+                                </MenuGroup>
+                                <MenuSeparator />
+                                <MenuItem
+                                    variant="destructive"
+                                    onClick={() => setShowLogoutConfirm(true)}
+                                >
+                                    <SignOutIcon />
+                                    Log out
+                                </MenuItem>
+                            </MenuPopup>
+                        </Menu>
+                    </SidebarMenuItem>
+                )}
             </SidebarMenu>
-            <ConfirmationDialog
-                description="Are you sure you want to log out? You will need to sign in again to access your account."
-                onConfirm={handleLogout}
-                onOpenChange={setShowLogoutConfirm}
-                open={showLogoutConfirm}
-                title="Confirm logout"
-                variant="destructive"
-            />
+            {user && (
+                <ConfirmationDialog
+                    description="Are you sure you want to log out? You will need to sign in again to access your account."
+                    onConfirm={handleLogout}
+                    onOpenChange={setShowLogoutConfirm}
+                    open={showLogoutConfirm}
+                    title="Confirm logout"
+                    variant="destructive"
+                />
+            )}
         </>
     );
 };

@@ -37,6 +37,8 @@ export const buttonVariants = cva(
     }
 );
 
+const defaultButtonRender = () => <button type="button" />;
+
 const Button: React.FC<
     useRender.ComponentProps<'button'> &
         VariantProps<typeof buttonVariants> & {
@@ -45,8 +47,7 @@ const Button: React.FC<
 > = ({
     className,
     pending = false,
-    // biome-ignore lint/a11y/useButtonType: base ui
-    render = <button />,
+    render = defaultButtonRender,
     size,
     type = 'button',
     variant,

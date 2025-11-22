@@ -37,7 +37,7 @@ const ScoreBadge: React.FC<Props> = ({score}) => {
     return (
         <div className="relative inline-flex items-center justify-center w-full h-full aspect-square max-w-full max-h-full">
             <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
-                <title>Authenticity Score: {score}%</title>
+                <title>{`Authenticity Score: ${score}%`}</title>
                 <circle
                     cx="50"
                     cy="50"
