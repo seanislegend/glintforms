@@ -24,12 +24,16 @@ export const respondentsRouter = {
                 surveyId: surveys.id,
                 surveyTitle: surveys.title,
                 campaignId: campaigns.id,
-                campaignTitle: campaigns.title
+                campaignTitle: campaigns.title,
+                cohortId: cohorts.id,
+                cohortName: cohorts.name
             })
             .from(respondents)
             .leftJoin(responses, eq(respondents.id, responses.respondentId))
             .leftJoin(surveys, eq(responses.surveyId, surveys.id))
             .leftJoin(campaigns, eq(surveys.campaignId, campaigns.id))
+            .leftJoin(respondentCohorts, eq(respondents.id, respondentCohorts.respondentId))
+            .leftJoin(cohorts, eq(respondentCohorts.cohortId, cohorts.id))
             .where(eq(respondents.tenantId, ctx.tenant))
             .orderBy(desc(respondents.updatedAt));
 
@@ -55,24 +59,25 @@ export const respondentsRouter = {
                             });
                         }
                     }
+                    if (row.cohortId && acc[row.id] && acc[row.id]?.cohorts) {
+                        const respondent = acc[row.id];
+                        if (!respondent || !respondent.cohorts) return acc;
+
+                        const hasCohort = respondent.cohorts.some(
+                            (c: {id: string}) => c.id === row.cohortId
+                        );
+                        if (!hasCohort) {
+                            respondent.cohorts.push({
+                                id: row.cohortId,
+                                name: row.cohortName ?? ''
+                            });
+                        }
+                    }
                     return acc;
                 },
                 {} as Record<string, RespondentList>
             )
         );
-
-        for (const respondent of data) {
-            const cohortRows = await ctx.db
-                .select({
-                    id: cohorts.id,
-                    name: cohorts.name
-                })
-                .from(respondentCohorts)
-                .innerJoin(cohorts, eq(respondentCohorts.cohortId, cohorts.id))
-                .where(eq(respondentCohorts.respondentId, respondent.id));
-
-            respondent.cohorts = cohortRows;
-        }
 
         return data;
     }),
