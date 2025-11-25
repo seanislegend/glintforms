@@ -23,7 +23,7 @@ const ResponseAnswer: React.FC<Props> = ({question, value}) => {
 
     switch (question.type) {
         case 'text':
-            return <div className="whitespace-pre-wrap">&quot;{value}&quot;</div>;
+            return <div className="whitespace-pre-wrap">{value}</div>;
         case 'number':
             return <div>{value}</div>;
         case 'single_select':
@@ -31,7 +31,7 @@ const ResponseAnswer: React.FC<Props> = ({question, value}) => {
         case 'multi_select':
             if (Array.isArray(value)) {
                 return (
-                    <ul className="list-disc list-inside">
+                    <ul className="list-disc pl-2 list-inside flex flex-wrap gap-2">
                         {value.map((item: string) => (
                             <li key={item}>{options[item]}</li>
                         ))}

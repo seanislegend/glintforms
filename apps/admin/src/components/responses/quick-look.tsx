@@ -2,26 +2,26 @@
 
 import EmptyPanel from '@glint/ui/empty-panel';
 import {useSuspenseQuery} from '@tanstack/react-query';
-import {useState} from 'react';
+import {DataTable} from '@/components/data-table';
+import {usePaginationSearchParams} from '@/components/data-table/parsers';
 import {isCodedQuestion} from '@/lib/answer-formatter';
 import {useTRPC} from '@/lib/trpc/react';
-import AnswerContent from './answer-content';
+import {createAnswerColumns} from './columns';
 import OptionDistributionChart from './option-distribution-chart';
-import Pagination from './pagination';
-import type {QuestionAnswersContentProps, QuestionAnswersQuickLookProps} from './types';
+import type {QuestionAnswersQuickLookProps} from './types';
 
-const ANSWERS_PER_PAGE = 50;
+const MAX_ANSWERS = 100;
 
 const QuestionAnswersQuickLook: React.FC<QuestionAnswersQuickLookProps> = ({
     questionId,
     surveyId
 }) => {
-    const [page, setPage] = useState(0);
     const trpc = useTRPC();
+    const [pagination] = usePaginationSearchParams();
     const {data} = useSuspenseQuery(
         trpc.answers.getByQuestion.queryOptions({
-            limit: ANSWERS_PER_PAGE,
-            offset: page * ANSWERS_PER_PAGE,
+            limit: MAX_ANSWERS,
+            offset: pagination.pageIndex * pagination.pageSize,
             questionId
         })
     );
@@ -32,6 +32,7 @@ const QuestionAnswersQuickLook: React.FC<QuestionAnswersQuickLookProps> = ({
 
     const question = data.question;
     const answers = data.answers ?? [];
+    const tableData = answers.map(a => ({...a, question, surveyId}));
 
     return (
         <>
@@ -51,44 +52,17 @@ const QuestionAnswersQuickLook: React.FC<QuestionAnswersQuickLookProps> = ({
                     title="Awaiting responses"
                 />
             ) : (
-                <QuestionAnswersContent
-                    answers={answers}
-                    data={data}
-                    onPageChange={setPage}
-                    page={page}
-                    question={question}
-                    surveyId={surveyId}
+                <DataTable
+                    columns={createAnswerColumns(question, surveyId)}
+                    data={tableData}
+                    hasPagination={true}
+                    hasManualPagination={true}
+                    rowCount={data.total}
+                    inputFilterKey={null}
+                    tableClassName="[&_td:nth-child(1)]:w-full [&_td:nth-child(3)]:w-[50px]"
                 />
             )}
         </>
-    );
-};
-
-const QuestionAnswersContent: React.FC<QuestionAnswersContentProps> = ({
-    answers,
-    data,
-    onPageChange,
-    page,
-    question,
-    surveyId
-}) => {
-    return (
-        <div className="space-y-4">
-            {answers.map(answer => (
-                <AnswerContent
-                    answer={answer}
-                    key={answer.id}
-                    question={question}
-                    surveyId={surveyId}
-                />
-            ))}
-            <Pagination
-                currentPage={page}
-                onPageChange={onPageChange}
-                pageSize={ANSWERS_PER_PAGE}
-                total={data.total}
-            />
-        </div>
     );
 };
 
