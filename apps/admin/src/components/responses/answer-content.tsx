@@ -5,6 +5,7 @@ import {Card, CardContent} from '@glint/ui/card';
 import RelativeDate from '@glint/ui/relative-date';
 import {ArrowRightIcon} from '@phosphor-icons/react/dist/ssr/ArrowRight';
 import Link from 'next/link';
+import RecordId from '@/components/record-id';
 import ResponseAnswer from './answer';
 import type {AnswerContentProps} from './types';
 
@@ -26,8 +27,17 @@ const AnswerContent: React.FC<AnswerContentProps> = ({answer, question, surveyId
                 )}
                 <div className="flex mt-4 gap-4 justify-between">
                     <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
-                        <span>{answer.respondentId ?? 'Anonymous respondent'}</span>
-                        <span aria-hidden="true">•</span>
+                        <span>
+                            {answer.respondentId ? (
+                                <RecordId
+                                    canCopy={false}
+                                    href={`/respondents/${answer.respondentId}`}
+                                    id={answer.respondentId}
+                                />
+                            ) : (
+                                'Anonymous respondent'
+                            )}
+                        </span>
                         <RelativeDate date={new Date(answer.startedAt)} />
                     </div>
                 </div>
