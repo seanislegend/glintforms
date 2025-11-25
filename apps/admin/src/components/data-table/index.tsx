@@ -32,7 +32,9 @@ interface DataTableProps<TData, TValue> {
         | {dynamic?: false | undefined; label: string; options: FacetedFilterItem[]}
     >;
     hasPagination?: boolean;
+    hasManualPagination?: boolean;
     inputFilterKey?: string | null;
+    rowCount?: number;
     toolbarActions?: (filters: ColumnFiltersState, pagination: PaginationState) => React.ReactNode;
 }
 
@@ -41,7 +43,9 @@ export const DataTable = <TData, TValue>({
     data,
     facetedFilters,
     hasPagination = true,
+    hasManualPagination = false,
     inputFilterKey = 'title',
+    rowCount,
     toolbarActions
 }: DataTableProps<TData, TValue>) => {
     const [rowSelection, setRowSelection] = useState({});
@@ -71,6 +75,8 @@ export const DataTable = <TData, TValue>({
             columnFilters,
             pagination
         },
+        manualPagination: hasManualPagination,
+        rowCount: hasManualPagination && rowCount ? rowCount : undefined,
         initialState: {pagination, columnFilters},
         enableRowSelection: false,
         onRowSelectionChange: setRowSelection,
@@ -149,6 +155,7 @@ export const DataTable = <TData, TValue>({
                 </Table>
             </div>
             {hasPagination && <DataTablePagination table={table} />}
+            <div className="h-4" />
         </div>
     );
 };

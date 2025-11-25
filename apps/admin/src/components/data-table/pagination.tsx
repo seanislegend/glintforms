@@ -1,3 +1,5 @@
+'use no memo';
+
 import {Select, SelectItem, SelectPopup, SelectTrigger, SelectValue} from '@glint/form/select';
 import Button from '@glint/ui/button';
 import {CaretDoubleLeftIcon} from '@phosphor-icons/react/dist/ssr/CaretDoubleLeft';
