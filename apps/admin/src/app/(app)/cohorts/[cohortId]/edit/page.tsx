@@ -1,18 +1,16 @@
 import Container from '@glint/ui/container';
 import SectionHeader from '@glint/ui/section-header';
 import Spacer from '@glint/ui/spacer';
-import {Suspense} from 'react';
+import ClientOnly from '@/components/client-only';
 import {HydrateClient, prefetch, trpc} from '@/lib/trpc/server';
 import Form from './form';
 
 interface PageProps {
-    params: {
-        cohortId: string;
-    };
+    params: Promise<{cohortId: string}>;
 }
 
 const Page: React.FC<PageProps> = async ({params}) => {
-    const {cohortId} = params;
+    const {cohortId} = await params;
     prefetch(trpc.cohorts.get.queryOptions(cohortId));
 
     return (
@@ -20,9 +18,9 @@ const Page: React.FC<PageProps> = async ({params}) => {
             <Container>
                 <SectionHeader title="Edit cohort" />
                 <Spacer size="md" />
-                <Suspense>
+                <ClientOnly>
                     <Form cohortId={cohortId} />
-                </Suspense>
+                </ClientOnly>
             </Container>
         </HydrateClient>
     );

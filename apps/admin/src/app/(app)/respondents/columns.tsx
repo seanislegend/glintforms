@@ -120,12 +120,12 @@ export const columns: ColumnDef<RespondentList>[] = [
             return (
                 <span className="max-w-[300px] truncate text-muted-foreground">
                     {surveys.map((survey, index) => (
-                        <>
+                        <Fragment key={survey.id}>
                             <TextLink href={`/surveys/${survey.id}`} key={survey.id}>
                                 {survey.title}
                             </TextLink>
                             {index < surveys.length - 1 && <span>, </span>}
-                        </>
+                        </Fragment>
                     ))}
                 </span>
             );
