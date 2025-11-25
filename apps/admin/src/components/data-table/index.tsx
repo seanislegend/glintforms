@@ -35,6 +35,7 @@ interface DataTableProps<TData, TValue> {
     hasManualPagination?: boolean;
     inputFilterKey?: string | null;
     rowCount?: number;
+    tableClassName?: string;
     toolbarActions?: (filters: ColumnFiltersState, pagination: PaginationState) => React.ReactNode;
 }
 
@@ -46,6 +47,7 @@ export const DataTable = <TData, TValue>({
     hasManualPagination = false,
     inputFilterKey = 'title',
     rowCount,
+    tableClassName = '',
     toolbarActions
 }: DataTableProps<TData, TValue>) => {
     const [rowSelection, setRowSelection] = useState({});
@@ -108,7 +110,7 @@ export const DataTable = <TData, TValue>({
                 {toolbarActions?.(columnFilters, pagination)}
             </DataTableToolbar>
             <div className="border rounded overflow-hidden">
-                <Table>
+                <Table className={tableClassName}>
                     <TableHeader className="bg-muted/50">
                         {table.getHeaderGroups().map(headerGroup => (
                             <TableRow key={headerGroup.id}>
