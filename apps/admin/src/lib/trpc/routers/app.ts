@@ -1,4 +1,5 @@
 import {createTRPCRouter} from '@/lib/trpc/init';
+import {answersRouter} from '@/lib/trpc/routers/answers';
 import {activitiesRouter} from '@/lib/trpc/routers/activities';
 import {authenticityRouter} from '@/lib/trpc/routers/authenticity';
 import {breadcrumbsRouter} from '@/lib/trpc/routers/breadcrumbs';
@@ -12,6 +13,7 @@ import {actionsRouter} from '@/lib/trpc/routers/survey-actions';
 import {surveysRouter} from '@/lib/trpc/routers/surveys';
 
 export const appRouter = createTRPCRouter({
+    answers: answersRouter,
     actions: actionsRouter,
     activities: activitiesRouter,
     authenticity: authenticityRouter,

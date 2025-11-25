@@ -6,6 +6,7 @@ import {ChartLineIcon} from '@phosphor-icons/react/dist/ssr/ChartLine';
 import {GearIcon} from '@phosphor-icons/react/dist/ssr/Gear';
 import {HouseIcon} from '@phosphor-icons/react/dist/ssr/House';
 import {QuestionMarkIcon} from '@phosphor-icons/react/dist/ssr/QuestionMark';
+import {TextAlignLeftIcon} from '@phosphor-icons/react/dist/ssr/TextAlignLeft';
 import {useSuspenseQuery} from '@tanstack/react-query';
 import Link from 'next/link';
 import {redirect, usePathname} from 'next/navigation';
@@ -93,6 +94,19 @@ const SurveyNavbar: React.FC<Props> = ({surveyId}) => {
                     >
                         <ChartLineIcon />
                         Responses
+                    </Button>
+                </span>
+                <span>
+                    <Button
+                        data-active={isPathActive('answers')}
+                        {...(hasLaunched || isTesting
+                            ? {render: <Link href={`/surveys/${survey.id}/answers`} />}
+                            : {disabled: true})}
+                        size="sm"
+                        variant="ghost"
+                    >
+                        <TextAlignLeftIcon />
+                        Answers
                     </Button>
                 </span>
                 <span>

@@ -23,7 +23,7 @@ const ResponseAnswer: React.FC<Props> = ({question, value}) => {
 
     switch (question.type) {
         case 'text':
-            return <div className="whitespace-pre-wrap">{value}</div>;
+            return <div className="whitespace-pre-wrap">&quot;{value}&quot;</div>;
         case 'number':
             return <div>{value}</div>;
         case 'single_select':
