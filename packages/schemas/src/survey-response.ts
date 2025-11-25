@@ -187,6 +187,20 @@ export const createResponseSchema = (surveyQuestions: (typeof questions.$inferSe
                     if (q.required && !(q.id in obj)) return false;
                 }
                 return true;
-            }, 'all required questions must be answered')
+            }, 'all required questions must be answered'),
+        respondent: z
+            .object({
+                email: z.string().email(),
+                gender: z
+                    .enum(['female', 'male', 'other', 'prefer_not_to_say'])
+                    .nullable()
+                    .optional(),
+                locationCity: z.string().nullable().optional(),
+                locationCountry: z.string().nullable().optional(),
+                name: z.string().min(1),
+                notes: z.string().nullable().optional(),
+                signupSource: z.string().nullable().optional()
+            })
+            .optional()
     });
 };

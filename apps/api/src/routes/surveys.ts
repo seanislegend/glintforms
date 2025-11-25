@@ -1,5 +1,5 @@
 import {createHash} from 'node:crypto';
-import {activities, answers, db, questions, responses, surveys} from '@glint/database';
+import {activities, answers, db, questions, respondents, responses, surveys} from '@glint/database';
 import {createResponseSchema} from '@glint/schemas';
 import {asc, eq} from 'drizzle-orm';
 import {Hono} from 'hono';
@@ -52,6 +52,8 @@ router.post(
         const validationResult = responseSchema.safeParse(body);
 
         if (!validationResult.success) {
+            console.log(body);
+            console.log(validationResult.error);
             throw new InvalidBodyError();
         }
 
@@ -82,6 +84,29 @@ router.post(
         const responseEndedAt = processedAnswers[processedAnswers.length - 1].endedAt;
 
         await db.transaction(async tx => {
+            // create or find existing respondent if respondent data is provided
+            let respondentId: string | null = null;
+            if (validatedBody.respondent) {
+                const [existingRespondent] = await tx
+                    .select()
+                    .from(respondents)
+                    .where(eq(respondents.email, validatedBody.respondent.email))
+                    .limit(1);
+
+                if (existingRespondent) {
+                    respondentId = existingRespondent.id;
+                } else {
+                    const [newRespondent] = await tx
+                        .insert(respondents)
+                        .values({...validatedBody.respondent, tenantId: survey.tenantId})
+                        .returning();
+                    if (!newRespondent) {
+                        throw new Error('Failed to create respondent');
+                    }
+                    respondentId = newRespondent.id;
+                }
+            }
+
             const [response] = await tx
                 .insert(responses)
                 .values({
@@ -90,6 +115,7 @@ router.post(
                         ipHash: ip ? sha256(ip) : null,
                         uaHash: ua ? sha256(ua) : null
                     },
+                    respondentId,
                     startedAt: responseStartedAt,
                     surveyId: survey.id,
                     tenantId: survey.tenantId,
