@@ -1,5 +1,14 @@
-import {answers, type Database, questions, respondents, responses, surveys} from '@glint/database';
+import {
+    analysisThemes,
+    answers,
+    type Database,
+    questions,
+    respondents,
+    responses,
+    surveys
+} from '@glint/database';
 import {and, asc, desc, eq, inArray, sql} from 'drizzle-orm';
+import * as R from 'remeda';
 import {z} from 'zod';
 import {isCodedQuestion} from '@/lib/answer-formatter';
 import type {QuestionOption} from '@/lib/schemas/questions';
@@ -135,6 +144,28 @@ export const answersRouter = {
             )
             .orderBy(asc(questions.order));
 
+        const textQuestionIds = stats.filter(q => q.type === 'text').map(q => q.id);
+        const themes =
+            textQuestionIds.length > 0
+                ? await ctx.db
+                      .select({
+                          description: analysisThemes.description,
+                          id: analysisThemes.id,
+                          name: analysisThemes.name,
+                          questionId: analysisThemes.questionId,
+                          sentiment: analysisThemes.sentiment,
+                          score: analysisThemes.score
+                      })
+                      .from(analysisThemes)
+                      .where(inArray(analysisThemes.questionId, textQuestionIds))
+                : [];
+
+        const themesByQuestionId = new Map<string, typeof themes>();
+        for (const theme of themes) {
+            const existing = themesByQuestionId.get(theme.questionId) ?? [];
+            themesByQuestionId.set(theme.questionId, [...existing, theme]);
+        }
+
         const codedQuestions = new Map<string, QuestionMeta>(
             stats
                 .filter(q => isCodedQuestion(q.type))
@@ -143,10 +174,13 @@ export const answersRouter = {
         const selectionCounts = await getSelectionCounts(codedQuestions, ctx, surveyId);
 
         return stats.map(question => {
-            if (!isCodedQuestion(question.type)) return question;
+            const questionThemes = themesByQuestionId.get(question.id) ?? [];
+            const baseQuestion = {...question, themes: R.sortBy(questionThemes, t => t.score)};
+
+            if (!isCodedQuestion(question.type)) return baseQuestion;
 
             const questionWithOptions = codedQuestions.get(question.id);
-            if (!questionWithOptions) return question;
+            if (!questionWithOptions) return baseQuestion;
 
             const optionCounts = buildOptionCounts(
                 question.id,
@@ -154,7 +188,7 @@ export const answersRouter = {
                 questionWithOptions.options,
                 selectionCounts
             );
-            return {...question, optionCounts};
+            return {...baseQuestion, optionCounts};
         });
     })
 };
