@@ -1,7 +1,7 @@
 'use client';
 
 import {type ChartConfig, ChartContainer, ChartTooltip} from '@glint/ui/chart';
-import {Bar, BarChart, CartesianGrid, Cell, LabelList, XAxis, YAxis} from 'recharts';
+import {Bar, BarChart, Cell, LabelList, XAxis, YAxis} from 'recharts';
 
 const colorPalette = [
     'var(--color-blue-500)',
@@ -13,8 +13,7 @@ const colorPalette = [
     'var(--color-pink-500)',
     'var(--color-gray-500)',
     'var(--color-brown-500)',
-    'var(--color-black-500)',
-    'var(--color-white-500)'
+    'var(--color-black-500)'
 ];
 
 const chartConfig = {
@@ -44,17 +43,26 @@ const OptionDistributionChart: React.FC<Props> = ({
     const containerClassName = ['aspect-auto h-[220px] w-full', className]
         .filter(Boolean)
         .join(' ');
+    console.log(chartData);
 
     return (
         <ChartContainer className={containerClassName} config={chartConfig}>
             <BarChart
                 accessibilityLayer
+                barCategoryGap={2}
                 data={chartData}
-                margin={{bottom: 8, left: 0, right: 12, top: 16}}
+                layout="vertical"
+                margin={{right: 16}}
             >
-                <CartesianGrid horizontal={false} vertical />
-                <XAxis dataKey="label" tickLine={false} tick={{fontSize: 12}} type="category" />
-                <YAxis allowDecimals={false} dataKey="count" tickLine={false} type="number" />
+                <YAxis
+                    dataKey="label"
+                    tickLine={false}
+                    tickMargin={10}
+                    axisLine={false}
+                    hide
+                    type="category"
+                />
+                <XAxis allowDecimals={false} dataKey="count" hide type="number" />
                 <ChartTooltip
                     cursor={false}
                     content={({active, payload}) => {
@@ -68,18 +76,23 @@ const OptionDistributionChart: React.FC<Props> = ({
                         );
                     }}
                 />
-                <Bar dataKey="count" fill={chartConfig.selections.color} radius={[4, 4, 0, 0]}>
+                <Bar dataKey="count" fill={chartConfig.selections.color} radius={4}>
                     {chartData.map((entry, index) => (
-                        <Cell
-                            key={`cell-${entry.optionId}`}
-                            fill={colorPalette[index % colorPalette.length]}
-                        />
+                        <Cell key={entry.label} fill={colorPalette[index % colorPalette.length]} />
                     ))}
                     <LabelList
-                        className="fill-foreground text-xs"
-                        dataKey="count"
+                        dataKey="label"
+                        position="insideLeft"
                         offset={8}
-                        position="top"
+                        className="fill-foreground"
+                        fontSize={12}
+                    />
+                    <LabelList
+                        dataKey="count"
+                        position="right"
+                        offset={8}
+                        className="fill-foreground"
+                        fontSize={12}
                     />
                 </Bar>
             </BarChart>
