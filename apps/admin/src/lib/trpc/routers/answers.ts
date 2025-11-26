@@ -64,6 +64,7 @@ export const answersRouter = {
                     respondentId: respondents.id,
                     respondentName: respondents.name,
                     responseId: answers.responseId,
+                    theme: analysisThemes.name,
                     startedAt: answers.startedAt,
                     value: answers.value,
                     wasSkipped: answers.wasSkipped,
@@ -74,6 +75,7 @@ export const answersRouter = {
                     responses,
                     and(eq(answers.responseId, responses.id), eq(responses.tenantId, ctx.tenant))
                 )
+                .innerJoin(analysisThemes, eq(answers.questionId, analysisThemes.questionId))
                 .leftJoin(respondents, eq(responses.respondentId, respondents.id))
                 .where(eq(answers.questionId, questionId))
                 .orderBy(desc(answers.startedAt))
@@ -97,6 +99,7 @@ export const answersRouter = {
                 answers: answersList.map(a => ({
                     endedAt: a.endedAt,
                     id: a.id,
+                    theme: a.theme,
                     respondentId: a.respondentId,
                     responseId: a.responseId,
                     startedAt: a.startedAt,

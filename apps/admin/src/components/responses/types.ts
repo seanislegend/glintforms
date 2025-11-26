@@ -1,4 +1,5 @@
 export interface QuestionAnswersQuickLookProps {
+    allThemes: QuestionTheme[] | undefined;
     questionId: string;
     surveyId: string;
 }

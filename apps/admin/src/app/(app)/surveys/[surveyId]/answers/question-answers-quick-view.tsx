@@ -18,7 +18,7 @@ const QuestionAnswersQuickView: React.FC<Props> = ({questions, surveyId}) => {
 
     return (
         <Sheet open={!!questionId} onOpenChange={() => setQuestionId(null)}>
-            <SheetPopup className="w-[400px] sm:w-[720px] md:w-[900px] xl:w-[1400px] !max-w-none">
+            <SheetPopup className="w-full sm:w-[720px] md:w-[900px] xl:w-[1400px] sm:max-w-[95vw]">
                 <SheetHeader className="sticky top-0 bg-white/70 backdrop-blur-lg">
                     <SheetTitle>
                         {question?.title ? `${question.order}. ${question.title}` : 'Answers'}
@@ -37,7 +37,11 @@ const QuestionAnswersQuickView: React.FC<Props> = ({questions, surveyId}) => {
                                 </div>
                             }
                         >
-                            <QuestionAnswersQuickLook questionId={questionId} surveyId={surveyId} />
+                            <QuestionAnswersQuickLook
+                                allThemes={question?.themes}
+                                questionId={questionId}
+                                surveyId={surveyId}
+                            />
                         </Suspense>
                     )}
                 </div>

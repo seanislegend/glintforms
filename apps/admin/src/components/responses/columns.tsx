@@ -14,7 +14,8 @@ interface AnswerWithQuestion extends Answer {
 
 export const createAnswerColumns = (
     question: Question,
-    surveyId: string
+    surveyId: string,
+    allThemes: QuestionTheme[] | undefined
 ): ColumnDef<AnswerWithQuestion>[] => [
     {
         accessorKey: 'value',
@@ -37,12 +38,29 @@ export const createAnswerColumns = (
         enableSorting: false
     },
     {
+        accessorKey: 'theme',
+        cell: ({row}) => {
+            const theme = row.getValue('theme') as string;
+            return <span className="text-muted-foreground">{theme}</span>;
+        },
+        filterFn: (row, _, value) => {
+            if (!allThemes || allThemes.length === 0) {
+                return false;
+            }
+            const themeId = allThemes.find(theme => theme.name === row.getValue('theme'))?.id;
+            return themeId === value;
+        },
+        header: ({column}) => <DataTableColumnHeader column={column} title="Theme" />,
+        enableSorting: true
+    },
+    {
         accessorKey: 'startedAt',
         cell: ({row}) => {
             const startedAt = row.getValue('startedAt') as Date;
             return <RelativeDate className="text-muted-foreground" date={new Date(startedAt)} />;
         },
-        header: ({column}) => <DataTableColumnHeader column={column} title="Started at" />
+        header: ({column}) => <DataTableColumnHeader column={column} title="Started at" />,
+        enableSorting: true
     },
     {
         id: 'actions',
