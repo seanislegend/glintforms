@@ -2,9 +2,12 @@
 
 import Button from '@glint/ui/button';
 import {Card, CardContent, CardFooter, CardHeader, CardTitle} from '@glint/ui/card';
+import {EyeIcon} from '@phosphor-icons/react/dist/ssr/Eye';
 import {useQueryState} from 'nuqs';
 import QuestionTypeBadge from '@/components/badges/question-type';
+import OptionDistributionChart from '@/components/responses/option-distribution-chart';
 import ResponsesThemeList from '@/components/responses/theme-list';
+import {isCodedQuestion} from '@/lib/answer-formatter';
 
 interface Props {
     question: QuestionWithStats;
@@ -22,6 +25,9 @@ const QuestionCard: React.FC<Props> = ({question}) => {
                 <QuestionTypeBadge type={question.type} />
             </CardHeader>
             <CardContent className="text-sm flex-grow">
+                {isCodedQuestion(question.type) && (
+                    <OptionDistributionChart data={question.optionCounts ?? []} />
+                )}
                 {question.themes && question.themes.length > 0 && (
                     <ResponsesThemeList themes={question.themes} />
                 )}
@@ -33,7 +39,8 @@ const QuestionCard: React.FC<Props> = ({question}) => {
                     size="sm"
                     variant="outline"
                 >
-                    View all answers
+                    <span>View all answers</span>
+                    <EyeIcon className="size-4" />
                 </Button>
             </CardFooter>
         </Card>

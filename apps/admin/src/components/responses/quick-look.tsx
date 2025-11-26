@@ -4,10 +4,8 @@ import EmptyPanel from '@glint/ui/empty-panel';
 import {useSuspenseQuery} from '@tanstack/react-query';
 import {DataTable} from '@/components/data-table';
 import {usePaginationSearchParams} from '@/components/data-table/parsers';
-import {isCodedQuestion} from '@/lib/answer-formatter';
 import {useTRPC} from '@/lib/trpc/react';
 import {createAnswerColumns} from './columns';
-import OptionDistributionChart from './option-distribution-chart';
 import type {QuestionAnswersQuickLookProps} from './types';
 
 const MAX_ANSWERS = 100;
@@ -36,16 +34,6 @@ const QuestionAnswersQuickLook: React.FC<QuestionAnswersQuickLookProps> = ({
 
     return (
         <>
-            {isCodedQuestion(question.type) && (
-                <>
-                    <p className="mb-3 text-sm font-medium text-foreground">Selections breakdown</p>
-                    <OptionDistributionChart
-                        className="h-[220px]"
-                        data={question.optionCounts}
-                        emptyMessage="Selections will appear here once responses are recorded."
-                    />
-                </>
-            )}
             {answers.length === 0 ? (
                 <EmptyPanel
                     text="Answers will appear here once respondents reply"

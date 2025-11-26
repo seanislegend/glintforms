@@ -10,7 +10,7 @@ interface Props {
     themes: QuestionTheme[];
 }
 
-const DEFAULT_MAX_THEMES = 5;
+const DEFAULT_MAX_THEMES = 8;
 
 const ResponsesThemeList: React.FC<Props> = ({themes}) => {
     const [showAll, setShowAll] = useState(false);
