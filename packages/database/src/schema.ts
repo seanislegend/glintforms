@@ -354,6 +354,7 @@ export const analysisThemes = pgTable(
         name: varchar('name', {length: 255}).notNull(),
         description: text('description'),
         sentiment: varchar('sentiment', {length: 50}),
+        score: integer('score').default(0).notNull(),
         metadata: jsonb('metadata')
     },
     table => ({

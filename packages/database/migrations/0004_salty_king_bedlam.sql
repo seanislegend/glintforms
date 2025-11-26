@@ -1,0 +1,1 @@
+ALTER TABLE "analysis_themes" ADD COLUMN "score" integer DEFAULT 0 NOT NULL;
