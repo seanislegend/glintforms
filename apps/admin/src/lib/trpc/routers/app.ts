@@ -1,6 +1,6 @@
 import {createTRPCRouter} from '@/lib/trpc/init';
-import {answersRouter} from '@/lib/trpc/routers/answers';
 import {activitiesRouter} from '@/lib/trpc/routers/activities';
+import {answersRouter} from '@/lib/trpc/routers/answers';
 import {authenticityRouter} from '@/lib/trpc/routers/authenticity';
 import {breadcrumbsRouter} from '@/lib/trpc/routers/breadcrumbs';
 import {campaignsRouter} from '@/lib/trpc/routers/campaigns';

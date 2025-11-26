@@ -342,9 +342,45 @@ export const responses = pgTable(
     })
 );
 
+export const analysisThemes = pgTable(
+    'analysis_themes',
+    {
+        id: uuid('id').primaryKey().defaultRandom(),
+        createdAt: timestamp('created_at').defaultNow().notNull(),
+        updatedAt: timestamp('updated_at').defaultNow().notNull(),
+        questionId: uuid('question_id')
+            .references(() => questions.id, {onDelete: 'cascade'})
+            .notNull(),
+        name: varchar('name', {length: 255}).notNull(),
+        description: text('description'),
+        sentiment: varchar('sentiment', {length: 50}),
+        metadata: jsonb('metadata')
+    },
+    table => ({
+        questionIdx: index('analysis_theme_question_idx').on(table.questionId)
+    })
+);
+
+export const analysisThemeEntries = pgTable(
+    'analysis_theme_entries',
+    {
+        themeId: uuid('theme_id')
+            .references(() => analysisThemes.id, {onDelete: 'cascade'})
+            .notNull(),
+        answerId: uuid('answer_id')
+            .references(() => answers.id, {onDelete: 'cascade'})
+            .notNull(),
+        createdAt: timestamp('created_at').defaultNow().notNull()
+    },
+    table => ({
+        themeIdx: index('entry_theme_idx').on(table.themeId),
+        answerIdx: index('entry_answer_idx').on(table.answerId)
+    })
+);
+
 // relations
 
-export const answersRelations = relations(answers, ({one}) => ({
+export const answersRelations = relations(answers, ({one, many}) => ({
     question: one(questions, {
         fields: [answers.questionId],
         references: [questions.id]
@@ -352,7 +388,8 @@ export const answersRelations = relations(answers, ({one}) => ({
     response: one(responses, {
         fields: [answers.responseId],
         references: [responses.id]
-    })
+    }),
+    themeEntries: many(analysisThemeEntries)
 }));
 
 export const surveySettingsRelations = relations(surveySettings, ({one}) => ({
@@ -424,6 +461,7 @@ export const surveysRelations = relations(surveys, ({one, many}) => ({
 
 export const questionsRelations = relations(questions, ({one, many}) => ({
     answers: many(answers),
+    analysisThemes: many(analysisThemes),
     survey: one(surveys, {
         fields: [questions.surveyId],
         references: [surveys.id]
@@ -506,5 +544,24 @@ export const respondentCohortsRelations = relations(respondentCohorts, ({one}) =
     respondent: one(respondents, {
         fields: [respondentCohorts.respondentId],
         references: [respondents.id]
+    })
+}));
+
+export const analysisThemesRelations = relations(analysisThemes, ({one, many}) => ({
+    question: one(questions, {
+        fields: [analysisThemes.questionId],
+        references: [questions.id]
+    }),
+    entries: many(analysisThemeEntries)
+}));
+
+export const analysisThemeEntriesRelations = relations(analysisThemeEntries, ({one}) => ({
+    theme: one(analysisThemes, {
+        fields: [analysisThemeEntries.themeId],
+        references: [analysisThemes.id]
+    }),
+    answer: one(answers, {
+        fields: [analysisThemeEntries.answerId],
+        references: [answers.id]
     })
 }));
