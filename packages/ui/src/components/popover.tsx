@@ -19,7 +19,12 @@ const PopoverPopup: React.FC<React.ComponentProps<typeof BasePopover.Popup>> = (
 }) => {
     return (
         <BasePopover.Portal>
-            <BasePopover.Positioner align="start" side="bottom" sideOffset={8}>
+            <BasePopover.Positioner
+                align="start"
+                className="relative z-50"
+                side="bottom"
+                sideOffset={8}
+            >
                 <BasePopover.Popup
                     data-slot="popover-content"
                     className={cn(
