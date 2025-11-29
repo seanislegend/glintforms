@@ -36,6 +36,20 @@
       "when": 1764119655962,
       "tag": "0004_salty_king_bedlam",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1764369970696,
+      "tag": "0005_ambiguous_killer_shrike",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1764377492096,
+      "tag": "0006_heavy_lord_tyger",
+      "breakpoints": true
     }
   ]
 }

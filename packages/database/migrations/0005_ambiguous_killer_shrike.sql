@@ -1,0 +1,1 @@
+ALTER TABLE "analysis_themes" ALTER COLUMN "score" SET DATA TYPE real;

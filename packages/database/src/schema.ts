@@ -6,6 +6,7 @@ import {
     jsonb,
     pgEnum,
     pgTable,
+    real,
     text,
     timestamp,
     uuid,
@@ -354,7 +355,7 @@ export const analysisThemes = pgTable(
         name: varchar('name', {length: 255}).notNull(),
         description: text('description'),
         sentiment: varchar('sentiment', {length: 50}),
-        score: integer('score').default(0).notNull(),
+        score: real('score').default(0).notNull(),
         metadata: jsonb('metadata')
     },
     table => ({
@@ -365,17 +366,21 @@ export const analysisThemes = pgTable(
 export const analysisThemeEntries = pgTable(
     'analysis_theme_entries',
     {
-        themeId: uuid('theme_id')
-            .references(() => analysisThemes.id, {onDelete: 'cascade'})
-            .notNull(),
         answerId: uuid('answer_id')
             .references(() => answers.id, {onDelete: 'cascade'})
             .notNull(),
-        createdAt: timestamp('created_at').defaultNow().notNull()
+        createdAt: timestamp('created_at').defaultNow().notNull(),
+        questionId: uuid('question_id')
+            .references(() => questions.id, {onDelete: 'cascade'})
+            .notNull(),
+        themeId: uuid('theme_id')
+            .references(() => analysisThemes.id, {onDelete: 'cascade'})
+            .notNull()
     },
     table => ({
-        themeIdx: index('entry_theme_idx').on(table.themeId),
-        answerIdx: index('entry_answer_idx').on(table.answerId)
+        answerIdx: index('entry_answer_idx').on(table.answerId),
+        questionIdx: index('entry_question_idx').on(table.questionId),
+        themeIdx: index('entry_theme_idx').on(table.themeId)
     })
 );
 
