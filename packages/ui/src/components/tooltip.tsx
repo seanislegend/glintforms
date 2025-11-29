@@ -11,10 +11,14 @@ const TooltipProvider: React.FC<React.ComponentProps<typeof BaseTooltip.Provider
     return <BaseTooltip.Provider data-slot="tooltip-provider" delay={delay} {...props} />;
 };
 
+const TooltipRoot: React.FC<React.ComponentProps<typeof BaseTooltip.Root>> = ({...props}) => {
+    return <BaseTooltip.Root data-slot="tooltip" {...props} />;
+};
+
 const Tooltip: React.FC<React.ComponentProps<typeof BaseTooltip.Root>> = ({...props}) => {
     return (
         <TooltipProvider>
-            <BaseTooltip.Root data-slot="tooltip" {...props} />
+            <TooltipRoot {...props} />
         </TooltipProvider>
     );
 };
@@ -29,12 +33,12 @@ const TooltipPopup: React.FC<
     }
 > = ({className, positionSideOffset = 0, children, ...props}) => {
     return (
-        <BaseTooltip.Portal>
+        <BaseTooltip.Portal className="z-100 relative">
             <BaseTooltip.Positioner sideOffset={positionSideOffset}>
                 <BaseTooltip.Popup
                     data-slot="tooltip-content"
                     className={cn(
-                        'bg-black text-white rounded animate-in fade-in-0 zoom-in-95 data-[closed]:animate-out data-[closed]:fade-out-0 data-[closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 w-fit origin-[var(--transform-origin)] px-3 py-1.5 text-xs text-pretty max-w-[400px]',
+                        'bg-black text-white rounded z-100 animate-in fade-in-0 zoom-in-95 data-[closed]:animate-out data-[closed]:fade-out-0 data-[closed]:zoom-out-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 w-fit origin-[var(--transform-origin)] px-3 py-1.5 text-xs text-pretty max-w-[400px]',
                         className
                     )}
                     {...props}
@@ -46,4 +50,6 @@ const TooltipPopup: React.FC<
     );
 };
 
-export {Tooltip, TooltipTrigger, TooltipPopup, TooltipProvider};
+const TooltipUtils = BaseTooltip;
+
+export {Tooltip, TooltipTrigger, TooltipPopup, TooltipProvider, TooltipRoot, TooltipUtils};

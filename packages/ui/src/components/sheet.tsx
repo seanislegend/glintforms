@@ -94,7 +94,7 @@ const SheetTitle: React.FC<React.ComponentProps<typeof BaseDialog.Title>> = ({
     return (
         <BaseDialog.Title
             data-slot="sheet-title"
-            className={cn('text-foreground font-semibold', className)}
+            className={cn('text-foreground font-semibold text-lg', className)}
             {...props}
         />
     );
