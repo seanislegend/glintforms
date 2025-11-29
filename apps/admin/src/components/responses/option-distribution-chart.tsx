@@ -1,6 +1,7 @@
 'use client';
 
 import {type ChartConfig, ChartContainer, ChartTooltip} from '@glint/ui/chart';
+import clsx from 'clsx';
 import {Bar, BarChart, Cell, LabelList, XAxis, YAxis} from 'recharts';
 
 const colorPalette = [
@@ -40,13 +41,11 @@ const OptionDistributionChart: React.FC<Props> = ({
         return <div className="text-sm text-muted-foreground">{emptyMessage}</div>;
     }
 
-    const containerClassName = ['aspect-auto h-[220px] w-full', className]
-        .filter(Boolean)
-        .join(' ');
-    console.log(chartData);
-
     return (
-        <ChartContainer className={containerClassName} config={chartConfig}>
+        <ChartContainer
+            className={clsx(['aspect-auto h-[180px] w-full', className])}
+            config={chartConfig}
+        >
             <BarChart
                 accessibilityLayer
                 barCategoryGap={2}
