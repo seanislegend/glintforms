@@ -53,7 +53,6 @@ export const answersRouter = {
                 )
                 .where(eq(questions.id, questionId))
                 .limit(1);
-
             if (!question) return null;
 
             const answersList = await ctx.db
@@ -75,7 +74,7 @@ export const answersRouter = {
                     responses,
                     and(eq(answers.responseId, responses.id), eq(responses.tenantId, ctx.tenant))
                 )
-                .innerJoin(analysisThemes, eq(answers.questionId, analysisThemes.questionId))
+                .leftJoin(analysisThemes, eq(answers.questionId, analysisThemes.questionId))
                 .leftJoin(respondents, eq(responses.respondentId, respondents.id))
                 .where(eq(answers.questionId, questionId))
                 .orderBy(desc(answers.startedAt))
@@ -94,6 +93,15 @@ export const answersRouter = {
                 parsedOptions,
                 selectionCounts
             );
+            const themes = await ctx.db
+                .select({
+                    description: analysisThemes.description,
+                    name: analysisThemes.name,
+                    sentiment: analysisThemes.sentiment,
+                    score: analysisThemes.score
+                })
+                .from(analysisThemes)
+                .where(eq(analysisThemes.questionId, question.id));
 
             return {
                 answers: answersList.map(a => ({
@@ -116,6 +124,7 @@ export const answersRouter = {
                     title: question.title,
                     type: question.type
                 },
+                themes,
                 total
             };
         }),
@@ -193,7 +202,136 @@ export const answersRouter = {
             );
             return {...baseQuestion, optionCounts};
         });
-    })
+    }),
+    getOptionDistribution: protectedProcedure
+        .input(
+            z.object({
+                questionId: z.string()
+            })
+        )
+        .query(async ({input: {questionId}, ctx}) => {
+            const [question] = await ctx.db
+                .select({
+                    id: questions.id,
+                    options: questions.options,
+                    surveyId: questions.surveyId,
+                    type: questions.type
+                })
+                .from(questions)
+                .innerJoin(
+                    surveys,
+                    and(eq(questions.surveyId, surveys.id), eq(surveys.tenantId, ctx.tenant))
+                )
+                .where(eq(questions.id, questionId))
+                .limit(1);
+
+            if (!question) return [];
+
+            if (question.type !== 'multi_select' && question.type !== 'single_select') {
+                return [];
+            }
+
+            const parsedOptions = parseQuestionOptions(question.options);
+            if (parsedOptions.length === 0) return [];
+
+            const meta = new Map<string, QuestionMeta>([
+                [question.id, {options: parsedOptions, type: question.type}]
+            ]);
+            const selectionCounts = await getSelectionCounts(meta, ctx, question.surveyId);
+            const optionCounts = buildOptionCounts(
+                question.id,
+                question.type,
+                parsedOptions,
+                selectionCounts
+            );
+
+            return optionCounts;
+        }),
+    getCoOccurrenceData: protectedProcedure
+        .input(
+            z.object({
+                questionId: z.string()
+            })
+        )
+        .query(async ({input: {questionId}, ctx}) => {
+            const [question] = await ctx.db
+                .select({
+                    id: questions.id,
+                    options: questions.options,
+                    type: questions.type
+                })
+                .from(questions)
+                .innerJoin(
+                    surveys,
+                    and(eq(questions.surveyId, surveys.id), eq(surveys.tenantId, ctx.tenant))
+                )
+                .where(eq(questions.id, questionId))
+                .limit(1);
+
+            if (!question || question.type !== 'multi_select') {
+                return {
+                    coOccurrences: {},
+                    options: []
+                };
+            }
+
+            const parsedOptions = parseQuestionOptions(question.options);
+            if (parsedOptions.length === 0) {
+                return {
+                    coOccurrences: {},
+                    options: []
+                };
+            }
+
+            const answerRows = await ctx.db
+                .select({value: answers.value})
+                .from(answers)
+                .innerJoin(
+                    responses,
+                    and(eq(answers.responseId, responses.id), eq(responses.tenantId, ctx.tenant))
+                )
+                .where(
+                    and(
+                        eq(answers.questionId, questionId),
+                        eq(answers.wasSkipped, false),
+                        sql`jsonb_typeof(${answers.value}) = 'array'`
+                    )
+                );
+
+            // calculate co-occurrence counts (only store non-zero pairs)
+            const coOccurrences: Record<string, Record<string, number>> = {};
+
+            for (const answer of answerRows) {
+                if (!answer.value || typeof answer.value !== 'object') continue;
+
+                const selectedOptions: string[] = Array.isArray(answer.value)
+                    ? answer.value.map(v => String(v))
+                    : [];
+
+                // for each pair of selected options, increment co-occurrence count
+                for (let i = 0; i < selectedOptions.length; i++) {
+                    for (let j = 0; j < selectedOptions.length; j++) {
+                        const opt1 = selectedOptions[i];
+                        const opt2 = selectedOptions[j];
+                        if (opt1 && opt2) {
+                            if (!coOccurrences[opt1]) {
+                                coOccurrences[opt1] = {};
+                            }
+                            coOccurrences[opt1][opt2] = (coOccurrences[opt1][opt2] ?? 0) + 1;
+                        }
+                    }
+                }
+            }
+
+            return {
+                coOccurrences,
+                options: parsedOptions.map(o => ({
+                    id: String(o.id),
+                    label: o.value
+                })),
+                totalResponses: answerRows.length
+            };
+        })
 };
 
 const parseQuestionOptions = (options: unknown): QuestionOption[] => {
@@ -270,9 +408,20 @@ const buildOptionCounts = (
 
     const counts = selectionCounts[questionId] ?? {};
 
-    return options.map(o => ({
-        count: counts[o.id] ?? 0,
-        label: o.value,
-        optionId: o.id
-    }));
+    return options.map(o => {
+        // answers.value stores the option ID, so we match by ID
+        // try multiple formats in case of type mismatches
+        const count =
+            counts[String(o.id)] ??
+            counts[o.id] ??
+            // fallback: try matching by value in case of data inconsistencies
+            counts[String(o.value)] ??
+            counts[o.value] ??
+            0;
+        return {
+            count,
+            label: o.value,
+            optionId: o.id
+        };
+    });
 };

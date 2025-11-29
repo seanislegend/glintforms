@@ -1,13 +1,17 @@
 'use client';
 
 import EmptyPanel from '@glint/ui/empty-panel';
+import {Heading3} from '@glint/ui/heading';
+import {Tabs, TabsContent, TabsList, TabsTrigger} from '@glint/ui/tabs';
 import {useSuspenseQuery} from '@tanstack/react-query';
 import {DataTable} from '@/components/data-table';
 import {usePaginationSearchParams} from '@/components/data-table/parsers';
+import CoOccurrenceMatrix from '@/components/responses/co-occurrence-matrix';
+import OptionDistributionChart from '@/components/responses/option-distribution-chart';
+import ResponsesThemeOverview from '@/components/responses/theme-overview';
 import {isCodedQuestion} from '@/lib/answer-formatter';
 import {useTRPC} from '@/lib/trpc/react';
 import {createAnswerColumns} from './columns';
-import OptionDistributionChart from './option-distribution-chart';
 import type {QuestionAnswersQuickLookProps} from './types';
 
 const MAX_ANSWERS = 100;
@@ -36,42 +40,60 @@ const QuestionAnswersQuickLook: React.FC<QuestionAnswersQuickLookProps> = ({
     const tableData = answers.map(a => ({...a, question, surveyId}));
 
     return (
-        <>
-            {isCodedQuestion(question.type) && (
-                <>
-                    <p className="mb-3 text-sm font-medium text-foreground">Selections breakdown</p>
-                    <OptionDistributionChart
-                        className="h-[220px]"
-                        data={question.optionCounts}
-                        emptyMessage="Selections will appear here once responses are recorded."
+        <Tabs defaultValue="overview" className="w-auto">
+            <TabsList className="grid max-w-50 grid-cols-2 gap-1 mb-6">
+                <TabsTrigger value="overview">Overview</TabsTrigger>
+                <TabsTrigger value="answers">Answers</TabsTrigger>
+            </TabsList>
+            <TabsContent value="overview" className="space-y-8">
+                {isCodedQuestion(question.type) && (
+                    <div>
+                        <Heading3>Option distribution</Heading3>
+                        <p className="text-sm text-muted-foreground mb-4">
+                            This chart shows the distribution of selections for this question.
+                        </p>
+                        <OptionDistributionChart data={question.optionCounts ?? []} />
+                    </div>
+                )}
+                {question.type === 'multi_select' && (
+                    <div>
+                        <Heading3>Co-occurrence patterns for selected options</Heading3>
+                        <p className="text-sm text-muted-foreground mb-4">
+                            Percentages show how often each pair of options was selected together
+                        </p>
+                        <CoOccurrenceMatrix questionId={questionId} />
+                    </div>
+                )}
+                {data?.themes && data.themes.length > 0 && (
+                    <div>
+                        <Heading3>Theme categorisation</Heading3>
+                        <p className="text-sm text-muted-foreground mb-4">
+                            Themes are categorised based on the context of the responses. The
+                            sentiment of the responses is also taken into account.
+                        </p>
+                        <ResponsesThemeOverview themes={data.themes} />
+                    </div>
+                )}
+            </TabsContent>
+            <TabsContent value="answers">
+                {answers.length === 0 ? (
+                    <EmptyPanel
+                        text="Answers will appear here once respondents reply"
+                        title="Awaiting responses"
                     />
-                </>
-            )}
-            {answers.length === 0 ? (
-                <EmptyPanel
-                    text="Answers will appear here once respondents reply"
-                    title="Awaiting responses"
-                />
-            ) : (
-                <DataTable
-                    columns={createAnswerColumns(question, surveyId, allThemes)}
-                    data={tableData}
-                    facetedFilters={{
-                        theme: {
-                            label: 'Theme',
-                            options:
-                                allThemes?.map(theme => ({label: theme.name, value: theme.id})) ??
-                                []
-                        }
-                    }}
-                    hasPagination={true}
-                    hasManualPagination={true}
-                    rowCount={data.total}
-                    inputFilterKey={null}
-                    tableClassName="[&_td:nth-child(1)]:w-full [&_td:nth-child(3)]:w-[50px]"
-                />
-            )}
-        </>
+                ) : (
+                    <DataTable
+                        columns={createAnswerColumns(question, surveyId, allThemes)}
+                        data={tableData}
+                        hasPagination={true}
+                        hasManualPagination={true}
+                        rowCount={data.total}
+                        inputFilterKey={null}
+                        tableClassName="[&_td:nth-child(1)]:w-full [&_td:nth-child(3)]:w-[50px]"
+                    />
+                )}
+            </TabsContent>
+        </Tabs>
     );
 };
 

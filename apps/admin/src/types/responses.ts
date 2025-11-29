@@ -12,6 +12,7 @@ interface QuestionTheme {
     name: string;
     questionId: string;
     sentiment: string | null;
+    score: number;
 }
 
 interface QuestionWithStats {

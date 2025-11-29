@@ -1,9 +1,7 @@
 'use client';
 
 import Button from '@glint/ui/button';
-import {Tooltip, TooltipPopup, TooltipTrigger} from '@glint/ui/tooltip';
 import {CaretDownIcon} from '@phosphor-icons/react/dist/ssr/CaretDown';
-import {InfoIcon} from '@phosphor-icons/react/dist/ssr/Info';
 import {useState} from 'react';
 
 interface Props {
@@ -23,14 +21,6 @@ const ResponsesThemeList: React.FC<Props> = ({themes}) => {
                     <li key={theme.id}>
                         <span className="flex flex-row gap-x-4 gap-y-2 items-center">
                             <span className="flex-grow">{theme.name}</span>
-                            <Tooltip>
-                                <TooltipTrigger
-                                    render={<InfoIcon className="size-4.5 shrink-0" />}
-                                />
-                                <TooltipPopup>
-                                    <p>{theme.description}</p>
-                                </TooltipPopup>
-                            </Tooltip>
                         </span>
                     </li>
                 ))}
