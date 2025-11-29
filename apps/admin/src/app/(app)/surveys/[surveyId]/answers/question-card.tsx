@@ -39,7 +39,7 @@ const QuestionCard: React.FC<Props> = ({question}) => {
                     size="sm"
                     variant="outline"
                 >
-                    <span>View all answers</span>
+                    <span>View</span>
                     <EyeIcon className="size-4" />
                 </Button>
             </CardFooter>

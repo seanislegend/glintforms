@@ -4,8 +4,7 @@ import {Sheet, SheetDescription, SheetHeader, SheetPopup, SheetTitle} from '@gli
 import {SpinnerGapIcon} from '@phosphor-icons/react/dist/ssr/SpinnerGap';
 import {useQueryState} from 'nuqs';
 import {Suspense} from 'react';
-import QuestionTypeBadge from '@/components/badges/question-type';
-import QuestionAnswersQuickLook from '../../../../../components/responses/quick-look';
+import QuestionAnswersQuickLook from '@/components/responses/quick-look';
 
 interface Props {
     questions: QuestionWithStats[];
@@ -18,13 +17,12 @@ const QuestionAnswersQuickView: React.FC<Props> = ({questions, surveyId}) => {
 
     return (
         <Sheet open={!!questionId} onOpenChange={() => setQuestionId(null)}>
-            <SheetPopup className="w-full sm:w-[720px] md:w-[900px] xl:w-[1400px] sm:max-w-[95vw]">
+            <SheetPopup className="w-full sm:w-[720px] md:w-[900px] xl:w-[1400px] sm:max-w-[95vw] gap-0">
                 <SheetHeader className="sticky top-0 bg-white/70 backdrop-blur-lg">
                     <SheetTitle>
                         {question?.title ? `${question.order}. ${question.title}` : 'Answers'}
                     </SheetTitle>
                     <SheetDescription className="flex items-center gap-2">
-                        {question?.type && <QuestionTypeBadge type={question.type} />}
                         {question?.description ?? 'All answers for this question.'}
                     </SheetDescription>
                 </SheetHeader>
