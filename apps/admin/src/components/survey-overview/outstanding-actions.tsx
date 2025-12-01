@@ -6,22 +6,12 @@ import {useSuspenseQuery} from '@tanstack/react-query';
 import {useTRPC} from '@/lib/trpc/react';
 
 interface Props {
-    survey: SurveyDetails;
+    surveyId: string;
 }
 
-const STATUS_TEXT = {
-    draft: 'Your survey is currently a draft. Once you launch it, you will see any outstanding actions here.',
-    launched:
-        'Your survey is currently live. You can view the survey results and manage your survey settings.',
-    completed:
-        'Your survey is currently completed. You can view the survey results and manage your survey settings.'
-};
-
-const SurveyOverviewOutstandingActions: React.FC<Props> = ({survey}) => {
+const SurveyOverviewOutstandingActions: React.FC<Props> = ({surveyId}) => {
     const trpc = useTRPC();
-    const {data: actions} = useSuspenseQuery(trpc.actions.getAll.queryOptions(survey.id));
-
-    const statusText = STATUS_TEXT[survey.status as keyof typeof STATUS_TEXT];
+    const {data: actions} = useSuspenseQuery(trpc.actions.getAll.queryOptions(surveyId));
     const hasData = actions && actions.length > 0;
 
     return (
@@ -51,7 +41,6 @@ const SurveyOverviewOutstandingActions: React.FC<Props> = ({survey}) => {
                     <EmptyPanel
                         className="flex-grow"
                         Icon={CheckCircleIcon}
-                        text={statusText}
                         title="No outstanding actions"
                     />
                 )}

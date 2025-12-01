@@ -13,9 +13,7 @@ const SurveyOverviewHeader: React.FC<Props> = ({survey}) => {
         <div className="lg:col-span-2 space-y-8">
             <div className="space-y-4">
                 <Heading1>{survey.title}</Heading1>
-                <p className="text-xl text-slate-600 leading-relaxed max-w-2xl">
-                    {survey.description}
-                </p>
+                <p className="text-xl leading-relaxed max-w-screen-2xl">{survey.description}</p>
                 <Suspense>
                     <div className="flex items-center gap-y-2 gap-x-4 text-sm text-accent-foreground">
                         <span>

@@ -6,12 +6,12 @@ import {useSuspenseQuery} from '@tanstack/react-query';
 import {useTRPC} from '@/lib/trpc/react';
 
 interface Props {
-    survey: SurveyDetails;
+    surveyId: string;
 }
 
-const SurveyOverviewRecentActivity: React.FC<Props> = ({survey}) => {
+const SurveyOverviewRecentActivity: React.FC<Props> = ({surveyId}) => {
     const trpc = useTRPC();
-    const {data: activities} = useSuspenseQuery(trpc.activities.getAll.queryOptions(survey.id));
+    const {data: activities} = useSuspenseQuery(trpc.activities.getAll.queryOptions(surveyId));
 
     return (
         <Card className="min-h-full">
