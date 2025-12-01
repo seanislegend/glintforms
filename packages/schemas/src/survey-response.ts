@@ -149,6 +149,20 @@ const buildBaseValidation = (q: Question): z.ZodTypeAny => {
     }
 };
 
+export type ResponseSubmissionBody = {
+    answers: Record<string, {endedAt: Date; startedAt: Date; value: unknown; wasSkipped: boolean}>;
+    metadata?: {ip?: string; ua?: string};
+    respondent?: {
+        email: string;
+        gender?: 'female' | 'male' | 'other' | 'prefer_not_to_say' | null;
+        locationCity?: string | null;
+        locationCountry?: string | null;
+        name: string;
+        notes?: string | null;
+        signupSource?: string | null;
+    };
+};
+
 export const createResponseSchema = (surveyQuestions: (typeof questions.$inferSelect)[]) => {
     const answerValidations: Record<string, z.ZodTypeAny> = {};
 

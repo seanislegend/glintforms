@@ -50,6 +50,20 @@
       "when": 1764377492096,
       "tag": "0006_heavy_lord_tyger",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1764544958357,
+      "tag": "0007_peaceful_arachne",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1764546102817,
+      "tag": "0008_married_firestar",
+      "breakpoints": true
     }
   ]
 }

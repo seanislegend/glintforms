@@ -343,6 +343,33 @@ export const responses = pgTable(
     })
 );
 
+export const responseSubmissions = pgTable(
+    'response_submissions',
+    {
+        body: jsonb('body').notNull(),
+        createdAt: timestamp('created_at').defaultNow().notNull(),
+        failureReason: text('failure_reason'),
+        id: uuid('id').primaryKey().defaultRandom(),
+        processedAt: timestamp('processed_at'),
+        surveyId: uuid('survey_id')
+            .references(() => surveys.id, {onDelete: 'cascade'})
+            .notNull(),
+        tenantId: uuid('tenant_id')
+            .references(() => tenants.id, {onDelete: 'cascade'})
+            .notNull(),
+        updatedAt: timestamp('updated_at').defaultNow().notNull()
+    },
+    table => ({
+        processedAtIdx: index('response_submission_processed_at_idx').on(table.processedAt),
+        surveyIdx: index('response_submission_survey_idx').on(table.surveyId),
+        surveyTenantIdx: index('response_submission_survey_tenant_idx').on(
+            table.surveyId,
+            table.tenantId
+        ),
+        tenantIdx: index('response_submission_tenant_idx').on(table.tenantId)
+    })
+);
+
 export const analysisThemes = pgTable(
     'analysis_themes',
     {

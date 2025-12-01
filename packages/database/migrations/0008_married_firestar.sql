@@ -1,0 +1,1 @@
+ALTER TABLE "response_submissions" ADD COLUMN "failure_reason" text;
