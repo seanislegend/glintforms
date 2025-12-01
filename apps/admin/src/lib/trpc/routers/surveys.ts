@@ -1,4 +1,4 @@
-import {campaigns, surveySettings, surveys} from '@glint/database';
+import {campaigns, questions, surveySettings, surveys} from '@glint/database';
 import {encrypt} from '@glint/encryption';
 import {TRPCError} from '@trpc/server';
 import {and, desc, eq, or} from 'drizzle-orm';
@@ -110,10 +110,33 @@ export const surveysRouter = {
         )
         .mutation(async ({input, ctx}) => {
             const {id, status} = input;
-            const updateData: any = {
-                status,
-                updatedAt: new Date()
-            };
+            const updateData: any = {status, updatedAt: new Date()};
+
+            const [survey] = await ctx.db
+                .select()
+                .from(surveys)
+                .where(and(eq(surveys.id, id), eq(surveys.tenantId, ctx.tenant)));
+            if (!survey) {
+                throw new TRPCError({code: 'NOT_FOUND', message: 'Survey not found'});
+            }
+
+            // if the status is changing to anything but draft, we need to check if the
+            // survey has questions.
+            if (status !== 'draft') {
+                const [allQuestions] = await ctx.db
+                    .select()
+                    .from(questions)
+                    .where(eq(questions.surveyId, id));
+                if (!allQuestions) {
+                    throw new TRPCError({
+                        code: 'BAD_REQUEST',
+                        message:
+                            'This survey has no questions. Before the status can be changed, at least one question must be added.'
+                    });
+                }
+            }
+
+            throw new TRPCError({code: 'BAD_REQUEST', message: 'test'});
 
             // set launchedAt when moving to active status
             if (status === 'active') {
