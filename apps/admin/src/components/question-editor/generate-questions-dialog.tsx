@@ -16,9 +16,10 @@ import {zodResolver} from '@hookform/resolvers/zod';
 import {SparkleIcon} from '@phosphor-icons/react/dist/ssr/Sparkle';
 import {useMutation} from '@tanstack/react-query';
 import {useAtomValue} from 'jotai';
-import {useState} from 'react';
+import {use, useState} from 'react';
 import {FormProvider, useForm, useFormContext} from 'react-hook-form';
 import {toast} from 'sonner';
+import {QuestionEditorContext} from '@/components/question-editor/wrapper';
 import useHighlight from '@/hooks/use-highlight';
 import {MAX_QUESTIONS} from '@/lib/schemas/constants';
 import {type GenerateQuestionsForm, generateQuestionsSchema} from '@/lib/schemas/questions';
@@ -32,6 +33,7 @@ interface Props {
 
 const GenerateQuestionsDialog: React.FC<Props> = ({isPending, surveyId}) => {
     const [isOpen, setIsOpen] = useState(false);
+    const {survey} = use(QuestionEditorContext);
     const questionCount = useAtomValue(questionCountAtom);
     const {getValues, setValue} = useFormContext();
     const {highlight} = useHighlight();
@@ -116,20 +118,51 @@ const GenerateQuestionsDialog: React.FC<Props> = ({isPending, surveyId}) => {
                 </DialogHeader>
                 <FormProvider {...generateFormMethods}>
                     <form onSubmit={handleSubmit} className="space-y-4">
-                        <FormField
-                            control={generateFormMethods.control}
-                            fieldType="input"
-                            label="Topic"
-                            name="topic"
-                            placeholder="e.g., Customer satisfaction, Product feedback, Employee engagement"
-                        />
-                        <FormField
-                            control={generateFormMethods.control}
-                            fieldType="textarea"
-                            label="Description"
-                            name="description"
-                            placeholder="Provide context about what you want to learn, target audience, or specific areas to focus on..."
-                        />
+                        <div>
+                            <FormField
+                                control={generateFormMethods.control}
+                                fieldType="input"
+                                label="Topic"
+                                name="topic"
+                                placeholder="e.g., Customer satisfaction, Product feedback, Employee engagement"
+                            />
+                            {survey?.description && (
+                                <Button
+                                    className="mt-2"
+                                    onClick={() => {
+                                        generateFormMethods.setValue('topic', survey.title ?? '');
+                                    }}
+                                    size="xs"
+                                    variant="secondary"
+                                >
+                                    Use survey title
+                                </Button>
+                            )}
+                        </div>
+                        <div>
+                            <FormField
+                                control={generateFormMethods.control}
+                                fieldType="textarea"
+                                label="Description"
+                                name="description"
+                                placeholder="Provide context about what you want to learn, target audience, or specific areas to focus on..."
+                            ></FormField>
+                            {survey?.description && (
+                                <Button
+                                    className="mt-2"
+                                    onClick={() => {
+                                        generateFormMethods.setValue(
+                                            'description',
+                                            survey.description ?? ''
+                                        );
+                                    }}
+                                    size="xs"
+                                    variant="secondary"
+                                >
+                                    Use survey description
+                                </Button>
+                            )}
+                        </div>
                         <FormField
                             control={generateFormMethods.control}
                             name="questionCount"
