@@ -7,7 +7,7 @@ export const surveyIsTesting = (status: SurveyStatus) => {
 };
 
 export const surveyHasLaunched = (status: SurveyStatus) => {
-    return status === 'active' || status === 'complete';
+    return status === 'active' || status === 'complete' || status === 'archived';
 };
 
 export const surveyIsActive = (status: SurveyStatus) => {

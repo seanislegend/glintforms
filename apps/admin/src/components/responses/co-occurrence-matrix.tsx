@@ -88,7 +88,6 @@ const CoOccurrenceMatrix: React.FC<Props> = ({
                                     return (
                                         <tr key={opt1.id}>
                                             <TooltipTrigger
-                                                data-slot="tooltip-trigger"
                                                 handle={tooltipHandle}
                                                 payload={{tooltipText: opt1Label}}
                                                 render={
@@ -114,7 +113,7 @@ const CoOccurrenceMatrix: React.FC<Props> = ({
                                                         <span className="text-xs font-medium inline-block min-h-[1.25rem]">
                                                             {count > 0
                                                                 ? formatPercentage(percentage)
-                                                                : '\u00A0'}
+                                                                : '0%'}
                                                         </span>
                                                     </td>
                                                 );
