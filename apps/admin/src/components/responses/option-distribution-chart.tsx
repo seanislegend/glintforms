@@ -28,12 +28,14 @@ interface Props {
     className?: string;
     data: QuestionOptionCount[];
     emptyMessage?: string;
+    showCount?: boolean;
 }
 
 const OptionDistributionChart: React.FC<Props> = ({
     className,
     data,
-    emptyMessage = 'Selections will appear here once responses are recorded.'
+    emptyMessage = 'Selections will appear here once responses are recorded.',
+    showCount = true
 }) => {
     const chartData = data.filter(option => !!option.label);
 
@@ -61,7 +63,13 @@ const OptionDistributionChart: React.FC<Props> = ({
                     hide
                     type="category"
                 />
-                <XAxis allowDecimals={false} dataKey="count" hide type="number" />
+                <XAxis
+                    allowDecimals={false}
+                    dataKey="count"
+                    domain={['dataMin', 'dataMax']}
+                    hide
+                    type="number"
+                />
                 <ChartTooltip
                     cursor={false}
                     content={({active, payload}) => {
@@ -86,13 +94,15 @@ const OptionDistributionChart: React.FC<Props> = ({
                         className="fill-foreground"
                         fontSize={12}
                     />
-                    <LabelList
-                        dataKey="count"
-                        position="right"
-                        offset={8}
-                        className="fill-foreground"
-                        fontSize={12}
-                    />
+                    {showCount && (
+                        <LabelList
+                            dataKey="count"
+                            position="right"
+                            offset={8}
+                            className="fill-foreground"
+                            fontSize={12}
+                        />
+                    )}
                 </Bar>
             </BarChart>
         </ChartContainer>
