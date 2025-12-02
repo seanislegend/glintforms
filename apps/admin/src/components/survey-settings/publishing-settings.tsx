@@ -1,5 +1,6 @@
 'use client';
 
+import ErrorsPanel from '@glint/form/errors-panel';
 import {Badge} from '@glint/ui/badge';
 import Button from '@glint/ui/button';
 import Spacer from '@glint/ui/spacer';
@@ -44,17 +45,21 @@ const getStepIndex = (status: string) => {
 const SurveyPublishingSettings: React.FC<Props> = ({survey}) => {
     const trpc = useTRPC();
     const queryClient = useQueryClient();
-    const [showConfirmDialog, setShowConfirmDialog] = useState<string | null>(null);
+    const [showConfirmDialog, setShowConfirmDialog] = useState(false);
+    const [pendingStatus, setPendingStatus] = useState<string | null>(null);
     const [currentStep, setCurrentStep] = useState(getStepIndex(survey.status));
 
     const updateStatus = useMutation(
         trpc.surveys.updateStatus.mutationOptions({
+            onError: () => {
+                toast.error('Failed to update survey status');
+            },
             onSuccess: async () => {
+                setShowConfirmDialog(false);
+                setPendingStatus(null);
                 await queryClient.invalidateQueries({
                     queryKey: trpc.surveys.get.queryKey(survey.id)
                 });
-                toast.success('Survey status updated successfully');
-                setShowConfirmDialog(null);
             }
         })
     );
@@ -64,7 +69,10 @@ const SurveyPublishingSettings: React.FC<Props> = ({survey}) => {
             id: survey.id,
             status: newStatus as any
         });
+        toast.success('Survey status updated successfully');
         setCurrentStep(getStepIndex(newStatus));
+        setShowConfirmDialog(false);
+        setPendingStatus(null);
     };
 
     const getStatusDescription = (status: string) => {
@@ -225,7 +233,10 @@ const SurveyPublishingSettings: React.FC<Props> = ({survey}) => {
                     {availableActions.map(action => (
                         <Button
                             key={action.status}
-                            onClick={() => setShowConfirmDialog(action.status)}
+                            onClick={() => {
+                                setPendingStatus(action.status);
+                                setShowConfirmDialog(true);
+                            }}
                             pending={updateStatus.status === 'pending'}
                             variant={action.variant as any}
                         >
@@ -237,13 +248,22 @@ const SurveyPublishingSettings: React.FC<Props> = ({survey}) => {
             )}
             <ConfirmationDialog
                 description={`Are you sure you want to change the survey status?`}
-                onConfirm={() => showConfirmDialog && handleStatusChange(showConfirmDialog)}
-                onOpenChange={open => setShowConfirmDialog(open ? showConfirmDialog : null)}
-                open={showConfirmDialog !== null}
+                onConfirm={() => pendingStatus && handleStatusChange(pendingStatus)}
+                onOpenChange={(newStatus, reason) => {
+                    if (newStatus === false && reason !== 'confirm-press') {
+                        setShowConfirmDialog(newStatus);
+                        updateStatus.reset();
+                    }
+                }}
+                open={showConfirmDialog}
                 pending={updateStatus.status === 'pending'}
                 title="Confirm status change"
-                variant={showConfirmDialog === 'archived' ? 'destructive' : 'default'}
-            />
+                variant={pendingStatus === 'archived' ? 'destructive' : 'default'}
+            >
+                {updateStatus.error && (
+                    <ErrorsPanel errors={[updateStatus.error.message]} showList={false} />
+                )}
+            </ConfirmationDialog>
         </>
     );
 };
