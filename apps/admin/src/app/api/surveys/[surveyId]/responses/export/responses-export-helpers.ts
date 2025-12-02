@@ -111,6 +111,25 @@ export const processResponsesWithAnswers = async (
                             answer.question_options,
                             delimiter
                         );
+                    } else if (field === 'analysis_themes') {
+                        const themes = answer.analysis_themes as string[] | null;
+                        row[field] = themes && themes.length > 0 ? themes.join(', ') : null;
+                    } else if (field === 'analysis_themes_descriptions') {
+                        const descriptions = answer.analysis_themes_descriptions as string[] | null;
+                        if (descriptions && descriptions.length > 0) {
+                            const filtered = descriptions.filter(d => d && d.trim() !== '');
+                            row[field] = filtered.length > 0 ? filtered.join(', ') : null;
+                        } else {
+                            row[field] = null;
+                        }
+                    } else if (field === 'analysis_themes_sentiments') {
+                        const sentiments = answer.analysis_themes_sentiments as string[] | null;
+                        if (sentiments && sentiments.length > 0) {
+                            const filtered = sentiments.filter(s => s && s.trim() !== '');
+                            row[field] = filtered.length > 0 ? filtered.join(', ') : null;
+                        } else {
+                            row[field] = null;
+                        }
                     } else {
                         row[field] = answer[field as keyof typeof answer] as AnswerValueType;
                     }

@@ -65,6 +65,21 @@ export const ANSWER_EXPORT_FIELDS = [
         key: 'answer_updated_at',
         label: 'Answer Updated At',
         description: 'When the answer was last updated'
+    },
+    {
+        key: 'analysis_themes',
+        label: 'Analysis Themes',
+        description: 'Themes identified in the answer (comma-separated)'
+    },
+    {
+        key: 'analysis_themes_descriptions',
+        label: 'Analysis Theme Descriptions',
+        description: 'Descriptions of themes identified in the answer (comma-separated)'
+    },
+    {
+        key: 'analysis_themes_sentiments',
+        label: 'Analysis Theme Sentiments',
+        description: 'Sentiments of themes identified in the answer (comma-separated)'
     }
 ];
 
