@@ -7,10 +7,11 @@ interface Props {
         | {_errors?: string[]}[]
         | {_errors?: string[]}
         | any; // allow for deeply nested structures
+    showList?: boolean;
     title?: string;
 }
 
-const FormErrorsPanel: React.FC<Props> = ({className, errors, title}) => {
+const FormErrorsPanel: React.FC<Props> = ({className, errors, showList = true, title}) => {
     if (!errors) return null;
 
     // recursive function to extract all error messages from nested structure
@@ -28,6 +29,8 @@ const FormErrorsPanel: React.FC<Props> = ({className, errors, title}) => {
         for (const value of Object.values(obj)) {
             if (typeof value === 'object' && value !== null) {
                 messages.push(...extractErrors(value));
+            } else if (typeof value === 'string') {
+                messages.push(value);
             }
         }
 
@@ -40,14 +43,18 @@ const FormErrorsPanel: React.FC<Props> = ({className, errors, title}) => {
 
     return (
         <Alert className={className} variant="destructive">
-            <AlertTitle>{title || 'An error occurred'}</AlertTitle>
+            <AlertTitle className="mb-1">{title || 'An error occurred'}</AlertTitle>
             <AlertDescription>
-                <ul className="list-disc list-inside mt-1">
-                    {errorMessages.map((message, index) => (
-                        // biome-ignore lint/suspicious/noArrayIndexKey: wip
-                        <li key={index}>{message}</li>
-                    ))}
-                </ul>
+                {showList ? (
+                    <ul className="list-disc list-outside ml-4">
+                        {errorMessages.map((message, index) => (
+                            // biome-ignore lint/suspicious/noArrayIndexKey: wip
+                            <li key={index}>{message}</li>
+                        ))}
+                    </ul>
+                ) : (
+                    <p>{errorMessages.join(', ')}</p>
+                )}
             </AlertDescription>
         </Alert>
     );
