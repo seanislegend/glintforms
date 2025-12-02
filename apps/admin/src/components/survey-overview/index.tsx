@@ -4,12 +4,13 @@ import Spacer from '@glint/ui/spacer';
 import Spinner from '@glint/ui/spinner';
 import {useSuspenseQuery} from '@tanstack/react-query';
 import {Suspense} from 'react';
-import SurveyOverviewOutstandingActions from '@/components/survey-overview/outstanding-actions';
-import SurveyOverviewRecentActivity from '@/components/survey-overview/recent-activity';
-import SurveyResponsesStats from '@/components/survey-overview/stats';
-import {surveyHasLaunched} from '@/lib/survey';
+import {surveyHasLaunched, surveyIsTesting} from '@/lib/survey';
 import {useTRPC} from '@/lib/trpc/react';
 import SurveyOverviewHeader from './header';
+import SurveyOverviewOutstandingActions from './outstanding-actions';
+import SurveyOverviewRecentActivity from './recent-activity';
+import SurveyResponsesStats from './stats';
+import SurveyTestingOverview from './testing-overview';
 import UnprocessedSubmissions from './unprocessed-submissions';
 
 interface Props {
@@ -29,15 +30,18 @@ const SurveyOverview: React.FC<Props> = ({surveyId}) => {
                 <Spacer size="md" />
             </div>
             {surveyHasLaunched(survey.status) && <SurveyResponsesStats surveyId={surveyId} />}
+            {surveyIsTesting(survey.status) && <SurveyTestingOverview surveyId={surveyId} />}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                    <Suspense>
+                    <Suspense fallback={<Spinner />}>
                         <SurveyOverviewRecentActivity surveyId={surveyId} />
                     </Suspense>
                 </div>
                 <div>
-                    <Suspense>
+                    <Suspense fallback={<Spinner />}>
                         <UnprocessedSubmissions surveyId={surveyId} />
+                    </Suspense>
+                    <Suspense fallback={<Spinner />}>
                         <SurveyOverviewOutstandingActions surveyId={surveyId} />
                     </Suspense>
                 </div>

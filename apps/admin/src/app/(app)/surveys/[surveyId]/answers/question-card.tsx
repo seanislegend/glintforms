@@ -2,12 +2,13 @@
 
 import Button from '@glint/ui/button';
 import {Card, CardContent, CardFooter, CardHeader, CardTitle} from '@glint/ui/card';
+import EmptyPanel from '@glint/ui/empty-panel';
 import {EyeIcon} from '@phosphor-icons/react/dist/ssr/Eye';
 import {useQueryState} from 'nuqs';
 import QuestionTypeBadge from '@/components/badges/question-type';
 import OptionDistributionChart from '@/components/responses/option-distribution-chart';
 import ResponsesThemeList from '@/components/responses/theme-list';
-import {isCodedQuestion} from '@/lib/answer-formatter';
+import {isCodedQuestion, isFreeTextQuestion} from '@/lib/answer-formatter';
 
 interface Props {
     question: QuestionWithStats;
@@ -26,10 +27,16 @@ const QuestionCard: React.FC<Props> = ({question}) => {
             </CardHeader>
             <CardContent className="text-sm flex-grow">
                 {isCodedQuestion(question.type) && (
-                    <OptionDistributionChart data={question.optionCounts ?? []} />
+                    <OptionDistributionChart data={question.optionCounts ?? []} showCount={false} />
                 )}
-                {question.themes && question.themes.length > 0 && (
-                    <ResponsesThemeList themes={question.themes} />
+                {isFreeTextQuestion(question.type) && (
+                    <span className="min-h-full flex">
+                        {question.themes && question.themes.length > 0 ? (
+                            <ResponsesThemeList themes={question.themes} />
+                        ) : (
+                            <EmptyPanel className="w-full" text="No themes generated" />
+                        )}
+                    </span>
                 )}
             </CardContent>
             <CardFooter>

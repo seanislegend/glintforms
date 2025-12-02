@@ -9,7 +9,7 @@ import {usePaginationSearchParams} from '@/components/data-table/parsers';
 import CoOccurrenceMatrix from '@/components/responses/co-occurrence-matrix';
 import OptionDistributionChart from '@/components/responses/option-distribution-chart';
 import ResponsesThemeOverview from '@/components/responses/theme-overview';
-import {isCodedQuestion} from '@/lib/answer-formatter';
+import {isCodedQuestion, isFreeTextQuestion} from '@/lib/answer-formatter';
 import {useTRPC} from '@/lib/trpc/react';
 import {createAnswerColumns} from './columns';
 import type {QuestionAnswersQuickLookProps} from './types';
@@ -64,14 +64,20 @@ const QuestionAnswersQuickLook: React.FC<QuestionAnswersQuickLookProps> = ({
                         <CoOccurrenceMatrix questionId={questionId} />
                     </div>
                 )}
-                {data?.themes && data.themes.length > 0 && (
+                {isFreeTextQuestion(question.type) && (
                     <div>
-                        <Heading3>Theme categorisation</Heading3>
-                        <p className="text-sm text-muted-foreground mb-4">
-                            Themes are categorised based on the context of the responses. The
-                            sentiment of the responses is also taken into account.
-                        </p>
-                        <ResponsesThemeOverview themes={data.themes} />
+                        {data?.themes && data.themes.length > 0 ? (
+                            <>
+                                <Heading3>Theme categorisation</Heading3>
+                                <p className="text-sm text-muted-foreground mb-4">
+                                    Themes are categorised based on the context of the responses.
+                                    The sentiment of the responses is also taken into account.
+                                </p>
+                                <ResponsesThemeOverview themes={data.themes} />
+                            </>
+                        ) : (
+                            <EmptyPanel className="w-full" text="No themes generated" />
+                        )}
                     </div>
                 )}
             </TabsContent>
