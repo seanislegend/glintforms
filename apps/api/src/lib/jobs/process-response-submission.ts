@@ -42,7 +42,6 @@ export const processResponseSubmissionTask = task({
                     skipped: true
                 };
             }
-
             const submissionBody = submission.body as ResponseSubmissionBody;
             const [survey] = await db
                 .select()
@@ -94,13 +93,13 @@ export const processResponseSubmissionTask = task({
                 const [response] = await tx
                     .insert(responses)
                     .values({
-                        endedAt: responseEndedAt,
+                        endedAt: responseEndedAt ? new Date(responseEndedAt) : new Date(),
                         metadata: {
                             ipHash: ip ? sha256(ip) : null,
                             uaHash: ua ? sha256(ua) : null
                         },
                         respondentId,
-                        startedAt: responseStartedAt || new Date(),
+                        startedAt: responseStartedAt ? new Date(responseStartedAt) : new Date(),
                         surveyId: submission.surveyId,
                         tenantId: submission.tenantId,
                         wasCompleted: true
@@ -113,7 +112,9 @@ export const processResponseSubmissionTask = task({
                 for (const answer of processedAnswers) {
                     await tx.insert(answers).values({
                         ...answer,
-                        responseId: response.id
+                        endedAt: answer.endedAt ? new Date(answer.endedAt) : null,
+                        responseId: response.id,
+                        startedAt: answer.startedAt ? new Date(answer.startedAt) : new Date()
                     });
                 }
 
@@ -137,7 +138,7 @@ export const processResponseSubmissionTask = task({
                 });
                 await tx
                     .update(responseSubmissions)
-                    .set({body: {}, processedAt: new Date()})
+                    .set({body: {}, failureReason: null, processedAt: new Date()})
                     .where(eq(responseSubmissions.id, submissionId));
                 await generateAuthenticityScoreTask.trigger({
                     campaignId: survey.campaignId,
