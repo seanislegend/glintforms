@@ -90,7 +90,8 @@ const applyValidationRules = (
 };
 
 const makeOptional = <T extends z.ZodTypeAny>(schema: T, required: boolean) => {
-    return required ? schema : schema.optional().or(z.literal(null)).or(z.literal(''));
+    if (required) return schema;
+    return schema.nullable().or(z.literal('')).optional();
 };
 
 const buildOptionValidation = (
@@ -100,7 +101,11 @@ const buildOptionValidation = (
     required: boolean
 ): z.ZodTypeAny => {
     const validIds = options?.map(o => o.id) ?? [];
-    const isValid = (val: string) => validIds.includes(val) || (allowOther && val.length > 0);
+    const isValid = (val: string) => {
+        if (validIds.includes(val)) return true;
+        if (allowOther && val.length > 0) return true;
+        return false;
+    };
 
     if (type === 'single_select') {
         let schema: z.ZodString | z.ZodEffects<z.ZodString, string, string> = z.string();
