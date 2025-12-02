@@ -31,3 +31,8 @@ export const isCodedQuestion = (questionType: string | null): boolean => {
     if (!questionType) return false;
     return questionType === 'single_select' || questionType === 'multi_select';
 };
+
+export const isFreeTextQuestion = (questionType: string | null): boolean => {
+    if (!questionType) return false;
+    return questionType === 'text';
+};

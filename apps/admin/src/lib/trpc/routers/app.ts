@@ -11,6 +11,7 @@ import {respondentsRouter} from '@/lib/trpc/routers/respondents';
 import {responsesRouter} from '@/lib/trpc/routers/responses';
 import {actionsRouter} from '@/lib/trpc/routers/survey-actions';
 import {surveysRouter} from '@/lib/trpc/routers/surveys';
+import {unprocessedSubmissionsRouter} from '@/lib/trpc/routers/unprocessed-submissions';
 
 export const appRouter = createTRPCRouter({
     answers: answersRouter,
@@ -24,7 +25,8 @@ export const appRouter = createTRPCRouter({
     questions: questionsRouter,
     respondents: respondentsRouter,
     responses: responsesRouter,
-    surveys: surveysRouter
+    surveys: surveysRouter,
+    unprocessedSubmissions: unprocessedSubmissionsRouter
 });
 
 export type AppRouter = typeof appRouter;

@@ -136,8 +136,6 @@ export const surveysRouter = {
                 }
             }
 
-            throw new TRPCError({code: 'BAD_REQUEST', message: 'test'});
-
             // set launchedAt when moving to active status
             if (status === 'active') {
                 updateData.launchedAt = new Date();
