@@ -15,9 +15,12 @@ export class SurveyClosedError extends Error {
 }
 
 export class InvalidBodyError extends Error {
-    constructor() {
+    issues?: unknown;
+
+    constructor(issues?: unknown) {
         super('INVALID_BODY');
         this.name = 'InvalidBodyError';
+        this.issues = issues;
     }
 }
 
@@ -29,12 +32,18 @@ export class SurveyAuthenticationError extends Error {
 }
 
 export const errorMiddleware = async (err: Error, c: Context) => {
+    console.log(err);
+
     if (err instanceof SurveyNotFoundError) {
         return c.json({error: 'not_found'}, 404);
     } else if (err instanceof SurveyClosedError) {
         return c.json({error: 'closed'}, 403);
     } else if (err instanceof InvalidBodyError) {
-        return c.json({error: 'invalid_body'}, 400);
+        const response: {error: string; issues?: unknown} = {error: 'invalid_body'};
+        if (err.issues) {
+            response.issues = err.issues;
+        }
+        return c.json(response, 400);
     } else if (err instanceof SurveyAuthenticationError) {
         return c.json({error: 'authentication_required'}, 401);
     }

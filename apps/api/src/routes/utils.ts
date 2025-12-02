@@ -94,7 +94,7 @@ export const verifySurveyIsActive: MiddlewareHandler = async (
         throw new SurveyNotFoundError();
     }
 
-    if (survey.status !== 'active') {
+    if (!['active', 'testing'].includes(survey.status)) {
         // for get, intended for showing the user the survey, we want nice feedback when
         // the survey is closed. for posts, we want to throw an error.
         if (method === 'GET') {

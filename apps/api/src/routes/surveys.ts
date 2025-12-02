@@ -47,9 +47,7 @@ router.post(
         const validationResult = responseSchema.safeParse(body);
 
         if (!validationResult.success) {
-            console.log(body);
-            console.log(validationResult.error);
-            throw new InvalidBodyError();
+            throw new InvalidBodyError(validationResult.error.issues);
         }
 
         const validatedBody = validationResult.data;

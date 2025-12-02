@@ -7,6 +7,12 @@ vi.mock('@/lib/jobs/generate-authenticity-score.js', () => ({
     }
 }));
 
+vi.mock('@/lib/jobs/process-response-submission.js', () => ({
+    processResponseSubmissionTask: {
+        trigger: vi.fn().mockResolvedValue(undefined)
+    }
+}));
+
 // mock upstash redis to avoid external dependencies during tests
 const mockRedis = {
     expire: vi.fn(),

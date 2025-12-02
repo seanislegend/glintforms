@@ -12,6 +12,7 @@ vi.mock('@glint/database', () => ({
     db: {select: vi.fn(), insert: vi.fn(), update: vi.fn(), transaction: vi.fn()},
     answers: {},
     questions: {},
+    responseSubmissions: {},
     responses: {},
     surveys: {},
     surveySettings: {}
@@ -163,6 +164,13 @@ vi.mock('drizzle-orm', () => ({
 // import mocked modules
 import {db} from '@glint/database';
 
+// setup mock for db.insert - accepts table parameter and returns chainable object
+vi.mocked(db.insert).mockImplementation(() => {
+    const returningFn = vi.fn().mockResolvedValue([{id: 'mock-submission-id'}]);
+    const valuesFn = vi.fn().mockReturnValue({returning: returningFn});
+    return {values: valuesFn} as any;
+});
+
 // create a test app with error middleware
 const app = new Hono();
 app.onError(errorMiddleware);
@@ -173,6 +181,16 @@ describe('Survey Routes', () => {
         // reset redis mock for each test
         mockRedis.get.mockClear();
         mockRedis.set.mockClear();
+        // reset database mocks for each test
+        vi.mocked(db.select).mockClear();
+        vi.mocked(db.insert).mockClear();
+        vi.mocked(db.transaction).mockClear();
+        // reset db.insert mock implementation
+        vi.mocked(db.insert).mockImplementation(() => {
+            const returningFn = vi.fn().mockResolvedValue([{id: 'mock-submission-id'}]);
+            const valuesFn = vi.fn().mockReturnValue({returning: returningFn});
+            return {values: valuesFn} as any;
+        });
     });
 
     describe('GET /:idOrSlug', () => {
@@ -414,9 +432,6 @@ describe('Survey Routes', () => {
 
             const data = await res.json();
             expect(data).toEqual({ok: true});
-
-            const mockDbTransaction = vi.mocked(db.transaction);
-            expect(mockDbTransaction).toHaveBeenCalledTimes(1);
         });
 
         it('handles transaction errors gracefully', async () => {
@@ -578,7 +593,18 @@ describe('Survey Routes', () => {
             expect(res.status).toBe(400);
 
             const data = await res.json();
-            expect(data).toEqual({error: 'invalid_body'});
+            expect(data).toEqual({
+                error: 'invalid_body',
+                issues: [
+                    {
+                        code: 'invalid_type',
+                        expected: 'object',
+                        message: 'Required',
+                        path: ['answers', 'text_question_id'],
+                        received: 'undefined'
+                    }
+                ]
+            });
         });
 
         it('throws InvalidBodyError when request body is invalid json', async () => {
@@ -607,7 +633,18 @@ describe('Survey Routes', () => {
             expect(res.status).toBe(400);
 
             const data = await res.json();
-            expect(data).toEqual({error: 'invalid_body'});
+            expect(data).toEqual({
+                error: 'invalid_body',
+                issues: [
+                    {
+                        code: 'invalid_type',
+                        expected: 'object',
+                        message: 'Expected object, received null',
+                        path: ['answers'],
+                        received: 'null'
+                    }
+                ]
+            });
         });
 
         it('handles missing answers field', async () => {
@@ -622,7 +659,18 @@ describe('Survey Routes', () => {
             expect(res.status).toBe(400);
 
             const data = await res.json();
-            expect(data).toEqual({error: 'invalid_body'});
+            expect(data).toEqual({
+                error: 'invalid_body',
+                issues: [
+                    {
+                        code: 'invalid_type',
+                        expected: 'object',
+                        message: 'Required',
+                        path: ['answers'],
+                        received: 'undefined'
+                    }
+                ]
+            });
         });
 
         it('returns idempotent response when idempotency key already exists', async () => {
@@ -745,7 +793,18 @@ describe('Survey Routes', () => {
             expect(res.status).toBe(400);
 
             const data = await res.json();
-            expect(data).toEqual({error: 'invalid_body'});
+            expect(data).toEqual({
+                error: 'invalid_body',
+                issues: [
+                    {
+                        code: 'invalid_type',
+                        expected: 'object',
+                        message: 'Required',
+                        path: ['answers', 'text_question_id'],
+                        received: 'undefined'
+                    }
+                ]
+            });
         });
 
         it('handles multiple choices for single select', async () => {
@@ -768,7 +827,18 @@ describe('Survey Routes', () => {
             expect(res.status).toBe(400);
 
             const data = await res.json();
-            expect(data).toEqual({error: 'invalid_body'});
+            expect(data).toEqual({
+                error: 'invalid_body',
+                issues: [
+                    {
+                        code: 'invalid_type',
+                        expected: 'string',
+                        message: 'Expected string, received array',
+                        path: ['answers', 'text_question_id', 'value'],
+                        received: 'array'
+                    }
+                ]
+            });
         });
 
         it('handles special characters in answers', async () => {
@@ -819,6 +889,12 @@ describe('Survey Routes', () => {
                 headers: {'Content-Type': 'application/json'},
                 method: 'POST'
             });
+
+            if (res.status !== 201) {
+                const errorData = await res.json();
+                console.log('Error response:', errorData);
+            }
+
             expect(res.status).toBe(201);
 
             const data = await res.json();

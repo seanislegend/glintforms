@@ -7,7 +7,7 @@ const securityHeaders = [
     {key: 'X-XSS-Protection', value: '1; mode=block'},
     {
         key: 'Content-Security-Policy',
-        value: "default-src 'self'; img-src 'self' data:; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; connect-src 'self' https://vitals.vercel-insights.com https://*.sentry.io; worker-src 'self' blob:; frame-src 'self' https://*.sentry.io;"
+        value: `default-src 'self'; img-src 'self' data:; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; connect-src 'self' ${process.env.NEXT_PUBLIC_API_URL} https://vitals.vercel-insights.com https://*.sentry.io; worker-src 'self' blob:; frame-src 'self' https://*.sentry.io;`
     }
 ];
 
