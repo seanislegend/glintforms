@@ -28,9 +28,10 @@ const QuestionValidationRules: React.FC = () => {
             config.applicableTypes.includes(questionType)
         ).length;
     }, [questionType]);
-    const isDisabled =
-        !isDraft || fields.length >= maxValidations || questionType === 'single_select';
+    const isDisabled = fields.length >= maxValidations || questionType === 'single_select';
     const isVisible = fields.length > 0 && questionType !== 'single_select';
+
+    if (!isDraft) return null;
 
     return (
         <div>

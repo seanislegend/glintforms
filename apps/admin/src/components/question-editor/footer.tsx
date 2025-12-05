@@ -11,7 +11,7 @@ import SortItemsDialog, {type SortItem} from '@/components/sort-items';
 import useHighlight from '@/hooks/use-highlight';
 import type {Question} from '@/lib/schemas/questions';
 import {questionCountAtom} from '@/lib/store';
-import {getReorderButtonDisabledReason, isDraftSurvey} from '@/lib/surveys/disabled-rules';
+import {getReorderButtonDisabledReason} from '@/lib/surveys/disabled-rules';
 import ErrorStatus from './error-status';
 
 interface Props {
@@ -44,7 +44,7 @@ const QuestionEditorFooter: React.FC<Props> = ({isDraft, isPending, onAdd}) => {
                         Add question
                     </Button>
                 )}
-                {questionCount > 1 && (
+                {isDraft && questionCount > 1 && (
                     <SortItemsDialog
                         ctaLabel="Reorder questions"
                         description="Drag and drop questions to change their order. The order will be saved when you click 'Save order'."
