@@ -10,18 +10,20 @@ import {
 } from '@glint/database';
 import type {ResponseSubmissionBody} from '@glint/schemas';
 import * as Sentry from '@sentry/node';
-import {logger, task} from '@trigger.dev/sdk';
+import {logger, schemaTask, tasks} from '@trigger.dev/sdk';
 import {eq} from 'drizzle-orm';
-import {generateAuthenticityScoreTask} from './generate-authenticity-score.js';
+import {
+    type GenerateAuthenticityScoreTaskPayload,
+    processResponseSubmissionTaskSchema
+} from './schema';
 
 const sha256 = (x: string) => createHash('sha256').update(x).digest('hex');
 
-export const processResponseSubmissionTask = task({
+export const processResponseSubmissionTask = schemaTask({
     id: 'process-response-submission',
     maxDuration: 300,
-    run: async (payload: {submissionId: string}, {ctx}) => {
-        logger.log('Starting response submission processing', {payload, ctx});
-
+    schema: processResponseSubmissionTaskSchema,
+    run: async payload => {
         try {
             const {submissionId} = payload;
             const [submission] = await db
@@ -70,8 +72,16 @@ export const processResponseSubmissionTask = task({
                         .limit(1);
 
                     if (existingRespondent) {
+                        if (process.env.LOG_LEVEL === 'debug') {
+                            logger.log('Found existing respondent', {existingRespondent});
+                        }
+
                         respondentId = existingRespondent.id;
                     } else {
+                        if (process.env.LOG_LEVEL === 'debug') {
+                            logger.log('Creating new respondent', {submissionBody});
+                        }
+
                         const [newRespondent] = await tx
                             .insert(respondents)
                             .values({
@@ -82,6 +92,11 @@ export const processResponseSubmissionTask = task({
                         if (!newRespondent) {
                             throw new Error('Failed to create respondent');
                         }
+
+                        if (process.env.LOG_LEVEL === 'debug') {
+                            logger.log('Created new respondent', {newRespondent});
+                        }
+
                         respondentId = newRespondent.id;
                     }
                 }
@@ -109,6 +124,10 @@ export const processResponseSubmissionTask = task({
                     throw new Error('Failed to create response');
                 }
 
+                if (process.env.LOG_LEVEL === 'debug') {
+                    logger.log('Created response', {response});
+                }
+
                 for (const answer of processedAnswers) {
                     await tx.insert(answers).values({
                         ...answer,
@@ -116,9 +135,17 @@ export const processResponseSubmissionTask = task({
                         responseId: response.id,
                         startedAt: answer.startedAt ? new Date(answer.startedAt) : new Date()
                     });
+
+                    if (process.env.LOG_LEVEL === 'debug') {
+                        logger.log('Created answer', {answer});
+                    }
                 }
 
                 if (!survey.hasResponses) {
+                    if (process.env.LOG_LEVEL === 'debug') {
+                        logger.log('Updating survey to have responses', {survey});
+                    }
+
                     await tx
                         .update(surveys)
                         .set({hasResponses: true})
@@ -136,18 +163,27 @@ export const processResponseSubmissionTask = task({
                     text: 'Response submitted',
                     type: 'respondes_recorded'
                 });
+                if (process.env.LOG_LEVEL === 'debug') {
+                    logger.log('Updated activities');
+                }
+
                 await tx
                     .update(responseSubmissions)
                     .set({body: {}, failureReason: null, processedAt: new Date()})
                     .where(eq(responseSubmissions.id, submissionId));
-                await generateAuthenticityScoreTask.trigger({
+                if (process.env.LOG_LEVEL === 'debug') {
+                    logger.log('Updated response submission');
+                }
+
+                await tasks.trigger('generate-authenticity-score', {
                     campaignId: survey.campaignId,
                     responseId: response.id,
                     surveyId: submission.surveyId
-                });
+                } satisfies GenerateAuthenticityScoreTaskPayload);
+                if (process.env.LOG_LEVEL === 'debug') {
+                    logger.log('Triggered generate authenticity score task');
+                }
             });
-
-            logger.log('Response submission processed successfully', {submissionId});
 
             return {
                 success: true,
@@ -156,19 +192,13 @@ export const processResponseSubmissionTask = task({
         } catch (error) {
             logger.error('Failed to process response submission', {error});
             Sentry.captureException(error);
-            const failureReason = error instanceof Error ? error.message : 'Unknown error';
 
-            try {
-                const {submissionId} = payload;
-                await db
-                    .update(responseSubmissions)
-                    .set({failureReason})
-                    .where(eq(responseSubmissions.id, submissionId));
-            } catch (updateError) {
-                logger.error('Failed to update submission with failure reason', {
-                    error: updateError
-                });
-            }
+            const failureReason = error instanceof Error ? error.message : 'Unknown error';
+            const {submissionId} = payload;
+            await db
+                .update(responseSubmissions)
+                .set({failureReason})
+                .where(eq(responseSubmissions.id, submissionId));
 
             return {
                 error: failureReason,

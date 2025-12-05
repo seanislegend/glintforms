@@ -1,24 +1,17 @@
 import {openai} from '@ai-sdk/openai';
-import {answers, type Database, questions, responses} from '@glint/database';
+import {
+    answers,
+    authenticityScores,
+    type Database,
+    db,
+    questions,
+    responses
+} from '@glint/database';
 import {generateObject} from 'ai';
 import {eq} from 'drizzle-orm';
+import {buildAuthenticityPrompt} from './prompts';
 import {type AuthenticityResult, authenticityResultSchema} from './schemas';
-
-export const callAiService = async (prompt: string) => {
-    try {
-        const result = await generateObject({
-            model: openai(process.env.AI_MODEL ?? 'gpt-4.1-nano'),
-            system: 'You are a research authenticity auditor. Always respond with valid JSON only.',
-            prompt,
-            schema: authenticityResultSchema
-        });
-
-        return JSON.stringify(result.object);
-    } catch (error) {
-        console.error('Error calling AI service:', error);
-        throw new Error('Failed to analyze authenticity. Please try again.');
-    }
-};
+import type {AuthenticityCalculationData} from './types';
 
 export const extractFailureReasons = (aiResult: AuthenticityResult) => {
     const reasons: string[] = [];
@@ -126,4 +119,36 @@ export const calculateAuthenticityData = async (
         totalQuestions,
         wasCompleted: response.wasCompleted
     };
+};
+
+export const generateAuthenticityScore = async (responseId: string, surveyId: string) => {
+    const authenticityData = await calculateAuthenticityData(db, responseId, surveyId);
+    const prompt = buildAuthenticityPrompt(authenticityData);
+    // @ts-expect-error - TypeScript has issues with deep type inference from generateObject with nested Zod schemas
+    const result = await generateObject({
+        model: openai(process.env.AI_MODEL ?? 'gpt-4.1-nano'),
+        system: 'You are a research authenticity auditor. Always respond with valid JSON only.',
+        prompt,
+        schema: authenticityResultSchema
+    });
+    const aiResult = authenticityResultSchema.parse(result.object);
+
+    const [authenticityScore] = await db
+        .insert(authenticityScores)
+        .values({
+            metadata: {
+                aiReasoning: aiResult.reasoning,
+                checks: aiResult.checks,
+                expectedDurationMinutes: authenticityData.expectedDurationMinutes,
+                actualDurationMinutes: authenticityData.actualDurationMinutes,
+                totalQuestions: authenticityData.totalQuestions,
+                failureReasons: extractFailureReasons(aiResult)
+            },
+            percentage: aiResult.percentage,
+            responseId,
+            surveyId
+        })
+        .returning();
+
+    return authenticityScore;
 };

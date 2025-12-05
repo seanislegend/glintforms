@@ -1,5 +1,7 @@
 import {campaigns, questions, surveySettings, surveys} from '@glint/database';
 import {encrypt} from '@glint/encryption';
+import type {DeleteSurveyDataTaskPayload} from '@glint/jobs/schema';
+import {tasks} from '@trigger.dev/sdk';
 import {TRPCError} from '@trpc/server';
 import {and, desc, eq, or} from 'drizzle-orm';
 import {z} from 'zod';
@@ -134,6 +136,14 @@ export const surveysRouter = {
                             'This survey has no questions. Before the status can be changed, at least one question must be added.'
                     });
                 }
+            }
+
+            if (status === 'active' && survey.status === 'testing') {
+                // clear all data that has been collected during testing
+                await tasks.trigger('delete-survey-data', {
+                    surveyId: id,
+                    tenantId: ctx.tenant
+                } satisfies DeleteSurveyDataTaskPayload);
             }
 
             // set launchedAt when moving to active status

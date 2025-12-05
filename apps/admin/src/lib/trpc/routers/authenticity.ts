@@ -1,9 +1,7 @@
+import {generateAuthenticityScore} from '@glint/authenticity';
 import {authenticityScores, user} from '@glint/database';
 import {eq} from 'drizzle-orm';
 import {z} from 'zod';
-import {calculateAuthenticityData, callAiService, extractFailureReasons} from '@/lib/authenticity';
-import {buildAuthenticityPrompt} from '@/lib/prompts/authenticity';
-import {authenticityResultSchema} from '@/lib/schemas/authenticity';
 import {isAuthenticityPass} from '@/utils/authenticity';
 import {protectedProcedure} from '../init';
 
@@ -50,43 +48,8 @@ export const authenticityRouter = {
             })
         )
         .mutation(async ({input: {responseId, surveyId}, ctx}) => {
-            const authenticityData = await calculateAuthenticityData(ctx.db, responseId, surveyId);
-            const prompt = buildAuthenticityPrompt(authenticityData);
-            const aiResponseRaw: string = await callAiService(prompt);
-            let aiResult: z.infer<typeof authenticityResultSchema>;
-
-            try {
-                aiResult = authenticityResultSchema.parse(JSON.parse(aiResponseRaw));
-            } catch (err: unknown) {
-                console.error('Invalid AI response:', err);
-                throw new Error('AI response format invalid');
-            }
-
-            const [authenticityScore] = await ctx.db
-                .insert(authenticityScores)
-                .values({
-                    metadata: {
-                        aiReasoning: aiResult.reasoning,
-                        checks: aiResult.checks,
-                        expectedDurationMinutes: authenticityData.expectedDurationMinutes,
-                        actualDurationMinutes: authenticityData.actualDurationMinutes,
-                        totalQuestions: authenticityData.totalQuestions,
-                        failureReasons: extractFailureReasons(aiResult)
-                    },
-                    percentage: aiResult.percentage,
-                    responseId,
-                    surveyId
-                })
-                .returning();
-
-            if (!authenticityScore) {
-                throw new Error('authenticity score not found');
-            }
-
-            return {
-                ...authenticityScore,
-                isPass: isAuthenticityPass(authenticityScore.percentage)
-            };
+            const result = await generateAuthenticityScore(responseId, surveyId);
+            return result;
         }),
     override: protectedProcedure
         .input(

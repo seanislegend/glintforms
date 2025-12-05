@@ -1,0 +1,19 @@
+{
+    "name": "@glint/authenticity",
+    "version": "0.1.0",
+    "scripts": {
+        "type-check": "tsc --noEmit"
+    },
+    "dependencies": {
+        "@ai-sdk/openai": "^2.0.23",
+        "ai": "^5.0.28",
+        "drizzle-orm": "^0.44.5",
+        "zod": "^3.23.8"
+    },
+    "exports": {
+        ".": "./src/index.ts",
+        "./prompts": "./src/prompts.ts",
+        "./schemas": "./src/schemas.ts"
+    },
+    "private": true
+}

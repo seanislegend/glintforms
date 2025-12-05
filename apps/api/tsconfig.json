@@ -8,6 +8,11 @@
             "@glint/database": ["../../packages/database/src/index.ts"]
         }
     },
-    "include": ["src/**/*", "tests/routes/surveys.test.ts", "tests/setup.ts"],
+    "include": [
+        "src/**/*",
+        "tests/routes/surveys.test.ts",
+        "tests/setup.ts",
+        "../../packages/authenticity/authenticity"
+    ],
     "exclude": ["node_modules", "dist"]
 }

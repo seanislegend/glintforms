@@ -1,25 +1,4 @@
-interface BuildAuthenticityPromptProps {
-    actualDurationMinutes: number;
-    codedQuestions: Array<{
-        id: string;
-        options: Array<{
-            id: string;
-            value: string;
-        }>;
-        title: string;
-        type: string;
-    }>;
-    expectedDurationMinutes: number;
-    responseAnswers: {
-        answerValue: unknown;
-        answerWasSkipped: boolean;
-        questionTitle: string;
-        questionOptions: unknown;
-        questionType: string;
-    }[];
-    totalQuestions: number;
-    wasCompleted: boolean;
-}
+import type {BuildAuthenticityPromptProps, QuestionOption} from './types';
 
 export const buildAuthenticityPrompt = ({
     actualDurationMinutes,

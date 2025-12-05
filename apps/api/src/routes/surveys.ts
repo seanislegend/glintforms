@@ -1,8 +1,9 @@
 import {db, questions, responseSubmissions} from '@glint/database';
+import type {ProcessResponseSubmissionTaskPayload} from '@glint/jobs/schema';
 import {createResponseSchema} from '@glint/schemas';
+import {tasks} from '@trigger.dev/sdk';
 import {asc, eq} from 'drizzle-orm';
 import {Hono} from 'hono';
-import {processResponseSubmissionTask} from '@/lib/jobs/process-response-submission.js';
 import {InvalidBodyError} from '@/middleware/errors';
 import type {ServerContext} from '@/types/server';
 import {
@@ -79,7 +80,10 @@ router.post(
             throw new Error('Failed to create response submission');
         }
 
-        await processResponseSubmissionTask.trigger({submissionId: submission.id});
+        await tasks.trigger('process-response-submission', {
+            submissionId: submission.id
+        } satisfies ProcessResponseSubmissionTaskPayload);
+
         return c.json({ok: true}, 201);
     }
 );

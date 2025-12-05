@@ -1,13 +1,13 @@
 import {afterEach, beforeEach, vi} from 'vitest';
 
 // mock trigger task usage to avoid external side effects during tests
-vi.mock('@/lib/jobs/generate-authenticity-score.js', () => ({
+vi.mock('@glint/jobs/generate-authenticity-score.js', () => ({
     generateAuthenticityScoreTask: {
         trigger: vi.fn().mockResolvedValue(undefined)
     }
 }));
 
-vi.mock('@/lib/jobs/process-response-submission.js', () => ({
+vi.mock('@glint/jobs/process-response-submission.js', () => ({
     processResponseSubmissionTask: {
         trigger: vi.fn().mockResolvedValue(undefined)
     }

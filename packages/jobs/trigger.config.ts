@@ -1,4 +1,5 @@
 import {defineConfig} from '@trigger.dev/sdk';
+import 'dotenv/config';
 
 export default defineConfig({
     project: process.env.TRIGGER_PROJECT_ID ?? '',
@@ -7,7 +8,7 @@ export default defineConfig({
     // The max compute seconds a task is allowed to run. If the task run exceeds this duration, it will be stopped.
     // You can override this on an individual task.
     // See https://trigger.dev/docs/runs/max-duration
-    maxDuration: 3600,
+    maxDuration: 60,
     retries: {
         enabledInDev: true,
         default: {
@@ -18,5 +19,5 @@ export default defineConfig({
             randomize: true
         }
     },
-    dirs: ['./src/jobs']
+    dirs: ['./src']
 });
