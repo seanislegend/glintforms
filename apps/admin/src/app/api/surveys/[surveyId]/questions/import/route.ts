@@ -32,6 +32,13 @@ export const POST = async (
             return NextResponse.json({error: 'Survey not found or access denied'}, {status: 404});
         }
 
+        if (survey[0]?.status !== 'draft') {
+            return NextResponse.json(
+                {error: 'Cannot import questions into a survey that is no longer in draft status'},
+                {status: 400}
+            );
+        }
+
         const formData = await request.formData();
         const file = formData.get('file') as File;
 

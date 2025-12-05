@@ -21,6 +21,7 @@ import {FormProvider, useForm, useFormContext} from 'react-hook-form';
 import {toast} from 'sonner';
 import {QuestionEditorContext} from '@/components/question-editor/wrapper';
 import useHighlight from '@/hooks/use-highlight';
+import {isDraftSurvey} from '@/lib/disabled-rules';
 import {MAX_QUESTIONS} from '@/lib/schemas/constants';
 import {type GenerateQuestionsForm, generateQuestionsSchema} from '@/lib/schemas/questions';
 import {questionCountAtom} from '@/lib/store';
@@ -38,6 +39,7 @@ const GenerateQuestionsDialog: React.FC<Props> = ({isPending, surveyId}) => {
     const {getValues, setValue} = useFormContext();
     const {highlight} = useHighlight();
     const trpc = useTRPC();
+    const isDraft = isDraftSurvey(survey?.status);
 
     const generateFormMethods = useForm<GenerateQuestionsForm>({
         resolver: zodResolver(generateQuestionsSchema),
@@ -95,7 +97,8 @@ const GenerateQuestionsDialog: React.FC<Props> = ({isPending, surveyId}) => {
     };
 
     const remainingSlots = MAX_QUESTIONS - questionCount;
-    const isDisabled = isPending || questionCount === MAX_QUESTIONS || generateQuestions.isPending;
+    const isDisabled =
+        !isDraft || isPending || questionCount === MAX_QUESTIONS || generateQuestions.isPending;
 
     return (
         <Dialog open={isOpen} onOpenChange={handleOpenChange}>

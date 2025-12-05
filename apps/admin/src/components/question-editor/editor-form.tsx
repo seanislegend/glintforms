@@ -1,19 +1,23 @@
 'use client';
 
 import {handleFormError} from '@glint/form/utils';
+import {Alert, AlertDescription, AlertTitle} from '@glint/ui/alert';
 import Button from '@glint/ui/button';
 import Container from '@glint/ui/container';
 import EmptyPanel from '@glint/ui/empty-panel';
 import SectionHeader from '@glint/ui/section-header';
 import Spacer from '@glint/ui/spacer';
+import {InfoIcon} from '@phosphor-icons/react/dist/ssr/Info';
 import {PlusIcon} from '@phosphor-icons/react/dist/ssr/Plus';
 import {useMutation, useQueryClient} from '@tanstack/react-query';
 import {useSetAtom} from 'jotai';
 import {use} from 'react';
 import {type SubmitHandler, useFieldArray, useFormContext} from 'react-hook-form';
 import {toast} from 'sonner';
+import {isDraftSurvey} from '@/lib/disabled-rules';
 import type {Question, QuestionsUpdate} from '@/lib/schemas/questions';
 import {questionCountAtom} from '@/lib/store';
+import {surveyHasLaunched} from '@/lib/survey';
 import {useTRPC} from '@/lib/trpc/react';
 import QuestionCard from './card';
 import QuestionCardSkeleton from './card-skeleton';
@@ -30,8 +34,9 @@ const QuestionEditorForm: React.FC = () => {
     const {control, handleSubmit} = useFormContext<QuestionsUpdate>();
     const fieldArray = useFieldArray({control, name: 'questions'});
     const {getNewQuestion, normaliseQuestions, surveyId} = useQuestionEditor();
-    const {isPending} = use(QuestionEditorContext);
+    const {isPending, survey} = use(QuestionEditorContext);
     const setQuestionCount = useSetAtom(questionCountAtom);
+    const isDraft = isDraftSurvey(survey?.status);
 
     const trpc = useTRPC();
     const queryClient = useQueryClient();
@@ -80,7 +85,12 @@ const QuestionEditorForm: React.FC = () => {
                 actions={
                     fieldArray.fields.length > 0 && (
                         <>
-                            <GenerateQuestionsDialog isPending={isPending} surveyId={surveyId} />
+                            {isDraft && (
+                                <GenerateQuestionsDialog
+                                    isPending={isPending}
+                                    surveyId={surveyId}
+                                />
+                            )}
                             <ExportQuestionsDialog surveyId={surveyId} />
                         </>
                     )
@@ -89,6 +99,21 @@ const QuestionEditorForm: React.FC = () => {
                 title="Question editor"
             />
             <Spacer />
+            {survey?.status && surveyHasLaunched(survey.status) && (
+                <>
+                    <Alert variant="warning">
+                        <InfoIcon />
+                        <AlertTitle>Survey has been published</AlertTitle>
+                        <AlertDescription>
+                            Your survey has been published and you can only edit the text content of
+                            existing questions and options. Structural changes such as adding or
+                            removing questions, changing question types, or modifying options are
+                            not allowed to ensure the integrity of the survey.
+                        </AlertDescription>
+                    </Alert>
+                    <Spacer />
+                </>
+            )}
             {isPending ? (
                 <div className="space-y-6">
                     <QuestionCardSkeleton />
@@ -108,18 +133,22 @@ const QuestionEditorForm: React.FC = () => {
                             title="No questions added yet"
                         >
                             <div className="flex items-center gap-2 justify-center">
-                                <GenerateQuestionsDialog
-                                    isPending={isPending}
-                                    surveyId={surveyId}
-                                />
-                                <ImportQuestionsDialog
-                                    onImport={handleImportQuestions}
-                                    surveyId={surveyId}
-                                />
-                                <Button onClick={handleAddQuestion} variant="accent">
-                                    <PlusIcon />
-                                    Add question
-                                </Button>
+                                {isDraft && (
+                                    <>
+                                        <GenerateQuestionsDialog
+                                            isPending={isPending}
+                                            surveyId={surveyId}
+                                        />
+                                        <ImportQuestionsDialog
+                                            onImport={handleImportQuestions}
+                                            surveyId={surveyId}
+                                        />
+                                        <Button onClick={handleAddQuestion} variant="accent">
+                                            <PlusIcon />
+                                            Add question
+                                        </Button>
+                                    </>
+                                )}
                             </div>
                         </EmptyPanel>
                     )}
@@ -131,8 +160,12 @@ const QuestionEditorForm: React.FC = () => {
                                 </QuestionProvider>
                             ))}
 
-                            <Footer isPending={saveQuestions.isPending} onAdd={handleAddQuestion} />
-                            <RemoveQuestionDialog onRemove={fieldArray.remove} />
+                            <Footer
+                                isDraft={isDraft}
+                                isPending={saveQuestions.isPending}
+                                onAdd={handleAddQuestion}
+                            />
+                            {isDraft && <RemoveQuestionDialog onRemove={fieldArray.remove} />}
                         </>
                     )}
                 </form>

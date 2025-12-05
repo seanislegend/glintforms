@@ -6,25 +6,30 @@ import ToggleVisibility from '@glint/ui/toggle-visibility';
 import {PlusIcon} from '@phosphor-icons/react/dist/ssr/Plus';
 import {use, useMemo} from 'react';
 import {useFieldArray, useWatch} from 'react-hook-form';
+import {isDraftSurvey} from '@/lib/disabled-rules';
 import {validationRuleConfigs} from '@/lib/schemas/questions';
 import {QuestionContext} from './provider';
 import useQuestionEditor from './use-question-editor';
+import {QuestionEditorContext} from './wrapper';
 import ValidationsRule from './validations-rule';
 
 const QuestionValidationRules: React.FC = () => {
     const {questionIndex} = use(QuestionContext);
+    const {survey} = use(QuestionEditorContext);
     const questionType = useWatch({name: `questions.${questionIndex}.type`});
     const {append, fields, remove} = useFieldArray({
         name: `questions.${questionIndex}.validations`
     });
     const {getNewValidationRule} = useQuestionEditor();
+    const isDraft = isDraftSurvey(survey?.status);
 
     const maxValidations = useMemo(() => {
         return Object.entries(validationRuleConfigs).filter(([_, config]) =>
             config.applicableTypes.includes(questionType)
         ).length;
     }, [questionType]);
-    const isDisabled = fields.length >= maxValidations || questionType === 'single_select';
+    const isDisabled =
+        !isDraft || fields.length >= maxValidations || questionType === 'single_select';
     const isVisible = fields.length > 0 && questionType !== 'single_select';
 
     return (
@@ -33,6 +38,7 @@ const QuestionValidationRules: React.FC = () => {
             <ToggleVisibility className="mt-2 space-y-2" initial="hidden" visible={isVisible}>
                 {fields.map((rule, ruleIndex) => (
                     <ValidationsRule
+                        isDraft={isDraft}
                         key={rule.id}
                         onRemove={() => remove(ruleIndex)}
                         questionType={questionType}

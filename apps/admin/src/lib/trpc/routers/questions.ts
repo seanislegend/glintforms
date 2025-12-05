@@ -3,6 +3,7 @@ import {and, asc, eq, inArray} from 'drizzle-orm';
 import {z} from 'zod';
 import {generateQuestions} from '@/lib/question-generation-service';
 import {questionSchema, questionsUpdateSchema} from '@/lib/schemas/questions';
+import {hasPublishedStructureChanges} from '@/lib/surveys/validate-published-structure';
 import {protectedProcedure} from '../init';
 
 export const questionsRouter = {
@@ -42,10 +43,47 @@ export const questionsRouter = {
             return {success: false, error: 'Survey not found or access denied'};
         }
 
+        const isDraft = survey.status === 'draft';
+
+        // get existing questions for validation and updates (needed for non-draft surveys)
+        let existingQuestionsMap: Map<string, {options: unknown; type: string}> | undefined;
+
+        if (!isDraft) {
+            // get existing questions to compare
+            const existingQuestions = await ctx.db
+                .select({
+                    id: questions.id,
+                    options: questions.options,
+                    type: questions.type
+                })
+                .from(questions)
+                .where(eq(questions.surveyId, surveyId));
+
+            existingQuestionsMap = new Map(
+                existingQuestions.map(q => [q.id, {options: q.options, type: q.type}])
+            );
+        }
+
+        // if not draft, validate that no structural changes are being made
+        if (!isDraft && existingQuestionsMap) {
+            const structureError = hasPublishedStructureChanges({
+                existingQuestionsMap,
+                deletedQuestionIds: input.deletedQuestionIds ?? {},
+                questions: input.questions
+            });
+            if (structureError) {
+                return {success: false, error: structureError};
+            }
+        }
+
         // save questions to db, if question already exists, update it
         await ctx.db.transaction(async tx => {
-            // delete removed questions first
-            if (input.deletedQuestionIds && Object.keys(input.deletedQuestionIds).length > 0) {
+            // delete removed questions first (only if draft)
+            if (
+                isDraft &&
+                input.deletedQuestionIds &&
+                Object.keys(input.deletedQuestionIds).length > 0
+            ) {
                 await tx
                     .delete(questions)
                     .where(
@@ -56,23 +94,57 @@ export const questionsRouter = {
 
             // insert/update remaining questions
             for (const q of input.questions) {
-                await tx
-                    .insert(questions)
-                    .values(q)
-                    .onConflictDoUpdate({
-                        target: [questions.id],
-                        set: {
-                            allowOther: q.allowOther,
-                            description: q.description,
-                            options: q.options,
-                            order: q.order,
-                            randomiseOptionsOrder: q.randomiseOptionsOrder,
-                            required: q.required,
-                            title: q.title,
-                            type: q.type,
-                            validations: q.validations
-                        }
-                    });
+                if (isDraft) {
+                    // full update allowed for draft surveys
+                    await tx
+                        .insert(questions)
+                        .values(q)
+                        .onConflictDoUpdate({
+                            target: [questions.id],
+                            set: {
+                                allowOther: q.allowOther,
+                                description: q.description,
+                                options: q.options,
+                                order: q.order,
+                                randomiseOptionsOrder: q.randomiseOptionsOrder,
+                                required: q.required,
+                                title: q.title,
+                                type: q.type,
+                                validations: q.validations
+                            }
+                        });
+                } else {
+                    // only allow updating copy (title, description) and option values for non-draft surveys
+                    const existing = existingQuestionsMap
+                        ? existingQuestionsMap.get(q.id)
+                        : undefined;
+
+                    if (existing) {
+                        // preserve existing options structure but allow value updates
+                        const existingOptions = Array.isArray(existing.options)
+                            ? existing.options
+                            : [];
+                        const newOptions = Array.isArray(q.options) ? q.options : [];
+                        const updatedOptions = existingOptions.map(
+                            (existingOpt: any, idx: number) => {
+                                const newOpt = newOptions[idx];
+                                // only update value if provided, otherwise keep existing
+                                return newOpt ? {...existingOpt, value: newOpt.value} : existingOpt;
+                            }
+                        );
+
+                        await tx
+                            .update(questions)
+                            .set({
+                                description: q.description,
+                                options: updatedOptions,
+                                title: q.title
+                                // note: not updating allowOther, required, randomiseOptionsOrder, type, validations
+                                // as these are structural changes not allowed for non-draft surveys
+                            })
+                            .where(eq(questions.id, q.id));
+                    }
+                }
             }
 
             await tx.insert(activities).values({
@@ -108,6 +180,12 @@ export const questionsRouter = {
                 .where(and(eq(surveys.id, input.surveyId), eq(surveys.tenantId, ctx.tenant)));
             if (!survey) {
                 throw new Error('Survey not found or access denied');
+            }
+
+            if (survey.status !== 'draft') {
+                throw new Error(
+                    'Cannot generate questions for a survey that is no longer in draft status'
+                );
             }
 
             return generateQuestions({

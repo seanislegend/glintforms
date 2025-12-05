@@ -8,6 +8,7 @@ import {TrashIcon} from '@phosphor-icons/react/dist/ssr/Trash';
 import {useSetAtom} from 'jotai';
 import {use} from 'react';
 import {useFormContext} from 'react-hook-form';
+import {isDraftSurvey} from '@/lib/disabled-rules';
 import {removeQuestionIndexAtom} from '@/lib/store';
 import HighlightChange from '../highlight-change';
 import QuestionOptions from './options';
@@ -15,11 +16,14 @@ import {QuestionContext} from './provider';
 import QuestionRequiredStatus from './required-status';
 import Settings from './settings';
 import QuestionTypeSelect from './type-select';
+import {QuestionEditorContext} from './wrapper';
 
 const QuestionCard: React.FC = () => {
     const {control} = useFormContext();
     const {questionIndex} = use(QuestionContext);
+    const {survey} = use(QuestionEditorContext);
     const setRemoveQuestionIndex = useSetAtom(removeQuestionIndexAtom);
+    const isDraft = isDraftSurvey(survey?.status);
 
     return (
         <HighlightChange id="questions-list">
@@ -36,18 +40,26 @@ const QuestionCard: React.FC = () => {
                                         <QuestionRequiredStatus />
                                     </span>
                                 </div>
-                                <Button
-                                    className="ml-auto"
-                                    onClick={() => setRemoveQuestionIndex(questionIndex)}
-                                    size="sm"
-                                    variant="destructiveGhost"
-                                >
-                                    <TrashIcon />
-                                </Button>
+                                {isDraft && (
+                                    <Button
+                                        className="ml-auto"
+                                        onClick={() => setRemoveQuestionIndex(questionIndex)}
+                                        size="sm"
+                                        variant="destructiveGhost"
+                                    >
+                                        <TrashIcon />
+                                    </Button>
+                                )}
                             </div>
                         </CardHeader>
                         <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
-                            <div className="md:col-span-6 lg:col-span-8 2xl:col-span-9">
+                            <div
+                                className={
+                                    isDraft
+                                        ? 'md:col-span-6 lg:col-span-8 2xl:col-span-9'
+                                        : 'md:col-span-12'
+                                }
+                            >
                                 <FormField
                                     fieldType="input"
                                     label="Title"
@@ -55,9 +67,11 @@ const QuestionCard: React.FC = () => {
                                     name={`questions.${questionIndex}.title`}
                                 />
                             </div>
-                            <div className="md:col-span-6 lg:col-span-4 2xl:col-span-3">
-                                <QuestionTypeSelect />
-                            </div>
+                            {isDraft && (
+                                <div className="md:col-span-6 lg:col-span-4 2xl:col-span-3">
+                                    <QuestionTypeSelect />
+                                </div>
+                            )}
                             <div className="md:col-span-12 2xl:col-span-12">
                                 <FormField
                                     fieldType="input"

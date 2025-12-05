@@ -11,14 +11,17 @@ import {use} from 'react';
 import {useFieldArray, useFormContext, useWatch} from 'react-hook-form';
 import SortItemsDialog, {type SortItem} from '@/components/sort-items';
 import useHighlight from '@/hooks/use-highlight';
+import {isDraftSurvey} from '@/lib/disabled-rules';
 import {MAX_QUESTION_OPTIONS} from '@/lib/schemas/constants';
 import type {QuestionOption, QuestionsUpdate} from '@/lib/schemas/questions';
 import HighlightChange from '../highlight-change';
 import {QuestionContext} from './provider';
 import useQuestionEditor from './use-question-editor';
+import {QuestionEditorContext} from './wrapper';
 
 const QuestionOptions: React.FC = () => {
     const {questionIndex} = use(QuestionContext);
+    const {survey} = use(QuestionEditorContext);
     const {control, getValues, setValue} = useFormContext<QuestionsUpdate>();
     const questionType = useWatch({name: `questions.${questionIndex}.type`});
     const {append, fields, remove} = useFieldArray({
@@ -26,6 +29,7 @@ const QuestionOptions: React.FC = () => {
     });
     const {getNewOption, isCodedQuestion} = useQuestionEditor();
     const {highlight} = useHighlight();
+    const isDraft = isDraftSurvey(survey?.status);
 
     const handleReorderOptions = (options: SortItem[]) => {
         const updatedOptions = options.map((option, index) => ({
@@ -59,28 +63,32 @@ const QuestionOptions: React.FC = () => {
                                         placeholder="Enter option value"
                                     />
                                 </div>
-                                <Button
-                                    className="w-[40px] !px-4"
-                                    onClick={() => remove(optionIndex)}
-                                    size="sm"
-                                    variant="destructiveGhost"
-                                >
-                                    <TrashIcon />
-                                </Button>
+                                {isDraft && (
+                                    <Button
+                                        className="w-[40px] !px-4"
+                                        onClick={() => remove(optionIndex)}
+                                        size="sm"
+                                        variant="destructiveGhost"
+                                    >
+                                        <TrashIcon />
+                                    </Button>
+                                )}
                             </div>
                         );
                     })}
                 </div>
                 <div className="flex flex-row gap-2">
-                    <Button
-                        disabled={!canAddOption}
-                        onClick={() => append(getNewOption())}
-                        variant="accent"
-                    >
-                        <PlusIcon />
-                        Add option
-                    </Button>
-                    {fields.length > 1 && (
+                    {isDraft && (
+                        <Button
+                            disabled={!canAddOption}
+                            onClick={() => append(getNewOption())}
+                            variant="accent"
+                        >
+                            <PlusIcon />
+                            Add option
+                        </Button>
+                    )}
+                    {isDraft && fields.length > 1 && (
                         <SortItemsDialog
                             ctaLabel="Reorder options"
                             description="Drag and drop options to change their order. The order will be saved when you click 'Save order'."

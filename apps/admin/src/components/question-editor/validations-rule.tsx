@@ -16,12 +16,13 @@ import {
 import {QuestionContext} from './provider';
 
 interface Props {
+    isDraft: boolean;
     onRemove: () => void;
     questionType: QuestionType;
     ruleIndex: number;
 }
 
-const QuestionValidations: React.FC<Props> = ({onRemove, questionType, ruleIndex}) => {
+const QuestionValidations: React.FC<Props> = ({isDraft, onRemove, questionType, ruleIndex}) => {
     const {questionIndex} = use(QuestionContext);
     const {control} = useFormContext<QuestionsUpdate>();
     const rules = useWatch({name: `questions.${questionIndex}.validations`});
@@ -72,6 +73,7 @@ const QuestionValidations: React.FC<Props> = ({onRemove, questionType, ruleIndex
                 <div className="@md/rule:w-[calc(50%-20px)] w-full">
                     <FormField
                         control={control}
+                        disabled={!isDraft}
                         fieldType="select"
                         name={`questions.${questionIndex}.validations.${ruleIndex}.type`}
                         options={getApplicableValidationTypes(rule.id).map(type => ({
@@ -88,7 +90,7 @@ const QuestionValidations: React.FC<Props> = ({onRemove, questionType, ruleIndex
                         render={({field}) => (
                             <Input
                                 className="bg-white"
-                                disabled={!config?.requiresValue}
+                                disabled={!isDraft || !config?.requiresValue}
                                 placeholder={getPlaceholder(rule.type as ValidationRuleType)}
                                 type={config?.valueType === 'number' ? 'number' : 'text'}
                                 {...field}
@@ -97,14 +99,16 @@ const QuestionValidations: React.FC<Props> = ({onRemove, questionType, ruleIndex
                         )}
                     />
                 </div>
-                <Button
-                    className="w-[40px] !px-4"
-                    onClick={onRemove}
-                    size="sm"
-                    variant="destructiveGhost"
-                >
-                    <TrashIcon />
-                </Button>
+                {isDraft && (
+                    <Button
+                        className="w-[40px] !px-4"
+                        onClick={onRemove}
+                        size="sm"
+                        variant="destructiveGhost"
+                    >
+                        <TrashIcon />
+                    </Button>
+                )}
             </div>
         </div>
     );
