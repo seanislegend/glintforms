@@ -6,12 +6,12 @@ import ToggleVisibility from '@glint/ui/toggle-visibility';
 import {PlusIcon} from '@phosphor-icons/react/dist/ssr/Plus';
 import {use, useMemo} from 'react';
 import {useFieldArray, useWatch} from 'react-hook-form';
-import {isDraftSurvey} from '@/lib/disabled-rules';
 import {validationRuleConfigs} from '@/lib/schemas/questions';
+import {isDraftSurvey} from '@/lib/surveys/disabled-rules';
 import {QuestionContext} from './provider';
 import useQuestionEditor from './use-question-editor';
-import {QuestionEditorContext} from './wrapper';
 import ValidationsRule from './validations-rule';
+import {QuestionEditorContext} from './wrapper';
 
 const QuestionValidationRules: React.FC = () => {
     const {questionIndex} = use(QuestionContext);

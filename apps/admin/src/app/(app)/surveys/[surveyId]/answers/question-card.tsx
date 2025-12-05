@@ -8,7 +8,7 @@ import {useQueryState} from 'nuqs';
 import QuestionTypeBadge from '@/components/badges/question-type';
 import OptionDistributionChart from '@/components/responses/option-distribution-chart';
 import ResponsesThemeList from '@/components/responses/theme-list';
-import {isCodedQuestion, isFreeTextQuestion} from '@/lib/answer-formatter';
+import {isCodedQuestion, isFreeTextQuestion} from '@/lib/surveys/answer-formatter';
 
 interface Props {
     question: QuestionWithStats;

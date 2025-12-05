@@ -1,7 +1,7 @@
 import {openai} from '@ai-sdk/openai';
 import {generateObject} from 'ai';
-import {buildQuestionGenerationPrompt} from './prompts/question-generation';
-import {generatedQuestionSchema} from './schemas/questions';
+import {buildQuestionGenerationPrompt} from '../prompts/question-generation';
+import {generatedQuestionSchema} from '../schemas/questions';
 import {transformGeneratedQuestionForForm} from './transform-generated-question-for-form';
 
 interface GenerateQuestionsProps {

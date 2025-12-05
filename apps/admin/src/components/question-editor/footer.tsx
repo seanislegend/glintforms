@@ -9,9 +9,9 @@ import {useFormContext} from 'react-hook-form';
 import {QuestionEditorContext} from '@/components/question-editor/wrapper';
 import SortItemsDialog, {type SortItem} from '@/components/sort-items';
 import useHighlight from '@/hooks/use-highlight';
-import {getReorderButtonDisabledReason, isDraftSurvey} from '@/lib/disabled-rules';
 import type {Question} from '@/lib/schemas/questions';
 import {questionCountAtom} from '@/lib/store';
+import {getReorderButtonDisabledReason, isDraftSurvey} from '@/lib/surveys/disabled-rules';
 import ErrorStatus from './error-status';
 
 interface Props {

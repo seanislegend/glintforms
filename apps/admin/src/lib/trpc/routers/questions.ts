@@ -1,8 +1,8 @@
 import {activities, questions, surveys} from '@glint/database';
 import {and, asc, eq, inArray} from 'drizzle-orm';
 import {z} from 'zod';
-import {generateQuestions} from '@/lib/question-generation-service';
 import {questionSchema, questionsUpdateSchema} from '@/lib/schemas/questions';
+import {generateQuestions} from '@/lib/surveys/question-generation-service';
 import {hasPublishedStructureChanges} from '@/lib/surveys/validate-published-structure';
 import {protectedProcedure} from '../init';
 

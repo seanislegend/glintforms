@@ -9,12 +9,12 @@ import {CheckIcon} from '@phosphor-icons/react/dist/ssr/Check';
 import {XIcon} from '@phosphor-icons/react/dist/ssr/X';
 import {use, useMemo} from 'react';
 import {Controller, useFormContext, useWatch} from 'react-hook-form';
-import {isDraftSurvey} from '@/lib/disabled-rules';
 import type {QuestionsUpdate} from '@/lib/schemas/questions';
+import {isDraftSurvey} from '@/lib/surveys/disabled-rules';
 import {QuestionContext} from './provider';
 import useQuestionEditor from './use-question-editor';
-import {QuestionEditorContext} from './wrapper';
 import ValidationRules from './validations';
+import {QuestionEditorContext} from './wrapper';
 
 const Settings: React.FC = () => {
     const {questionIndex} = use(QuestionContext);

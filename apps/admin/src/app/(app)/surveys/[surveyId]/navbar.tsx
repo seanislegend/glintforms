@@ -11,7 +11,7 @@ import {useSuspenseQuery} from '@tanstack/react-query';
 import Link from 'next/link';
 import {redirect, usePathname} from 'next/navigation';
 import SurveyStatusBadge from '@/components/badges/survey-status';
-import {surveyHasLaunched, surveyIsTesting} from '@/lib/survey';
+import {surveyHasLaunched, surveyIsTesting} from '@/lib/surveys/status';
 import {useTRPC} from '@/lib/trpc/react';
 
 interface Props {

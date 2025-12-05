@@ -4,7 +4,7 @@ import Spacer from '@glint/ui/spacer';
 import Spinner from '@glint/ui/spinner';
 import {useSuspenseQuery} from '@tanstack/react-query';
 import {Suspense} from 'react';
-import {surveyHasLaunched, surveyIsTesting} from '@/lib/survey';
+import {surveyHasLaunched, surveyIsTesting} from '@/lib/surveys/status';
 import {useTRPC} from '@/lib/trpc/react';
 import SurveyOverviewHeader from './header';
 import SurveyOverviewOutstandingActions from './outstanding-actions';

@@ -9,7 +9,7 @@ import {usePaginationSearchParams} from '@/components/data-table/parsers';
 import CoOccurrenceMatrix from '@/components/responses/co-occurrence-matrix';
 import OptionDistributionChart from '@/components/responses/option-distribution-chart';
 import ResponsesThemeOverview from '@/components/responses/theme-overview';
-import {isCodedQuestion, isFreeTextQuestion} from '@/lib/answer-formatter';
+import {isCodedQuestion, isFreeTextQuestion} from '@/lib/surveys/answer-formatter';
 import {useTRPC} from '@/lib/trpc/react';
 import {createAnswerColumns} from './columns';
 import type {QuestionAnswersQuickLookProps} from './types';

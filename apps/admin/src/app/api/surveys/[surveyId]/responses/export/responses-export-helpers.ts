@@ -3,7 +3,7 @@ import {
     fetchAnswers,
     fetchResponses
 } from '@/app/api/surveys/[surveyId]/responses/export/export-helpers';
-import {formatCodedAnswer, isCodedQuestion} from '@/lib/answer-formatter';
+import {formatCodedAnswer, isCodedQuestion} from '@/lib/surveys/answer-formatter';
 import {ANSWER_EXPORT_FIELDS, RESPONSE_EXPORT_FIELDS} from '@/lib/schemas/constants';
 import {isAuthenticityPass} from '@/utils/authenticity';
 

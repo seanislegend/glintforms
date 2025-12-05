@@ -10,8 +10,8 @@ import {
 import {and, asc, desc, eq, inArray, sql} from 'drizzle-orm';
 import * as R from 'remeda';
 import {z} from 'zod';
-import {isCodedQuestion} from '@/lib/answer-formatter';
 import type {QuestionOption} from '@/lib/schemas/questions';
+import {isCodedQuestion} from '@/lib/surveys/answer-formatter';
 import {protectedProcedure} from '../init';
 
 type SelectionCountMap = Record<string, Record<string, number>>;

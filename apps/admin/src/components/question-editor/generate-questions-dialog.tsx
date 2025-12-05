@@ -21,10 +21,10 @@ import {FormProvider, useForm, useFormContext} from 'react-hook-form';
 import {toast} from 'sonner';
 import {QuestionEditorContext} from '@/components/question-editor/wrapper';
 import useHighlight from '@/hooks/use-highlight';
-import {isDraftSurvey} from '@/lib/disabled-rules';
 import {MAX_QUESTIONS} from '@/lib/schemas/constants';
 import {type GenerateQuestionsForm, generateQuestionsSchema} from '@/lib/schemas/questions';
 import {questionCountAtom} from '@/lib/store';
+import {isDraftSurvey} from '@/lib/surveys/disabled-rules';
 import {useTRPC} from '@/lib/trpc/react';
 
 interface Props {

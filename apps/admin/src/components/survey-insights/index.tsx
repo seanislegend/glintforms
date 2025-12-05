@@ -5,7 +5,7 @@ import SectionHeader from '@glint/ui/section-header';
 import {useQuery, useSuspenseQuery} from '@tanstack/react-query';
 import {formatRelative} from 'date-fns/formatRelative';
 import {SurveyResponsesStatsCards} from '@/components/survey-overview/stats';
-import {surveyIsActive} from '@/lib/survey';
+import {surveyIsActive} from '@/lib/surveys/status';
 import {useTRPC} from '@/lib/trpc/react';
 import GenderDistributionChart from './gender-distribution-chart';
 import GeolocationDistributionChart from './geolocation-distribution-chart';
