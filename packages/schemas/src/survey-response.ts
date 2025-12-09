@@ -155,7 +155,16 @@ const buildBaseValidation = (q: Question): z.ZodTypeAny => {
 };
 
 export type ResponseSubmissionBody = {
-    answers: Record<string, {endedAt: Date; startedAt: Date; value: unknown; wasSkipped: boolean}>;
+    answers: Record<
+        string,
+        {
+            endedAt: Date;
+            metadata?: {questionVersion?: number};
+            startedAt: Date;
+            value: unknown;
+            wasSkipped: boolean;
+        }
+    >;
     metadata?: {ip?: string; ua?: string};
     respondent?: {
         email: string;
@@ -184,12 +193,15 @@ export const createResponseSchema = (surveyQuestions: (typeof questions.$inferSe
                 .string()
                 .datetime({message: 'endedAt must be a valid ISO date string'})
                 .transform(val => new Date(val)),
+            metadata: z
+                .object({questionVersion: z.number().int().positive().optional()})
+                .optional(),
             startedAt: z
                 .string()
                 .datetime({message: 'startedAt must be a valid ISO date string'})
                 .transform(val => new Date(val)),
-            wasSkipped: z.boolean(),
-            value: withRules
+            value: withRules,
+            wasSkipped: z.boolean()
         });
 
         answerValidations[q.id] = q.required

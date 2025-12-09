@@ -64,6 +64,13 @@
       "when": 1764546102817,
       "tag": "0008_married_firestar",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1765275907073,
+      "tag": "0009_superb_weapon_omega",
+      "breakpoints": true
     }
   ]
 }

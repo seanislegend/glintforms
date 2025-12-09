@@ -132,6 +132,7 @@ export const processResponseSubmissionTask = schemaTask({
                     await tx.insert(answers).values({
                         ...answer,
                         endedAt: answer.endedAt ? new Date(answer.endedAt) : null,
+                        metadata: answer.metadata ?? null,
                         responseId: response.id,
                         startedAt: answer.startedAt ? new Date(answer.startedAt) : new Date()
                     });

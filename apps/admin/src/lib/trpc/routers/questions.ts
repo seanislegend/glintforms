@@ -46,21 +46,44 @@ export const questionsRouter = {
         const isDraft = survey.status === 'draft';
 
         // get existing questions for validation and updates (needed for non-draft surveys)
-        let existingQuestionsMap: Map<string, {options: unknown; type: string}> | undefined;
+        let existingQuestionsMap:
+            | Map<
+                  string,
+                  {
+                      description: string | null;
+                      metadata: unknown;
+                      options: unknown;
+                      title: string;
+                      type: string;
+                  }
+              >
+            | undefined;
 
         if (!isDraft) {
             // get existing questions to compare
             const existingQuestions = await ctx.db
                 .select({
+                    description: questions.description,
                     id: questions.id,
+                    metadata: questions.metadata,
                     options: questions.options,
+                    title: questions.title,
                     type: questions.type
                 })
                 .from(questions)
                 .where(eq(questions.surveyId, surveyId));
 
             existingQuestionsMap = new Map(
-                existingQuestions.map(q => [q.id, {options: q.options, type: q.type}])
+                existingQuestions.map(q => [
+                    q.id,
+                    {
+                        description: q.description,
+                        metadata: q.metadata,
+                        options: q.options,
+                        title: q.title,
+                        type: q.type
+                    }
+                ])
             );
         }
 
@@ -128,15 +151,96 @@ export const questionsRouter = {
                         const updatedOptions = existingOptions.map(
                             (existingOpt: any, idx: number) => {
                                 const newOpt = newOptions[idx];
-                                // only update value if provided, otherwise keep existing
                                 return newOpt ? {...existingOpt, value: newOpt.value} : existingOpt;
                             }
                         );
+
+                        const hasDescriptionChange = existing.description !== q.description;
+                        const hasOptionValueChanges = updatedOptions.some(
+                            (updatedOpt: any, idx: number) => {
+                                const currentOpt = existingOptions[idx] as any;
+                                return currentOpt?.value !== updatedOpt?.value;
+                            }
+                        );
+                        const hasTitleChange = existing.title !== q.title;
+                        const hasChanges =
+                            hasDescriptionChange || hasOptionValueChanges || hasTitleChange;
+
+                        const existingMetadata =
+                            (existing.metadata as Record<string, unknown>) ?? {};
+                        const currentVersion =
+                            typeof existingMetadata.version === 'number' &&
+                            existingMetadata.version > 0
+                                ? existingMetadata.version
+                                : 1;
+                        const nextVersion = hasChanges ? currentVersion + 1 : currentVersion;
+                        const existingVersions =
+                            (existingMetadata.versions as {
+                                description?: QuestionMetadataVersions;
+                                options?: {
+                                    [optionId: string]: QuestionMetadataVersions;
+                                };
+                                title?: QuestionMetadataVersions;
+                            }) ?? {};
+                        const nextVersions = {...existingVersions};
+                        const now = new Date();
+                        const versionKey = String(nextVersion);
+
+                        if (hasTitleChange) {
+                            const titleVersions = existingVersions.title ?? {};
+                            nextVersions.title = {
+                                ...titleVersions,
+                                [versionKey]: {
+                                    updatedAt: now,
+                                    value: q.title
+                                }
+                            };
+                        }
+
+                        if (hasDescriptionChange) {
+                            const descriptionVersions = existingVersions.description ?? {};
+                            nextVersions.description = {
+                                ...descriptionVersions,
+                                [versionKey]: {
+                                    updatedAt: now,
+                                    value: q.description ?? ''
+                                }
+                            };
+                        }
+
+                        if (hasOptionValueChanges) {
+                            const optionVersions = existingVersions.options ?? {};
+                            updatedOptions.forEach((updatedOpt: any, idx: number) => {
+                                const currentOpt = existingOptions[idx] as any;
+                                if (currentOpt?.value !== updatedOpt?.value) {
+                                    const existingOptionVersions =
+                                        optionVersions[updatedOpt.id] ?? {};
+                                    optionVersions[updatedOpt.id] = {
+                                        ...existingOptionVersions,
+                                        [versionKey]: {
+                                            updatedAt: now,
+                                            value: updatedOpt.value
+                                        }
+                                    };
+                                }
+                            });
+                            nextVersions.options = optionVersions;
+                        }
+
+                        const nextMetadata = {
+                            ...existingMetadata,
+                            optionValues: Object.fromEntries(
+                                updatedOptions.map((opt: any) => [opt.id, opt.value])
+                            ),
+                            version: nextVersion,
+                            versions: nextVersions
+                        };
 
                         await tx
                             .update(questions)
                             .set({
                                 description: q.description,
+                                metadata: nextMetadata,
                                 options: updatedOptions,
                                 title: q.title
                                 // note: not updating allowOther, required, randomiseOptionsOrder, type, validations

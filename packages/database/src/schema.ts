@@ -206,6 +206,7 @@ export const answers = pgTable(
         createdAt: timestamp('created_at').defaultNow().notNull(),
         endedAt: timestamp('ended_at'),
         id: uuid('id').primaryKey().defaultRandom(),
+        metadata: jsonb('metadata'),
         questionId: uuid('question_id')
             .references(() => questions.id, {onDelete: 'cascade'})
             .notNull(),
