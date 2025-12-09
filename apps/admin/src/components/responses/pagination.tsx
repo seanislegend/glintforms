@@ -1,7 +1,7 @@
 'use client';
 
 import Button from '@glint/ui/button';
-import type {PaginationProps} from './types';
+import type {PaginationProps} from '../../types/question-and-answers';
 
 const Pagination: React.FC<PaginationProps> = ({currentPage, onPageChange, pageSize, total}) => {
     const totalPages = Math.max(1, Math.ceil(total / pageSize));

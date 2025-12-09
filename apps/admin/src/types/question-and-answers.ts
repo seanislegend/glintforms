@@ -15,6 +15,7 @@ export interface Answer {
 }
 
 export interface Question {
+    metadata?: QuestionMetadata;
     order: number;
     options: unknown;
     title: string;
@@ -40,7 +41,7 @@ export interface QuestionAnswersContentProps {
 }
 
 export interface AnswerContentProps {
-    answer: Answer;
+    answer: ResponseAnswer;
     question: Question;
     surveyId: string;
 }

@@ -53,6 +53,24 @@ router.post(
 
         const validatedBody = validationResult.data;
         const questionIds = allQuestions.map(q => q.id);
+        const questionVersions = new Map(
+            allQuestions.map(question => {
+                const version = (question.metadata as {version?: number} | null)?.version;
+                return [question.id, typeof version === 'number' && version > 0 ? version : 1];
+            })
+        );
+        const answersWithVersion = Object.fromEntries(
+            Object.entries(validatedBody.answers).map(([questionId, answer]) => {
+                const questionVersion = questionVersions.get(questionId) ?? 1;
+                return [
+                    questionId,
+                    {
+                        ...answer,
+                        metadata: {...(answer.metadata ?? {}), questionVersion}
+                    }
+                ];
+            })
+        );
 
         for (const [questionId] of Object.entries(validatedBody.answers)) {
             if (!questionIds.includes(questionId)) {
@@ -66,7 +84,11 @@ router.post(
             c.req.header('x-real-ip') ||
             '';
         const ua = c.req.header('user-agent') || '';
-        const submissionBody = {...validatedBody, metadata: {ip, ua}};
+        const submissionBody = {
+            answers: answersWithVersion,
+            metadata: {ip, ua},
+            respondent: validatedBody.respondent
+        };
         const [submission] = await db
             .insert(responseSubmissions)
             .values({

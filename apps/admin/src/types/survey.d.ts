@@ -28,3 +28,24 @@ interface SurveyRecentActivity {
     id: string;
     text: string;
 }
+
+interface QuestionMetadataVersions {
+    [versionNumber: string]: {
+        updatedAt: Date;
+        value: string;
+    };
+}
+
+interface QuestionMetadata {
+    optionValues?: {
+        [optionId: string]: string;
+    };
+    versions?: {
+        description?: QuestionMetadataVersions;
+        options?: {
+            [optionId: string]: QuestionMetadataVersions;
+        };
+        title?: QuestionMetadataVersions;
+    };
+    version?: number;
+}

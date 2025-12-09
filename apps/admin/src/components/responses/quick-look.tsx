@@ -11,8 +11,8 @@ import OptionDistributionChart from '@/components/responses/option-distribution-
 import ResponsesThemeOverview from '@/components/responses/theme-overview';
 import {isCodedQuestion, isFreeTextQuestion} from '@/lib/surveys/answer-formatter';
 import {useTRPC} from '@/lib/trpc/react';
+import type {QuestionAnswersQuickLookProps} from '../../types/question-and-answers';
 import {createAnswerColumns} from './columns';
-import type {QuestionAnswersQuickLookProps} from './types';
 
 const MAX_ANSWERS = 100;
 
@@ -30,7 +30,7 @@ const QuestionAnswersQuickLook: React.FC<QuestionAnswersQuickLookProps> = ({
             questionId
         })
     );
-
+    console.log(data);
     if (!data) {
         return <EmptyPanel text="We could not find this question." title="Question not found" />;
     }

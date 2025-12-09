@@ -217,7 +217,8 @@ export const responsesRouter = {
                 .select({
                     endedAt: answers.endedAt,
                     id: answers.id,
-                    questionid: answers.questionId,
+                    metadata: answers.metadata,
+                    questionId: answers.questionId,
                     startedAt: answers.startedAt,
                     value: answers.value,
                     wasSkipped: answers.wasSkipped
@@ -228,7 +229,7 @@ export const responsesRouter = {
                 .orderBy(questions.order);
 
             return {
-                answers: answersData,
+                answers: answersData as ResponseAnswer[],
                 questions: questionsData,
                 response: responseWithRespondent
             };

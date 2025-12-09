@@ -39,6 +39,7 @@ export const answersRouter = {
             const [question] = await ctx.db
                 .select({
                     description: questions.description,
+                    metadata: questions.metadata,
                     id: questions.id,
                     options: questions.options,
                     order: questions.order,
@@ -59,6 +60,7 @@ export const answersRouter = {
                 .select({
                     endedAt: answers.endedAt,
                     id: answers.id,
+                    metadata: answers.metadata,
                     respondentEmail: respondents.email,
                     respondentId: respondents.id,
                     respondentName: respondents.name,
@@ -107,16 +109,18 @@ export const answersRouter = {
                 answers: answersList.map(a => ({
                     endedAt: a.endedAt,
                     id: a.id,
-                    theme: a.theme,
+                    metadata: a.metadata as AnswerMetadata | undefined,
                     respondentId: a.respondentId,
                     responseId: a.responseId,
                     startedAt: a.startedAt,
-                    value: a.value,
+                    theme: a.theme,
+                    value: a.value as AnswerValueType,
                     wasSkipped: a.wasSkipped
                 })),
                 question: {
                     description: question.description,
                     id: question.id,
+                    metadata: question.metadata as QuestionMetadata,
                     optionCounts,
                     options: question.options,
                     order: question.order,

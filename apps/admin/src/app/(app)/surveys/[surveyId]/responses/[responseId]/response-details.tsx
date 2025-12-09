@@ -11,7 +11,7 @@ import {toast} from 'sonner';
 import QuestionTypeBadge from '@/components/badges/question-type';
 import ResponseStatusBadge from '@/components/badges/response-status';
 import AuthenticityScoreOverview from '@/components/response-authenticity/overview';
-import ResponseAnswer from '@/components/responses/answer';
+import ResponseAnswerValue from '@/components/responses/answer-value';
 import {useTRPC} from '@/lib/trpc/react';
 import {humanise} from '@/utils/humanise';
 import {formatDurationToClosestSecond} from '@/utils/time';
@@ -119,7 +119,8 @@ const ResponseDetails: React.FC<React.PropsWithChildren<Props>> = ({responseId, 
                 <CardContent>
                     <div className="space-y-6">
                         {answers.map(answer => {
-                            const question = questions.find(q => q.id === answer.questionid);
+                            const question = questions.find(q => q.id === answer.questionId);
+                            console.log({answers, questions});
                             if (!question) return null;
 
                             return (
@@ -162,9 +163,9 @@ const ResponseDetails: React.FC<React.PropsWithChildren<Props>> = ({responseId, 
                                     </div>
                                     {!answer.wasSkipped && (
                                         <div className="ml-6 text-sm rounded-md bg-muted p-3">
-                                            <ResponseAnswer
+                                            <ResponseAnswerValue
+                                                answer={answer}
                                                 question={question}
-                                                value={answer.value}
                                             />
                                         </div>
                                     )}

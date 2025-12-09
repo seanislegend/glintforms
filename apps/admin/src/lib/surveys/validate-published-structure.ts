@@ -1,7 +1,10 @@
 import type {Question} from '@/lib/schemas/questions';
 
 interface HasPublishedStructureChangesProps {
-    existingQuestionsMap: Map<string, {options: unknown; type: string}>;
+    existingQuestionsMap: Map<
+        string,
+        {description: string | null; metadata: unknown; options: unknown; title: string; type: string}
+    >;
     deletedQuestionIds: Record<string, boolean>;
     questions: Question[];
 }
