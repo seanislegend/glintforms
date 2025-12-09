@@ -2,8 +2,8 @@ import {activities, db, questions, surveys, user} from '@glint/database';
 import {desc, eq} from 'drizzle-orm';
 import {headers} from 'next/headers';
 import {type NextRequest, NextResponse} from 'next/server';
-import {convertToQuestionsWithAi} from '@/lib/ai-question-converter';
 import {auth} from '@/lib/auth/server';
+import {convertToQuestionsWithAi} from '@/lib/surveys/ai-question-converter';
 import {parseImportFile} from '@/utils/parse-import-file';
 
 export const POST = async (
