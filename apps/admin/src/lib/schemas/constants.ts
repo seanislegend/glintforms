@@ -95,7 +95,8 @@ export const CONTENT_TYPES = {
 export const EXPORT_FORMATS = {
     csv: 'CSV',
     json: 'JSON',
-    excel: 'Excel'
+    excel: 'Excel',
+    xlsform: 'XLSForm'
 } as const;
 
 export const QUESTION_EXPORT_FIELDS = [
