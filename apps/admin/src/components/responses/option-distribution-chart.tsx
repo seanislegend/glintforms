@@ -1,6 +1,7 @@
 'use client';
 
 import {type ChartConfig, ChartContainer, ChartTooltip} from '@glint/ui/chart';
+import EmptyPanel from '@glint/ui/empty-panel';
 import clsx from 'clsx';
 import {Bar, BarChart, Cell, LabelList, XAxis, YAxis} from 'recharts';
 
@@ -38,29 +39,40 @@ const OptionDistributionChart: React.FC<Props> = ({
     showCount = true
 }) => {
     const chartData = data.filter(option => !!option.label);
+    const maxCount = Math.max(...chartData.map(option => option.count));
+    const chartDataWithMax = chartData.map(option => ({
+        ...option,
+        max: maxCount
+    }));
+    const hasNoAnswers = data.every(o => o.count === 0);
 
-    if (chartData.length === 0) {
-        return <div className="text-sm text-muted-foreground">{emptyMessage}</div>;
+    if (chartData.length === 0 || hasNoAnswers) {
+        return (
+            <span className="min-h-full flex">
+                <EmptyPanel className="w-full" text={emptyMessage} />
+            </span>
+        );
     }
+
+    const barSize = 30;
 
     return (
         <ChartContainer
-            className={clsx(['aspect-auto h-[180px] w-full', className])}
+            className={clsx(['aspect-auto h-[200px] w-full', className])}
             config={chartConfig}
         >
             <BarChart
-                accessibilityLayer
-                barCategoryGap={2}
-                data={chartData}
+                barGap={-barSize}
+                data={chartDataWithMax}
                 layout="vertical"
                 margin={{right: 16}}
             >
                 <YAxis
+                    axisLine={false}
                     dataKey="label"
+                    hide
                     tickLine={false}
                     tickMargin={10}
-                    axisLine={false}
-                    hide
                     type="category"
                 />
                 <XAxis
@@ -74,7 +86,7 @@ const OptionDistributionChart: React.FC<Props> = ({
                     cursor={false}
                     content={({active, payload}) => {
                         if (!active || !payload?.length) return null;
-                        const item = payload[0];
+                        const item = payload.filter(p => p.dataKey === 'count')[0];
                         return (
                             <div className="border-border/50 bg-background grid min-w-[8rem] items-start gap-1.5 rounded-lg border px-2.5 py-1.5 text-xs shadow-xl">
                                 <div className="font-medium">{item.payload.label}</div>
@@ -83,8 +95,14 @@ const OptionDistributionChart: React.FC<Props> = ({
                         );
                     }}
                 />
-                <Bar dataKey="count" fill={chartConfig.selections.color} radius={4}>
-                    {chartData.map((entry, index) => (
+                <Bar dataKey="max" fill="#fff" radius={4} barSize={barSize}></Bar>
+                <Bar
+                    dataKey="count"
+                    fill={chartConfig.selections.color}
+                    radius={4}
+                    barSize={barSize}
+                >
+                    {chartDataWithMax.map((entry, index) => (
                         <Cell key={entry.label} fill={colorPalette[index % colorPalette.length]} />
                     ))}
                     <LabelList

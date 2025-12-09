@@ -140,8 +140,7 @@ export const answersRouter = {
                 options: questions.options,
                 order: questions.order,
                 title: questions.title,
-                type: questions.type,
-                uniqueAnswerCount: sql<number>`count(distinct ${answers.value}::text)`
+                type: questions.type
             })
             .from(questions)
             .innerJoin(

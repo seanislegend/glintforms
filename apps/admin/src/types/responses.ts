@@ -45,5 +45,4 @@ interface QuestionWithStats {
     themes?: QuestionTheme[];
     title: string;
     type: string;
-    uniqueAnswerCount: number;
 }
