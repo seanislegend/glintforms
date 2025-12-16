@@ -2,12 +2,15 @@
 
 import {FormField} from '@glint/form/fields';
 import {handleFormError} from '@glint/form/utils';
+import {Alert, AlertDescription, AlertTitle} from '@glint/ui/alert';
 import Button from '@glint/ui/button';
 import {zodResolver} from '@hookform/resolvers/zod';
+import {InfoIcon} from '@phosphor-icons/react/dist/ssr/Info';
 import {useMutation, useQueryClient} from '@tanstack/react-query';
 import {FormProvider, type SubmitHandler, useForm} from 'react-hook-form';
 import {toast} from 'sonner';
 import {type SurveyUpdate, surveyUpdateSchema} from '@/lib/schemas/surveys';
+import {surveyCanBeEdited} from '@/lib/surveys/status';
 import {useTRPC} from '@/lib/trpc/react';
 
 interface Props {
@@ -17,6 +20,7 @@ interface Props {
 const DetailsStep: React.FC<Props> = ({survey}) => {
     const trpc = useTRPC();
     const queryClient = useQueryClient();
+    const canEdit = surveyCanBeEdited(survey.status);
     const updateSurvey = useMutation(
         trpc.surveys.update.mutationOptions({
             onSuccess: async newSurvey => {
@@ -42,7 +46,8 @@ const DetailsStep: React.FC<Props> = ({survey}) => {
             description: survey.description || '',
             slug: survey.slug || '',
             title: survey.title || ''
-        }
+        },
+        disabled: !canEdit
     });
 
     const handleFormSubmit: SubmitHandler<SurveyUpdate> = async data => {
@@ -51,6 +56,15 @@ const DetailsStep: React.FC<Props> = ({survey}) => {
 
     return (
         <FormProvider {...methods}>
+            {!canEdit && (
+                <Alert className="mb-6" variant="warning">
+                    <InfoIcon />
+                    <AlertTitle>Survey is locked</AlertTitle>
+                    <AlertDescription>
+                        Survey details cannot be changed when the survey is complete or archived.
+                    </AlertDescription>
+                </Alert>
+            )}
             <form onSubmit={methods.handleSubmit(handleFormSubmit, handleFormError)}>
                 <div className="grid gap-4">
                     <FormField
@@ -72,11 +86,13 @@ const DetailsStep: React.FC<Props> = ({survey}) => {
                         name="description"
                     />
                 </div>
-                <div className="flex justify-end mt-6">
-                    <Button pending={updateSurvey.status === 'pending'} type="submit">
-                        Save Changes
-                    </Button>
-                </div>
+                {canEdit && (
+                    <div className="flex justify-end mt-6">
+                        <Button pending={updateSurvey.status === 'pending'} type="submit">
+                            Save Changes
+                        </Button>
+                    </div>
+                )}
             </form>
         </FormProvider>
     );

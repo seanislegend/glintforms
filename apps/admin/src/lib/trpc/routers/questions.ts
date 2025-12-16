@@ -4,7 +4,7 @@ import {z} from 'zod';
 import {questionSchema, questionsUpdateSchema} from '@/lib/schemas/questions';
 import {generateQuestions} from '@/lib/surveys/question-generation-service';
 import {hasPublishedStructureChanges} from '@/lib/surveys/validate-published-structure';
-import {protectedProcedure} from '../init';
+import {protectedProcedure, surveyEditableProcedure} from '../init';
 
 export const questionsRouter = {
     getAll: protectedProcedure.input(z.string()).query(async ({input, ctx}) => {
@@ -28,13 +28,10 @@ export const questionsRouter = {
 
         return data;
     }),
-    update: protectedProcedure.input(questionsUpdateSchema).mutation(async ({input, ctx}) => {
+    update: surveyEditableProcedure.input(questionsUpdateSchema).mutation(async ({input, ctx}) => {
         const surveyId = input.surveyId;
-        if (!surveyId) {
-            return {success: false, error: 'Survey id is required'};
-        }
 
-        // verify survey belongs to tenant
+        // middleware already verified survey exists, belongs to tenant, and can be edited
         const [survey] = await ctx.db
             .select()
             .from(surveys)

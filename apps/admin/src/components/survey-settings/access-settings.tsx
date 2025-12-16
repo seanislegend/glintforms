@@ -2,9 +2,11 @@
 
 import {FormField} from '@glint/form/fields';
 import {handleFormError} from '@glint/form/utils';
+import {Alert, AlertDescription, AlertTitle} from '@glint/ui/alert';
 import Button from '@glint/ui/button';
 import {BasicCard} from '@glint/ui/card';
 import {zodResolver} from '@hookform/resolvers/zod';
+import {InfoIcon} from '@phosphor-icons/react/dist/ssr/Info';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import {FormProvider, type SubmitHandler, useForm} from 'react-hook-form';
 import {toast} from 'sonner';
@@ -13,6 +15,7 @@ import SurveySecuritySettingsCloseOnResponseLimitField from '@/components/survey
 import SurveySecuritySettingsPasswordField from '@/components/survey-settings/password-field';
 import {MAX_RESPONSE_HARD_LIMIT} from '@/lib/schemas/constants';
 import {type SurveySettings, surveySettingsSchema} from '@/lib/schemas/surveys';
+import {surveyCanBeEdited} from '@/lib/surveys/status';
 import {useTRPC} from '@/lib/trpc/react';
 import {formatNumber} from '@/utils/numbers';
 
@@ -28,6 +31,7 @@ interface FormProps extends Props {
 const SurveySecuritySettingsForm: React.FC<FormProps> = ({settings, survey}) => {
     const trpc = useTRPC();
     const queryClient = useQueryClient();
+    const canEdit = surveyCanBeEdited(survey.status);
     const updateSettings = useMutation(
         trpc.surveys.updateSettings.mutationOptions({
             onSuccess: async () => {
@@ -43,7 +47,8 @@ const SurveySecuritySettingsForm: React.FC<FormProps> = ({settings, survey}) => 
     );
     const methods = useForm<FormData>({
         resolver: zodResolver(surveySettingsSchema),
-        defaultValues: settings ?? {}
+        defaultValues: settings ?? {},
+        disabled: !canEdit
     });
 
     const handleFormSubmit: SubmitHandler<FormData> = async data => {
@@ -54,6 +59,15 @@ const SurveySecuritySettingsForm: React.FC<FormProps> = ({settings, survey}) => 
 
     return (
         <FormProvider {...methods}>
+            {!canEdit && (
+                <Alert className="mb-6" variant="warning">
+                    <InfoIcon />
+                    <AlertTitle>Survey is locked</AlertTitle>
+                    <AlertDescription>
+                        Survey settings cannot be changed when the survey is complete or archived.
+                    </AlertDescription>
+                </Alert>
+            )}
             <form onSubmit={methods.handleSubmit(handleFormSubmit, handleFormError)}>
                 <div className="grid gap-4 xl:grid-cols-2">
                     <BasicCard title="Access Controls">
@@ -88,11 +102,13 @@ const SurveySecuritySettingsForm: React.FC<FormProps> = ({settings, survey}) => 
                         </div>
                     </BasicCard>
                 </div>
-                <div className="flex justify-end mt-6">
-                    <Button pending={updateSettings.status === 'pending'} type="submit">
-                        Save settings
-                    </Button>
-                </div>
+                {canEdit && (
+                    <div className="flex justify-end mt-6">
+                        <Button pending={updateSettings.status === 'pending'} type="submit">
+                            Save settings
+                        </Button>
+                    </div>
+                )}
             </form>
         </FormProvider>
     );

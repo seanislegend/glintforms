@@ -12,6 +12,7 @@ import useHighlight from '@/hooks/use-highlight';
 import type {Question} from '@/lib/schemas/questions';
 import {questionCountAtom} from '@/lib/store';
 import {getReorderButtonDisabledReason} from '@/lib/surveys/disabled-rules';
+import {surveyCanBeEdited} from '@/lib/surveys/status';
 import ErrorStatus from './error-status';
 
 interface Props {
@@ -25,6 +26,7 @@ const QuestionEditorFooter: React.FC<Props> = ({isDraft, isPending, onAdd}) => {
     const {getValues, setValue} = useFormContext();
     const questionCount = useAtomValue(questionCountAtom);
     const {highlight} = useHighlight();
+    const canEdit = surveyCanBeEdited(survey?.status);
 
     const handleReorderQuestions = (questions: SortItem[]) => {
         const updatedQuestions = questions.map((question, index) => ({
@@ -62,10 +64,12 @@ const QuestionEditorFooter: React.FC<Props> = ({isDraft, isPending, onAdd}) => {
                 )}
                 <ErrorStatus />
             </div>
-            <Button pending={isPending} type="submit">
-                <FloppyDiskIcon />
-                Save questions
-            </Button>
+            {canEdit && (
+                <Button pending={isPending} type="submit">
+                    <FloppyDiskIcon />
+                    Save questions
+                </Button>
+            )}
         </div>
     );
 };

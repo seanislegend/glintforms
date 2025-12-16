@@ -21,3 +21,7 @@ export const surveyIsComplete = (status: SurveyStatus) => {
 export const surveyIsArchived = (status: SurveyStatus) => {
     return status === 'archived';
 };
+
+export const surveyCanBeEdited = (status: SurveyStatus | undefined) => {
+    return status !== undefined && status !== 'complete' && status !== 'archived';
+};

@@ -17,7 +17,7 @@ import {toast} from 'sonner';
 import type {Question, QuestionsUpdate} from '@/lib/schemas/questions';
 import {questionCountAtom} from '@/lib/store';
 import {isDraftSurvey} from '@/lib/surveys/disabled-rules';
-import {surveyHasLaunched} from '@/lib/surveys/status';
+import {surveyCanBeEdited, surveyHasLaunched} from '@/lib/surveys/status';
 import {useTRPC} from '@/lib/trpc/react';
 import QuestionCard from './card';
 import QuestionCardSkeleton from './card-skeleton';
@@ -37,6 +37,7 @@ const QuestionEditorForm: React.FC = () => {
     const {isPending, survey} = use(QuestionEditorContext);
     const setQuestionCount = useSetAtom(questionCountAtom);
     const isDraft = isDraftSurvey(survey?.status);
+    const canEdit = surveyCanBeEdited(survey?.status);
 
     const trpc = useTRPC();
     const queryClient = useQueryClient();
@@ -99,7 +100,19 @@ const QuestionEditorForm: React.FC = () => {
                 title="Question editor"
             />
             <Spacer />
-            {survey?.status && surveyHasLaunched(survey.status) && (
+            {survey?.status && !canEdit && (
+                <>
+                    <Alert variant="warning">
+                        <InfoIcon />
+                        <AlertTitle>Survey is locked</AlertTitle>
+                        <AlertDescription>
+                            Questions cannot be changed when the survey is complete or archived.
+                        </AlertDescription>
+                    </Alert>
+                    <Spacer />
+                </>
+            )}
+            {survey?.status && surveyHasLaunched(survey.status) && canEdit && (
                 <>
                     <Alert variant="warning">
                         <InfoIcon />
@@ -133,7 +146,7 @@ const QuestionEditorForm: React.FC = () => {
                             title="No questions added yet"
                         >
                             <div className="flex items-center gap-2 justify-center">
-                                {isDraft && (
+                                {canEdit && isDraft && (
                                     <>
                                         <GenerateQuestionsDialog
                                             isPending={isPending}
@@ -165,7 +178,9 @@ const QuestionEditorForm: React.FC = () => {
                                 isPending={saveQuestions.isPending}
                                 onAdd={handleAddQuestion}
                             />
-                            {isDraft && <RemoveQuestionDialog onRemove={fieldArray.remove} />}
+                            {canEdit && isDraft && (
+                                <RemoveQuestionDialog onRemove={fieldArray.remove} />
+                            )}
                         </>
                     )}
                 </form>

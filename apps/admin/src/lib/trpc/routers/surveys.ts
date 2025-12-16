@@ -8,7 +8,7 @@ import {z} from 'zod';
 import {surveyInsertSchema, surveySettingsSchema, surveyUpdateSchema} from '@/lib/schemas/surveys';
 import {transformNullToUndefined} from '@/utils/database';
 import {generateSlug} from '@/utils/generate-slug';
-import {protectedProcedure} from '../init';
+import {protectedProcedure, surveyEditableProcedure} from '../init';
 
 export const surveysRouter = {
     getAll: protectedProcedure.query(async ({ctx}) => {
@@ -86,10 +86,10 @@ export const surveysRouter = {
             .returning();
         return data;
     }),
-    update: protectedProcedure
-        .input(z.object({id: z.string()}).merge(surveyUpdateSchema))
+    update: surveyEditableProcedure
+        .input(z.object({surveyId: z.string()}).merge(surveyUpdateSchema))
         .mutation(async ({input, ctx}) => {
-            const {id, ...updateData} = input;
+            const {surveyId, ...updateData} = input;
 
             // generate slug from title if title is being updated and slug is not provided
             if (updateData.title && !updateData.slug) {
@@ -99,7 +99,7 @@ export const surveysRouter = {
             const [data] = await ctx.db
                 .update(surveys)
                 .set({...updateData, updatedAt: new Date()})
-                .where(and(eq(surveys.id, id), eq(surveys.tenantId, ctx.tenant)))
+                .where(and(eq(surveys.id, surveyId), eq(surveys.tenantId, ctx.tenant)))
                 .returning();
             return data;
         }),
@@ -193,24 +193,16 @@ export const surveysRouter = {
             password: ''
         };
     }),
-    updateSettings: protectedProcedure
-        .input(z.object({id: z.string(), ...surveySettingsSchema.shape}))
+    updateSettings: surveyEditableProcedure
+        .input(z.object({surveyId: z.string(), ...surveySettingsSchema.shape}))
         .mutation(async ({input, ctx}) => {
-            const {id, ...settings} = input;
-            const survey = await ctx.db
-                .select()
-                .from(surveys)
-                .where(and(eq(surveys.id, id), eq(surveys.tenantId, ctx.tenant)))
-                .limit(1);
-            if (!survey.length) {
-                throw new TRPCError({code: 'NOT_FOUND', message: 'Survey not found'});
-            }
+            const {surveyId, ...settings} = input;
 
             // get current settings to check if password exists
             const [currentSettings] = await ctx.db
                 .select({password: surveySettings.password})
                 .from(surveySettings)
-                .where(eq(surveySettings.surveyId, id))
+                .where(eq(surveySettings.surveyId, surveyId))
                 .limit(1);
 
             const hasExistingPassword = !!currentSettings?.password;
@@ -254,7 +246,7 @@ export const surveysRouter = {
             const [data] = await ctx.db
                 .update(surveySettings)
                 .set({...transformNullToUndefined(transformedSettings), updatedAt: new Date()})
-                .where(eq(surveySettings.surveyId, id))
+                .where(eq(surveySettings.surveyId, surveyId))
                 .returning();
 
             return data;
