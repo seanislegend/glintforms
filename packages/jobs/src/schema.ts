@@ -24,3 +24,10 @@ export const deleteSurveyDataTaskSchema = z.object({
 });
 
 export type DeleteSurveyDataTaskPayload = z.infer<typeof deleteSurveyDataTaskSchema>;
+
+export const generateThemesTaskSchema = z.object({
+    surveyId: z.string(),
+    tenantId: z.string()
+});
+
+export type GenerateThemesTaskPayload = z.infer<typeof generateThemesTaskSchema>;

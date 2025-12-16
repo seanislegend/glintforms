@@ -1,6 +1,6 @@
 import {campaigns, questions, surveySettings, surveys} from '@glint/database';
 import {encrypt} from '@glint/encryption';
-import type {DeleteSurveyDataTaskPayload} from '@glint/jobs/schema';
+import type {DeleteSurveyDataTaskPayload, GenerateThemesTaskPayload} from '@glint/jobs/schema';
 import {tasks} from '@trigger.dev/sdk';
 import {TRPCError} from '@trpc/server';
 import {and, desc, eq, or} from 'drizzle-orm';
@@ -144,6 +144,14 @@ export const surveysRouter = {
                     surveyId: id,
                     tenantId: ctx.tenant
                 } satisfies DeleteSurveyDataTaskPayload);
+            }
+
+            // generate themes when moving from active to complete
+            if (status === 'complete' && survey.status === 'active') {
+                await tasks.trigger('generate-themes', {
+                    surveyId: id,
+                    tenantId: ctx.tenant
+                } satisfies GenerateThemesTaskPayload);
             }
 
             // set launchedAt when moving to active status
