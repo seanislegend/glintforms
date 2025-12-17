@@ -15,8 +15,8 @@ interface Props extends Omit<React.ComponentProps<typeof Badge>, 'size'> {
 const STATUS_VARIANTS = {
     draft: 'stale',
     testing: 'warning',
-    active: 'success',
-    complete: '',
+    active: 'info',
+    complete: 'success',
     archived: 'destructive'
 } as const;
 const STATUS_LABELS = {
@@ -36,7 +36,7 @@ const STATUS_ICONS = {
 const ICON_SIZE_MAP = {
     md: '!size-5',
     sm: '!size-4',
-    xs: '!size-3'
+    xs: '!size-4'
 } as const;
 const TEXT_SIZE_MAP = {
     md: 'text-[15px]',

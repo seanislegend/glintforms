@@ -182,18 +182,22 @@ const ExportResponsesDialog: React.FC<Props> = ({filters, surveyId}) => {
                                 <ExportResponsesFiltersControls filters={filters} />
                             </div>
                         </div>
-                        <SheetFooter className="sticky bottom-0 bg-white/70 backdrop-blur-lg">
-                            <Button pending={isExporting} type="submit">
-                                <DownloadSimpleIcon />
-                                Export
-                            </Button>
+                        <SheetFooter className="sticky bottom-0 bg-white/70 backdrop-blur-lg flex flex-row gap-2">
                             <SheetClose
                                 render={
-                                    <Button disabled={isExporting} variant="secondary">
+                                    <Button
+                                        className="flex-grow"
+                                        disabled={isExporting}
+                                        variant="accent"
+                                    >
                                         Cancel
                                     </Button>
                                 }
                             />
+                            <Button className="flex-grow" pending={isExporting} type="submit">
+                                <DownloadSimpleIcon />
+                                Export
+                            </Button>
                         </SheetFooter>
                     </form>
                 </FormProvider>

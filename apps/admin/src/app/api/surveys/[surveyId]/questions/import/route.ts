@@ -1,5 +1,5 @@
 import {activities, db, questions, surveys, user} from '@glint/database';
-import {desc, eq} from 'drizzle-orm';
+import {and, desc, eq} from 'drizzle-orm';
 import {headers} from 'next/headers';
 import {type NextRequest, NextResponse} from 'next/server';
 import {auth} from '@/lib/auth/server';
@@ -16,23 +16,21 @@ export const POST = async (
             return NextResponse.json({error: 'Unauthorized'}, {status: 401});
         }
 
-        const userProfile = await db.select().from(user).where(eq(user.id, session.user.id));
-        if (!userProfile?.[0]?.tenantId) {
+        const [userProfile] = await db.select().from(user).where(eq(user.id, session.user.id));
+        if (!userProfile?.tenantId) {
             return NextResponse.json({error: 'User not found'}, {status: 404});
         }
 
-        const tenantId = userProfile[0].tenantId;
+        const tenantId = userProfile.tenantId;
         const {surveyId} = await params;
-        const survey = await db
+        const [survey] = await db
             .select()
             .from(surveys)
-            .where(eq(surveys.id, surveyId) && eq(surveys.tenantId, tenantId));
+            .where(and(eq(surveys.id, surveyId), eq(surveys.tenantId, tenantId)));
 
-        if (survey.length === 0) {
+        if (!survey) {
             return NextResponse.json({error: 'Survey not found or access denied'}, {status: 404});
-        }
-
-        if (survey[0]?.status !== 'draft') {
+        } else if (survey?.status !== 'draft') {
             return NextResponse.json(
                 {error: 'Cannot import questions into a survey that is no longer in draft status'},
                 {status: 400}
@@ -112,7 +110,7 @@ export const POST = async (
 
             await tx.insert(activities).values({
                 details: {
-                    surveyTitle: survey[0]?.title ?? 'Unknown',
+                    surveyTitle: survey?.title ?? 'Unknown',
                     importedCount: transformedQuestions.length,
                     warnings: warnings || []
                 },

@@ -35,4 +35,3 @@ const CohortQuickView = () => {
 };
 
 export default CohortQuickView;
-

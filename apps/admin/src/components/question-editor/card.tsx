@@ -83,7 +83,7 @@ const QuestionCard: React.FC = () => {
                         </div>
                         <QuestionOptions />
                     </div>
-                    <div className="xl:col-span-4 bg-muted p-6">
+                    <div className="xl:col-span-4 bg-accent p-6">
                         <Settings />
                     </div>
                 </CardContent>

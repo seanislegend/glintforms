@@ -174,7 +174,7 @@ const SortItemsDialog: React.FC<DialogProps> = ({
                 <DialogDescription>{description}</DialogDescription>
                 {isOpen && <SortItemsContent items={getItems()} onSorted={setNewSortedItems} />}
                 <DialogFooter>
-                    <DialogClose render={<Button variant="secondary">Cancel</Button>} />
+                    <DialogClose render={<Button variant="accent">Cancel</Button>} />
                     <ButtonWithTooltip disabled={!newSortedItems.length} onClick={handleSave}>
                         Save changes
                     </ButtonWithTooltip>

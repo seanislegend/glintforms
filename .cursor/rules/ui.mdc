@@ -80,7 +80,7 @@ const Component = () => {
 
 // Hardcoded classes without variants
 const Component = ({variant}) => {
-  const classes = variant === 'primary' ? 'bg-blue-500' : 'bg-gray-500';
+  const classes = variant === 'primary' ? 'bg-blue-500' : 'bg-slate-500';
   return <div className={classes}>...</div>;
 };
 
@@ -209,7 +209,7 @@ const Component = () => {
 
 // Hardcoded classes without variants
 const Component = ({variant}) => {
-  const classes = variant === 'primary' ? 'bg-blue-500' : 'bg-gray-500';
+  const classes = variant === 'primary' ? 'bg-blue-500' : 'bg-slate-500';
   return <div className={classes}>...</div>;
 };
 

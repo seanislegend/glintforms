@@ -18,7 +18,7 @@ const EmptyPanel: React.FC<Props> = ({children, text, Icon, title, ...props}) =>
                         {title && <Heading3>{title}</Heading3>}
                     </div>
                 )}
-                <div className="max-w-md @xs/empty-panel:max-w-sm @xs/empty-panel:text-center space-y-4">
+                <div className="max-w-md @xs/empty-panel:max-w-lg @xs/empty-panel:text-center space-y-4">
                     {text && <p className="text-sm text-muted-foreground text-pretty">{text}</p>}
                     {children}
                 </div>

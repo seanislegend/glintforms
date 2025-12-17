@@ -3,7 +3,6 @@
 import RelativeDate from '@glint/ui/relative-date';
 import TextLink from '@glint/ui/text-link';
 import type {ColumnDef} from '@tanstack/react-table';
-import Link from 'next/link';
 import {Fragment} from 'react';
 import {DataTableColumnHeader} from '@/components/data-table/column-header';
 import {DataTableRowActions} from '@/components/data-table/row-actions';
@@ -25,12 +24,9 @@ export const columns: ColumnDef<RespondentList>[] = [
         accessorKey: 'name',
         header: ({column}) => <DataTableColumnHeader column={column} title="Name" />,
         cell: ({row}) => (
-            <Link
-                href={`/respondents/${row.original.id}`}
-                className="max-w-[500px] underline hover:decoration-2 underline-offset-2 truncate font-medium"
-            >
+            <TextLink href={`/respondents/${row.original.id}`} className="max-w-[500px] truncate">
                 {row.getValue('name')}
-            </Link>
+            </TextLink>
         )
     },
     {

@@ -27,7 +27,7 @@ const SheetOverlay: React.FC<React.ComponentProps<typeof BaseDialog.Backdrop>> =
     return (
         <BaseDialog.Backdrop
             data-slot="sheet-overlay"
-            className={cn('backdrop-blur-[2px] fixed inset-0 z-50 bg-black/50', className)}
+            className={cn('fixed inset-0 z-50 bg-slate-600/40', className)}
             {...props}
         />
     );

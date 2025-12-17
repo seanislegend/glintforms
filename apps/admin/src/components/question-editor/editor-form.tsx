@@ -70,7 +70,8 @@ const QuestionEditorForm: React.FC = () => {
     const handleFormSubmit: SubmitHandler<QuestionsUpdate> = async data => {
         await saveQuestions.mutateAsync({
             ...data,
-            questions: normaliseQuestions(data.questions)
+            questions: normaliseQuestions(data.questions),
+            surveyId
         });
     };
 
@@ -145,18 +146,18 @@ const QuestionEditorForm: React.FC = () => {
                                 generator."
                             title="No questions added yet"
                         >
-                            <div className="flex items-center gap-2 justify-center">
+                            <div className="flex items-center gap-2 justify-center flex-wrap">
                                 {canEdit && isDraft && (
                                     <>
-                                        <GenerateQuestionsDialog
-                                            isPending={isPending}
-                                            surveyId={surveyId}
-                                        />
                                         <ImportQuestionsDialog
                                             onImport={handleImportQuestions}
                                             surveyId={surveyId}
                                         />
-                                        <Button onClick={handleAddQuestion} variant="accent">
+                                        <GenerateQuestionsDialog
+                                            isPending={isPending}
+                                            surveyId={surveyId}
+                                        />
+                                        <Button onClick={handleAddQuestion} variant="outline">
                                             <PlusIcon />
                                             Add question
                                         </Button>
@@ -172,7 +173,6 @@ const QuestionEditorForm: React.FC = () => {
                                     <QuestionCard />
                                 </QuestionProvider>
                             ))}
-
                             <Footer
                                 isDraft={isDraft}
                                 isPending={saveQuestions.isPending}

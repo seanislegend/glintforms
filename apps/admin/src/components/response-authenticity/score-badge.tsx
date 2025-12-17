@@ -45,7 +45,7 @@ const ScoreBadge: React.FC<Props> = ({score}) => {
                     stroke="currentColor"
                     strokeWidth="8"
                     fill="transparent"
-                    className="text-gray-200"
+                    className="text-slate-200"
                 />
                 <circle
                     cx="50"

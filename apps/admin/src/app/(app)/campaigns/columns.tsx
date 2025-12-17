@@ -1,8 +1,8 @@
 'use client';
 
 import RelativeDate from '@glint/ui/relative-date';
+import TextLink from '@glint/ui/text-link';
 import type {ColumnDef} from '@tanstack/react-table';
-import Link from 'next/link';
 import CampaignStatusBadge from '@/components/badges/campaign-status';
 import {DataTableColumnHeader} from '@/components/data-table/column-header';
 import {DataTableRowActions} from '@/components/data-table/row-actions';
@@ -23,12 +23,12 @@ export const columns: ColumnDef<CampaignList>[] = [
         accessorKey: 'title',
         header: ({column}) => <DataTableColumnHeader column={column} title="Campaign" />,
         cell: ({row}) => (
-            <Link
+            <TextLink
                 href={`/campaigns/${row.original.id}/edit`}
-                className="max-w-[500px] underline hover:decoration-2 underline-offset-2 truncate font-medium"
+                className="max-w-[500px] truncate"
             >
                 {row.getValue('title')}
-            </Link>
+            </TextLink>
         )
     },
     {

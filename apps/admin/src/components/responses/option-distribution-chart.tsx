@@ -6,16 +6,18 @@ import clsx from 'clsx';
 import {Bar, BarChart, Cell, LabelList, XAxis, YAxis} from 'recharts';
 
 const colorPalette = [
-    'var(--color-blue-500)',
-    'var(--color-green-500)',
-    'var(--color-yellow-500)',
-    'var(--color-red-500)',
-    'var(--color-purple-500)',
-    'var(--color-orange-500)',
-    'var(--color-pink-500)',
-    'var(--color-gray-500)',
-    'var(--color-brown-500)',
-    'var(--color-black-500)'
+    'var(--chart-1)',
+    'var(--chart-2)',
+    'var(--chart-3)',
+    'var(--chart-4)',
+    'var(--chart-5)',
+    'var(--chart-6)',
+    'var(--chart-7)',
+    'var(--chart-8)',
+    'var(--chart-9)',
+    'var(--chart-10)',
+    'var(--chart-11)',
+    'var(--chart-12)'
 ];
 
 const chartConfig = {

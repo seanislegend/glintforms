@@ -34,21 +34,29 @@ export const DataTableFacetedFilter = <TData, TValue>({
     const selectedValues = new Set(
         Array.isArray(filterValue) ? filterValue : filterValue != null ? [filterValue] : []
     );
+    const hasSelectedValues = selectedValues.size > 0;
 
     return (
         <Popover>
             <PopoverTrigger
                 render={
-                    <Button variant="outline" size="sm" className="h-8 border-dashed">
+                    <Button
+                        variant="outline"
+                        size="sm"
+                        className={cn(
+                            'h-8 border-dashed hover:border-solid',
+                            hasSelectedValues && 'border-solid'
+                        )}
+                    >
                         <PlusCircleIcon />
                         {title}
-                        {selectedValues?.size > 0 && (
+                        {hasSelectedValues && (
                             <>
                                 <Separator orientation="vertical" className="mx-2 h-4" />
                                 <Badge variant="secondary" className="px-1 font-normal lg:hidden">
                                     {selectedValues.size}
                                 </Badge>
-                                <div className="hidden space-x-1 lg:flex">
+                                <div className="hidden space-x-1 lg:flex -mr-2 -ml-3">
                                     {selectedValues.size > 2 ? (
                                         <Badge variant="secondary" className="px-1 font-normal">
                                             {selectedValues.size} selected
@@ -97,10 +105,10 @@ export const DataTableFacetedFilter = <TData, TValue>({
                                     >
                                         <div
                                             className={cn(
-                                                'mr-2 rounded flex size-5 items-center justify-center border border-primary',
+                                                'mr-2 rounded flex size-5 items-center justify-center border border-slate-300',
                                                 isSelected
-                                                    ? 'bg-primary text-primary-foreground'
-                                                    : 'opacity-50 [&_svg]:invisible'
+                                                    ? 'bg-primary text-primary-foreground border-primary'
+                                                    : '[&_svg]:invisible'
                                             )}
                                         >
                                             <CheckIcon className="text-primary-foreground" />

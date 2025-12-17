@@ -81,7 +81,7 @@ const GenderDistributionChart: React.FC<Props> = ({data}) => {
                                     entry.gender
                                         ? chartConfig[entry.gender as keyof typeof chartConfig]
                                               ?.color
-                                        : 'var(--color-gray-200)'
+                                        : 'var(--color-slate-200)'
                                 }
                             />
                         ))}

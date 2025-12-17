@@ -104,7 +104,7 @@ const GenerateQuestionsDialog: React.FC<Props> = ({isPending, surveyId}) => {
         <Dialog open={isOpen} onOpenChange={handleOpenChange}>
             <DialogTrigger
                 render={
-                    <Button disabled={isDisabled} variant="accent">
+                    <Button disabled={isDisabled} variant="secondary">
                         <SparkleIcon />
                         Generate questions
                     </Button>
@@ -136,7 +136,7 @@ const GenerateQuestionsDialog: React.FC<Props> = ({isPending, surveyId}) => {
                                         generateFormMethods.setValue('topic', survey.title ?? '');
                                     }}
                                     size="xs"
-                                    variant="secondary"
+                                    variant="accent"
                                 >
                                     Use survey title
                                 </Button>
@@ -160,7 +160,7 @@ const GenerateQuestionsDialog: React.FC<Props> = ({isPending, surveyId}) => {
                                         );
                                     }}
                                     size="xs"
-                                    variant="secondary"
+                                    variant="accent"
                                 >
                                     Use survey description
                                 </Button>
@@ -180,7 +180,7 @@ const GenerateQuestionsDialog: React.FC<Props> = ({isPending, surveyId}) => {
                     <Button
                         disabled={generateQuestions.isPending}
                         onClick={() => setIsOpen(false)}
-                        variant="secondary"
+                        variant="accent"
                     >
                         Cancel
                     </Button>

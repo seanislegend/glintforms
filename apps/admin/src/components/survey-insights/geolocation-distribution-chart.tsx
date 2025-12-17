@@ -97,7 +97,7 @@ const GeolocationDistributionChart: React.FC<Props> = ({data}) => {
                                 fill={
                                     entry.country
                                         ? chartConfig[index as keyof typeof chartConfig]?.color
-                                        : 'var(--color-gray-200)'
+                                        : 'var(--color-slate-200)'
                                 }
                             />
                         ))}

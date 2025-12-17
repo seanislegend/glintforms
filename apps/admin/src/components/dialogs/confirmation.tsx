@@ -54,7 +54,7 @@ const ConfirmationDialog: React.FC<React.PropsWithChildren<Props>> = ({
                             <Button
                                 disabled={pending}
                                 onClick={() => onOpenChange(false, 'cancel-press')}
-                                variant="secondary"
+                                variant="accent"
                             />
                         }
                     >

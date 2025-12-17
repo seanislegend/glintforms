@@ -3,6 +3,7 @@
 import Input from '@glint/form/input';
 import {handleFormError} from '@glint/form/utils';
 import Button from '@glint/ui/button';
+import {Card, CardContent} from '@glint/ui/card';
 import {
     Dialog,
     DialogClose,
@@ -86,9 +87,9 @@ const ImportQuestionsDialog: React.FC<Props> = ({onImport, surveyId}) => {
                 setIsOpen(false);
                 setSelectedFile(null);
                 onImport(result.questions);
+                setIsImporting(false);
             } catch (error) {
                 toast.error(error instanceof Error ? error.message : 'Import failed');
-            } finally {
                 setIsImporting(false);
             }
         },
@@ -99,7 +100,7 @@ const ImportQuestionsDialog: React.FC<Props> = ({onImport, surveyId}) => {
         <Dialog open={isOpen} onOpenChange={handleOpenChange}>
             <DialogTrigger
                 render={
-                    <Button variant="secondary">
+                    <Button>
                         <UploadSimpleIcon />
                         Import questions
                     </Button>
@@ -112,7 +113,7 @@ const ImportQuestionsDialog: React.FC<Props> = ({onImport, surveyId}) => {
                         onSubmit={methods.handleSubmit(handleFormSubmit, handleFormError)}
                     >
                         <DialogHeader className="sticky top-0 bg-white/70 backdrop-blur-lg">
-                            <DialogTitle>Import Questions</DialogTitle>
+                            <DialogTitle>Import questions</DialogTitle>
                             <DialogDescription>
                                 Upload a CSV or XLSX file with your survey questions. Our AI will
                                 automatically convert them to the correct format.
@@ -137,7 +138,7 @@ const ImportQuestionsDialog: React.FC<Props> = ({onImport, surveyId}) => {
                                             <Button
                                                 onClick={() => setSelectedFile(null)}
                                                 size="sm"
-                                                variant="destructiveGhost"
+                                                variant="destructive"
                                             >
                                                 <TrashIcon />
                                                 Remove File
@@ -170,30 +171,32 @@ const ImportQuestionsDialog: React.FC<Props> = ({onImport, surveyId}) => {
                                         </p>
                                     </div>
                                 )}
-                                <div className="space-y-2 border bg-muted/20 border-muted rounded-md p-4">
-                                    <div className="text-sm font-medium">How it works</div>
-                                    <ol className="text-sm space-y-1 text-muted-foreground list-decimal list-inside">
-                                        <li>Upload your CSV or XLSX file with questions</li>
-                                        <li>
-                                            Our AI will analyse the file structure and convert it to
-                                            our format
-                                        </li>
-                                        <li>
-                                            Questions will be added to your survey in the correct
-                                            order
-                                        </li>
-                                        <li>
-                                            You'll receive warnings if any data couldn't be
-                                            converted
-                                        </li>
-                                    </ol>
-                                </div>
+                                <Card>
+                                    <CardContent>
+                                        <div className="text-sm font-medium">How it works</div>
+                                        <ol className="text-sm space-y-1 text-muted-foreground list-decimal list-inside">
+                                            <li>Upload your CSV or XLSX file with questions</li>
+                                            <li>
+                                                Our AI will analyse the file structure and convert
+                                                it to our format
+                                            </li>
+                                            <li>
+                                                Questions will be added to your survey in the
+                                                correct order
+                                            </li>
+                                            <li>
+                                                You'll receive warnings if any data couldn't be
+                                                converted
+                                            </li>
+                                        </ol>
+                                    </CardContent>
+                                </Card>
                             </div>
                         </div>
                         <DialogFooter className="sticky bottom-0 bg-white/70 backdrop-blur-lg">
                             <DialogClose
                                 render={
-                                    <Button pending={isImporting} variant="secondary">
+                                    <Button disabled={isImporting} variant="accent">
                                         Cancel
                                     </Button>
                                 }

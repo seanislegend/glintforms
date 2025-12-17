@@ -2,7 +2,7 @@ import {cva, type VariantProps} from 'class-variance-authority';
 import {cn} from '../lib/utils';
 
 const badgeVariants = cva(
-    'inline-flex items-center leading-none justify-center rounded-sm border font-medium w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-[color,box-shadow] overflow-hidden px-2 py-1.5 font-mono uppercase tracking-wide',
+    'inline-flex items-center leading-none justify-center rounded border font-medium w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-[color,box-shadow] overflow-hidden px-2 py-1.5 font-mono uppercase tracking-wide',
     {
         variants: {
             variant: {
@@ -13,11 +13,11 @@ const badgeVariants = cva(
                 destructive:
                     'border-transparent bg-destructive text-white [a&]:hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60',
                 outline: 'text-foreground [a&]:hover:bg-accent [a&]:hover:text-accent-foreground',
-                stale: 'bg-gray-50 text-gray-600 border-gray-100',
+                stale: 'bg-slate-50 text-slate-600 border-slate-100',
                 success: 'bg-green-50 text-green-600 border-green-100',
                 error: 'bg-red-50 text-red-600 border-red-100',
                 warning: 'bg-orange-50 text-orange-600 border-orange-100',
-                info: 'bg-blue-50 text-blue-600 border-blue-100'
+                info: 'bg-yellow-50 text-yellow-600 border-yellow-100'
             },
             size: {
                 default: 'text-[11px] !leading-none',

@@ -58,10 +58,7 @@ const RemoveQuestionDialog: React.FC<DialogProps> = ({onRemove}) => {
                 <DialogFooter>
                     <DialogClose
                         render={
-                            <Button
-                                onClick={() => setRemoveQuestionIndex(null)}
-                                variant="secondary"
-                            >
+                            <Button onClick={() => setRemoveQuestionIndex(null)} variant="accent">
                                 Cancel
                             </Button>
                         }

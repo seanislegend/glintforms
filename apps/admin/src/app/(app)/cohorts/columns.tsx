@@ -1,13 +1,12 @@
 'use client';
 
 import RelativeDate from '@glint/ui/relative-date';
+import TextLink from '@glint/ui/text-link';
 import type {ColumnDef} from '@tanstack/react-table';
-import Link from 'next/link';
 import {DataTableColumnHeader} from '@/components/data-table/column-header';
 import {DataTableRowActions} from '@/components/data-table/row-actions';
 import RecordId from '@/components/record-id';
 import type {CohortList} from '@/lib/schemas/cohorts';
-import {humanise} from '@/utils/humanise';
 
 export const columns: ColumnDef<CohortList>[] = [
     {
@@ -23,12 +22,9 @@ export const columns: ColumnDef<CohortList>[] = [
         accessorKey: 'name',
         header: ({column}) => <DataTableColumnHeader column={column} title="Name" />,
         cell: ({row}) => (
-            <Link
-                href={`/cohorts/${row.original.id}`}
-                className="max-w-[500px] underline hover:decoration-2 underline-offset-2 truncate font-medium"
-            >
+            <TextLink href={`/cohorts/${row.original.id}`} className="max-w-[500px] truncate">
                 {row.getValue('name')}
-            </Link>
+            </TextLink>
         )
     },
     {

@@ -11,10 +11,7 @@ const TextLink: React.FC<Props> = ({children, className = '', href, ...props}) =
         <Link
             href={href}
             {...props}
-            className={cn(
-                'text-primary underline-offset-2 underline hover:decoration-2',
-                className
-            )}
+            className={cn('text-link underline-offset-2 underline hover:decoration-2', className)}
         >
             {children}
         </Link>
