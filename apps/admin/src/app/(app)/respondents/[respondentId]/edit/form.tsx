@@ -46,8 +46,7 @@ const Form: React.FC<FormProps> = ({respondentId}) => {
             cohortIds: [],
             email: '',
             name: '',
-            notes: '',
-            signupSource: ''
+            notes: ''
         }
     });
 
@@ -57,8 +56,7 @@ const Form: React.FC<FormProps> = ({respondentId}) => {
                 cohortIds: respondent.cohortIds || [],
                 email: respondent.email,
                 name: respondent.name,
-                notes: respondent.notes || '',
-                signupSource: respondent.signupSource || ''
+                notes: respondent.notes || ''
             });
         }
     }, [respondent, methods]);
@@ -87,33 +85,32 @@ const Form: React.FC<FormProps> = ({respondentId}) => {
     return (
         <FormProvider {...methods}>
             <form onSubmit={methods.handleSubmit(handleFormSubmit, handleFormError)}>
-                <div className="grid gap-6">
-                    <FormField
-                        control={methods.control}
-                        fieldType="input"
-                        label="Name"
-                        name="name"
-                    />
-                    <FormField
-                        control={methods.control}
-                        fieldType="input"
-                        label="Email"
-                        name="email"
-                    />
-                    <FormField
-                        control={methods.control}
-                        fieldType="input"
-                        label="Signup Source"
-                        name="signupSource"
-                        placeholder="e.g. email campaign, social media, website"
-                    />
-                    <FormField
-                        control={methods.control}
-                        fieldType="textarea"
-                        label="Notes"
-                        name="notes"
-                        placeholder="any additional notes about this respondent"
-                    />
+                <div className="grid gap-6 md:grid-cols-2">
+                    <div className="md:col-span-2">
+                        <FormField
+                            control={methods.control}
+                            fieldType="input"
+                            label="Name"
+                            name="name"
+                        />
+                    </div>
+                    <div className="md:col-span-2">
+                        <FormField
+                            control={methods.control}
+                            fieldType="input"
+                            label="Email"
+                            name="email"
+                        />
+                    </div>
+                    <div className="md:col-span-2">
+                        <FormField
+                            control={methods.control}
+                            fieldType="textarea"
+                            label="Notes"
+                            name="notes"
+                            placeholder="any additional notes about this respondent"
+                        />
+                    </div>
                 </div>
                 <RespondentCohorts />
                 <div className="flex justify-end">

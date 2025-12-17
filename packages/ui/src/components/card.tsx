@@ -1,3 +1,4 @@
+import {Heading4} from '@glint/ui/heading';
 import {cn} from '../lib/utils';
 
 const Card: React.FC<React.ComponentProps<'div'>> = ({className, ...props}) => {
@@ -28,7 +29,7 @@ const CardHeader: React.FC<React.ComponentProps<'div'>> = ({className, ...props}
 
 const CardTitle: React.FC<React.ComponentProps<'div'>> = ({className, ...props}) => {
     return (
-        <div
+        <Heading4
             data-slot="card-title"
             className={cn('leading-none font-medium', className)}
             {...props}
