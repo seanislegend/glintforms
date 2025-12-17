@@ -7,10 +7,10 @@ import {GeistSans} from 'geist/font/sans';
 import AppProviders from '@/components/providers';
 
 export const metadata: Metadata = {
-    title: 'Glint - Ethical AI Research Platform',
+    title: 'Glint - An AI-assisted survey platform',
     description:
         'Data points that shine, insights that catch the eye. Build, deploy and analyse surveys with AI assistance.',
-    keywords: ['research', 'surveys', 'ai', 'ethics', 'data collection'],
+    keywords: ['research', 'surveys', 'ai', 'data collection'],
     authors: [{name: 'Glint Team'}]
 };
 

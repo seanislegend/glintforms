@@ -1,58 +1,77 @@
-# Glint - AI-powered research platform
+# Glint - An AI-assisted survey platform
 
 > Data points that shine, insights that catch the eye
 
-Glint is a modern platform that empowers research teams to design, deploy and analyse surveys using AI-assisted tools, multi-channel collection, and intelligent analytics.
+Glint is a survey platform that empowers teams to design, deploy, and analyse surveys using AI-powered question generation, theme analysis, and authenticity detection.
 
 ## 🚀 Features
 
-### AI-powered survey builder
-- **Intelligent question generation**: AI chat interface for creating surveys
-- **Smart logic branching**: Automated conditional flows
-- **Import/export**: CSV, JSON support for data flexibility, including XLSForm
-- **Advanced filtering**: Custom criteria and targeting options
+### Survey builder
+- **Question types**: Text, number, single select, and multi-select questions
+- **Question settings**: Required fields, option randomisation, custom "other" options
+- **Validation rules**: Min/max length, email, URL, and selection limits
+- **AI question generation**: Generate survey questions from topic and description
+- **Import questions**: Import from CSV, JSON, or XLSForm formats
+- **Export questions**: Export to CSV, JSON, Excel, or XLSForm formats
+- **Survey statuses**: Draft, testing, active, complete, and archived states
 
-### Multi-channel distribution
-- **Shareable links & QR codes**: Track engagement across channels
-- **Interviewer network**: Human-in-the-loop interview management
-- **Source tracking**: Monitor response origins and effectiveness
+### Campaign & respondent management
+- **Campaigns**: Organise surveys into campaigns for better project management
+- **Cohorts**: Group respondents into cohorts for segmentation and analysis
+- **Respondent profiles**: Track respondent details including name, email, location, and metadata
+- **Cohort assignment**: Assign respondents to multiple cohorts with tracking
+
+### Response collection & settings
+- **Anonymous responses**: Allow or require respondent identification
+- **Password protection**: Secure surveys with password access
+- **Response limits**: Set maximum response counts with automatic closure
+- **Custom closed text**: Display custom messages when surveys are closed
+- **Response tracking**: Monitor completion status, timestamps, and geolocation
 
 ### AI analytics & insights
-- **Automated analysis**: Sentiment analysis and topic clustering
-- **Intelligent coding**: AI-powered response categorisation
-- **Authenticity detection**: Automated authenticity verification in responses
-- **Interactive dashboards**: Real-time insights and visualisations
+- **Theme analysis**: AI-powered semantic clustering of text responses with sentiment analysis
+- **Authenticity detection**: Automated verification of response authenticity with scoring
+- **Authenticity overrides**: Manual review and override of authenticity scores
+- **Response insights**: Visual dashboards with charts and response overviews
+- **Question-level analytics**: View answers grouped by question with theme associations
 
-### Integrations & automation
-- **Webhook system**: Connect to external tools and platforms
-- **API management**: Secure key management and access control
-- **Event triggers**: Automated workflows on survey completion
-- **Data export**: Flexible data delivery options
+### Data export & integration
+- **Response exports**: Export responses in CSV, JSON, or Excel formats
+- **Field selection**: Choose specific fields to include in exports
+- **Answer formatting**: Customise how multi-select answers are formatted
+- **Filter application**: Apply active filters to exported data
+- **API access**: RESTful API for programmatic survey and response access
 
 ## 🛠 Tech stack
 
-- **Frontend**: Next.js 15 (App Router), React 19, TypeScript 5, TRPC
+- **Frontend**: Next.js 16 (App Router), React 19, TypeScript 5
+- **API**: TRPC for type-safe APIs, REST API for external access
 - **Database**: Supabase (PostgreSQL) with Drizzle ORM
 - **Authentication**: Better Auth with magic links via Resend
 - **State Management**: Jotai
 - **Forms**: React Hook Form with Zod validation
-- **Background Jobs**: Trigger.dev
-- **URL State**: nuqs
-- **Monorepo**: Turborepo
+- **Background Jobs**: Trigger.dev for async processing
+- **AI**: OpenAI SDK for question generation, theme analysis, and authenticity detection
+- **URL State**: nuqs for URL-based state management
+- **Monorepo**: Turborepo with Bun package manager
+- **Linting & Formatting**: Biome
 
 ## 📦 Project structure
 
 ```
 glint/
 ├── apps/
-│   ├── admin/              # Next.js admin application
-│   └── api/                # API server
+│   ├── admin/              # Next.js admin application (TRPC, React)
+│   └── api/                # REST API server
 ├── packages/
-│   ├── database/           # Database schema and connection
+│   ├── authenticity/      # Authenticity scoring and analysis
+│   ├── database/           # Database schema, migrations, and connection
 │   ├── encryption/         # Encryption utilities
-│   ├── ui/                 # Shared UI components
 │   ├── form/               # Form components and validation
-│   ├── schemas/            # Shared validation schemas
+│   ├── jobs/               # Background job tasks (Trigger.dev)
+│   ├── schemas/            # Shared validation schemas (Zod)
+│   ├── tsconfig/           # Shared TypeScript configurations
+│   ├── ui/                 # Shared UI components
 │   └── utils/              # Utility functions
 ├── package.json            # Root package.json
 └── turbo.json             # Turborepo configuration
@@ -71,7 +90,7 @@ glint/
 1. **Clone the repository**
    ```bash
    git clone <repository-url>
-   cd glint
+   cd glintforms
    ```
 
 2. **Install dependencies**
@@ -80,11 +99,15 @@ glint/
    ```
 
 3. **Set up environment variables**
+   
+   Copy environment example files for each app:
    ```bash
-   cp env.example .env.local
+   cp apps/admin/env.example apps/admin/.env.local
+   cp apps/api/env.example apps/api/.env.local
+   cp packages/jobs/env.example packages/jobs/.env.local
    ```
    
-   Update `.env.local` with your actual values.
+   Update each `.env.local` file with your actual values.
 
 4. **Set up the database**
    ```bash
@@ -142,23 +165,24 @@ bun run db:studio      # Open Drizzle Studio
 ### Product managers
 - Need quick feedback collection and analysis
 - Real-time insights and automated reporting
-- Multi-channel distribution capabilities
+- Campaign organisation and respondent segmentation
 
 ## 📈 Key benefits
 
-- **Faster insights**: AI-powered analysis reduces time from weeks to hours
-- **Higher engagement**: Intelligent survey design improves completion rates
-- **Better data quality**: Automated validation and bias detection
-- **Seamless integration**: Connect with existing tools and workflows
-- **Scalable platform**: Handle research projects of any size
+- **AI-powered insights**: Automated theme analysis and authenticity detection for faster data understanding
+- **Flexible question types**: Support for text, numeric, and multiple choice questions with custom validation
+- **Data portability**: Import and export in multiple formats (CSV, JSON, Excel, XLSForm) for easy integration
+- **Respondent management**: Organise respondents into cohorts for targeted analysis and segmentation
+- **Multi-tenant architecture**: Secure tenant isolation for organisations and teams
+- **Background processing**: Asynchronous job processing for theme generation and authenticity scoring
 
 ## 🔒 Security & data protection
 
-- **Data encryption**: End-to-end encryption for all data
-- **Access controls**: Role-based permissions and API key management
-- **Audit logging**: Complete activity tracking and monitoring
-- **Spam protection**: Advanced bot detection and rate limiting
-- **Data privacy**: Built-in privacy controls and data management
+- **Multi-tenancy**: Tenant isolation for data separation
+- **Password protection**: Optional password-protected surveys
+- **Access controls**: User authentication with Better Auth
+- **Activity tracking**: Complete audit logging of survey activities
+- **Data privacy**: Anonymous response options and metadata controls
 
 ## 🤝 Contributing
 
