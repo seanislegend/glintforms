@@ -5,21 +5,21 @@ import {cva, type VariantProps} from 'class-variance-authority';
 import {cn} from '../lib/utils';
 
 export const buttonVariants = cva(
-    "inline-flex rounded items-center shadow-xs duration-200 justify-center gap-2 whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive has-[href]:hover:underline border-1 active:scale-[0.98] active:duration-150 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 data-[active='true']:bg-accent",
+    "inline-flex rounded items-center duration-200 justify-center gap-2 whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive has-[href]:hover:underline active:scale-[0.98] active:duration-150 data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
     {
         variants: {
             variant: {
-                default: 'bg-primary border-primary text-primary-foreground hover:bg-primary/90',
+                default: 'bg-primary ring ring-primary text-primary-foreground hover:bg-primary/90',
                 destructive:
-                    'bg-destructive border-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60 hover:text-white',
+                    'bg-destructive ring ring-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60 hover:text-white',
                 outline:
-                    'bg-background hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50',
+                    'bg-background ring ring-background-accent hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50 shadow-none',
                 secondary:
-                    'bg-secondary border-secondary text-secondary-foreground hover:bg-secondary/80',
-                accent: 'bg-accent border-accent text-accent-foreground hover:bg-accent/90 shadow-none',
-                ghost: 'hover:bg-accent border-transparent hover:text-accent-foreground dark:hover:bg-accent/50 shadow-none',
+                    'bg-secondary ring ring-secondary text-secondary-foreground hover:bg-secondary/80',
+                accent: 'bg-accent ring ring-accent text-accent-foreground hover:bg-accent/90 shadow-none data-[active=true]:bg-accent',
+                ghost: 'hover:bg-accent border-transparent hover:text-accent-foreground dark:hover:bg-accent/50 shadow-none data-[active=true]:bg-accent',
                 destructiveGhost:
-                    'hover:bg-destructive/10 border-transparent hover:text-destructive text-destructive shadow-none',
+                    'hover:bg-destructive/10 ring ring-transparent hover:text-destructive text-destructive shadow-none',
                 link: 'text-primary underline-offset-2 underline hover:decoration-2'
             },
             size: {

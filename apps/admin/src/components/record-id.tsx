@@ -44,7 +44,7 @@ const RecordId: React.FC<Props> = ({canCopy = true, href, id}) => {
             </span>
             {canCopy && (
                 <Button
-                    className="transition-all duration-200 ease-in-out absolute right-1 top-1 opacity-0 group-hover:opacity-100 scale-90 group-hover:scale-100 h-6 w-6"
+                    className="transition-all duration-200 ease-in-out absolute right-1 top-1 opacity-0 group-hover:opacity-100 scale-90 group-hover:scale-100 h-6 w-6 shadow-xs"
                     onClick={handleCopy}
                     size="icon"
                     type="button"

@@ -44,8 +44,8 @@ export const DataTableFacetedFilter = <TData, TValue>({
                         variant="outline"
                         size="sm"
                         className={cn(
-                            'h-8 border-dashed hover:border-solid',
-                            hasSelectedValues && 'border-solid'
+                            'min-h-full border-dashed ring-0 border hover:border-solid',
+                            hasSelectedValues && 'border-solid shadow-xs'
                         )}
                     >
                         <PlusCircleIcon />

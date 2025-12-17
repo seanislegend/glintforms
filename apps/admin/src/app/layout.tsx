@@ -18,14 +18,14 @@ const RootLayout: React.FC<React.PropsWithChildren> = ({children}) => {
     return (
         <html
             lang="en"
-            className={cn('antialiased bg-background', GeistSans.variable, GeistMono.variable)}
+            className={cn('antialiased bg-sidebar', GeistSans.variable, GeistMono.variable)}
         >
             <head>
                 {process.env.NEXT_PUBLIC_ENABLE_REACT_SCAN === '1' && (
                     <script src="https://unpkg.com/react-scan/dist/auto.global.js" />
                 )}
             </head>
-            <body className="bg-background text-slate-900">
+            <body className="bg-sidebar text-blue-900">
                 <div className="min-h-screen">
                     <AppProviders>{children}</AppProviders>
                 </div>

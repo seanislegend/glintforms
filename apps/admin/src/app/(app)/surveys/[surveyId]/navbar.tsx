@@ -20,7 +20,7 @@ interface Props {
 
 export const SurveyNavbarWrapper: React.FC<React.PropsWithChildren> = ({children}) => {
     return (
-        <div className="flex bg-white border-b border-accent h-10 items-center [&>span]:h-full [&>span]:flex [&>span>a,&>span>button]:h-full [&>span>a,&>span>button]:bg-white [&>span:last-child]:border-r [&>span:last-child]:border-accent [&>span>a[data-active=true],&>span>button[data-active=true]]:bg-accent [&>span>a[data-active=true],&>span>button[data-active=true]]:pointer-events-none p-1 space-x-1 max-w-full overflow-x-auto">
+        <div className="flex bg-white border-b border-accent items-center [&>span]:h-full [&>span]:flex [&>span>a,&>span>button]:h-full [&>span>a,&>span>button]:bg-white [&>span:last-child]:border-r [&>span:last-child]:border-accent [&>span>a[data-active=true],&>span>button[data-active=true]]:bg-accent [&>span>a[data-active=true],&>span>button[data-active=true]]:pointer-events-none p-2 space-x-2 max-w-full overflow-x-auto">
             {children}
         </div>
     );
@@ -49,7 +49,7 @@ const SurveyNavbar: React.FC<Props> = ({surveyId}) => {
 
     return (
         <SurveyNavbarWrapper>
-            <div className="flex items-center flex-row gap-x-1 flex-grow">
+            <div className="flex items-center flex-row gap-x-2 flex-grow">
                 <span>
                     <Button
                         data-active={isPathActive('/')}

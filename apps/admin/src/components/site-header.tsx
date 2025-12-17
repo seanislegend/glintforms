@@ -8,7 +8,7 @@ interface Props {
 const SiteHeader: React.FC<Props> = ({breadcrumbs}) => {
     return (
         <header className="sticky top-0 z-10 bg-white/70 backdrop-blur-lg flex h-[var(--header-height)] shrink-0 items-center gap-2 border-accent border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-[var(--header-height)]">
-            <div className="flex w-full items-center gap-1 px-1 lg:gap-2">
+            <div className="flex w-full items-center gap-1 py-1 px-2 lg:gap-2">
                 <SidebarTrigger />
                 <Separator
                     orientation="vertical"

@@ -83,7 +83,7 @@ const ImportQuestionsDialog: React.FC<Props> = ({surveyId}) => {
         <Sheet open={isOpen} onOpenChange={handleOpenChange}>
             <SheetTrigger
                 render={
-                    <Button variant="accent">
+                    <Button variant="outline">
                         <DownloadSimpleIcon />
                         Export questions
                     </Button>
@@ -149,12 +149,16 @@ const ImportQuestionsDialog: React.FC<Props> = ({surveyId}) => {
                         <SheetFooter className="sticky bottom-0 bg-white/70 backdrop-blur-lg flex flex-row gap-2">
                             <SheetClose
                                 render={
-                                    <Button disabled={isExporting} variant="accent">
+                                    <Button
+                                        className="flex-grow"
+                                        disabled={isExporting}
+                                        variant="accent"
+                                    >
                                         Cancel
                                     </Button>
                                 }
                             />
-                            <Button pending={isExporting} type="submit">
+                            <Button className="flex-grow" pending={isExporting} type="submit">
                                 <DownloadSimpleIcon />
                                 Export
                             </Button>

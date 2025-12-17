@@ -71,7 +71,7 @@ const SubNav: React.FC<Props> = ({href, id, Icon, title}) => {
                 <CollapsibleTrigger render={<SidebarMenuButton />}>
                     {Icon && <Icon className="!size-5" />}
                     <span>{title}</span>
-                    <CaretRightIcon className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
+                    <CaretRightIcon className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90 group-data-[panel-open]:rotate-90" />
                 </CollapsibleTrigger>
                 <CollapsibleContent>
                     <SidebarMenuSub>

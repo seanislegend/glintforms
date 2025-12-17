@@ -89,7 +89,7 @@ const SelectItem = ({
         <BaseSelect.Item
             data-slot="select-item"
             className={cn(
-                "focus:bg-accent rounded focus:text-accent-foreground [&_svg:not([class*='text-'])]:text-muted-foreground relative flex w-full cursor-default items-center gap-2 py-1.5 pr-8 pl-2 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 *:[span]:last:flex *:[span]:last:items-center *:[span]:last:gap-2 min-w-[var(--anchor-width)] data-[selected]:bg-accent data-[selected]:text-accent-foreground",
+                "focus:bg-muted rounded focus:text-accent-foreground [&_svg:not([class*='text-'])]:text-muted-foreground relative flex w-full cursor-default items-center gap-2 py-1.5 pr-8 pl-2 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 *:[span]:last:flex *:[span]:last:items-center *:[span]:last:gap-2 min-w-[var(--anchor-width)] data-[selected]:bg-accent data-[selected]:text-accent-foreground",
                 className
             )}
             {...props}

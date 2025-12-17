@@ -299,7 +299,7 @@ const SidebarInset: React.FC<React.ComponentProps<'main'>> = ({className, ...pro
         <main
             data-slot="sidebar-inset"
             className={cn(
-                'bg-background ring ring-slate-100 overflow-hidden rounded-lg relative flex w-full flex-1 flex-col',
+                'bg-background ring ring-slate-200 overflow-hidden rounded-xl relative flex w-full flex-1 flex-col',
                 'md:peer-data-[variant=inset]:m-2 md:peer-data-[variant=inset]:ml-0 md:peer-data-[variant=inset]:shadow-sm md:peer-data-[variant=inset]:peer-data-[collapsed]:ml-2',
                 className
             )}
@@ -450,7 +450,7 @@ const SidebarMenuItem: React.FC<React.ComponentProps<'li'>> = ({className, ...pr
 };
 
 const sidebarMenuButtonVariants = cva(
-    'peer/menu-button flex w-full items-center gap-2 overflow-hidden p-2 text-left text-sm outline-hidden ring-ring transition-[width,height,padding] focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:bg-sidebar-accent data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[open]:hover:bg-sidebar-accent data-[open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 [&[href]]:hover:underline [&[href]]:underline-offset-2 rounded',
+    'group peer/menu-button flex w-full items-center gap-2 overflow-hidden p-2 text-left text-sm outline-hidden ring-ring transition-[width,height,padding] focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:bg-sidebar-accent data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[open]:hover:bg-sidebar-accent data-[open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 [&[href]]:hover:underline [&[href]]:underline-offset-2 rounded',
     {
         variants: {
             variant: {
@@ -555,7 +555,7 @@ const SidebarMenuSub: React.FC<React.ComponentProps<'ul'>> = ({className, ...pro
             data-slot="sidebar-menu-sub"
             data-sidebar="menu-sub"
             className={cn(
-                'border-sidebar-border mx-3.5 flex min-w-0 translate-x-px flex-col gap-1 border-l px-2.5 py-0.5',
+                'border-sidebar-border mx-3.5 flex min-w-0 translate-x-px flex-col gap-1 border-l border-slate-200 px-2.5 py-0.5',
                 'group-data-[collapsible=icon]:hidden',
                 className
             )}
@@ -593,7 +593,7 @@ const SidebarMenuSubButton: React.FC<
         props: {
             className: cn(
                 'text-sidebar-foreground ring-ring active:bg-sidebar-accent active:text-sidebar-accent-foreground [&>svg]:text-sidebar-accent-foreground flex h-7 min-w-0 -translate-x-px items-center gap-2 overflow-hidden px-2 outline-hidden focus-visible:ring-2 disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0',
-                'data-[active=true]:bg-sidebar-accent data-[active=true]:shadow-xs data-[active=true]:text-sidebar-accent-foreground hover:underline underline-offset-2 rounded',
+                'data-[active=true]:bg-sidebar-accent data-[active=true]:shadow-xs data-[active=true]:text-sidebar-accent-foreground hover:underline underline-offset-2 rounded data-[active=true]:no-underline',
                 size === 'sm' && 'text-xs',
                 size === 'md' && 'text-sm',
                 'group-data-[collapsible=icon]:hidden',

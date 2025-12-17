@@ -117,7 +117,7 @@ const ExportResponsesDialog: React.FC<Props> = ({filters, surveyId}) => {
         <Sheet open={isOpen} onOpenChange={handleOpenChange}>
             <SheetTrigger
                 render={
-                    <Button variant="secondary">
+                    <Button variant="outline">
                         <DownloadSimpleIcon />
                         Export responses
                     </Button>

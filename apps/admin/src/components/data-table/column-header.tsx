@@ -23,14 +23,14 @@ export const DataTableColumnHeader = <TData, TValue>({
 
     return (
         <div className={cn('flex items-center space-x-2', className)}>
-            <div className="overflow-hidden">
+            <div>
                 <Menu>
                     <MenuTrigger
                         render={
                             <Button
                                 variant="ghost"
                                 size="sm"
-                                className="-ml-3 h-8 data-[state=open]:bg-accent"
+                                className="-translate-x-3 isolate h-8 data-[state=open]:bg-accent"
                             >
                                 <span>{title}</span>
                                 {column.getIsSorted() === 'desc' ? (
