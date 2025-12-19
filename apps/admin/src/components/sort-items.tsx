@@ -160,7 +160,7 @@ const SortItemsDialog: React.FC<DialogProps> = ({
                     <ButtonWithTooltip
                         disabledReason={disabledReason}
                         onClick={() => setIsOpen(true)}
-                        variant="outline"
+                        variant="accent"
                     >
                         <ArrowsDownUpIcon />
                         {ctaLabel}

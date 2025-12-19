@@ -41,7 +41,7 @@ const QuestionEditorFooter: React.FC<Props> = ({isDraft, isPending, onAdd}) => {
         <div className="flex gap-4 flex-col sm:flex-row justify-between items-center sticky bottom-0 p-4 lg:p-6 -mb-6 bg-white/70 backdrop-blur-lg -mx-4 lg:-mx-6 border-t border-border z-20 self-start">
             <div className="flex flex-col sm:flex-row gap-2">
                 {isDraft && (
-                    <Button onClick={onAdd} variant="accent">
+                    <Button onClick={onAdd} variant="secondary">
                         <PlusIcon />
                         Add question
                     </Button>

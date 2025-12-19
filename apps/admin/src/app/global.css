@@ -224,7 +224,7 @@ black is: #0f1220; */
 
     --tracking-normal: 0em;
 
-    --heading: var(--color-blue-800);
+    --heading: var(--color-blue-900);
 
     --radius: 0.3rem;
     /* --shadow-2xs: 0px 1px 0px 0px hsl(0 0% 0% / 0);

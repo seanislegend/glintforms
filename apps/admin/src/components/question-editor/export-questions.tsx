@@ -83,7 +83,7 @@ const ImportQuestionsDialog: React.FC<Props> = ({surveyId}) => {
         <Sheet open={isOpen} onOpenChange={handleOpenChange}>
             <SheetTrigger
                 render={
-                    <Button variant="outline">
+                    <Button variant="secondary">
                         <DownloadSimpleIcon />
                         Export questions
                     </Button>
