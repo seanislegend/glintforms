@@ -214,12 +214,14 @@ const AddRespondentsToCohortSheet: React.FC<Props> = ({cohortId}) => {
 
     return (
         <Sheet onOpenChange={handleOpenChange} open={isOpen}>
-            <SheetTrigger>
-                <Button variant="secondary">
-                    <PlusIcon />
-                    Add respondents
-                </Button>
-            </SheetTrigger>
+            <SheetTrigger
+                render={() => (
+                    <Button variant="secondary">
+                        <PlusIcon />
+                        Add respondents
+                    </Button>
+                )}
+            />
             <SheetPopup className="w-[400px] sm:w-[800px] xl:w-[1000px] max-w-none sm:max-w-none xl:max-w-none">
                 <SheetHeader className="sticky top-0 bg-white/70 backdrop-blur-lg">
                     <SheetTitle>Add respondents to cohort</SheetTitle>
