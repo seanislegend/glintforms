@@ -7,7 +7,7 @@ import {
     responses,
     surveys
 } from '@glint/database';
-import {and, desc, eq, sql} from 'drizzle-orm';
+import {and, desc, eq, inArray, ne, notInArray, or, sql} from 'drizzle-orm';
 import {z} from 'zod';
 import type {RespondentList} from '@/lib/schemas/respondents';
 import {protectedProcedure} from '../init';
@@ -220,5 +220,220 @@ export const respondentsRouter = {
             }
 
             return updatedRespondent;
+        }),
+    getFilterValues: protectedProcedure.query(async ({ctx}) => {
+        const genderRows = await ctx.db
+            .select({value: respondents.gender})
+            .from(respondents)
+            .where(and(eq(respondents.tenantId, ctx.tenant), sql`${respondents.gender} IS NOT NULL`))
+            .groupBy(respondents.gender);
+        
+        const genders = genderRows
+            .map(r => r.value)
+            .filter((g): g is NonNullable<typeof g> => g !== null);
+
+        const cities = await ctx.db
+            .select({value: respondents.locationCity})
+            .from(respondents)
+            .where(and(eq(respondents.tenantId, ctx.tenant), sql`${respondents.locationCity} IS NOT NULL`))
+            .groupBy(respondents.locationCity);
+
+        const countries = await ctx.db
+            .select({value: respondents.locationCountry})
+            .from(respondents)
+            .where(and(eq(respondents.tenantId, ctx.tenant), sql`${respondents.locationCountry} IS NOT NULL`))
+            .groupBy(respondents.locationCountry);
+
+        const surveyData = await ctx.db
+            .select({
+                id: surveys.id,
+                title: surveys.title
+            })
+            .from(surveys)
+            .innerJoin(responses, eq(surveys.id, responses.surveyId))
+            .innerJoin(respondents, eq(responses.respondentId, respondents.id))
+            .where(eq(surveys.tenantId, ctx.tenant))
+            .groupBy(surveys.id, surveys.title);
+
+        const allRespondents = await ctx.db
+            .select({metadata: respondents.metadata})
+            .from(respondents)
+            .where(eq(respondents.tenantId, ctx.tenant));
+
+        const ages = Array.from(
+            new Set(
+                allRespondents
+                    .map(r => {
+                        const metadata = r.metadata as {age?: number | string} | null;
+                        return metadata?.age ? String(metadata.age) : null;
+                    })
+                    .filter((age): age is string => age !== null)
+            )
+        ).sort((a, b) => Number(a) - Number(b));
+
+        return {
+            ages: ages.map(age => ({label: age, value: age})),
+            cities: cities
+                .map(c => c.value)
+                .filter((city): city is string => city !== null)
+                .sort()
+                .map(city => ({label: city, value: city})),
+            countries: countries
+                .map(c => c.value)
+                .filter((country): country is string => country !== null)
+                .sort()
+                .map(country => ({label: country, value: country})),
+            genders: genders
+                .sort()
+                .map(gender => ({label: String(gender), value: String(gender)})),
+            surveys: surveyData
+                .map(s => ({id: s.id, title: s.title}))
+                .filter((s): s is {id: string; title: string} => Boolean(s.id && s.title))
+                .sort((a, b) => a.title.localeCompare(b.title))
+                .map(s => ({label: s.title, value: s.id}))
+        };
+    }),
+    search: protectedProcedure
+        .input(
+            z.object({
+                age: z
+                    .object({
+                        max: z.string().optional(),
+                        min: z.string().optional(),
+                        type: z.union([z.enum(['equal', 'between', 'over', 'under']), z.literal('')]).optional(),
+                        value: z.string().optional()
+                    })
+                    .optional(),
+                excludeCohortId: z.string().uuid().optional(),
+                gender: z.string().optional(),
+                genderQualifier: z.enum(['is', 'is_not']).optional(),
+                locationCity: z.string().optional(),
+                locationCityQualifier: z.enum(['is', 'is_not']).optional(),
+                locationCountry: z.string().optional(),
+                locationCountryQualifier: z.enum(['is', 'is_not']).optional(),
+                survey: z.string().optional(),
+                surveyQualifier: z.enum(['is', 'is_not']).optional()
+            })
+        )
+        .mutation(async ({ctx, input}) => {
+            const conditions = [eq(respondents.tenantId, ctx.tenant)];
+
+            // exclude respondents already in the cohort if excludeCohortId is provided
+            if (input.excludeCohortId) {
+                const respondentsInCohort = await ctx.db
+                    .select({respondentId: respondentCohorts.respondentId})
+                    .from(respondentCohorts)
+                    .where(eq(respondentCohorts.cohortId, input.excludeCohortId));
+
+                const respondentIdsInCohort = respondentsInCohort
+                    .map(r => r.respondentId)
+                    .filter((id): id is string => id !== null);
+
+                if (respondentIdsInCohort.length > 0) {
+                    conditions.push(notInArray(respondents.id, respondentIdsInCohort));
+                }
+            }
+
+            if (input.gender && input.gender !== '') {
+                const qualifier = input.genderQualifier || 'is';
+                if (qualifier === 'is') {
+                    conditions.push(eq(respondents.gender, input.gender));
+                } else {
+                    conditions.push(ne(respondents.gender, input.gender));
+                }
+            }
+
+            if (input.locationCity && input.locationCity !== '') {
+                const qualifier = input.locationCityQualifier || 'is';
+                if (qualifier === 'is') {
+                    conditions.push(eq(respondents.locationCity, input.locationCity));
+                } else {
+                    conditions.push(ne(respondents.locationCity, input.locationCity));
+                }
+            }
+
+            if (input.locationCountry && input.locationCountry !== '') {
+                const qualifier = input.locationCountryQualifier || 'is';
+                if (qualifier === 'is') {
+                    conditions.push(eq(respondents.locationCountry, input.locationCountry));
+                } else {
+                    conditions.push(ne(respondents.locationCountry, input.locationCountry));
+                }
+            }
+
+            if (input.survey && input.survey !== '') {
+                const respondentIdsWithSurvey = await ctx.db
+                    .selectDistinct({respondentId: responses.respondentId})
+                    .from(responses)
+                    .where(and(eq(responses.surveyId, input.survey), eq(responses.tenantId, ctx.tenant)));
+
+                const ids = respondentIdsWithSurvey
+                    .map(r => r.respondentId)
+                    .filter((id): id is string => id !== null);
+
+                const qualifier = input.surveyQualifier || 'is';
+                if (ids.length > 0) {
+                    if (qualifier === 'is') {
+                        conditions.push(inArray(respondents.id, ids));
+                    } else {
+                        conditions.push(notInArray(respondents.id, ids));
+                    }
+                } else {
+                    if (qualifier === 'is') {
+                        return [];
+                    }
+                }
+            }
+
+            if (input.age?.type && input.age.type !== '') {
+                const ageValue = input.age.value ? Number(input.age.value) : null;
+                const ageMin = input.age.min ? Number(input.age.min) : null;
+                const ageMax = input.age.max ? Number(input.age.max) : null;
+
+                if (input.age.type === 'equal' && ageValue !== null) {
+                    conditions.push(
+                        and(
+                            sql`${respondents.metadata}->>'age' IS NOT NULL`,
+                            sql`CAST(${respondents.metadata}->>'age' AS INTEGER) = ${ageValue}`
+                        )!
+                    );
+                } else if (input.age.type === 'over' && ageValue !== null) {
+                    conditions.push(
+                        and(
+                            sql`${respondents.metadata}->>'age' IS NOT NULL`,
+                            sql`CAST(${respondents.metadata}->>'age' AS INTEGER) > ${ageValue}`
+                        )!
+                    );
+                } else if (input.age.type === 'under' && ageValue !== null) {
+                    conditions.push(
+                        and(
+                            sql`${respondents.metadata}->>'age' IS NOT NULL`,
+                            sql`CAST(${respondents.metadata}->>'age' AS INTEGER) < ${ageValue}`
+                        )!
+                    );
+                } else if (input.age.type === 'between' && ageMin !== null && ageMax !== null) {
+                    conditions.push(
+                        and(
+                            sql`${respondents.metadata}->>'age' IS NOT NULL`,
+                            sql`CAST(${respondents.metadata}->>'age' AS INTEGER) >= ${ageMin}`,
+                            sql`CAST(${respondents.metadata}->>'age' AS INTEGER) <= ${ageMax}`
+                        )!
+                    );
+                }
+            }
+
+            const results = await ctx.db
+                .select({
+                    email: respondents.email,
+                    gender: respondents.gender,
+                    id: respondents.id,
+                    locationCity: respondents.locationCity,
+                    locationCountry: respondents.locationCountry,
+                    name: respondents.name
+                })
+                .from(respondents)
+                .where(and(...conditions));
+
+            return results;
         })
 };
