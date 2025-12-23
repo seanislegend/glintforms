@@ -1,6 +1,7 @@
 import {
     campaigns,
     cohorts,
+    type Database,
     respondentCohorts,
     respondents,
     responses,
@@ -12,6 +13,19 @@ import type {CohortList} from '@/lib/schemas/cohorts';
 import {cohortCreateSchema, cohortUpdateSchema} from '@/lib/schemas/cohorts';
 import type {RespondentList} from '@/lib/schemas/respondents';
 import {createTRPCRouter, protectedProcedure} from '../init';
+
+async function verifyCohortAccess(
+    db: Database,
+    tenant: string,
+    cohortId: string
+): Promise<{id: string} | null> {
+    const [cohort] = await db
+        .select({id: cohorts.id})
+        .from(cohorts)
+        .where(and(eq(cohorts.id, cohortId), eq(cohorts.tenantId, tenant)))
+        .limit(1);
+    return cohort ?? null;
+}
 
 export const cohortsRouter = createTRPCRouter({
     getAll: protectedProcedure.query(async ({ctx}) => {
@@ -87,13 +101,7 @@ export const cohortsRouter = createTRPCRouter({
             })
         )
         .mutation(async ({ctx, input}) => {
-            // verify cohort exists and belongs to tenant
-            const [cohort] = await ctx.db
-                .select({id: cohorts.id})
-                .from(cohorts)
-                .where(and(eq(cohorts.id, input.cohortId), eq(cohorts.tenantId, ctx.tenant)))
-                .limit(1);
-
+            const cohort = await verifyCohortAccess(ctx.db, ctx.tenant, input.cohortId);
             if (!cohort) {
                 throw new Error('Cohort not found');
             }
@@ -132,13 +140,7 @@ export const cohortsRouter = createTRPCRouter({
             };
         }),
     getRespondents: protectedProcedure.input(z.string()).query(async ({input: cohortId, ctx}) => {
-        // verify cohort exists and belongs to tenant
-        const [cohort] = await ctx.db
-            .select({id: cohorts.id})
-            .from(cohorts)
-            .where(and(eq(cohorts.id, cohortId), eq(cohorts.tenantId, ctx.tenant)))
-            .limit(1);
-
+        const cohort = await verifyCohortAccess(ctx.db, ctx.tenant, cohortId);
         if (!cohort) {
             return [];
         }
@@ -231,13 +233,7 @@ export const cohortsRouter = createTRPCRouter({
             })
         )
         .mutation(async ({ctx, input}) => {
-            // verify cohort exists and belongs to tenant
-            const [cohort] = await ctx.db
-                .select({id: cohorts.id})
-                .from(cohorts)
-                .where(and(eq(cohorts.id, input.cohortId), eq(cohorts.tenantId, ctx.tenant)))
-                .limit(1);
-
+            const cohort = await verifyCohortAccess(ctx.db, ctx.tenant, input.cohortId);
             if (!cohort) {
                 throw new Error('Cohort not found');
             }
