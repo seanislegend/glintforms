@@ -19,6 +19,7 @@ import {useQueryState} from 'nuqs';
 import {useCallback, useState} from 'react';
 import {FormProvider, type SubmitHandler, useForm} from 'react-hook-form';
 import {toast} from 'sonner';
+import useHighlight from '@/hooks/use-highlight';
 import {useTRPC} from '@/lib/trpc/react';
 import type {SearchResult} from './columns';
 import Filters from './filters';
@@ -37,6 +38,7 @@ const AddRespondentsToCohortSheet: React.FC<Props> = ({cohortId}) => {
         trpc.respondents.getFilterValues.queryOptions()
     );
     const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
+    const {highlight} = useHighlight();
 
     const isOpen = action === 'add';
     const defaultValues: FilterForm = {
@@ -92,7 +94,11 @@ const AddRespondentsToCohortSheet: React.FC<Props> = ({cohortId}) => {
         trpc.respondents.search.mutationOptions({
             onSuccess: data => {
                 setSearchResults(data);
-                toast.success(`Found ${data.length} respondent${data.length !== 1 ? 's' : ''}`);
+                if (data.length > 0) {
+                    toast.success(`Found ${data.length} respondent${data.length !== 1 ? 's' : ''}`);
+                } else {
+                    toast.info('No respondents found');
+                }
             },
             onError: error => {
                 toast.error(error.message || 'Failed to search respondents');
@@ -119,6 +125,7 @@ const AddRespondentsToCohortSheet: React.FC<Props> = ({cohortId}) => {
                     queryKey: trpc.cohorts.getRespondents.queryKey(cohortId)
                 });
                 setSearchResults([]);
+                highlight('cohorts-respondents-list');
             },
             onError: error => {
                 toast.error(error.message || 'Failed to add respondents to cohort');
