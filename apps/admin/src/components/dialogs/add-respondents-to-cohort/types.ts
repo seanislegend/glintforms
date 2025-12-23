@@ -32,13 +32,13 @@ export const ageFilterSchema = z
 
 export const filterSchema = z.object({
     age: ageFilterSchema.optional(),
-    gender: z.string().optional(),
+    gender: z.array(z.string()).optional(),
     genderQualifier: z.enum(['is', 'is_not']).optional(),
-    locationCity: z.string().optional(),
+    locationCity: z.array(z.string()).optional(),
     locationCityQualifier: z.enum(['is', 'is_not']).optional(),
-    locationCountry: z.string().optional(),
+    locationCountry: z.array(z.string()).optional(),
     locationCountryQualifier: z.enum(['is', 'is_not']).optional(),
-    survey: z.string().optional(),
+    survey: z.array(z.string()).optional(),
     surveyQualifier: z.enum(['is', 'is_not']).optional()
 });
 

@@ -41,13 +41,13 @@ const AddRespondentsToCohortSheet: React.FC<Props> = ({cohortId}) => {
     const isOpen = action === 'add';
     const defaultValues: FilterForm = {
         age: {type: '', value: '', min: '', max: ''},
-        gender: '',
+        gender: [],
         genderQualifier: 'is',
-        locationCity: '',
+        locationCity: [],
         locationCityQualifier: 'is',
-        locationCountry: '',
+        locationCountry: [],
         locationCountryQualifier: 'is',
-        survey: '',
+        survey: [],
         surveyQualifier: 'is'
     };
 
@@ -65,16 +65,16 @@ const AddRespondentsToCohortSheet: React.FC<Props> = ({cohortId}) => {
             if (fieldName === 'age') {
                 methods.setValue('age', defaultValues.age);
             } else if (fieldName === 'gender') {
-                methods.setValue('gender', defaultValues.gender);
+                methods.setValue('gender', []);
                 methods.setValue('genderQualifier', 'is' as const);
             } else if (fieldName === 'locationCity') {
-                methods.setValue('locationCity', defaultValues.locationCity);
+                methods.setValue('locationCity', []);
                 methods.setValue('locationCityQualifier', 'is' as const);
             } else if (fieldName === 'locationCountry') {
-                methods.setValue('locationCountry', defaultValues.locationCountry);
+                methods.setValue('locationCountry', []);
                 methods.setValue('locationCountryQualifier', 'is' as const);
             } else if (fieldName === 'survey') {
-                methods.setValue('survey', defaultValues.survey);
+                methods.setValue('survey', []);
                 methods.setValue('surveyQualifier', 'is' as const);
             } else if (
                 fieldName === 'genderQualifier' ||
@@ -128,7 +128,6 @@ const AddRespondentsToCohortSheet: React.FC<Props> = ({cohortId}) => {
 
     const handleFormSubmit: SubmitHandler<FilterForm> = useCallback(
         async data => {
-            // filter out empty strings
             const ageType = data.age?.type;
             const isValidAgeType =
                 ageType === 'equal' ||
@@ -150,26 +149,36 @@ const AddRespondentsToCohortSheet: React.FC<Props> = ({cohortId}) => {
                           }
                         : undefined,
                 excludeCohortId: cohortId,
-                gender: data.gender && data.gender !== '' ? data.gender : undefined,
-                genderQualifier:
-                    data.gender && data.gender !== '' ? data.genderQualifier : undefined,
+                gender:
+                    data.gender && data.gender.length > 0 && data.genderQualifier
+                        ? data.gender.map(value => ({
+                              qualifier: data.genderQualifier as 'is' | 'is_not',
+                              value
+                          }))
+                        : undefined,
                 locationCity:
-                    data.locationCity && data.locationCity !== '' ? data.locationCity : undefined,
-                locationCityQualifier:
-                    data.locationCity && data.locationCity !== ''
-                        ? data.locationCityQualifier
+                    data.locationCity && data.locationCity.length > 0 && data.locationCityQualifier
+                        ? data.locationCity.map(value => ({
+                              qualifier: data.locationCityQualifier as 'is' | 'is_not',
+                              value
+                          }))
                         : undefined,
                 locationCountry:
-                    data.locationCountry && data.locationCountry !== ''
-                        ? data.locationCountry
+                    data.locationCountry &&
+                    data.locationCountry.length > 0 &&
+                    data.locationCountryQualifier
+                        ? data.locationCountry.map(value => ({
+                              qualifier: data.locationCountryQualifier as 'is' | 'is_not',
+                              value
+                          }))
                         : undefined,
-                locationCountryQualifier:
-                    data.locationCountry && data.locationCountry !== ''
-                        ? data.locationCountryQualifier
-                        : undefined,
-                survey: data.survey && data.survey !== '' ? data.survey : undefined,
-                surveyQualifier:
-                    data.survey && data.survey !== '' ? data.surveyQualifier : undefined
+                survey:
+                    data.survey && data.survey.length > 0 && data.surveyQualifier
+                        ? data.survey.map(value => ({
+                              qualifier: data.surveyQualifier as 'is' | 'is_not',
+                              value
+                          }))
+                        : undefined
             };
 
             await searchRespondents.mutateAsync(cleanData);
@@ -194,7 +203,7 @@ const AddRespondentsToCohortSheet: React.FC<Props> = ({cohortId}) => {
             <Sheet onOpenChange={handleOpenChange} open={isOpen}>
                 <SheetTrigger
                     render={
-                        <Button variant="secondary">
+                        <Button disabled={true} variant="secondary">
                             <PlusIcon />
                             Add respondents
                         </Button>
@@ -214,14 +223,10 @@ const AddRespondentsToCohortSheet: React.FC<Props> = ({cohortId}) => {
 
     return (
         <Sheet onOpenChange={handleOpenChange} open={isOpen}>
-            <SheetTrigger
-                render={() => (
-                    <Button variant="secondary">
-                        <PlusIcon />
-                        Add respondents
-                    </Button>
-                )}
-            />
+            <SheetTrigger render={<Button variant="secondary" />}>
+                <PlusIcon />
+                Add respondents
+            </SheetTrigger>
             <SheetPopup className="w-[400px] sm:w-[800px] xl:w-[1000px] max-w-none sm:max-w-none xl:max-w-none">
                 <SheetHeader className="sticky top-0 bg-white/70 backdrop-blur-lg">
                     <SheetTitle>Add respondents to cohort</SheetTitle>

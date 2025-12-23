@@ -2,11 +2,13 @@ import {
     authenticityScores,
     campaigns,
     cohorts,
+    genderTypes,
     respondentCohorts,
     respondents,
     responses,
     surveys
 } from '@glint/database';
+import type {SQL} from 'drizzle-orm';
 import {and, desc, eq, inArray, ne, notInArray, or, sql} from 'drizzle-orm';
 import {z} from 'zod';
 import type {RespondentList} from '@/lib/schemas/respondents';
@@ -225,25 +227,33 @@ export const respondentsRouter = {
         const genderRows = await ctx.db
             .select({value: respondents.gender})
             .from(respondents)
-            .where(and(eq(respondents.tenantId, ctx.tenant), sql`${respondents.gender} IS NOT NULL`))
+            .where(
+                and(eq(respondents.tenantId, ctx.tenant), sql`${respondents.gender} IS NOT NULL`)
+            )
             .groupBy(respondents.gender);
-        
         const genders = genderRows
             .map(r => r.value)
             .filter((g): g is NonNullable<typeof g> => g !== null);
-
         const cities = await ctx.db
             .select({value: respondents.locationCity})
             .from(respondents)
-            .where(and(eq(respondents.tenantId, ctx.tenant), sql`${respondents.locationCity} IS NOT NULL`))
+            .where(
+                and(
+                    eq(respondents.tenantId, ctx.tenant),
+                    sql`${respondents.locationCity} IS NOT NULL`
+                )
+            )
             .groupBy(respondents.locationCity);
-
         const countries = await ctx.db
             .select({value: respondents.locationCountry})
             .from(respondents)
-            .where(and(eq(respondents.tenantId, ctx.tenant), sql`${respondents.locationCountry} IS NOT NULL`))
+            .where(
+                and(
+                    eq(respondents.tenantId, ctx.tenant),
+                    sql`${respondents.locationCountry} IS NOT NULL`
+                )
+            )
             .groupBy(respondents.locationCountry);
-
         const surveyData = await ctx.db
             .select({
                 id: surveys.id,
@@ -254,12 +264,10 @@ export const respondentsRouter = {
             .innerJoin(respondents, eq(responses.respondentId, respondents.id))
             .where(eq(surveys.tenantId, ctx.tenant))
             .groupBy(surveys.id, surveys.title);
-
         const allRespondents = await ctx.db
             .select({metadata: respondents.metadata})
             .from(respondents)
             .where(eq(respondents.tenantId, ctx.tenant));
-
         const ages = Array.from(
             new Set(
                 allRespondents
@@ -283,9 +291,7 @@ export const respondentsRouter = {
                 .filter((country): country is string => country !== null)
                 .sort()
                 .map(country => ({label: country, value: country})),
-            genders: genders
-                .sort()
-                .map(gender => ({label: String(gender), value: String(gender)})),
+            genders: genders.sort().map(gender => ({label: String(gender), value: String(gender)})),
             surveys: surveyData
                 .map(s => ({id: s.id, title: s.title}))
                 .filter((s): s is {id: string; title: string} => Boolean(s.id && s.title))
@@ -300,23 +306,47 @@ export const respondentsRouter = {
                     .object({
                         max: z.string().optional(),
                         min: z.string().optional(),
-                        type: z.union([z.enum(['equal', 'between', 'over', 'under']), z.literal('')]).optional(),
+                        type: z
+                            .union([z.enum(['equal', 'between', 'over', 'under']), z.literal('')])
+                            .optional(),
                         value: z.string().optional()
                     })
                     .optional(),
                 excludeCohortId: z.string().uuid().optional(),
-                gender: z.string().optional(),
-                genderQualifier: z.enum(['is', 'is_not']).optional(),
-                locationCity: z.string().optional(),
-                locationCityQualifier: z.enum(['is', 'is_not']).optional(),
-                locationCountry: z.string().optional(),
-                locationCountryQualifier: z.enum(['is', 'is_not']).optional(),
-                survey: z.string().optional(),
-                surveyQualifier: z.enum(['is', 'is_not']).optional()
+                gender: z
+                    .array(
+                        z.object({qualifier: z.enum(['is', 'is_not']), value: z.enum(genderTypes)})
+                    )
+                    .optional(),
+                locationCity: z
+                    .array(z.object({qualifier: z.enum(['is', 'is_not']), value: z.string()}))
+                    .optional(),
+                locationCountry: z
+                    .array(z.object({qualifier: z.enum(['is', 'is_not']), value: z.string()}))
+                    .optional(),
+                survey: z
+                    .array(z.object({qualifier: z.enum(['is', 'is_not']), value: z.string()}))
+                    .optional()
             })
         )
         .mutation(async ({ctx, input}) => {
             const conditions = [eq(respondents.tenantId, ctx.tenant)];
+            const appendOr = (clauses: Array<SQL<unknown> | null | undefined>) => {
+                let combined: SQL<unknown> | undefined;
+                const isSql = (clause: SQL<unknown> | null | undefined): clause is SQL<unknown> =>
+                    clause !== null && clause !== undefined;
+                clauses.forEach(clause => {
+                    if (!isSql(clause)) return;
+                    if (combined === undefined) {
+                        combined = clause;
+                    } else {
+                        combined = or(combined, clause);
+                    }
+                });
+                if (combined !== undefined) {
+                    conditions.push(combined);
+                }
+            };
 
             // exclude respondents already in the cohort if excludeCohortId is provided
             if (input.excludeCohortId) {
@@ -334,91 +364,114 @@ export const respondentsRouter = {
                 }
             }
 
-            if (input.gender && input.gender !== '') {
-                const qualifier = input.genderQualifier || 'is';
-                if (qualifier === 'is') {
-                    conditions.push(eq(respondents.gender, input.gender));
-                } else {
-                    conditions.push(ne(respondents.gender, input.gender));
-                }
-            }
-
-            if (input.locationCity && input.locationCity !== '') {
-                const qualifier = input.locationCityQualifier || 'is';
-                if (qualifier === 'is') {
-                    conditions.push(eq(respondents.locationCity, input.locationCity));
-                } else {
-                    conditions.push(ne(respondents.locationCity, input.locationCity));
-                }
-            }
-
-            if (input.locationCountry && input.locationCountry !== '') {
-                const qualifier = input.locationCountryQualifier || 'is';
-                if (qualifier === 'is') {
-                    conditions.push(eq(respondents.locationCountry, input.locationCountry));
-                } else {
-                    conditions.push(ne(respondents.locationCountry, input.locationCountry));
-                }
-            }
-
-            if (input.survey && input.survey !== '') {
-                const respondentIdsWithSurvey = await ctx.db
-                    .selectDistinct({respondentId: responses.respondentId})
-                    .from(responses)
-                    .where(and(eq(responses.surveyId, input.survey), eq(responses.tenantId, ctx.tenant)));
-
-                const ids = respondentIdsWithSurvey
-                    .map(r => r.respondentId)
-                    .filter((id): id is string => id !== null);
-
-                const qualifier = input.surveyQualifier || 'is';
-                if (ids.length > 0) {
-                    if (qualifier === 'is') {
-                        conditions.push(inArray(respondents.id, ids));
-                    } else {
-                        conditions.push(notInArray(respondents.id, ids));
+            if (input.gender && input.gender.length > 0) {
+                const genderConditions = input.gender.map(entry => {
+                    if (entry.qualifier === 'is') {
+                        return eq(respondents.gender, entry.value);
                     }
-                } else {
-                    if (qualifier === 'is') {
-                        return [];
-                    }
-                }
+                    return ne(respondents.gender, entry.value);
+                });
+                appendOr(genderConditions);
             }
 
-            if (input.age?.type && input.age.type !== '') {
-                const ageValue = input.age.value ? Number(input.age.value) : null;
-                const ageMin = input.age.min ? Number(input.age.min) : null;
-                const ageMax = input.age.max ? Number(input.age.max) : null;
+            if (input.locationCity && input.locationCity.length > 0) {
+                const cityConditions = input.locationCity.map(entry => {
+                    if (entry.qualifier === 'is') {
+                        return eq(respondents.locationCity, entry.value);
+                    }
+                    return ne(respondents.locationCity, entry.value);
+                });
+                appendOr(cityConditions);
+            }
 
-                if (input.age.type === 'equal' && ageValue !== null) {
-                    conditions.push(
-                        and(
-                            sql`${respondents.metadata}->>'age' IS NOT NULL`,
-                            sql`CAST(${respondents.metadata}->>'age' AS INTEGER) = ${ageValue}`
-                        )!
+            if (input.locationCountry && input.locationCountry.length > 0) {
+                const countryConditions = input.locationCountry.map(entry => {
+                    if (entry.qualifier === 'is') {
+                        return eq(respondents.locationCountry, entry.value);
+                    }
+                    return ne(respondents.locationCountry, entry.value);
+                });
+                appendOr(countryConditions);
+            }
+
+            if (input.survey && input.survey.length > 0) {
+                const surveyResults = await Promise.all(
+                    input.survey.map(async entry => {
+                        const respondentIdsWithSurvey = await ctx.db
+                            .selectDistinct({respondentId: responses.respondentId})
+                            .from(responses)
+                            .where(
+                                and(
+                                    eq(responses.surveyId, entry.value),
+                                    eq(responses.tenantId, ctx.tenant)
+                                )
+                            );
+
+                        const ids = respondentIdsWithSurvey
+                            .map(r => r.respondentId)
+                            .filter((id): id is string => id !== null);
+
+                        return {condition: entry, ids};
+                    })
+                );
+
+                const hasIsWithNoResults = surveyResults.some(
+                    result => result.condition.qualifier === 'is' && result.ids.length === 0
+                );
+
+                if (hasIsWithNoResults) {
+                    return [];
+                }
+
+                const surveyConditions = surveyResults
+                    .map(result => {
+                        if (result.ids.length > 0) {
+                            if (result.condition.qualifier === 'is') {
+                                return inArray(respondents.id, result.ids);
+                            }
+                            return notInArray(respondents.id, result.ids);
+                        }
+                        if (result.condition.qualifier === 'is_not') {
+                            return sql`true`;
+                        }
+                        return null;
+                    })
+                    .filter((c): c is NonNullable<typeof c> => c !== null);
+
+                appendOr(surveyConditions);
+            }
+
+            const ageType = input.age?.type === '' ? null : input.age?.type;
+            if (ageType) {
+                const ageValue = input.age?.value ? Number(input.age.value) : null;
+                const ageMin = input.age?.min ? Number(input.age.min) : null;
+                const ageMax = input.age?.max ? Number(input.age.max) : null;
+
+                if (ageType === 'equal' && ageValue !== null) {
+                    const clause = and(
+                        sql`${respondents.metadata}->>'age' IS NOT NULL`,
+                        sql`CAST(${respondents.metadata}->>'age' AS INTEGER) = ${ageValue}`
                     );
-                } else if (input.age.type === 'over' && ageValue !== null) {
-                    conditions.push(
-                        and(
-                            sql`${respondents.metadata}->>'age' IS NOT NULL`,
-                            sql`CAST(${respondents.metadata}->>'age' AS INTEGER) > ${ageValue}`
-                        )!
+                    if (clause) conditions.push(clause);
+                } else if (ageType === 'over' && ageValue !== null) {
+                    const clause = and(
+                        sql`${respondents.metadata}->>'age' IS NOT NULL`,
+                        sql`CAST(${respondents.metadata}->>'age' AS INTEGER) > ${ageValue}`
                     );
-                } else if (input.age.type === 'under' && ageValue !== null) {
-                    conditions.push(
-                        and(
-                            sql`${respondents.metadata}->>'age' IS NOT NULL`,
-                            sql`CAST(${respondents.metadata}->>'age' AS INTEGER) < ${ageValue}`
-                        )!
+                    if (clause) conditions.push(clause);
+                } else if (ageType === 'under' && ageValue !== null) {
+                    const clause = and(
+                        sql`${respondents.metadata}->>'age' IS NOT NULL`,
+                        sql`CAST(${respondents.metadata}->>'age' AS INTEGER) < ${ageValue}`
                     );
-                } else if (input.age.type === 'between' && ageMin !== null && ageMax !== null) {
-                    conditions.push(
-                        and(
-                            sql`${respondents.metadata}->>'age' IS NOT NULL`,
-                            sql`CAST(${respondents.metadata}->>'age' AS INTEGER) >= ${ageMin}`,
-                            sql`CAST(${respondents.metadata}->>'age' AS INTEGER) <= ${ageMax}`
-                        )!
+                    if (clause) conditions.push(clause);
+                } else if (ageType === 'between' && ageMin !== null && ageMax !== null) {
+                    const clause = and(
+                        sql`${respondents.metadata}->>'age' IS NOT NULL`,
+                        sql`CAST(${respondents.metadata}->>'age' AS INTEGER) >= ${ageMin}`,
+                        sql`CAST(${respondents.metadata}->>'age' AS INTEGER) <= ${ageMax}`
                     );
+                    if (clause) conditions.push(clause);
                 }
             }
 

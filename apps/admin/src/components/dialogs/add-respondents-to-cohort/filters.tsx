@@ -141,6 +141,7 @@ const Filters: React.FC<Props> = ({filterValues, handleClearField, methods}) => 
                 <div className="w-full">
                     <FormField<FilterForm>
                         control={methods.control}
+                        fieldProps={{multiple: true}}
                         fieldType="select"
                         name="gender"
                         options={[{label: 'Any gender', value: ''}, ...filterValues.genders]}
@@ -148,7 +149,7 @@ const Filters: React.FC<Props> = ({filterValues, handleClearField, methods}) => 
                 </div>
                 <div className="w-[50px]">
                     <Button
-                        disabled={!gender}
+                        disabled={gender?.length === 0}
                         onClick={() => handleClearField('gender')}
                         size="sm"
                         type="button"
@@ -179,6 +180,7 @@ const Filters: React.FC<Props> = ({filterValues, handleClearField, methods}) => 
                 <div className="w-full">
                     <FormField<FilterForm>
                         control={methods.control}
+                        fieldProps={{multiple: true}}
                         fieldType="select"
                         name="locationCity"
                         options={[{label: 'Any city', value: ''}, ...filterValues.cities]}
@@ -186,7 +188,7 @@ const Filters: React.FC<Props> = ({filterValues, handleClearField, methods}) => 
                 </div>
                 <div className="w-[50px]">
                     <Button
-                        disabled={!locationCity}
+                        disabled={locationCity?.length === 0}
                         onClick={() => handleClearField('locationCity')}
                         size="sm"
                         type="button"
@@ -217,6 +219,7 @@ const Filters: React.FC<Props> = ({filterValues, handleClearField, methods}) => 
                 <div className="w-full">
                     <FormField<FilterForm>
                         control={methods.control}
+                        fieldProps={{multiple: true}}
                         fieldType="select"
                         name="locationCountry"
                         options={[{label: 'Any country', value: ''}, ...filterValues.countries]}
@@ -224,7 +227,7 @@ const Filters: React.FC<Props> = ({filterValues, handleClearField, methods}) => 
                 </div>
                 <div className="w-[50px]">
                     <Button
-                        disabled={!locationCountry}
+                        disabled={locationCountry?.length === 0}
                         onClick={() => handleClearField('locationCountry')}
                         size="sm"
                         type="button"
@@ -252,6 +255,7 @@ const Filters: React.FC<Props> = ({filterValues, handleClearField, methods}) => 
                 <div className="w-full">
                     <FormField<FilterForm>
                         control={methods.control}
+                        fieldProps={{multiple: true}}
                         fieldType="select"
                         name="survey"
                         options={[{label: 'Any survey', value: ''}, ...filterValues.surveys]}
@@ -259,7 +263,7 @@ const Filters: React.FC<Props> = ({filterValues, handleClearField, methods}) => 
                 </div>
                 <div className="w-[50px]">
                     <Button
-                        disabled={!survey}
+                        disabled={survey?.length === 0}
                         onClick={() => handleClearField('survey')}
                         size="sm"
                         type="button"
