@@ -34,7 +34,7 @@ export const createColumns = (
             <DataTableRowActions
                 deleteAction={{
                     onClick: () => onDelete(row),
-                    label: 'Delete'
+                    label: 'Remove'
                 }}
                 detailsUrl={`/respondents/${row.original.id}`}
                 row={row}
