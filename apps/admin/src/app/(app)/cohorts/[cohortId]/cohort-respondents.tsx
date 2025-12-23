@@ -7,6 +7,8 @@ import {useState} from 'react';
 import {toast} from 'sonner';
 import {DataTable} from '@/components/data-table';
 import ConfirmationDialog from '@/components/dialogs/confirmation';
+import HighlightChange from '@/components/highlight-change';
+import useHighlight from '@/hooks/use-highlight';
 import type {RespondentList} from '@/lib/schemas/respondents';
 import {useTRPC} from '@/lib/trpc/react';
 import {createColumns} from './columns';
@@ -22,6 +24,7 @@ const CohortRespondents: React.FC<Props> = ({cohortId}) => {
         trpc.cohorts.getRespondents.queryOptions(cohortId)
     );
     const [deleteRow, setDeleteRow] = useState<Row<RespondentList> | null>(null);
+    const {highlight} = useHighlight();
 
     const removeRespondent = useMutation(
         trpc.cohorts.removeRespondent.mutationOptions({
@@ -31,6 +34,7 @@ const CohortRespondents: React.FC<Props> = ({cohortId}) => {
                 });
                 toast.success('Respondent removed from cohort');
                 setDeleteRow(null);
+                highlight('cohorts-respondents-list');
             },
             onError: error => {
                 toast.error(error.message || 'Failed to remove respondent from cohort');
@@ -64,11 +68,13 @@ const CohortRespondents: React.FC<Props> = ({cohortId}) => {
 
     return (
         <>
-            <DataTable
-                columns={columns}
-                data={respondents as RespondentList[]}
-                inputFilterKey={null}
-            />
+            <HighlightChange id="cohorts-respondents-list">
+                <DataTable
+                    columns={columns}
+                    data={respondents as RespondentList[]}
+                    inputFilterKey={null}
+                />
+            </HighlightChange>
             <ConfirmationDialog
                 description="Are you sure you want to remove this respondent from the cohort? This action cannot be undone."
                 onConfirm={handleConfirmDelete}
