@@ -165,10 +165,7 @@ export const cohortsRouter = createTRPCRouter({
             .leftJoin(campaigns, eq(surveys.campaignId, campaigns.id))
             .leftJoin(cohorts, eq(respondentCohorts.cohortId, cohorts.id))
             .where(
-                and(
-                    eq(respondentCohorts.cohortId, cohortId),
-                    eq(respondents.tenantId, ctx.tenant)
-                )
+                and(eq(respondentCohorts.cohortId, cohortId), eq(respondents.tenantId, ctx.tenant))
             )
             .orderBy(desc(respondents.updatedAt));
 
@@ -225,5 +222,35 @@ export const cohortsRouter = createTRPCRouter({
         );
 
         return data;
-    })
+    }),
+    removeRespondent: protectedProcedure
+        .input(
+            z.object({
+                cohortId: z.string().uuid(),
+                respondentId: z.string().uuid()
+            })
+        )
+        .mutation(async ({ctx, input}) => {
+            // verify cohort exists and belongs to tenant
+            const [cohort] = await ctx.db
+                .select({id: cohorts.id})
+                .from(cohorts)
+                .where(and(eq(cohorts.id, input.cohortId), eq(cohorts.tenantId, ctx.tenant)))
+                .limit(1);
+
+            if (!cohort) {
+                throw new Error('Cohort not found');
+            }
+
+            await ctx.db
+                .delete(respondentCohorts)
+                .where(
+                    and(
+                        eq(respondentCohorts.cohortId, input.cohortId),
+                        eq(respondentCohorts.respondentId, input.respondentId)
+                    )
+                );
+
+            return {success: true};
+        })
 });
