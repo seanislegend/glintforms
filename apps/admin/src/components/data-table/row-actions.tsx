@@ -5,6 +5,7 @@ import {Menu, MenuItem, MenuPopup, MenuSeparator, MenuShortcut, MenuTrigger} fro
 import {ArrowRightIcon} from '@phosphor-icons/react/dist/ssr/ArrowRight';
 import {DotsThreeIcon} from '@phosphor-icons/react/dist/ssr/DotsThree';
 import {PencilSimpleIcon} from '@phosphor-icons/react/dist/ssr/PencilSimple';
+import {TrashIcon} from '@phosphor-icons/react/dist/ssr/Trash';
 import type {Row} from '@tanstack/react-table';
 import Link from 'next/link';
 
@@ -38,7 +39,7 @@ export const DataTableRowActions = <TData,>({
     return (
         <div className="flex flex-row space-x-2 justify-end">
             {children}
-            {actions.length > 0 && (
+            {(actions.length > 0 || deleteAction) && (
                 <Menu>
                     <MenuTrigger
                         render={
@@ -61,6 +62,7 @@ export const DataTableRowActions = <TData,>({
                         {deleteAction && actions.length > 0 && <MenuSeparator />}
                         {deleteAction && (
                             <MenuItem onClick={deleteAction.onClick} variant="destructive">
+                                <TrashIcon />
                                 {deleteAction.label || 'Delete'}
                                 {deleteAction.shortcut && (
                                     <MenuShortcut>{deleteAction.shortcut}</MenuShortcut>
