@@ -18,6 +18,8 @@ import {
     Select,
     SelectItem,
     SelectItemText,
+    SelectMultipleValue,
+    type SelectOption,
     SelectPopup,
     SelectTrigger,
     SelectValue
@@ -87,16 +89,11 @@ const getDefaultRender = (
     hasWrappers?: boolean,
     label?: string,
     description?: string,
-    options?: {
-        description?: string;
-        icon?: React.ElementType;
-        label: string;
-        value: number | string;
-    }[]
+    options?: SelectOption[]
 ): ControllerProps<any, any>['render'] => {
     return ({field, fieldState}) => {
         const fieldElement = (() => {
-            const sharedProps = {
+            const sharedProps: Record<string, any> = {
                 'aria-invalid': !!fieldState.error,
                 ...fieldProps
             };
@@ -167,12 +164,17 @@ const getDefaultRender = (
                         <Select onValueChange={field.onChange} value={field.value} {...sharedProps}>
                             <SelectTrigger className="bg-white w-full">
                                 <SelectValue>
-                                    <span className="flex items-center gap-2">
-                                        {
-                                            options?.find(option => option.value === field.value)
-                                                ?.label
-                                        }
-                                    </span>
+                                    {sharedProps.multiple ? (
+                                        SelectMultipleValue(field.value, options ?? [], placeholder)
+                                    ) : (
+                                        <span className="flex items-center gap-2">
+                                            {
+                                                options?.find(
+                                                    option => option.value === field.value
+                                                )?.label
+                                            }
+                                        </span>
+                                    )}
                                 </SelectValue>
                             </SelectTrigger>
                             <SelectPopup>

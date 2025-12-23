@@ -6,6 +6,13 @@ import {CaretUpIcon} from '@phosphor-icons/react/dist/ssr/CaretUp';
 import {CheckIcon} from '@phosphor-icons/react/dist/ssr/Check';
 import {cn} from '../lib/utils';
 
+export interface SelectOption {
+    description?: string;
+    icon?: React.ElementType;
+    label: string;
+    value: number | string;
+}
+
 const Select = ({...props}: React.ComponentProps<typeof BaseSelect.Root>) => {
     return <BaseSelect.Root data-slot="select" {...props} />;
 };
@@ -16,6 +23,16 @@ const SelectGroup = ({...props}: React.ComponentProps<typeof BaseSelect.Group>) 
 
 const SelectValue = ({...props}: React.ComponentProps<typeof BaseSelect.Value>) => {
     return <BaseSelect.Value data-slot="select-value" {...props} />;
+};
+
+const SelectMultipleValue = (value: string[], options: SelectOption[], placeholder?: string) => {
+    if (value.length === 0) {
+        return placeholder;
+    }
+
+    const firstOption = options.find(option => option.value === value[0])?.label;
+    const additionalOptions = value.length > 1 ? ` (+${value.length - 1} more)` : '';
+    return firstOption + additionalOptions;
 };
 
 const SelectTrigger = ({
@@ -153,6 +170,7 @@ export {
     SelectGroup,
     SelectItem,
     SelectItemText,
+    SelectMultipleValue,
     SelectScrollDownArrow,
     SelectScrollUpArrow,
     SelectSeparator,
