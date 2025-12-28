@@ -109,7 +109,7 @@ export const screenersRouter = createTRPCRouter({
                 config?: Record<string, unknown>;
                 description?: string;
                 name?: string;
-                type?: string;
+                type?: 'age' | 'location' | 'single_choice';
                 updatedAt: Date;
             } = {
                 updatedAt: new Date()
