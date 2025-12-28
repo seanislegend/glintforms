@@ -6,10 +6,12 @@ import {Alert, AlertDescription, AlertTitle} from '@glint/ui/alert';
 import Button from '@glint/ui/button';
 import {Card, CardContent, CardHeader, CardTitle} from '@glint/ui/card';
 import EmptyPanel from '@glint/ui/empty-panel';
-import {InfoIcon, PlusIcon, TrashIcon} from '@phosphor-icons/react/dist/ssr';
+import {InfoIcon, TrashIcon} from '@phosphor-icons/react/dist/ssr';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
+import {useState} from 'react';
 import {FormProvider, useForm} from 'react-hook-form';
 import {toast} from 'sonner';
+import ConfirmationDialog from '@/components/dialogs/confirmation';
 import {surveyCanBeEdited} from '@/lib/surveys/status';
 import {useTRPC} from '@/lib/trpc/react';
 import AssignScreenerDialog from './assign-screener-dialog';
@@ -22,9 +24,9 @@ const ScreenersSettings: React.FC<Props> = ({survey}) => {
     const trpc = useTRPC();
     const queryClient = useQueryClient();
     const canEdit = surveyCanBeEdited(survey.status);
+    const [removingScreenerId, setRemovingScreenerId] = useState<string | null>(null);
 
     const {data: screeners} = useQuery(trpc.surveys.getScreeners.queryOptions(survey.id));
-    const {data: allScreeners} = useQuery(trpc.screeners.getAll.queryOptions());
 
     const removeScreener = useMutation(
         trpc.surveys.removeScreener.mutationOptions({
@@ -49,8 +51,12 @@ const ScreenersSettings: React.FC<Props> = ({survey}) => {
     );
 
     const handleRemove = (screenerId: string) => {
-        if (confirm('Are you sure you want to remove this screener?')) {
-            removeScreener.mutate({screenerId, surveyId: survey.id});
+        setRemovingScreenerId(screenerId);
+    };
+
+    const handleConfirmRemove = () => {
+        if (removingScreenerId) {
+            removeScreener.mutate({screenerId: removingScreenerId, surveyId: survey.id});
         }
     };
 
@@ -76,6 +82,19 @@ const ScreenersSettings: React.FC<Props> = ({survey}) => {
 
     return (
         <div className="space-y-4">
+            <ConfirmationDialog
+                description="Are you sure you want to remove this screener?"
+                onConfirm={handleConfirmRemove}
+                onOpenChange={open => {
+                    if (!open) {
+                        setRemovingScreenerId(null);
+                    }
+                }}
+                open={removingScreenerId !== null}
+                pending={removeScreener.isPending}
+                title="Remove screener"
+                variant="destructive"
+            />
             <div className="flex items-center justify-between">
                 <div>
                     <h3 className="text-lg font-semibold">Screeners</h3>
