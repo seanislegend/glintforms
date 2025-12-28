@@ -31,6 +31,7 @@
     "exports": {
         "./checkbox": "./src/components/checkbox.tsx",
         "./checkbox-group": "./src/components/checkbox-group.tsx",
+        "./combobox": "./src/components/combobox.tsx",
         "./errors-panel": "./src/components/errors-panel.tsx",
         "./field-error": "./src/components/field-error.tsx",
         "./fields": "./src/components/fields.tsx",

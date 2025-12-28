@@ -26,6 +26,8 @@ import Filters from './filters';
 import {SearchResultsList} from './list';
 import {type FilterForm, filterSchema} from './types';
 
+const validGenderValues = ['female', 'male', 'other', 'prefer_not_to_say'] as const;
+
 interface Props {
     cohortId: string;
 }
@@ -156,36 +158,46 @@ const AddRespondentsToCohortSheet: React.FC<Props> = ({cohortId}) => {
                           }
                         : undefined,
                 excludeCohortId: cohortId,
-                gender:
-                    data.gender && data.gender.length > 0 && data.genderQualifier
-                        ? data.gender.map(value => ({
+                gender: (() => {
+                    const filtered = data.gender?.filter(
+                        (value): value is (typeof validGenderValues)[number] =>
+                            value !== '' &&
+                            validGenderValues.includes(value as (typeof validGenderValues)[number])
+                    );
+                    return filtered && filtered.length > 0 && data.genderQualifier
+                        ? filtered.map(value => ({
                               qualifier: data.genderQualifier as 'is' | 'is_not',
-                              value
+                              value: value as (typeof validGenderValues)[number]
                           }))
-                        : undefined,
-                locationCity:
-                    data.locationCity && data.locationCity.length > 0 && data.locationCityQualifier
-                        ? data.locationCity.map(value => ({
+                        : undefined;
+                })(),
+                locationCity: (() => {
+                    const filtered = data.locationCity?.filter(value => value !== '');
+                    return filtered && filtered.length > 0 && data.locationCityQualifier
+                        ? filtered.map(value => ({
                               qualifier: data.locationCityQualifier as 'is' | 'is_not',
                               value
                           }))
-                        : undefined,
-                locationCountry:
-                    data.locationCountry &&
-                    data.locationCountry.length > 0 &&
-                    data.locationCountryQualifier
-                        ? data.locationCountry.map(value => ({
+                        : undefined;
+                })(),
+                locationCountry: (() => {
+                    const filtered = data.locationCountry?.filter(value => value !== '');
+                    return filtered && filtered.length > 0 && data.locationCountryQualifier
+                        ? filtered.map(value => ({
                               qualifier: data.locationCountryQualifier as 'is' | 'is_not',
                               value
                           }))
-                        : undefined,
-                survey:
-                    data.survey && data.survey.length > 0 && data.surveyQualifier
-                        ? data.survey.map(value => ({
+                        : undefined;
+                })(),
+                survey: (() => {
+                    const filtered = data.survey?.filter(value => value !== '');
+                    return filtered && filtered.length > 0 && data.surveyQualifier
+                        ? filtered.map(value => ({
                               qualifier: data.surveyQualifier as 'is' | 'is_not',
                               value
                           }))
-                        : undefined
+                        : undefined;
+                })()
             };
 
             await searchRespondents.mutateAsync(cleanData);

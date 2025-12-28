@@ -33,10 +33,13 @@ const Filters: React.FC<Props> = ({filterValues, handleClearField, methods}) => 
     return (
         <div className="grid gap-4">
             <div className="flex flex-row items-center gap-2">
-                <label className={clsx([LABEL_CLASSNAME, 'w-3/12'])} htmlFor="age.type">
+                <label
+                    className={clsx([LABEL_CLASSNAME, 'w-3/12 flex-shrink-0'])}
+                    htmlFor="age.type"
+                >
                     Age
                 </label>
-                <div className="w-2/12">
+                <div className="w-2/12 flex-shrink-0">
                     <FormField<FilterForm>
                         control={methods.control}
                         fieldType="select"
@@ -124,10 +127,13 @@ const Filters: React.FC<Props> = ({filterValues, handleClearField, methods}) => 
                 </div>
             </div>
             <div className="flex flex-row items-center gap-2">
-                <label className={clsx([LABEL_CLASSNAME, 'w-3/12'])} htmlFor="genderQualifier">
+                <label
+                    className={clsx([LABEL_CLASSNAME, 'w-3/12 flex-shrink-0'])}
+                    htmlFor="genderQualifier"
+                >
                     Gender
                 </label>
-                <div className="w-2/12">
+                <div className="w-2/12 flex-shrink-0">
                     <FormField<FilterForm>
                         control={methods.control}
                         fieldType="select"
@@ -142,7 +148,7 @@ const Filters: React.FC<Props> = ({filterValues, handleClearField, methods}) => 
                     <FormField<FilterForm>
                         control={methods.control}
                         fieldProps={{multiple: true}}
-                        fieldType="select"
+                        fieldType="combobox"
                         name="gender"
                         options={[{label: 'Any gender', value: ''}, ...filterValues.genders]}
                     />
@@ -161,12 +167,12 @@ const Filters: React.FC<Props> = ({filterValues, handleClearField, methods}) => 
             </div>
             <div className="flex flex-row items-center gap-2">
                 <label
-                    className={clsx([LABEL_CLASSNAME, 'w-3/12'])}
+                    className={clsx([LABEL_CLASSNAME, 'w-3/12 flex-shrink-0'])}
                     htmlFor="locationCityQualifier"
                 >
                     Location city
                 </label>
-                <div className="w-2/12">
+                <div className="w-2/12 flex-shrink-0">
                     <FormField<FilterForm>
                         control={methods.control}
                         fieldType="select"
@@ -181,7 +187,7 @@ const Filters: React.FC<Props> = ({filterValues, handleClearField, methods}) => 
                     <FormField<FilterForm>
                         control={methods.control}
                         fieldProps={{multiple: true}}
-                        fieldType="select"
+                        fieldType="combobox"
                         name="locationCity"
                         options={[{label: 'Any city', value: ''}, ...filterValues.cities]}
                     />
@@ -200,12 +206,12 @@ const Filters: React.FC<Props> = ({filterValues, handleClearField, methods}) => 
             </div>
             <div className="flex flex-row items-center gap-2">
                 <label
-                    className={clsx([LABEL_CLASSNAME, 'w-3/12'])}
+                    className={clsx([LABEL_CLASSNAME, 'w-3/12 flex-shrink-0'])}
                     htmlFor="locationCountryQualifier"
                 >
                     Location country
                 </label>
-                <div className="w-2/12">
+                <div className="w-2/12 flex-shrink-0">
                     <FormField<FilterForm>
                         control={methods.control}
                         fieldType="select"
@@ -220,7 +226,7 @@ const Filters: React.FC<Props> = ({filterValues, handleClearField, methods}) => 
                     <FormField<FilterForm>
                         control={methods.control}
                         fieldProps={{multiple: true}}
-                        fieldType="select"
+                        fieldType="combobox"
                         name="locationCountry"
                         options={[{label: 'Any country', value: ''}, ...filterValues.countries]}
                     />
@@ -238,10 +244,13 @@ const Filters: React.FC<Props> = ({filterValues, handleClearField, methods}) => 
                 </div>
             </div>
             <div className="flex flex-row items-center gap-2">
-                <label className={clsx([LABEL_CLASSNAME, 'w-3/12'])} htmlFor="surveyQualifier">
+                <label
+                    className={clsx([LABEL_CLASSNAME, 'w-3/12 flex-shrink-0'])}
+                    htmlFor="surveyQualifier"
+                >
                     Survey
                 </label>
-                <div className="w-2/12">
+                <div className="w-2/12 flex-shrink-0">
                     <FormField<FilterForm>
                         control={methods.control}
                         fieldType="select"
@@ -256,7 +265,7 @@ const Filters: React.FC<Props> = ({filterValues, handleClearField, methods}) => 
                     <FormField<FilterForm>
                         control={methods.control}
                         fieldProps={{multiple: true}}
-                        fieldType="select"
+                        fieldType="combobox"
                         name="survey"
                         options={[{label: 'Any survey', value: ''}, ...filterValues.surveys]}
                     />

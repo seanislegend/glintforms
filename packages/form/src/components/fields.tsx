@@ -3,13 +3,14 @@
 import {Field} from '@base-ui-components/react/field';
 import Condition from '@glint/ui/condition';
 import {cn} from '@glint/ui/utils';
-import {useId} from 'react';
+import {useId, useRef} from 'react';
 import type {ControllerProps, FieldError, FieldPath, FieldValues} from 'react-hook-form';
 import {Controller} from 'react-hook-form';
 import {FormFieldContext, FormItemContext} from '../hooks/context';
 import useFormField from '../hooks/use-form-field';
 import Checkbox from './checkbox';
 import {CheckboxGroup, CheckboxGroupItem} from './checkbox-group';
+import {Combobox, ComboboxInputWithTrigger, ComboboxListWithItems, ComboboxPopup} from './combobox';
 import Input from './input';
 import Label from './label';
 import PasswordInput from './password-input';
@@ -92,6 +93,9 @@ const getDefaultRender = (
     options?: SelectOption[]
 ): ControllerProps<any, any>['render'] => {
     return ({field, fieldState}) => {
+        const containerRef = useRef<HTMLDivElement>(null);
+        const id = useId();
+
         const fieldElement = (() => {
             const sharedProps: Record<string, any> = {
                 'aria-invalid': !!fieldState.error,
@@ -109,6 +113,16 @@ const getDefaultRender = (
                 } else {
                     field.onChange(field.value.filter(v => v !== value));
                 }
+            };
+
+            const getOptionLabel = (value: unknown) => {
+                const stringValue =
+                    typeof value === 'string' || typeof value === 'number' ? value.toString() : '';
+
+                return (
+                    options?.find(option => option.value.toString() === stringValue)?.label ??
+                    stringValue
+                );
             };
 
             switch (type) {
@@ -140,6 +154,34 @@ const getDefaultRender = (
                             })}
                         </CheckboxGroup>
                     );
+                case 'combobox': {
+                    return (
+                        <Combobox
+                            itemToStringLabel={getOptionLabel}
+                            itemToStringValue={value => (value != null ? String(value) : '')}
+                            items={options}
+                            multiple={sharedProps.multiple}
+                            onValueChange={field.onChange}
+                            value={field.value}
+                            {...sharedProps}
+                        >
+                            <ComboboxInputWithTrigger
+                                containerRef={containerRef}
+                                id={id}
+                                multiple={sharedProps.multiple}
+                                placeholder={placeholder ?? 'Select an option'}
+                                value={field.value}
+                                valueToStringLabel={getOptionLabel}
+                            />
+                            <ComboboxPopup anchorRef={containerRef}>
+                                <ComboboxListWithItems
+                                    options={options ?? []}
+                                    valueToStringLabel={getOptionLabel}
+                                />
+                            </ComboboxPopup>
+                        </Combobox>
+                    );
+                }
                 case 'input':
                     return <Input {...sharedProps} placeholder={placeholder} {...field} />;
                 case 'password-input':
@@ -248,6 +290,7 @@ interface FormFieldProps<
     fieldType?:
         | 'checkbox'
         | 'checkbox-group'
+        | 'combobox'
         | 'input'
         | 'password-input'
         | 'radio-group'
