@@ -23,7 +23,6 @@ const HighlightChange: React.FC<React.PropsWithChildren<Props>> = ({children, id
             return () => clearTimeout(timer);
         }
     }, [highlights, id]);
-    console.log({isHighlighted});
 
     return (
         <div

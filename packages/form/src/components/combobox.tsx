@@ -100,30 +100,33 @@ const ComboboxInputWithTrigger = ({
                     ref={containerRef}
                 >
                     <BaseCombobox.Value>
-                        {(values: any[]) => (
-                            <Fragment>
-                                {values.map(value => (
-                                    <BaseCombobox.Chip
-                                        key={value.value}
-                                        aria-label={value.label}
-                                        className="flex items-center gap-1 rounded bg-accent pl-1.5 pr-1 text-sm text-accent-foreground outline-none cursor-default focus-within:bg-primary focus-within:text-primary-foreground min-h-6"
-                                    >
-                                        {valueToStringLabel(value)}
-                                        <BaseCombobox.ChipRemove
-                                            aria-label="Remove"
-                                            className="rounded p-0.5 text-inherit hover:bg-white hover:bg-shadow [&_svg]:size-3"
+                        {(values: any) => {
+                            const valuesArray = Array.isArray(values) ? values : [];
+                            return (
+                                <Fragment>
+                                    {valuesArray.map(value => (
+                                        <BaseCombobox.Chip
+                                            key={value.value}
+                                            aria-label={value.label}
+                                            className="flex items-center gap-1 rounded bg-accent pl-1.5 pr-1 text-sm text-accent-foreground outline-none cursor-default focus-within:bg-primary focus-within:text-primary-foreground min-h-6"
                                         >
-                                            <XIcon />
-                                        </BaseCombobox.ChipRemove>
-                                    </BaseCombobox.Chip>
-                                ))}
-                                <BaseCombobox.Input
-                                    className="min-w-12 flex-1 rounded-md border-0 bg-transparent pl-2 text-gray-900 outline-none text-sm"
-                                    id={id}
-                                    placeholder={values.length > 0 ? '' : placeholder}
-                                />
-                            </Fragment>
-                        )}
+                                            {valueToStringLabel(value)}
+                                            <BaseCombobox.ChipRemove
+                                                aria-label="Remove"
+                                                className="rounded p-0.5 text-inherit hover:bg-white hover:bg-shadow [&_svg]:size-3"
+                                            >
+                                                <XIcon />
+                                            </BaseCombobox.ChipRemove>
+                                        </BaseCombobox.Chip>
+                                    ))}
+                                    <BaseCombobox.Input
+                                        className="min-w-12 flex-1 rounded-md border-0 bg-transparent pl-2 text-gray-900 outline-none text-sm"
+                                        id={id}
+                                        placeholder={valuesArray.length > 0 ? '' : placeholder}
+                                    />
+                                </Fragment>
+                            );
+                        }}
                     </BaseCombobox.Value>
                 </BaseCombobox.Chips>
             )}

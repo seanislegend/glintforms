@@ -188,16 +188,21 @@ const getDefaultRender = (
                     return <PasswordInput {...sharedProps} placeholder={placeholder} {...field} />;
                 case 'radio-group':
                     return (
-                        <RadioGroup {...sharedProps}>
+                        <RadioGroup
+                            {...sharedProps}
+                            className="sm:flex sm:flex-row sm:flex-wrap"
+                            onValueChange={field.onChange}
+                            value={field.value}
+                        >
                             {options?.map(option => (
-                                <div key={option.value} className="flex items-center gap-3">
+                                <Label key={option.value} htmlFor={option.value.toString()}>
                                     <RadioGroupItem
                                         {...field}
-                                        onChange={field.onChange}
+                                        id={option.value.toString()}
                                         value={option.value.toString()}
                                     />
-                                    <Label htmlFor={option.value.toString()}>{option.label}</Label>
-                                </div>
+                                    {option.label}
+                                </Label>
                             ))}
                         </RadioGroup>
                     );
@@ -210,11 +215,8 @@ const getDefaultRender = (
                                         SelectMultipleValue(field.value, options ?? [], placeholder)
                                     ) : (
                                         <span className="flex items-center gap-2">
-                                            {
-                                                options?.find(
-                                                    option => option.value === field.value
-                                                )?.label
-                                            }
+                                            {options?.find(option => option.value === field.value)
+                                                ?.label || placeholder}
                                         </span>
                                     )}
                                 </SelectValue>
