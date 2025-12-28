@@ -1,7 +1,15 @@
 'use client';
 
 import {Avatar, AvatarFallback} from '@glint/ui/avatar';
-import {Menu, MenuGroup, MenuItem, MenuLabel, MenuPopup, MenuSeparator, MenuTrigger} from '@glint/ui/menu';
+import {
+    Menu,
+    MenuGroup,
+    MenuItem,
+    MenuLabel,
+    MenuPopup,
+    MenuSeparator,
+    MenuTrigger
+} from '@glint/ui/menu';
 import {SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar} from '@glint/ui/sidebar';
 import {CaretUpDownIcon} from '@phosphor-icons/react/dist/ssr/CaretUpDown';
 import {SignOutIcon} from '@phosphor-icons/react/dist/ssr/SignOut';
@@ -61,8 +69,12 @@ const NavUser: React.FC = () => {
                                                 </AvatarFallback>
                                             </Avatar>
                                             <div className="grid flex-1 text-left text-sm leading-tight">
-                                                <span className="truncate font-medium">{user.name}</span>
-                                                <span className="truncate text-xs">{user.email}</span>
+                                                <span className="truncate font-medium">
+                                                    {user.name}
+                                                </span>
+                                                <span className="truncate text-xs">
+                                                    {user.email}
+                                                </span>
                                             </div>
                                         </div>
                                     </MenuLabel>

@@ -100,13 +100,13 @@ const ChartTooltip = RechartsPrimitive.Tooltip;
 
 const ChartTooltipContent = ({
     active,
-    // @ts-ignore
+    // @ts-expect-error
     payload,
     className,
     indicator = 'dot',
     hideLabel = false,
     hideIndicator = false,
-    // @ts-ignore
+    // @ts-expect-error
     label,
     labelFormatter,
     labelClassName,
@@ -247,14 +247,14 @@ const ChartLegendContent = ({
     verticalAlign = 'bottom',
     nameKey
 }: React.ComponentProps<'div'> &
-    // @ts-ignore
+    // @ts-expect-error
     Pick<RechartsPrimitive.LegendProps, 'payload' | 'verticalAlign'> & {
         hideIcon?: boolean;
         nameKey?: string;
     }) => {
     const {config} = useChart();
 
-    // @ts-ignore
+    // @ts-expect-error
     if (!payload?.length) {
         return null;
     }

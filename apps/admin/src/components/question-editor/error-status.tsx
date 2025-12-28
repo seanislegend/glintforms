@@ -18,7 +18,7 @@ const QuestionEditorErrorStatus: React.FC = () => {
                 .map(part => {
                     // handle array indices
                     if (/^\d+$/.test(part)) {
-                        return `Question ${parseInt(part) + 1}`;
+                        return `Question ${parseInt(part, 10) + 1}`;
                     }
 
                     // convert camelCase and snake_case to readable format

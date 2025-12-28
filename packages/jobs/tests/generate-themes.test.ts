@@ -121,7 +121,7 @@ describe('generate-themes', () => {
         });
 
         it('returns success when no text or number questions found', async () => {
-            const {db, surveys} = await import('@glint/database');
+            const {db} = await import('@glint/database');
             const {generateThemesTask} = await import('../src/generate-themes');
 
             const mockSurvey = {
@@ -234,14 +234,6 @@ describe('generate-themes', () => {
                 questionId: 'q1',
                 value: 'Great product!',
                 responseId: 'r1'
-            };
-
-            const mockTheme = {
-                id: 'theme-1',
-                name: 'Positive Feedback',
-                description: 'Customers expressing satisfaction',
-                sentiment: 'positive',
-                score: 100
             };
 
             // mock survey found

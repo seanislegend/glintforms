@@ -43,4 +43,3 @@ export const filterSchema = z.object({
 });
 
 export type FilterForm = z.infer<typeof filterSchema>;
-

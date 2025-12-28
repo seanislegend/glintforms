@@ -7,7 +7,7 @@ export const mapObjectValuesToNumber = <TData extends Record<string, number | nu
             key,
             !onlyKeys?.length || onlyKeys.includes(key)
                 ? typeof value === 'string'
-                    ? parseInt(value)
+                    ? parseInt(value, 10)
                     : value
                 : value
         ])

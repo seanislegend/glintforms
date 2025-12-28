@@ -200,9 +200,7 @@ export const fetchAnswers = async (
             ...answer,
             analysis_themes: themes.length > 0 ? themes.map(t => t.name) : null,
             analysis_themes_descriptions:
-                themes.length > 0
-                    ? themes.map(t => t.description || '')
-                    : null,
+                themes.length > 0 ? themes.map(t => t.description || '') : null,
             analysis_themes_sentiments:
                 themes.length > 0 ? themes.map(t => t.sentiment || '') : null
         };

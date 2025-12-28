@@ -333,9 +333,8 @@ black is: #0f1220; */
     --radius: calc(var(--radius));
     --radius-lg: var(--radius);
     --radius-xl: calc(var(--radius) + 4px);
-    
-    --text-sm: 0.885rem;
 
+    --text-sm: 0.885rem;
 
     /* --shadow-2xs: var(--shadow-2xs);
     --shadow-xs: var(--shadow-xs);

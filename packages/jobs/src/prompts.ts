@@ -35,4 +35,3 @@ export const buildThemeGenerationPrompt = ({
         9. Provide a sentiment for each theme between positive, negative or neutral.
       `;
 };
-

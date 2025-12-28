@@ -39,7 +39,7 @@ const BreadcrumbLink: React.FC<useRender.ComponentProps<'a'>> = ({
     return useRender({
         render,
         props: {
-            // @ts-ignore - todo: https://github.com/mui/base-ui/issues/2370
+            // @ts-expect-error - todo: https://github.com/mui/base-ui/issues/2370
             'data-slot': 'breadcrumb-link',
             className: cn(
                 'hover:text-foreground transition-colors hover:underline underline-offset-2',

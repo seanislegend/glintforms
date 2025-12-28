@@ -50,7 +50,7 @@ const QuestionRevisionsMatrix: React.FC<Props> = ({answerQuestionVersion, questi
     }
 
     if (isCoded && versions.options) {
-        for (const [optionId, optionVersions] of Object.entries(versions.options)) {
+        for (const [_, optionVersions] of Object.entries(versions.options)) {
             for (const [versionStr, versionData] of Object.entries(optionVersions)) {
                 revisions.push({
                     change: (

@@ -1,9 +1,9 @@
-interface QuestionOption {
+export interface QuestionOption {
     label: string;
     value: string;
 }
 
-interface BuildAuthenticityPromptProps {
+export interface BuildAuthenticityPromptProps {
     actualDurationMinutes: number;
     codedQuestions: Array<{
         id: string;
@@ -23,7 +23,7 @@ interface BuildAuthenticityPromptProps {
     wasCompleted: boolean;
 }
 
-interface AuthenticityScoreMetadata {
+export interface AuthenticityScoreMetadata {
     aiReasoning: string;
     aiScore: number;
     aiPass: boolean;
@@ -33,7 +33,7 @@ interface AuthenticityScoreMetadata {
     failureReasons: string[];
 }
 
-interface AuthenticityScore {
+export interface AuthenticityScore {
     id: string;
 }
 

@@ -47,7 +47,7 @@ export const authenticityRouter = {
                 campaignId: z.string().uuid()
             })
         )
-        .mutation(async ({input: {responseId, surveyId}, ctx}) => {
+        .mutation(async ({input: {responseId, surveyId}}) => {
             const result = await generateAuthenticityScore(responseId, surveyId);
             return result;
         }),
