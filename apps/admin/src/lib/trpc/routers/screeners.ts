@@ -1,9 +1,5 @@
-import {
-    screeners,
-    surveyScreeners,
-    surveys,
-    type Database
-} from '@glint/database';
+import {type Database, screeners, surveyScreeners, surveys} from '@glint/database';
+import {TRPCError} from '@trpc/server';
 import {and, count, desc, eq} from 'drizzle-orm';
 import {z} from 'zod';
 import type {ScreenerList} from '@/lib/schemas/screeners';
@@ -72,10 +68,7 @@ export const screenersRouter = createTRPCRouter({
             .from(surveyScreeners)
             .innerJoin(surveys, eq(surveyScreeners.surveyId, surveys.id))
             .where(
-                and(
-                    eq(surveyScreeners.screenerId, screener.id),
-                    eq(surveys.tenantId, ctx.tenant)
-                )
+                and(eq(surveyScreeners.screenerId, screener.id), eq(surveys.tenantId, ctx.tenant))
             )
             .orderBy(surveyScreeners.order);
 
@@ -109,7 +102,7 @@ export const screenersRouter = createTRPCRouter({
         .mutation(async ({ctx, input}) => {
             const screener = await verifyScreenerAccess(ctx.db, ctx.tenant, input.id);
             if (!screener) {
-                throw new Error('Screener not found');
+                throw new TRPCError({code: 'NOT_FOUND', message: 'Screener not found'});
             }
 
             const updateData: {
@@ -147,10 +140,9 @@ export const screenersRouter = createTRPCRouter({
     delete: protectedProcedure.input(z.string().uuid()).mutation(async ({ctx, input}) => {
         const screener = await verifyScreenerAccess(ctx.db, ctx.tenant, input);
         if (!screener) {
-            throw new Error('Screener not found');
+            throw new TRPCError({code: 'NOT_FOUND', message: 'Screener not found'});
         }
 
-        // check if screener is used in any surveys
         const [usage] = await ctx.db
             .select({count: count()})
             .from(surveyScreeners)
@@ -158,7 +150,10 @@ export const screenersRouter = createTRPCRouter({
             .limit(1);
 
         if (usage && usage.count > 0) {
-            throw new Error('Cannot delete screener that is assigned to surveys');
+            throw new TRPCError({
+                code: 'BAD_REQUEST',
+                message: 'Cannot delete screener that is assigned to surveys'
+            });
         }
 
         await ctx.db
@@ -168,4 +163,3 @@ export const screenersRouter = createTRPCRouter({
         return {success: true};
     })
 });
-

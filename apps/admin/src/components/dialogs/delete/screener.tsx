@@ -1,0 +1,63 @@
+'use client';
+
+import Button from '@glint/ui/button';
+import {TrashIcon} from '@phosphor-icons/react/dist/ssr';
+import {useMutation, useQueryClient} from '@tanstack/react-query';
+import {useRouter} from 'next/navigation';
+import {useState} from 'react';
+import {toast} from 'sonner';
+import ConfirmationDialog from '@/components/dialogs/confirmation';
+import {useTRPC} from '@/lib/trpc/react';
+
+interface Props {
+    screenerId: string;
+}
+
+const DeleteScreenerDialog: React.FC<Props> = ({screenerId}) => {
+    const [isOpen, setIsOpen] = useState(false);
+    const router = useRouter();
+    const trpc = useTRPC();
+    const queryClient = useQueryClient();
+
+    const deleteScreener = useMutation(
+        trpc.screeners.delete.mutationOptions({
+            onError: error => {
+                toast.error(error.message || 'Failed to delete screener');
+            },
+            onSuccess: async () => {
+                await queryClient.invalidateQueries({
+                    queryKey: trpc.screeners.getAll.queryKey()
+                });
+                await queryClient.invalidateQueries({
+                    queryKey: trpc.nav.getAll.queryKey()
+                });
+                toast.success('Screener deleted successfully');
+                router.push('/screeners');
+            }
+        })
+    );
+
+    const handleConfirm = () => {
+        deleteScreener.mutate(screenerId);
+    };
+
+    return (
+        <>
+            <ConfirmationDialog
+                description="Are you sure you want to delete this screener? This action cannot be undone."
+                onConfirm={handleConfirm}
+                onOpenChange={setIsOpen}
+                open={isOpen}
+                pending={deleteScreener.isPending}
+                title="Delete screener"
+                variant="destructive"
+            />
+            <Button onClick={() => setIsOpen(true)} variant="destructive">
+                <TrashIcon />
+                Delete screener
+            </Button>
+        </>
+    );
+};
+
+export default DeleteScreenerDialog;

@@ -4,7 +4,9 @@ import Container from '@glint/ui/container';
 import EmptyPanel from '@glint/ui/empty-panel';
 import {Heading4} from '@glint/ui/heading';
 import RelativeDate from '@glint/ui/relative-date';
+import Spacer from '@glint/ui/spacer';
 import {useQuery} from '@tanstack/react-query';
+import DeleteScreenerDialog from '@/components/dialogs/delete/screener';
 import RecordId from '@/components/record-id';
 import {useTRPC} from '@/lib/trpc/react';
 
@@ -50,6 +52,8 @@ const ScreenerSummary: React.FC<FormProps> = ({screenerId}) => {
                     </dd>
                 </div>
             </dl>
+            <Spacer />
+            <DeleteScreenerDialog screenerId={screenerId} />
         </Container>
     );
 };
