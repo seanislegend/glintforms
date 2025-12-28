@@ -8,6 +8,7 @@ import {
     SidebarMenuItem
 } from '@glint/ui/sidebar';
 import {ClipboardTextIcon} from '@phosphor-icons/react/dist/ssr/ClipboardText';
+import {FunnelIcon} from '@phosphor-icons/react/dist/ssr/Funnel';
 import {HouseIcon} from '@phosphor-icons/react/dist/ssr/House';
 import {MegaphoneIcon} from '@phosphor-icons/react/dist/ssr/Megaphone';
 import {UsersIcon} from '@phosphor-icons/react/dist/ssr/Users';
@@ -22,7 +23,8 @@ const data = [
     {href: '/campaigns', Icon: MegaphoneIcon, title: 'Campaigns', subnav: 'campaigns'},
     {href: '/surveys', Icon: ClipboardTextIcon, title: 'Surveys', subnav: 'surveys'},
     {href: '/respondents', Icon: UsersIcon, title: 'Respondents', subnav: 'respondents'},
-    {href: '/cohorts', Icon: UsersThreeIcon, title: 'Cohorts', subnav: 'cohorts'}
+    {href: '/cohorts', Icon: UsersThreeIcon, title: 'Cohorts', subnav: 'cohorts'},
+    {href: '/screeners', Icon: FunnelIcon, title: 'Screeners', subnav: 'screeners'}
 ];
 
 export const NavMainLink: React.FC<{

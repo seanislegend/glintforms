@@ -1,0 +1,91 @@
+'use client';
+
+import {FormField} from '@glint/form/fields';
+import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@glint/ui/card';
+import {type Control, useFormContext, useWatch} from 'react-hook-form';
+import type {ScreenerCreate} from '@/lib/schemas/screeners';
+import {COUNTRY_CODE_LABELS} from '@/utils/country-codes';
+import SingleChoiceFields from './form-single-choice-fields';
+
+interface Props {
+    defaultOptionIds?: Array<{id: string; tempId: string}>;
+}
+
+interface FieldProps {
+    control: Control<ScreenerCreate>;
+}
+
+const ScreenerAgeFields: React.FC<FieldProps> = ({control}) => (
+    <>
+        <FormField<ScreenerCreate>
+            control={control}
+            defaultValue=""
+            fieldProps={{min: '1', type: 'number'}}
+            fieldType="input"
+            label="Age"
+            name="config.value"
+        />
+        <FormField<ScreenerCreate>
+            control={control}
+            defaultValue=""
+            fieldType="radio-group"
+            label="Operator"
+            name="config.operator"
+            options={[
+                {label: 'Over', value: 'over'},
+                {label: 'Under', value: 'under'}
+            ]}
+        />
+    </>
+);
+
+const ScreenerLocationFields: React.FC<FieldProps> = ({control}) => {
+    const countryOptions = Object.entries(COUNTRY_CODE_LABELS).map(([code, label]) => ({
+        label,
+        value: code
+    }));
+
+    return (
+        <FormField<ScreenerCreate>
+            control={control}
+            defaultValue={[]}
+            fieldProps={{multiple: true}}
+            fieldType="combobox"
+            label="Countries"
+            name="config.countries"
+            options={countryOptions}
+        />
+    );
+};
+
+const screenerDescriptions: Record<string, string> = {
+    age: 'Only allow respondents to access the survey if they are older or younger than the specified age.',
+    location: 'Only allow respondents to access the survey if they are in the specified countries.',
+    single_choice:
+        'Only allow respondents to access the survey if they answer the question correctly.'
+};
+
+const ScreenerTypeFields: React.FC<Props> = ({defaultOptionIds}) => {
+    const methods = useFormContext<ScreenerCreate>();
+    const screenerType = useWatch({control: methods.control, name: 'type'});
+
+    return (
+        <Card>
+            <CardHeader>
+                <CardTitle>Screener configuration</CardTitle>
+                <CardDescription>{screenerDescriptions[screenerType]}</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+                {screenerType === 'age' && <ScreenerAgeFields control={methods.control} />}
+                {screenerType === 'location' && (
+                    <ScreenerLocationFields control={methods.control} />
+                )}
+                {screenerType === 'single_choice' && (
+                    <SingleChoiceFields defaultOptionIds={defaultOptionIds} />
+                )}
+            </CardContent>
+        </Card>
+    );
+};
+
+export default ScreenerTypeFields;

@@ -9,6 +9,7 @@ import {navRouter} from '@/lib/trpc/routers/nav';
 import {questionsRouter} from '@/lib/trpc/routers/questions';
 import {respondentsRouter} from '@/lib/trpc/routers/respondents';
 import {responsesRouter} from '@/lib/trpc/routers/responses';
+import {screenersRouter} from '@/lib/trpc/routers/screeners';
 import {actionsRouter} from '@/lib/trpc/routers/survey-actions';
 import {surveysRouter} from '@/lib/trpc/routers/surveys';
 import {unprocessedSubmissionsRouter} from '@/lib/trpc/routers/unprocessed-submissions';
@@ -25,6 +26,7 @@ export const appRouter = createTRPCRouter({
     questions: questionsRouter,
     respondents: respondentsRouter,
     responses: responsesRouter,
+    screeners: screenersRouter,
     surveys: surveysRouter,
     unprocessedSubmissions: unprocessedSubmissionsRouter
 });

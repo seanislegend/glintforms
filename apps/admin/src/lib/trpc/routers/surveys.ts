@@ -1,11 +1,25 @@
-import {campaigns, questions, surveySettings, surveys} from '@glint/database';
+import {
+    campaigns,
+    questions,
+    screeners,
+    surveyScreeners,
+    surveySettings,
+    surveys
+} from '@glint/database';
 import {encrypt} from '@glint/encryption';
 import type {DeleteSurveyDataTaskPayload, GenerateThemesTaskPayload} from '@glint/jobs/schema';
 import {tasks} from '@trigger.dev/sdk';
 import {TRPCError} from '@trpc/server';
-import {and, desc, eq, or} from 'drizzle-orm';
+import {and, desc, eq, max, or} from 'drizzle-orm';
 import {z} from 'zod';
+import {
+    assignScreenerSchema,
+    removeScreenerSchema,
+    updateScreenerFailureMessageSchema,
+    updateScreenerOrderSchema
+} from '@/lib/schemas/screeners';
 import {surveyInsertSchema, surveySettingsSchema, surveyUpdateSchema} from '@/lib/schemas/surveys';
+import {surveyCanBeEdited} from '@/lib/surveys/status';
 import {transformNullToUndefined} from '@/utils/database';
 import {generateSlug} from '@/utils/generate-slug';
 import {protectedProcedure, surveyEditableProcedure} from '../init';
@@ -250,5 +264,199 @@ export const surveysRouter = {
                 .returning();
 
             return data;
+        }),
+    getScreeners: protectedProcedure.input(z.string()).query(async ({input: surveyId, ctx}) => {
+        const rows = await ctx.db
+            .select({
+                config: screeners.config,
+                createdAt: screeners.createdAt,
+                description: screeners.description,
+                failureMessage: surveyScreeners.failureMessage,
+                id: screeners.id,
+                name: screeners.name,
+                order: surveyScreeners.order,
+                type: screeners.type,
+                updatedAt: screeners.updatedAt
+            })
+            .from(surveyScreeners)
+            .innerJoin(screeners, eq(surveyScreeners.screenerId, screeners.id))
+            .innerJoin(surveys, eq(surveyScreeners.surveyId, surveys.id))
+            .where(
+                and(
+                    eq(surveyScreeners.surveyId, surveyId),
+                    eq(surveys.tenantId, ctx.tenant),
+                    eq(screeners.tenantId, ctx.tenant)
+                )
+            )
+            .orderBy(surveyScreeners.order);
+
+        return rows;
+    }),
+    assignScreener: surveyEditableProcedure
+        .input(assignScreenerSchema)
+        .mutation(async ({input, ctx}) => {
+            // verify survey belongs to tenant and can be edited
+            const [survey] = await ctx.db
+                .select({id: surveys.id, status: surveys.status})
+                .from(surveys)
+                .where(and(eq(surveys.id, input.surveyId), eq(surveys.tenantId, ctx.tenant)))
+                .limit(1);
+
+            if (!survey) {
+                throw new TRPCError({code: 'NOT_FOUND', message: 'Survey not found'});
+            }
+
+            if (!surveyCanBeEdited(survey.status)) {
+                throw new TRPCError({
+                    code: 'BAD_REQUEST',
+                    message: 'Cannot modify survey when it is complete or archived'
+                });
+            }
+
+            // verify screener belongs to tenant
+            const [screener] = await ctx.db
+                .select({id: screeners.id})
+                .from(screeners)
+                .where(
+                    and(eq(screeners.id, input.screenerId), eq(screeners.tenantId, ctx.tenant))
+                )
+                .limit(1);
+
+            if (!screener) {
+                throw new TRPCError({code: 'NOT_FOUND', message: 'Screener not found'});
+            }
+
+            // check if already assigned
+            const [existing] = await ctx.db
+                .select()
+                .from(surveyScreeners)
+                .where(
+                    and(
+                        eq(surveyScreeners.surveyId, input.surveyId),
+                        eq(surveyScreeners.screenerId, input.screenerId)
+                    )
+                )
+                .limit(1);
+
+            if (existing) {
+                throw new TRPCError({
+                    code: 'BAD_REQUEST',
+                    message: 'Screener is already assigned to this survey'
+                });
+            }
+
+            // get max order for this survey
+            const [maxOrderResult] = await ctx.db
+                .select({maxOrder: max(surveyScreeners.order)})
+                .from(surveyScreeners)
+                .where(eq(surveyScreeners.surveyId, input.surveyId))
+                .limit(1);
+
+            const nextOrder = (maxOrderResult?.maxOrder ?? -1) + 1;
+
+            const [assigned] = await ctx.db
+                .insert(surveyScreeners)
+                .values({
+                    failureMessage: input.failureMessage || null,
+                    order: nextOrder,
+                    screenerId: input.screenerId,
+                    surveyId: input.surveyId
+                })
+                .returning();
+
+            return assigned;
+        }),
+    removeScreener: surveyEditableProcedure
+        .input(removeScreenerSchema)
+        .mutation(async ({input, ctx}) => {
+            // verify survey belongs to tenant
+            const [survey] = await ctx.db
+                .select({id: surveys.id})
+                .from(surveys)
+                .where(and(eq(surveys.id, input.surveyId), eq(surveys.tenantId, ctx.tenant)))
+                .limit(1);
+
+            if (!survey) {
+                throw new TRPCError({code: 'NOT_FOUND', message: 'Survey not found'});
+            }
+
+            await ctx.db
+                .delete(surveyScreeners)
+                .where(
+                    and(
+                        eq(surveyScreeners.surveyId, input.surveyId),
+                        eq(surveyScreeners.screenerId, input.screenerId)
+                    )
+                );
+
+            return {success: true};
+        }),
+    updateScreenerOrder: surveyEditableProcedure
+        .input(updateScreenerOrderSchema)
+        .mutation(async ({input, ctx}) => {
+            // verify survey belongs to tenant
+            const [survey] = await ctx.db
+                .select({id: surveys.id})
+                .from(surveys)
+                .where(and(eq(surveys.id, input.surveyId), eq(surveys.tenantId, ctx.tenant)))
+                .limit(1);
+
+            if (!survey) {
+                throw new TRPCError({code: 'NOT_FOUND', message: 'Survey not found'});
+            }
+
+            const [updated] = await ctx.db
+                .update(surveyScreeners)
+                .set({order: input.order})
+                .where(
+                    and(
+                        eq(surveyScreeners.surveyId, input.surveyId),
+                        eq(surveyScreeners.screenerId, input.screenerId)
+                    )
+                )
+                .returning();
+
+            if (!updated) {
+                throw new TRPCError({
+                    code: 'NOT_FOUND',
+                    message: 'Screener assignment not found'
+                });
+            }
+
+            return updated;
+        }),
+    updateScreenerFailureMessage: surveyEditableProcedure
+        .input(updateScreenerFailureMessageSchema)
+        .mutation(async ({input, ctx}) => {
+            // verify survey belongs to tenant
+            const [survey] = await ctx.db
+                .select({id: surveys.id})
+                .from(surveys)
+                .where(and(eq(surveys.id, input.surveyId), eq(surveys.tenantId, ctx.tenant)))
+                .limit(1);
+
+            if (!survey) {
+                throw new TRPCError({code: 'NOT_FOUND', message: 'Survey not found'});
+            }
+
+            const [updated] = await ctx.db
+                .update(surveyScreeners)
+                .set({failureMessage: input.failureMessage || null})
+                .where(
+                    and(
+                        eq(surveyScreeners.surveyId, input.surveyId),
+                        eq(surveyScreeners.screenerId, input.screenerId)
+                    )
+                )
+                .returning();
+
+            if (!updated) {
+                throw new TRPCError({
+                    code: 'NOT_FOUND',
+                    message: 'Screener assignment not found'
+                });
+            }
+
+            return updated;
         })
 };

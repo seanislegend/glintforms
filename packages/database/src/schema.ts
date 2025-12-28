@@ -185,6 +185,47 @@ export const respondentCohorts = pgTable(
     })
 );
 
+export const screenerTypes = ['age', 'location', 'single_choice'] as const;
+export const screenerTypeEnum = pgEnum('screener_type', screenerTypes);
+
+export const screeners = pgTable(
+    'screeners',
+    {
+        config: jsonb('config').notNull(),
+        createdAt: timestamp('created_at').defaultNow().notNull(),
+        description: text('description'),
+        id: uuid('id').primaryKey().defaultRandom(),
+        name: varchar('name', {length: 255}).notNull(),
+        tenantId: uuid('tenant_id')
+            .references(() => tenants.id, {onDelete: 'cascade'})
+            .notNull(),
+        type: screenerTypeEnum('type').notNull(),
+        updatedAt: timestamp('updated_at').defaultNow().notNull()
+    },
+    table => ({
+        tenantIdx: index('screener_tenant_idx').on(table.tenantId)
+    })
+);
+
+export const surveyScreeners = pgTable(
+    'survey_screeners',
+    {
+        failureMessage: text('failure_message'),
+        order: integer('order').default(0).notNull(),
+        screenerId: uuid('screener_id')
+            .references(() => screeners.id, {onDelete: 'cascade'})
+            .notNull(),
+        surveyId: uuid('survey_id')
+            .references(() => surveys.id, {onDelete: 'cascade'})
+            .notNull()
+    },
+    table => ({
+        screenerIdx: index('survey_screener_screener_idx').on(table.screenerId),
+        surveyIdx: index('survey_screener_survey_idx').on(table.surveyId),
+        primaryKey: index('survey_screener_pk').on(table.surveyId, table.screenerId)
+    })
+);
+
 export const surveySettings = pgTable('survey_settings', {
     allowAnonymous: boolean('allow_anonymous').notNull().default(true),
     closeOnResponseLimit: boolean('close_on_response_limit').notNull().default(false),
@@ -439,6 +480,7 @@ export const tenantsRelations = relations(tenants, ({many}) => ({
     cohorts: many(cohorts),
     responses: many(responses),
     respondents: many(respondents),
+    screeners: many(screeners),
     surveys: many(surveys),
     users: many(user)
 }));
@@ -487,6 +529,7 @@ export const surveysRelations = relations(surveys, ({one, many}) => ({
     }),
     questions: many(questions),
     responses: many(responses),
+    screeners: many(surveyScreeners),
     tenant: one(tenants, {
         fields: [surveys.tenantId],
         references: [tenants.id]
@@ -597,5 +640,24 @@ export const analysisThemeEntriesRelations = relations(analysisThemeEntries, ({o
     answer: one(answers, {
         fields: [analysisThemeEntries.answerId],
         references: [answers.id]
+    })
+}));
+
+export const screenersRelations = relations(screeners, ({one, many}) => ({
+    surveyScreeners: many(surveyScreeners),
+    tenant: one(tenants, {
+        fields: [screeners.tenantId],
+        references: [tenants.id]
+    })
+}));
+
+export const surveyScreenersRelations = relations(surveyScreeners, ({one}) => ({
+    screener: one(screeners, {
+        fields: [surveyScreeners.screenerId],
+        references: [screeners.id]
+    }),
+    survey: one(surveys, {
+        fields: [surveyScreeners.surveyId],
+        references: [surveys.id]
     })
 }));

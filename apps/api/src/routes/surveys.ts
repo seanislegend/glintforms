@@ -8,7 +8,12 @@ import {InvalidBodyError} from '@/middleware/errors';
 import type {ServerContext} from '@/types/server';
 import {
     createSurveyResponse,
+    getSurveyScreeners,
     transformQuestion,
+    transformScreener,
+    validateAgeScreener,
+    validateLocationScreener,
+    validateSingleChoiceScreener,
     verifyIdempotency,
     verifySurveyIsActive,
     verifySurveyPassword
@@ -26,7 +31,18 @@ router.get('/:idOrSlug', verifySurveyIsActive, async c => {
         .where(eq(questions.surveyId, survey.id))
         .orderBy(asc(questions.order));
     const surveyQuestions = allQuestions.map(transformQuestion);
-    const responseData = createSurveyResponse(survey, settings, surveyQuestions);
+
+    // get screeners for this survey
+    const screenerRows = await getSurveyScreeners(survey.id);
+    const transformedScreeners = screenerRows.map(transformScreener);
+
+    const responseData = createSurveyResponse(
+        survey,
+        settings,
+        surveyQuestions,
+        undefined,
+        transformedScreeners
+    );
 
     return c.json(responseData);
 });
@@ -109,5 +125,59 @@ router.post(
         return c.json({ok: true}, 201);
     }
 );
+
+// screener validation endpoint
+router.post('/:idOrSlug/screeners', verifySurveyIsActive, async c => {
+    const survey = c.get('survey');
+    const body = await c.req.json();
+
+    const screenerRows = await getSurveyScreeners(survey.id);
+
+    if (screenerRows.length === 0) {
+        return c.json({ok: true, passed: true}, 200);
+    }
+
+    // validate each screener
+    const results: Array<{id: string; passed: boolean; message?: string}> = [];
+
+    for (const screenerRow of screenerRows) {
+        const config = screenerRow.config as Record<string, unknown>;
+        let passed = false;
+
+        if (screenerRow.type === 'age') {
+            const age = body.age as number | null | undefined;
+            const ageConfig = config as {operator: 'over' | 'under'; value: number};
+            passed = validateAgeScreener(age, ageConfig);
+        } else if (screenerRow.type === 'location') {
+            const country = body.country as string | null | undefined;
+            const locationConfig = config as {countries: string[]};
+            passed = validateLocationScreener(country, locationConfig);
+        } else if (screenerRow.type === 'single_choice') {
+            const optionId = body[screenerRow.id] as string | null | undefined;
+            const singleChoiceConfig = config as {correctOptionId: string};
+            passed = validateSingleChoiceScreener(optionId, singleChoiceConfig);
+        }
+
+        results.push({
+            id: screenerRow.id,
+            message: screenerRow.failureMessage || undefined,
+            passed
+        });
+
+        // if any screener fails, return failure
+        if (!passed) {
+            return c.json(
+                {
+                    ok: false,
+                    message: screenerRow.failureMessage || 'You do not meet the requirements for this survey.',
+                    passed: false
+                },
+                403
+            );
+        }
+    }
+
+    return c.json({ok: true, passed: true}, 200);
+});
 
 export default router;

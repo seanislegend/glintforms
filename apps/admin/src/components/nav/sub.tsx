@@ -25,7 +25,7 @@ interface Props {
     title: string;
 }
 
-type ItemKey = 'campaigns' | 'cohorts' | 'surveys';
+type ItemKey = 'campaigns' | 'cohorts' | 'screeners' | 'surveys';
 
 const SubNav: React.FC<Props> = ({href, id, Icon, title}) => {
     const pathname = usePathname();

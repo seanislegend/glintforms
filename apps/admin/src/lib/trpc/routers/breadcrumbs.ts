@@ -1,4 +1,4 @@
-import {campaigns, cohorts, respondents, surveys} from '@glint/database';
+import {campaigns, cohorts, respondents, screeners, surveys} from '@glint/database';
 import {and, eq} from 'drizzle-orm';
 import {z} from 'zod';
 import {createTRPCRouter, protectedProcedure} from '../init';
@@ -7,6 +7,7 @@ const breadcrumbDataSchema = z.object({
     campaigns: z.string().nullable(),
     cohorts: z.string().nullable(),
     respondents: z.string().nullable(),
+    screeners: z.string().nullable(),
     surveys: z.string().nullable()
 });
 
@@ -20,6 +21,7 @@ export const breadcrumbsRouter = createTRPCRouter({
                 campaigns: null,
                 cohorts: null,
                 respondents: null,
+                screeners: null,
                 surveys: null
             };
 
@@ -72,6 +74,23 @@ export const breadcrumbsRouter = createTRPCRouter({
                             )
                         );
                     result.respondents = respondent?.name ?? null;
+                }
+            }
+
+            if (
+                routeSegments.screeners &&
+                Array.isArray(routeSegments.screeners) &&
+                routeSegments.screeners.length > 0
+            ) {
+                const screenerId = routeSegments.screeners[0];
+                if (screenerId) {
+                    const [screener] = await ctx.db
+                        .select({name: screeners.name})
+                        .from(screeners)
+                        .where(
+                            and(eq(screeners.id, screenerId), eq(screeners.tenantId, ctx.tenant))
+                        );
+                    result.screeners = screener?.name ?? null;
                 }
             }
 

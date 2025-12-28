@@ -20,7 +20,6 @@ const Form: React.FC<FormProps> = ({cohortId}) => {
     const router = useRouter();
     const trpc = useTRPC();
     const queryClient = useQueryClient();
-
     const {data: cohort, isLoading} = useQuery(trpc.cohorts.get.queryOptions(cohortId));
 
     const updateCohort = useMutation(
@@ -41,8 +40,8 @@ const Form: React.FC<FormProps> = ({cohortId}) => {
     const methods = useForm<CohortUpdate>({
         resolver: zodResolver(cohortUpdateSchema),
         defaultValues: {
-            description: '',
-            name: ''
+            description: cohort?.description || '',
+            name: cohort?.name || ''
         }
     });
 

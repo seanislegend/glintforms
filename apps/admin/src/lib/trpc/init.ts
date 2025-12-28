@@ -56,13 +56,16 @@ const isRecord = (value: unknown): value is Record<string, unknown> => {
 export const surveyEditableProcedure = protectedProcedure.use(async ({ctx, input, next}) => {
     // extract survey id from input
     // input is raw before validation, so we need to handle it carefully
+    // only check if input is a record - let input validation handle other cases
     if (!isRecord(input)) {
-        throw new TRPCError({code: 'BAD_REQUEST', message: 'Survey id is required'});
+        // input is not a record, let input validation handle the error
+        return next({ctx});
     }
 
     const surveyId = typeof input.surveyId === 'string' ? input.surveyId : null;
     if (!surveyId) {
-        throw new TRPCError({code: 'BAD_REQUEST', message: 'Survey id is required'});
+        // no surveyId in input, let input validation handle the error
+        return next({ctx});
     }
 
     // fetch survey and check if it can be edited

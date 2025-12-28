@@ -4,6 +4,7 @@ import {Tabs, TabsContent, TabsList, TabsTrigger} from '@glint/ui/tabs';
 import {FileTextIcon} from '@phosphor-icons/react/dist/ssr/FileText';
 import {LockKeyIcon} from '@phosphor-icons/react/dist/ssr/LockKey';
 import {StepsIcon} from '@phosphor-icons/react/dist/ssr/Steps';
+import {FunnelIcon} from '@phosphor-icons/react/dist/ssr/Funnel';
 import {useSuspenseQuery} from '@tanstack/react-query';
 import {redirect} from 'next/navigation';
 import {toast} from 'sonner';
@@ -11,6 +12,7 @@ import PageSpinner from '@/components/page-spinner';
 import SurveyAccessSettings from '@/components/survey-settings/access-settings';
 import DetailsStep from '@/components/survey-settings/details';
 import SurveyPublishingSettings from '@/components/survey-settings/publishing-settings';
+import ScreenersSettings from '@/components/survey-settings/screeners';
 import {useTRPC} from '@/lib/trpc/react';
 
 interface Props {
@@ -39,6 +41,10 @@ const SettingsPageClient: React.FC<Props> = ({surveyId}) => {
                     <LockKeyIcon />
                     Access
                 </TabsTrigger>
+                <TabsTrigger className="md:w-full md:flex md:justify-start" value="screeners">
+                    <FunnelIcon />
+                    Screeners
+                </TabsTrigger>
                 <TabsTrigger className="md:w-full md:flex md:justify-start" value="details">
                     <FileTextIcon />
                     Details
@@ -50,6 +56,9 @@ const SettingsPageClient: React.FC<Props> = ({surveyId}) => {
                 </TabsContent>
                 <TabsContent value="access">
                     <SurveyAccessSettings survey={survey} />
+                </TabsContent>
+                <TabsContent value="screeners">
+                    <ScreenersSettings survey={survey} />
                 </TabsContent>
                 <TabsContent value="details">
                     <DetailsStep survey={survey} />

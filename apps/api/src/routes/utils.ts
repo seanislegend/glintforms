@@ -1,7 +1,15 @@
-import {db, type questions, responses, surveySettings, surveys} from '@glint/database';
+import {
+    db,
+    type questions,
+    responses,
+    screeners,
+    surveyScreeners,
+    surveySettings,
+    surveys
+} from '@glint/database';
 import {decrypt} from '@glint/encryption';
 import {Redis} from '@upstash/redis';
-import {count, eq} from 'drizzle-orm';
+import {and, asc, count, eq} from 'drizzle-orm';
 import type {Context, MiddlewareHandler} from 'hono';
 import {
     SurveyAuthenticationError,
@@ -18,8 +26,15 @@ export const createSurveyResponse = (
     survey: Survey,
     settings: SurveySettings = {},
     questions: Question[] = [],
-    responseCount?: number
-): Omit<Survey, 'hasResponses' | 'status' | 'tenantId'> => {
+    responseCount?: number,
+    screeners: Array<{
+        config: Record<string, unknown>;
+        id: string;
+        options?: Array<{id: string; label: string}>;
+        question?: string;
+        type: 'age' | 'location' | 'single_choice';
+    }> = []
+): Omit<Survey, 'hasResponses' | 'status' | 'tenantId'> & {screeners?: typeof screeners} => {
     const baseData = {
         description: survey.description ?? '',
         id: survey.id,
@@ -35,7 +50,8 @@ export const createSurveyResponse = (
         closedText: settings?.closedText || '',
         isClosed: survey.status !== 'active' || !!hasExceededMaxResponses,
         isPasswordProtected: settings?.isPasswordProtected || false,
-        questions
+        questions,
+        ...(screeners.length > 0 ? {screeners} : {})
     };
 
     return data;
@@ -171,4 +187,78 @@ export const verifyIdempotency: MiddlewareHandler = async (
     }
 
     await next();
+};
+
+// screener validation helpers
+export const validateAgeScreener = (
+    age: number | null | undefined,
+    config: {operator: 'over' | 'under'; value: number}
+): boolean => {
+    if (age === null || age === undefined) return false;
+
+    if (config.operator === 'over') {
+        return age > config.value;
+    } else {
+        return age < config.value;
+    }
+};
+
+export const validateLocationScreener = (
+    country: string | null | undefined,
+    config: {countries: string[]}
+): boolean => {
+    if (!country) return false;
+    return config.countries.includes(country);
+};
+
+export const validateSingleChoiceScreener = (
+    optionId: string | null | undefined,
+    config: {correctOptionId: string}
+): boolean => {
+    if (!optionId) return false;
+    return optionId === config.correctOptionId;
+};
+
+export const getSurveyScreeners = async (surveyId: string) => {
+    const rows = await db
+        .select({
+            config: screeners.config,
+            failureMessage: surveyScreeners.failureMessage,
+            id: screeners.id,
+            order: surveyScreeners.order,
+            type: screeners.type
+        })
+        .from(surveyScreeners)
+        .innerJoin(screeners, eq(surveyScreeners.screenerId, screeners.id))
+        .where(eq(surveyScreeners.surveyId, surveyId))
+        .orderBy(asc(surveyScreeners.order));
+
+    return rows;
+};
+
+export const transformScreener = (screener: {
+    config: unknown;
+    id: string;
+    type: string;
+}) => {
+    const base = {
+        config: screener.config as Record<string, unknown>,
+        id: screener.id,
+        type: screener.type as 'age' | 'location' | 'single_choice'
+    };
+
+    if (screener.type === 'single_choice') {
+        const config = screener.config as {
+            correctOptionId: string;
+            options: Array<{id: string; value: string}>;
+            question: string;
+        };
+        return {
+            ...base,
+            options: config.options.map(opt => ({id: opt.id, label: opt.value})),
+            question: config.question
+        };
+    }
+
+    return base;
 };

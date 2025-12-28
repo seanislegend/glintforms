@@ -1,3 +1,11 @@
+interface Screener {
+    config: Record<string, unknown>;
+    id: string;
+    options?: Array<{id: string; label: string}>;
+    question?: string;
+    type: 'age' | 'location' | 'single_choice';
+}
+
 interface BaseSurvey {
     allowAnonymous?: boolean;
     campaignId: string;
@@ -10,6 +18,7 @@ interface BaseSurvey {
     maxResponses?: number;
     password?: string;
     questions?: Question[];
+    screeners?: Screener[];
     status: string;
     slug: string;
     tenantId: string;

@@ -1,76 +1,83 @@
 {
-    "version": "7",
-    "dialect": "postgresql",
-    "entries": [
-        {
-            "idx": 0,
-            "version": "7",
-            "when": 1757373140038,
-            "tag": "0000_ordinary_valeria_richards",
-            "breakpoints": true
-        },
-        {
-            "idx": 1,
-            "version": "7",
-            "when": 1757380817285,
-            "tag": "0001_early_johnny_storm",
-            "breakpoints": true
-        },
-        {
-            "idx": 2,
-            "version": "7",
-            "when": 1757527437478,
-            "tag": "0002_freezing_mac_gargan",
-            "breakpoints": true
-        },
-        {
-            "idx": 3,
-            "version": "7",
-            "when": 1764115082525,
-            "tag": "0003_faithful_umar",
-            "breakpoints": true
-        },
-        {
-            "idx": 4,
-            "version": "7",
-            "when": 1764119655962,
-            "tag": "0004_salty_king_bedlam",
-            "breakpoints": true
-        },
-        {
-            "idx": 5,
-            "version": "7",
-            "when": 1764369970696,
-            "tag": "0005_ambiguous_killer_shrike",
-            "breakpoints": true
-        },
-        {
-            "idx": 6,
-            "version": "7",
-            "when": 1764377492096,
-            "tag": "0006_heavy_lord_tyger",
-            "breakpoints": true
-        },
-        {
-            "idx": 7,
-            "version": "7",
-            "when": 1764544958357,
-            "tag": "0007_peaceful_arachne",
-            "breakpoints": true
-        },
-        {
-            "idx": 8,
-            "version": "7",
-            "when": 1764546102817,
-            "tag": "0008_married_firestar",
-            "breakpoints": true
-        },
-        {
-            "idx": 9,
-            "version": "7",
-            "when": 1765275907073,
-            "tag": "0009_superb_weapon_omega",
-            "breakpoints": true
-        }
-    ]
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1757373140038,
+      "tag": "0000_ordinary_valeria_richards",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1757380817285,
+      "tag": "0001_early_johnny_storm",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1757527437478,
+      "tag": "0002_freezing_mac_gargan",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1764115082525,
+      "tag": "0003_faithful_umar",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1764119655962,
+      "tag": "0004_salty_king_bedlam",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1764369970696,
+      "tag": "0005_ambiguous_killer_shrike",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1764377492096,
+      "tag": "0006_heavy_lord_tyger",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1764544958357,
+      "tag": "0007_peaceful_arachne",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1764546102817,
+      "tag": "0008_married_firestar",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1765275907073,
+      "tag": "0009_superb_weapon_omega",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1766947363586,
+      "tag": "0010_worthless_maggott",
+      "breakpoints": true
+    }
+  ]
 }
