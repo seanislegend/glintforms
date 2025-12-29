@@ -10,6 +10,7 @@ import {useTRPC} from '@/lib/trpc/react';
 import GenderDistributionChart from './gender-distribution-chart';
 import GeolocationDistributionChart from './geolocation-distribution-chart';
 import ResponsesOverviewChart from './responses-overview';
+import ScreenerFailures from './screener-failures';
 
 interface Props {
     surveyId: string;
@@ -24,6 +25,18 @@ const SurveyInsights: React.FC<Props> = ({surveyId}) => {
         ...trpc.responses.getLastResponseTime.queryOptions(surveyId),
         enabled: !!(survey && surveyIsActive(survey.status))
     });
+    const {data: screenerStats} = useQuery({
+        ...trpc.responses.getScreenerFailureStats.queryOptions(surveyId),
+        enabled: true
+    });
+    const {data: surveyScreeners} = useQuery({
+        ...trpc.surveys.getScreeners.queryOptions(surveyId),
+        enabled: true
+    });
+
+    if (screenerStats && screenerStats.totalFailures > 0) {
+        stats.failedScreenerAttempts = screenerStats.totalFailures;
+    }
 
     return (
         <div className="space-y-6">
@@ -49,6 +62,7 @@ const SurveyInsights: React.FC<Props> = ({surveyId}) => {
                 avgAuthenticityScore={stats.avgAuthenticityScore}
                 avgCompletionTimeMinutes={stats.avgCompletionTimeMinutes}
                 completionRate={stats.completionRate}
+                failedScreenerAttempts={stats.failedScreenerAttempts}
                 totalResponses={stats.totalResponses}
             />
             <ResponsesOverviewChart
@@ -59,6 +73,7 @@ const SurveyInsights: React.FC<Props> = ({surveyId}) => {
                 <GenderDistributionChart data={insights.genderDistribution || []} />
                 <GeolocationDistributionChart data={insights.topGeolocations || []} />
             </div>
+            <ScreenerFailures screenerStats={screenerStats} surveyScreeners={surveyScreeners} />
         </div>
     );
 };

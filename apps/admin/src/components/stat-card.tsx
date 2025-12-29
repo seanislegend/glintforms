@@ -1,10 +1,11 @@
-import {Card} from '@glint/ui/card';
+import {Card, CardContent} from '@glint/ui/card';
 import {cn} from '@glint/ui/utils';
 import {CheckCircleIcon} from '@phosphor-icons/react/dist/ssr/CheckCircle';
 import {ClockIcon} from '@phosphor-icons/react/dist/ssr/Clock';
 import {FileTextIcon} from '@phosphor-icons/react/dist/ssr/FileText';
 import {QuestionIcon} from '@phosphor-icons/react/dist/ssr/Question';
 import {SealCheckIcon} from '@phosphor-icons/react/dist/ssr/SealCheck';
+import {ShieldWarningIcon} from '@phosphor-icons/react/dist/ssr/ShieldWarning';
 import {TrendUpIcon} from '@phosphor-icons/react/dist/ssr/TrendUp';
 import {UsersIcon} from '@phosphor-icons/react/dist/ssr/Users';
 
@@ -20,6 +21,7 @@ const STAT_CARD_ICON_THEMES = {
     authenticity: SealCheckIcon,
     completion: CheckCircleIcon,
     document: FileTextIcon,
+    screener: ShieldWarningIcon,
     time: ClockIcon,
     trends: TrendUpIcon,
     unknown: QuestionIcon,
@@ -56,37 +58,35 @@ const StatCard: React.FC<Props> = ({icon, label, theme = 'green', title, value})
     const Icon = STAT_CARD_ICON_THEMES[icon as keyof typeof STAT_CARD_ICON_THEMES];
 
     return (
-        <Card className="p-6">
-            <div className="flex items-start justify-between gap-4 flex-grow">
-                <div className="h-full flex flex-col">
-                    <p className="text-sm font-medium text-muted-foreground capitalize flex-grow">
-                        {title}
-                    </p>
-                    <div>
-                        <p
-                            className="text-3xl font-bold h-9 relative w-full animate-in fade-in duration-200"
-                            key={value}
-                        >
-                            {value ?? (
-                                <span className="w-8 bg-muted absolute top-0 left-0 rounded h-9 translate-y-1" />
-                            )}
+        <Card className="animate-in fade-in duration-200">
+            <CardContent className="flex flex-col flex-grow justify-between">
+                <div className="flex items-start justify-between gap-4">
+                    <div className="h-full flex flex-col">
+                        <p className="text-sm font-medium text-muted-foreground capitalize flex-grow">
+                            {title}
                         </p>
-                        {label && (
-                            <span className="text-xs font-medium text-muted-foreground">
-                                {label}
-                            </span>
+                        <div>
+                            <p
+                                className="text-3xl font-bold h-9 relative w-full animate-in fade-in duration-200"
+                                key={value}
+                            >
+                                {value ?? (
+                                    <span className="w-8 bg-muted absolute top-0 left-0 rounded h-9 translate-y-1" />
+                                )}
+                            </p>
+                        </div>
+                    </div>
+                    <div
+                        className={cn(
+                            'h-12 w-12 rounded-full flex items-center justify-center flex-shrink-0',
+                            STAT_CARD_THEMES[theme].bg
                         )}
+                    >
+                        <Icon className={cn('size-6 xl:size-8', STAT_CARD_THEMES[theme].icon)} />
                     </div>
                 </div>
-                <div
-                    className={cn(
-                        'h-12 w-12 rounded-full flex items-center justify-center flex-shrink-0',
-                        STAT_CARD_THEMES[theme].bg
-                    )}
-                >
-                    <Icon className={cn('size-6 xl:size-8', STAT_CARD_THEMES[theme].icon)} />
-                </div>
-            </div>
+                {label && <p className="text-muted-foreground text-xs leading-4 mt-2">{label}</p>}
+            </CardContent>
         </Card>
     );
 };

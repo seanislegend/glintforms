@@ -1,9 +1,11 @@
 import {
     answers,
     authenticityScores,
+    metrics,
     questions,
     respondents,
     responses,
+    screeners,
     surveys
 } from '@glint/database';
 import {and, desc, eq, sql} from 'drizzle-orm';
@@ -47,9 +49,10 @@ export const responsesRouter = {
 
         return {
             avgAuthenticityScore: Math.round(avgScore),
+            avgCompletionTimeMinutes: formatDuration(avgTimeMinutes),
             completionRate: `${completionRate}%`,
-            totalResponses: total,
-            avgCompletionTimeMinutes: formatDuration(avgTimeMinutes)
+            failedScreenerAttempts: 0,
+            totalResponses: total
         };
     }),
     getInsights: protectedProcedure.input(z.string()).query(async ({input: surveyId, ctx}) => {
@@ -244,5 +247,50 @@ export const responsesRouter = {
                 .where(and(eq(responses.surveyId, surveyId), eq(responses.tenantId, ctx.tenant)))
                 .limit(1);
             return lastResponseTime?.created_at || null;
+        }),
+    getScreenerFailureStats: protectedProcedure
+        .input(z.string())
+        .query(async ({input: surveyId, ctx}) => {
+            const [totalFailuresResult] = await ctx.db
+                .select({count: sql<number>`count(*)`})
+                .from(metrics)
+                .where(
+                    and(
+                        eq(metrics.surveyId, surveyId),
+                        eq(metrics.metricType, 'screener_failure'),
+                        eq(metrics.tenantId, ctx.tenant)
+                    )
+                );
+            const totalFailures = totalFailuresResult?.count || 0;
+            const failuresByScreener = await ctx.db
+                .select({
+                    failureCount: sql<number>`count(*)`,
+                    screenerId: screeners.id,
+                    screenerName: screeners.name,
+                    screenerType: screeners.type
+                })
+                .from(metrics)
+                .innerJoin(screeners, eq(metrics.entityId, screeners.id))
+                .where(
+                    and(
+                        eq(metrics.surveyId, surveyId),
+                        eq(metrics.metricType, 'screener_failure'),
+                        eq(metrics.entityType, 'screener'),
+                        eq(metrics.tenantId, ctx.tenant),
+                        eq(screeners.tenantId, ctx.tenant)
+                    )
+                )
+                .groupBy(screeners.id, screeners.name, screeners.type)
+                .orderBy(desc(sql<number>`count(*)`));
+
+            return {
+                failuresByScreener: failuresByScreener.map(f => ({
+                    failureCount: f.failureCount,
+                    screenerId: f.screenerId,
+                    screenerName: f.screenerName,
+                    screenerType: f.screenerType as 'age' | 'location' | 'single_choice'
+                })),
+                totalFailures
+            };
         })
 };
