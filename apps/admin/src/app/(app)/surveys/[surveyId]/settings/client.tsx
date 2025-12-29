@@ -32,7 +32,7 @@ const SettingsPageClient: React.FC<Props> = ({surveyId}) => {
 
     return (
         <Tabs className="w-full flex-col flex md:flex-row gap-4 md:gap-8" defaultValue="publishing">
-            <TabsList className="flex flex-row md:flex-col justify-start gap-1 w-full md:w-40 h-fit shrink-0">
+            <TabsList className="flex flex-row md:flex-col justify-start gap-1 w-full md:w-40 h-fit shrink-0 [&_svg]:text-primary">
                 <TabsTrigger className="md:w-full md:flex md:justify-start" value="publishing">
                     <StepsIcon />
                     Publishing
