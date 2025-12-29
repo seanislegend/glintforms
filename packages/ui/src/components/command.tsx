@@ -22,11 +22,12 @@ const Command: React.FC<React.ComponentProps<typeof CommandPrimitive>> = ({
 };
 
 const CommandDialog: React.FC<
-    React.ComponentProps<typeof Dialog> & {
-        title?: string;
-        description?: string;
+    Omit<React.ComponentProps<typeof Dialog>, 'children'> & {
+        children?: React.ReactNode;
         className?: string;
+        description?: string;
         showCloseButton?: boolean;
+        title?: string;
     }
 > = ({
     title = 'Command Palette',

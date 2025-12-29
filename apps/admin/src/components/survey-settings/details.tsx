@@ -51,7 +51,7 @@ const DetailsStep: React.FC<Props> = ({survey}) => {
     });
 
     const handleFormSubmit: SubmitHandler<SurveyUpdate> = async data => {
-        await updateSurvey.mutateAsync({id: survey.id, ...data});
+        await updateSurvey.mutateAsync({surveyId: survey.id, ...data});
     };
 
     return (

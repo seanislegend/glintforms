@@ -377,9 +377,7 @@ const SidebarGroupLabel: React.FC<useRender.ComponentProps<'div'>> = ({
     return useRender({
         render,
         props: {
-            // @ts-expect-error - todo: https://github.com/mui/base-ui/issues/2370
             'data-slot': 'sidebar-group-label',
-            // @ts-expect-error - todo: https://github.com/mui/base-ui/issues/2370
             'data-sidebar': 'group-label',
             className: cn(
                 'text-sidebar-foreground/70 ring-ring flex h-8 shrink-0 items-center px-2 text-xs font-medium outline-hidden transition-[margin,opacity] duration-200 ease-linear focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0',
@@ -400,9 +398,7 @@ const SidebarGroupAction: React.FC<useRender.ComponentProps<'button'>> = ({
     return useRender({
         render,
         props: {
-            // @ts-expect-error - todo: https://github.com/mui/base-ui/issues/2370
             'data-slot': 'sidebar-group-action',
-            // @ts-expect-error - todo: https://github.com/mui/base-ui/issues/2370
             'data-sidebar': 'group-action',
             className: cn(
                 'text-sidebar-foreground ring-ring hover:bg-sidebar-accent hover:text-sidebar-accent-foreground absolute top-3.5 right-3 flex aspect-square w-5 items-center justify-center p-0 outline-hidden transition-transform focus-visible:ring-2 [&>svg]:size-4 [&>svg]:shrink-0',
@@ -490,7 +486,6 @@ const SidebarMenuButton: React.FC<
         props: mergeProps<'button'>(props, {
             // @ts-expect-error - todo: https://github.com/mui/base-ui/issues/2370
             'data-slot': 'sidebar-menu-button',
-            // @ts-expect-error - todo: https://github.com/mui/base-ui/issues/2370
             'data-sidebar': 'menu-button',
             'data-size': size,
             'data-active': isActive,
@@ -599,7 +594,6 @@ const SidebarMenuSubButton: React.FC<
                 'group-data-[collapsible=icon]:hidden',
                 className
             ),
-            // @ts-expect-error - todo: https://github.com/mui/base-ui/issues/2370
             'data-slot': 'sidebar-menu-sub-button',
             'data-sidebar': 'menu-sub-button',
             'data-size': size,

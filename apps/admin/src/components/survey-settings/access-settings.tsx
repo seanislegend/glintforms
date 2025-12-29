@@ -54,7 +54,7 @@ const SurveySecuritySettingsForm: React.FC<FormProps> = ({settings, survey}) => 
     const handleFormSubmit: SubmitHandler<FormData> = async data => {
         // biome-ignore lint/correctness/noUnusedVariables: don't need hasPassword
         const {hasPassword, ...submitData} = data;
-        await updateSettings.mutateAsync({id: survey.id, ...submitData});
+        await updateSettings.mutateAsync({surveyId: survey.id, ...submitData});
     };
 
     return (

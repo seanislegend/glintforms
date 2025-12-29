@@ -177,7 +177,6 @@ export const cohortsRouter = createTRPCRouter({
                     if (!row.respondentId) return acc;
                     if (!acc[row.respondentId]) {
                         acc[row.respondentId] = {
-                            campaigns: [],
                             cohorts: [],
                             email: row.email,
                             gender: row.gender,
