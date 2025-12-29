@@ -3,8 +3,8 @@
 import {Tabs, TabsContent, TabsList, TabsTrigger} from '@glint/ui/tabs';
 import {FileTextIcon} from '@phosphor-icons/react/dist/ssr/FileText';
 import {LockKeyIcon} from '@phosphor-icons/react/dist/ssr/LockKey';
+import {ShieldWarningIcon} from '@phosphor-icons/react/dist/ssr/ShieldWarning';
 import {StepsIcon} from '@phosphor-icons/react/dist/ssr/Steps';
-import {FunnelIcon} from '@phosphor-icons/react/dist/ssr/Funnel';
 import {useSuspenseQuery} from '@tanstack/react-query';
 import {redirect} from 'next/navigation';
 import {toast} from 'sonner';
@@ -42,7 +42,7 @@ const SettingsPageClient: React.FC<Props> = ({surveyId}) => {
                     Access
                 </TabsTrigger>
                 <TabsTrigger className="md:w-full md:flex md:justify-start" value="screeners">
-                    <FunnelIcon />
+                    <ShieldWarningIcon />
                     Screeners
                 </TabsTrigger>
                 <TabsTrigger className="md:w-full md:flex md:justify-start" value="details">
