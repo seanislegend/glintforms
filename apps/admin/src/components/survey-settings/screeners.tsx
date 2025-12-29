@@ -14,6 +14,7 @@ import {toast} from 'sonner';
 import ConfirmationDialog from '@/components/dialogs/confirmation';
 import {surveyCanBeEdited} from '@/lib/surveys/status';
 import {useTRPC} from '@/lib/trpc/react';
+import {getScreenerSummary} from '@/utils/screener-summary';
 import AssignScreenerDialog from './assign-screener-dialog';
 
 interface Props {
@@ -121,7 +122,14 @@ const ScreenersSettings: React.FC<Props> = ({survey}) => {
                         .map(screener => (
                             <Card key={screener.id}>
                                 <CardHeader className="flex flex-row items-center justify-between">
-                                    <CardTitle>{screener.name}</CardTitle>
+                                    <div className="flex flex-col gap-1">
+                                        <CardTitle>
+                                            <span>{screener.name}</span>
+                                        </CardTitle>
+                                        <p className="text-sm text-muted-foreground">
+                                            {getScreenerSummary(screener)}
+                                        </p>
+                                    </div>
                                     <Button
                                         onClick={() => handleRemove(screener.id)}
                                         size="sm"
@@ -132,11 +140,6 @@ const ScreenersSettings: React.FC<Props> = ({survey}) => {
                                     </Button>
                                 </CardHeader>
                                 <CardContent className="space-y-4">
-                                    <div>
-                                        <p className="text-sm text-muted-foreground">
-                                            Type: {screener.type}
-                                        </p>
-                                    </div>
                                     <FailureMessageForm
                                         defaultMessage={screener.failureMessage || ''}
                                         onSave={message =>
@@ -173,7 +176,7 @@ const FailureMessageForm: React.FC<FailureMessageFormProps> = ({defaultMessage, 
                 <FormField
                     control={methods.control}
                     description="Custom message to show when this screener fails. Leave empty for default message."
-                    fieldType="textarea"
+                    fieldType="input"
                     label="Failure message"
                     name="failureMessage"
                 />
