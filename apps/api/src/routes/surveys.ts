@@ -1,4 +1,4 @@
-import {db, questions, responseSubmissions} from '@glint/database';
+import {db, metrics, questions, responseSubmissions} from '@glint/database';
 import type {ProcessResponseSubmissionTaskPayload} from '@glint/jobs/schema';
 import {createResponseSchema} from '@glint/schemas';
 import {tasks} from '@trigger.dev/sdk';
@@ -170,17 +170,21 @@ router.post('/:idOrSlug/screeners', verifySurveyIsActive, async c => {
     for (const screenerRow of screenerRows) {
         const config = screenerRow.config as Record<string, unknown>;
         let passed = false;
+        let submittedAnswer: unknown = null;
 
         if (screenerRow.type === 'age') {
             const age = body.age as number | null | undefined;
+            submittedAnswer = age;
             const ageConfig = config as {operator: 'over' | 'under'; value: number};
             passed = validateAgeScreener(age, ageConfig);
         } else if (screenerRow.type === 'location') {
             const country = body.country as string | null | undefined;
+            submittedAnswer = country;
             const locationConfig = config as {countries: string[]};
             passed = validateLocationScreener(country, locationConfig);
         } else if (screenerRow.type === 'single_choice') {
             const optionId = body[screenerRow.id] as string | null | undefined;
+            submittedAnswer = optionId;
             const singleChoiceConfig = config as {correctOptionId: string};
             passed = validateSingleChoiceScreener(optionId, singleChoiceConfig);
         }
@@ -192,6 +196,15 @@ router.post('/:idOrSlug/screeners', verifySurveyIsActive, async c => {
         });
 
         if (!passed) {
+            await db.insert(metrics).values({
+                entityId: screenerRow.id,
+                entityType: 'screener',
+                metadata: {submittedAnswer},
+                metricType: 'screener_failure',
+                surveyId: survey.id,
+                tenantId: survey.tenantId
+            });
+
             return c.json(
                 {
                     ok: false,

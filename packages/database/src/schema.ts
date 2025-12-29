@@ -478,6 +478,7 @@ export const tenantsRelations = relations(tenants, ({many}) => ({
     activities: many(activities),
     campaigns: many(campaigns),
     cohorts: many(cohorts),
+    metrics: many(metrics),
     responses: many(responses),
     respondents: many(respondents),
     screeners: many(screeners),
@@ -527,6 +528,7 @@ export const surveysRelations = relations(surveys, ({one, many}) => ({
         fields: [surveys.campaignId],
         references: [campaigns.id]
     }),
+    metrics: many(metrics),
     questions: many(questions),
     responses: many(responses),
     screeners: many(surveyScreeners),
@@ -661,3 +663,33 @@ export const surveyScreenersRelations = relations(surveyScreeners, ({one}) => ({
         references: [surveys.id]
     })
 }));
+
+export const metrics = pgTable(
+    'metrics',
+    {
+        createdAt: timestamp('created_at').defaultNow().notNull(),
+        entityId: uuid('entity_id'),
+        entityType: varchar('entity_type', {length: 50}),
+        id: uuid('id').primaryKey().defaultRandom(),
+        metadata: jsonb('metadata'),
+        metricType: varchar('metric_type', {length: 50}).notNull(),
+        surveyId: uuid('survey_id').references(() => surveys.id, {onDelete: 'cascade'}),
+        tenantId: uuid('tenant_id')
+            .references(() => tenants.id, {onDelete: 'cascade'})
+            .notNull(),
+        value: integer('value')
+    },
+    table => ({
+        entityIdx: index('metric_entity_idx').on(table.entityId, table.entityType),
+        surveyMetricTypeIdx: index('metric_survey_metric_type_idx').on(
+            table.surveyId,
+            table.metricType,
+            table.createdAt
+        ),
+        surveyMetricTypeSimpleIdx: index('metric_survey_metric_type_simple_idx').on(
+            table.surveyId,
+            table.metricType
+        ),
+        tenantIdx: index('metric_tenant_idx').on(table.tenantId)
+    })
+);
