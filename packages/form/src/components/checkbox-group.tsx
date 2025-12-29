@@ -26,7 +26,7 @@ const CheckboxGroupItem: React.FC<React.ComponentProps<typeof BaseCheckbox.Root>
         <BaseCheckbox.Root
             data-slot="checkbox-group-item"
             className={cn(
-                'peer rounded border-input bg-white dark:bg-input/30 data-[checked]:bg-primary data-[checked]:text-primary-foreground dark:data-[checked]:bg-primary data-[checked]:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-4 shrink-0 border shadow-xs transition outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50',
+                'peer rounded border-input bg-white dark:bg-input/30 data-[checked]:bg-primary data-[checked]:text-primary-foreground dark:data-[checked]:bg-primary data-[checked]:border-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive size-5 shrink-0 border shadow-xs transition outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50',
                 className
             )}
             {...props}
@@ -35,7 +35,7 @@ const CheckboxGroupItem: React.FC<React.ComponentProps<typeof BaseCheckbox.Root>
                 data-slot="checkbox-group-indicator"
                 className="flex items-center justify-center text-current transition-none"
             >
-                <CheckIcon className="size-3.5" />
+                <CheckIcon className="size-4" />
             </BaseCheckbox.Indicator>
         </BaseCheckbox.Root>
     );

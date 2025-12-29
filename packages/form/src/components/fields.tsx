@@ -127,7 +127,14 @@ const getDefaultRender = (
 
             switch (type) {
                 case 'checkbox':
-                    return <Checkbox {...sharedProps} {...field} {...fieldProps} />;
+                    return (
+                        <Checkbox
+                            {...sharedProps}
+                            {...field}
+                            checked={field.value ?? false}
+                            onCheckedChange={field.onChange}
+                        />
+                    );
                 case 'checkbox-group':
                     return (
                         <CheckboxGroup {...sharedProps}>
