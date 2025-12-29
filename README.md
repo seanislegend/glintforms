@@ -28,6 +28,14 @@ Glint is a survey platform that empowers teams to design, deploy, and analyse su
 - **Custom closed text**: Display custom messages when surveys are closed
 - **Response tracking**: Monitor completion status, timestamps, and geolocation
 
+### Screener management
+- **Screener types**: Age-based (over/under), location-based (country filtering), and selection-based (single-choice questions)
+- **Reusable screeners**: Create and manage screeners independently, then assign to multiple surveys
+- **Multiple screeners**: Assign multiple screeners to surveys with custom ordering
+- **All-or-nothing validation**: All screeners must pass for respondents to access the survey
+- **Custom failure messages**: Configure custom messages shown when screeners fail
+- **Screener validation**: API endpoint validates screener responses before survey access
+
 ### AI analytics & insights
 - **Theme analysis**: AI-powered semantic clustering of text responses with sentiment analysis
 - **Authenticity detection**: Automated verification of response authenticity with scoring
