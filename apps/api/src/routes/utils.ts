@@ -1,3 +1,4 @@
+import {randomBytes} from 'node:crypto';
 import {
     db,
     type questions,
@@ -9,7 +10,7 @@ import {
 } from '@glint/database';
 import {decrypt} from '@glint/encryption';
 import {Redis} from '@upstash/redis';
-import {and, asc, count, eq} from 'drizzle-orm';
+import {asc, count, eq} from 'drizzle-orm';
 import type {Context, MiddlewareHandler} from 'hono';
 import {
     SurveyAuthenticationError,
@@ -236,11 +237,7 @@ export const getSurveyScreeners = async (surveyId: string) => {
     return rows;
 };
 
-export const transformScreener = (screener: {
-    config: unknown;
-    id: string;
-    type: string;
-}) => {
+export const transformScreener = (screener: {config: unknown; id: string; type: string}) => {
     const base = {
         config: screener.config as Record<string, unknown>,
         id: screener.id,
@@ -261,4 +258,60 @@ export const transformScreener = (screener: {
     }
 
     return base;
+};
+
+// screener token utilities
+export const generateScreenerToken = (): string => {
+    return randomBytes(32).toString('hex');
+};
+
+export const storeScreenerToken = async (surveyId: string, token: string): Promise<void> => {
+    const key = `screener:token:${surveyId}:${token}`;
+    await redis.set(key, surveyId);
+    await redis.expire(key, 3600); // 1 hour
+};
+
+export const verifyScreenerToken = async (
+    surveyId: string,
+    token: string | null | undefined
+): Promise<boolean> => {
+    if (!token) return false;
+
+    const key = `screener:token:${surveyId}:${token}`;
+    const storedSurveyId = await redis.get<string>(key);
+
+    return storedSurveyId === surveyId;
+};
+
+export const verifyScreenerTokenMiddleware: MiddlewareHandler = async (
+    c: Context,
+    next: () => Promise<void>
+) => {
+    const survey = c.get('survey');
+    const token = c.req.header('x-screener-token');
+
+    const isValid = await verifyScreenerToken(survey.id, token);
+    if (!isValid) {
+        throw new SurveyAuthenticationError();
+    }
+
+    await next();
+};
+
+export const verifyScreenerTokenIfRequired: MiddlewareHandler = async (
+    c: Context,
+    next: () => Promise<void>
+) => {
+    const survey = c.get('survey');
+    const screenerRows = await getSurveyScreeners(survey.id);
+
+    if (screenerRows.length > 0) {
+        const token = c.req.header('x-screener-token');
+        const isValid = await verifyScreenerToken(survey.id, token);
+        if (!isValid) {
+            throw new SurveyAuthenticationError();
+        }
+    }
+
+    await next();
 };

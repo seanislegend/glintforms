@@ -24,6 +24,8 @@
         "vitest": "2.1.9"
     },
     "exports": {
+        "./generate-authenticity-score.js": "./src/generate-authenticity-score.ts",
+        "./process-response-submission.js": "./src/process-response-submission.ts",
         "./schema": "./src/schema.ts"
     },
     "private": true

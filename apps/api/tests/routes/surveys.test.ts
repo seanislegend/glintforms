@@ -5,6 +5,12 @@ import {beforeEach, describe, expect, it, vi} from 'vitest';
 import {errorMiddleware} from '../../src/middleware/errors.js';
 import router from '../../src/routes/surveys.js';
 import {mockQuestionAnswersList, mockQuestionsList} from '../mocks/questions.js';
+import {
+    mockAgeScreener,
+    mockLocationScreener,
+    mockScreenersList,
+    mockSingleChoiceScreener
+} from '../mocks/screeners.js';
 import {mockSurvey, mockSurveySettings, mockSurveySettingsWithPassword} from '../mocks/survey.js';
 import {mockRedis} from '../setup.js';
 
@@ -14,6 +20,8 @@ vi.mock('@glint/database', () => ({
     questions: {},
     responseSubmissions: {},
     responses: {},
+    screeners: {},
+    surveyScreeners: {},
     surveys: {},
     surveySettings: {}
 }));
@@ -28,10 +36,21 @@ vi.mock('@glint/encryption', () => ({
     encrypt: vi.fn((password: string) => `encrypted-${password}`)
 }));
 
+vi.mock('@trigger.dev/sdk', () => ({
+    tasks: {
+        trigger: vi.fn().mockResolvedValue(undefined)
+    }
+}));
+
 // helper functions for simplified mocking
 const createMockDbSelect = (returnValue: any) =>
     ({
         from: vi.fn().mockReturnValue({
+            innerJoin: vi.fn().mockReturnValue({
+                where: vi.fn().mockReturnValue({
+                    orderBy: vi.fn().mockResolvedValue(returnValue)
+                })
+            }),
             where: vi.fn().mockReturnValue({
                 limit: vi.fn().mockResolvedValue(returnValue),
                 orderBy: vi.fn().mockResolvedValue(returnValue)
@@ -54,6 +73,7 @@ const createMockDbTransaction = (success = true) => {
 };
 
 const setupSurveyMocks = (options: {
+    screeners?: typeof mockScreenersList;
     survey?: typeof mockSurvey | null;
     settings?: typeof mockSurveySettings;
     responseCount?: number;
@@ -78,6 +98,19 @@ const setupSurveyMocks = (options: {
     mockDbSelect.mockReturnValueOnce(
         createMockDbSelectSimple([{count: options.responseCount || 5}])
     );
+    // screeners lookup (if provided) - uses innerJoin
+    if (options.screeners !== undefined) {
+        const screenerQuery = {
+            from: vi.fn().mockReturnValue({
+                innerJoin: vi.fn().mockReturnValue({
+                    where: vi.fn().mockReturnValue({
+                        orderBy: vi.fn().mockResolvedValue(options.screeners)
+                    })
+                })
+            })
+        } as any;
+        mockDbSelect.mockReturnValueOnce(screenerQuery);
+    }
     // questions lookup (only if survey is open)
     if (options.questions !== undefined) {
         mockDbSelect.mockReturnValueOnce(createMockDbSelect(options.questions));
@@ -92,16 +125,18 @@ const setupSurveyMocks = (options: {
 
 const mockScenarios = {
     // GET scenarios
-    openSurvey: () => setupSurveyMocks({questions: mockQuestionsList}),
-    closedSurvey: () => setupSurveyMocks({responseCount: 100}),
+    openSurvey: () => setupSurveyMocks({questions: mockQuestionsList, screeners: []}),
+    closedSurvey: () => setupSurveyMocks({responseCount: 100, screeners: []}),
     surveyNotFound: () => setupSurveyMocks({survey: null}),
     closedSurveyNoText: () =>
         setupSurveyMocks({
+            screeners: [],
             settings: {...mockSurveySettings, closedText: null as any},
             responseCount: 100
         }),
     passwordProtected: () =>
         setupSurveyMocks({
+            screeners: [],
             settings: {
                 ...mockSurveySettings,
                 isPasswordProtected: true,
@@ -112,12 +147,14 @@ const mockScenarios = {
         }),
     anonymousAccess: () =>
         setupSurveyMocks({
+            screeners: [],
             settings: {...mockSurveySettings, allowAnonymous: true},
             responseCount: 5,
             questions: mockQuestionsList
         }),
     maxResponsesReached: () =>
         setupSurveyMocks({
+            screeners: [],
             settings: {...mockSurveySettings, maxResponses: 50},
             responseCount: 50
         }),
@@ -126,13 +163,23 @@ const mockScenarios = {
         setupSurveyMocks({
             questions: mockQuestionsList,
             responseCount: 5,
+            screeners: [],
             transactionSuccess: true
         }),
-    transactionError: () =>
+    transactionError: () => {
         setupSurveyMocks({
+            questions: mockQuestionsList,
             responseCount: 5,
+            screeners: [],
             transactionSuccess: false
-        }),
+        });
+        // make insert fail to simulate database error
+        vi.mocked(db.insert).mockImplementationOnce(() => {
+            const returningFn = vi.fn().mockRejectedValue(new Error('Database error'));
+            const valuesFn = vi.fn().mockReturnValue({returning: returningFn});
+            return {values: valuesFn} as any;
+        });
+    },
     surveyClosed: () =>
         setupSurveyMocks({
             responseCount: 100
@@ -151,6 +198,7 @@ const mockScenarios = {
         setupSurveyMocks({
             questions: mockQuestionsList,
             responseCount: 5,
+            screeners: [],
             transactionSuccess: true
         })
 };
@@ -185,6 +233,8 @@ describe('Survey Routes', () => {
         vi.mocked(db.select).mockClear();
         vi.mocked(db.insert).mockClear();
         vi.mocked(db.transaction).mockClear();
+        // set default return value for db.select to prevent undefined errors
+        vi.mocked(db.select).mockReturnValue(createMockDbSelect([]));
         // reset db.insert mock implementation
         vi.mocked(db.insert).mockImplementation(() => {
             const returningFn = vi.fn().mockResolvedValue([{id: 'mock-submission-id'}]);
@@ -311,6 +361,17 @@ describe('Survey Routes', () => {
             mockDbSelect.mockReturnValueOnce(createMockDbSelectSimple([mockSurveySettings]));
             // response count
             mockDbSelect.mockReturnValueOnce(createMockDbSelectSimple([{count: 5}]));
+            // screeners lookup
+            const screenerQuery = {
+                from: vi.fn().mockReturnValue({
+                    innerJoin: vi.fn().mockReturnValue({
+                        where: vi.fn().mockReturnValue({
+                            orderBy: vi.fn().mockResolvedValue([])
+                        })
+                    })
+                })
+            } as any;
+            mockDbSelect.mockReturnValueOnce(screenerQuery);
             // questions lookup
             mockDbSelect.mockReturnValueOnce(createMockDbSelect(mockQuestionsList));
 
@@ -382,6 +443,136 @@ describe('Survey Routes', () => {
                     title: mockSurvey.title
                 })
             );
+        });
+
+        it('returns survey with screeners but no questions when token is missing', async () => {
+            setupSurveyMocks({screeners: mockScreenersList, questions: mockQuestionsList});
+
+            const res = await app.request(`/surveys/${mockSurvey.id}`);
+            expect(res.status).toBe(200);
+
+            const data = await res.json();
+            expect(data).toEqual(
+                expect.objectContaining({
+                    allowAnonymous: mockSurveySettings.allowAnonymous,
+                    description: mockSurvey.description,
+                    id: mockSurvey.id,
+                    isClosed: mockSurvey.isClosed,
+                    screeners: [
+                        {
+                            config: mockAgeScreener.config,
+                            id: mockAgeScreener.id,
+                            type: mockAgeScreener.type
+                        },
+                        {
+                            config: mockLocationScreener.config,
+                            id: mockLocationScreener.id,
+                            type: mockLocationScreener.type
+                        },
+                        {
+                            config: mockSingleChoiceScreener.config,
+                            id: mockSingleChoiceScreener.id,
+                            options: mockSingleChoiceScreener.config.options.map(opt => ({
+                                id: opt.id,
+                                label: opt.value
+                            })),
+                            question: mockSingleChoiceScreener.config.question,
+                            type: mockSingleChoiceScreener.type
+                        }
+                    ],
+                    slug: mockSurvey.slug,
+                    title: mockSurvey.title
+                })
+            );
+            expect(data.questions).toBeUndefined();
+        });
+
+        it('returns survey with questions when valid token is provided', async () => {
+            setupSurveyMocks({screeners: mockScreenersList, questions: mockQuestionsList});
+
+            const token = 'valid-token-123';
+            mockRedis.get.mockResolvedValueOnce(mockSurvey.id);
+
+            const res = await app.request(`/surveys/${mockSurvey.id}`, {
+                headers: {'x-screener-token': token}
+            });
+            expect(res.status).toBe(200);
+
+            const data = await res.json();
+            expect(data).toEqual(
+                expect.objectContaining({
+                    allowAnonymous: mockSurveySettings.allowAnonymous,
+                    description: mockSurvey.description,
+                    id: mockSurvey.id,
+                    isClosed: mockSurvey.isClosed,
+                    questions: [
+                        mockQuestionsList[0]!,
+                        mockQuestionsList[1]!,
+                        {
+                            ...mockQuestionsList[2]!,
+                            options: mockQuestionsList[2]!.options!.map(option => ({
+                                label: option.value,
+                                value: option.id
+                            }))
+                        },
+                        {
+                            ...mockQuestionsList[3]!,
+                            options: mockQuestionsList[3]!.options!.map(option => ({
+                                label: option.value,
+                                value: option.id
+                            }))
+                        }
+                    ],
+                    screeners: expect.any(Array),
+                    slug: mockSurvey.slug,
+                    title: mockSurvey.title
+                })
+            );
+
+            expect(mockRedis.get).toHaveBeenCalledWith(`screener:token:${mockSurvey.id}:${token}`);
+        });
+
+        it('returns survey without questions when token is invalid', async () => {
+            setupSurveyMocks({screeners: mockScreenersList, questions: mockQuestionsList});
+
+            const token = 'invalid-token-123';
+            mockRedis.get.mockResolvedValueOnce(null);
+
+            const res = await app.request(`/surveys/${mockSurvey.id}`, {
+                headers: {'x-screener-token': token}
+            });
+            expect(res.status).toBe(200);
+
+            const data = await res.json();
+            expect(data.questions).toBeUndefined();
+            expect(data.screeners).toBeDefined();
+        });
+
+        it('returns survey without questions when token is for different survey', async () => {
+            setupSurveyMocks({screeners: mockScreenersList, questions: mockQuestionsList});
+
+            const token = 'wrong-survey-token';
+            mockRedis.get.mockResolvedValueOnce('different-survey-id');
+
+            const res = await app.request(`/surveys/${mockSurvey.id}`, {
+                headers: {'x-screener-token': token}
+            });
+            expect(res.status).toBe(200);
+
+            const data = await res.json();
+            expect(data.questions).toBeUndefined();
+            expect(data.screeners).toBeDefined();
+        });
+
+        it('returns survey with questions when no screeners exist', async () => {
+            setupSurveyMocks({screeners: [], questions: mockQuestionsList});
+
+            const res = await app.request(`/surveys/${mockSurvey.id}`);
+            expect(res.status).toBe(200);
+
+            const data = await res.json();
+            expect(data.questions).toBeDefined();
+            expect(data.screeners).toBeUndefined();
         });
     });
 
@@ -543,7 +734,17 @@ describe('Survey Routes', () => {
         });
 
         it('allows access when correct password is provided', async () => {
-            mockScenarios.passwordProtected();
+            setupSurveyMocks({
+                questions: mockQuestionsList,
+                responseCount: 5,
+                screeners: [],
+                settings: {
+                    ...mockSurveySettings,
+                    isPasswordProtected: true,
+                    password: 'dummy-encrypted-password' as any
+                },
+                transactionSuccess: true
+            });
 
             const requestBody = defaultRequestBody;
             const res = await app.request(`/surveys/${mockSurvey.id}/responses`, {
@@ -608,17 +809,18 @@ describe('Survey Routes', () => {
         });
 
         it('throws InvalidBodyError when request body is invalid json', async () => {
+            mockScenarios.successfulResponse();
             const requestBody = 'invalid-json';
             const res = await app.request(`/surveys/${mockSurvey.id}/responses`, {
                 body: requestBody,
                 headers: {'Content-Type': 'application/json'},
                 method: 'POST'
             });
-            // the error middleware should handle this, but let's check what we actually get
-            expect(res.status).toBe(500);
+            // the error middleware should handle this and return 400 for invalid JSON
+            expect(res.status).toBe(400);
 
             const data = await res.json();
-            expect(data).toEqual({error: 'internal_server_error'});
+            expect(data).toEqual({error: 'invalid_json'});
         });
 
         it('handles null answers', async () => {
@@ -899,6 +1101,255 @@ describe('Survey Routes', () => {
 
             const data = await res.json();
             expect(data).toEqual({ok: true});
+        });
+    });
+
+    describe('POST /:idOrSlug/screeners', () => {
+        it('returns success with token when all screeners pass', async () => {
+            setupSurveyMocks({screeners: mockScreenersList});
+            mockRedis.set.mockResolvedValueOnce(undefined);
+            mockRedis.expire.mockResolvedValueOnce(undefined);
+
+            const requestBody = {
+                age: 25,
+                country: 'GB',
+                [mockSingleChoiceScreener.id]: 'correct_option_id'
+            };
+
+            const res = await app.request(`/surveys/${mockSurvey.id}/screeners`, {
+                body: JSON.stringify(requestBody),
+                headers: {'Content-Type': 'application/json'},
+                method: 'POST'
+            });
+            expect(res.status).toBe(200);
+
+            const data = await res.json();
+            expect(data).toEqual({
+                ok: true,
+                passed: true,
+                token: expect.any(String)
+            });
+            expect(data.token).toMatch(/^[a-f0-9]{64}$/); // 64 char hex string
+
+            // verify token was stored in redis
+            expect(mockRedis.set).toHaveBeenCalled();
+            expect(mockRedis.expire).toHaveBeenCalledWith(
+                expect.stringContaining(`screener:token:${mockSurvey.id}:`),
+                3600
+            );
+        });
+
+        it('returns success when no screeners exist', async () => {
+            setupSurveyMocks({screeners: []});
+
+            const requestBody = {};
+
+            const res = await app.request(`/surveys/${mockSurvey.id}/screeners`, {
+                body: JSON.stringify(requestBody),
+                headers: {'Content-Type': 'application/json'},
+                method: 'POST'
+            });
+            expect(res.status).toBe(200);
+
+            const data = await res.json();
+            expect(data).toEqual({
+                ok: true,
+                passed: true
+            });
+            expect(data.token).toBeUndefined();
+        });
+
+        it('returns failure when age screener fails', async () => {
+            setupSurveyMocks({screeners: [mockAgeScreener]});
+
+            const requestBody = {age: 15};
+
+            const res = await app.request(`/surveys/${mockSurvey.id}/screeners`, {
+                body: JSON.stringify(requestBody),
+                headers: {'Content-Type': 'application/json'},
+                method: 'POST'
+            });
+            expect(res.status).toBe(403);
+
+            const data = await res.json();
+            expect(data).toEqual({
+                ok: false,
+                message: mockAgeScreener.failureMessage,
+                passed: false
+            });
+        });
+
+        it('returns failure when location screener fails', async () => {
+            setupSurveyMocks({screeners: [mockLocationScreener]});
+
+            const requestBody = {country: 'FR'};
+
+            const res = await app.request(`/surveys/${mockSurvey.id}/screeners`, {
+                body: JSON.stringify(requestBody),
+                headers: {'Content-Type': 'application/json'},
+                method: 'POST'
+            });
+            expect(res.status).toBe(403);
+
+            const data = await res.json();
+            expect(data).toEqual({
+                ok: false,
+                message: mockLocationScreener.failureMessage,
+                passed: false
+            });
+        });
+
+        it('returns failure when single choice screener fails', async () => {
+            setupSurveyMocks({screeners: [mockSingleChoiceScreener]});
+
+            const requestBody = {[mockSingleChoiceScreener.id]: 'wrong_option_id'};
+
+            const res = await app.request(`/surveys/${mockSurvey.id}/screeners`, {
+                body: JSON.stringify(requestBody),
+                headers: {'Content-Type': 'application/json'},
+                method: 'POST'
+            });
+            expect(res.status).toBe(403);
+
+            const data = await res.json();
+            expect(data).toEqual({
+                ok: false,
+                message: mockSingleChoiceScreener.failureMessage,
+                passed: false
+            });
+        });
+
+        it('returns failure when age is missing', async () => {
+            setupSurveyMocks({screeners: [mockAgeScreener]});
+
+            const requestBody = {};
+
+            const res = await app.request(`/surveys/${mockSurvey.id}/screeners`, {
+                body: JSON.stringify(requestBody),
+                headers: {'Content-Type': 'application/json'},
+                method: 'POST'
+            });
+            expect(res.status).toBe(403);
+
+            const data = await res.json();
+            expect(data).toEqual({
+                ok: false,
+                message: mockAgeScreener.failureMessage,
+                passed: false
+            });
+        });
+
+        it('returns failure when country is missing', async () => {
+            setupSurveyMocks({screeners: [mockLocationScreener]});
+
+            const requestBody = {};
+
+            const res = await app.request(`/surveys/${mockSurvey.id}/screeners`, {
+                body: JSON.stringify(requestBody),
+                headers: {'Content-Type': 'application/json'},
+                method: 'POST'
+            });
+            expect(res.status).toBe(403);
+
+            const data = await res.json();
+            expect(data).toEqual({
+                ok: false,
+                message: mockLocationScreener.failureMessage,
+                passed: false
+            });
+        });
+
+        it('returns failure when first screener fails in multiple screeners', async () => {
+            setupSurveyMocks({screeners: mockScreenersList});
+
+            const requestBody = {
+                age: 15, // fails
+                country: 'GB',
+                [mockSingleChoiceScreener.id]: 'correct_option_id'
+            };
+
+            const res = await app.request(`/surveys/${mockSurvey.id}/screeners`, {
+                body: JSON.stringify(requestBody),
+                headers: {'Content-Type': 'application/json'},
+                method: 'POST'
+            });
+            expect(res.status).toBe(403);
+
+            const data = await res.json();
+            expect(data).toEqual({
+                ok: false,
+                message: mockAgeScreener.failureMessage,
+                passed: false
+            });
+        });
+
+        it('validates age screener with "under" operator', async () => {
+            const underAgeScreener = {
+                ...mockAgeScreener,
+                config: {operator: 'under', value: 65}
+            };
+            setupSurveyMocks({screeners: [underAgeScreener]});
+            mockRedis.set.mockResolvedValueOnce(undefined);
+            mockRedis.expire.mockResolvedValueOnce(undefined);
+
+            const requestBody = {age: 50};
+
+            const res = await app.request(`/surveys/${mockSurvey.id}/screeners`, {
+                body: JSON.stringify(requestBody),
+                headers: {'Content-Type': 'application/json'},
+                method: 'POST'
+            });
+            expect(res.status).toBe(200);
+
+            const data = await res.json();
+            expect(data.passed).toBe(true);
+        });
+
+        it('returns default failure message when screener has no custom message', async () => {
+            const screenerWithoutMessage = {
+                ...mockAgeScreener,
+                failureMessage: null
+            } as typeof mockAgeScreener & {failureMessage: null};
+            setupSurveyMocks({screeners: [screenerWithoutMessage]});
+
+            const requestBody = {age: 15};
+
+            const res = await app.request(`/surveys/${mockSurvey.id}/screeners`, {
+                body: JSON.stringify(requestBody),
+                headers: {'Content-Type': 'application/json'},
+                method: 'POST'
+            });
+            expect(res.status).toBe(403);
+
+            const data = await res.json();
+            expect(data).toEqual({
+                ok: false,
+                message: 'You do not meet the requirements for this survey.',
+                passed: false
+            });
+        });
+
+        it('handles multiple screeners in order', async () => {
+            setupSurveyMocks({screeners: mockScreenersList});
+            mockRedis.set.mockResolvedValueOnce(undefined);
+            mockRedis.expire.mockResolvedValueOnce(undefined);
+
+            const requestBody = {
+                age: 25,
+                country: 'US',
+                [mockSingleChoiceScreener.id]: 'correct_option_id'
+            };
+
+            const res = await app.request(`/surveys/${mockSurvey.id}/screeners`, {
+                body: JSON.stringify(requestBody),
+                headers: {'Content-Type': 'application/json'},
+                method: 'POST'
+            });
+            expect(res.status).toBe(200);
+
+            const data = await res.json();
+            expect(data.passed).toBe(true);
+            expect(data.token).toBeDefined();
         });
     });
 });

@@ -8,13 +8,17 @@ import {InvalidBodyError} from '@/middleware/errors';
 import type {ServerContext} from '@/types/server';
 import {
     createSurveyResponse,
+    generateScreenerToken,
     getSurveyScreeners,
+    storeScreenerToken,
     transformQuestion,
     transformScreener,
     validateAgeScreener,
     validateLocationScreener,
     validateSingleChoiceScreener,
     verifyIdempotency,
+    verifyScreenerToken,
+    verifyScreenerTokenIfRequired,
     verifySurveyIsActive,
     verifySurveyPassword
 } from './utils';
@@ -25,16 +29,40 @@ router.get('/:idOrSlug', verifySurveyIsActive, async c => {
     const survey = c.get('survey');
     const settings = c.get('settings');
 
+    // get screeners for this survey
+    const screenerRows = await getSurveyScreeners(survey.id);
+    const transformedScreeners = screenerRows.map(transformScreener);
+
+    // if screeners exist, verify token
+    if (screenerRows.length > 0) {
+        const token = c.req.header('x-screener-token');
+        const isValidToken = await verifyScreenerToken(survey.id, token);
+
+        if (!isValidToken) {
+            // return survey metadata and screeners only, no questions
+            const baseData = {
+                allowAnonymous: settings?.allowAnonymous || false,
+                campaignId: survey.campaignId,
+                closedText: settings?.closedText || '',
+                description: survey.description ?? '',
+                id: survey.id,
+                isClosed: survey.status !== 'active',
+                isPasswordProtected: settings?.isPasswordProtected || false,
+                screeners: transformedScreeners,
+                slug: survey.slug,
+                title: survey.title
+            };
+            return c.json(baseData);
+        }
+    }
+
+    // no screeners or valid token - return full response with questions
     const allQuestions = await db
         .select()
         .from(questions)
         .where(eq(questions.surveyId, survey.id))
         .orderBy(asc(questions.order));
     const surveyQuestions = allQuestions.map(transformQuestion);
-
-    // get screeners for this survey
-    const screenerRows = await getSurveyScreeners(survey.id);
-    const transformedScreeners = screenerRows.map(transformScreener);
 
     const responseData = createSurveyResponse(
         survey,
@@ -51,6 +79,7 @@ router.post(
     '/:idOrSlug/responses',
     verifySurveyIsActive,
     verifySurveyPassword,
+    verifyScreenerTokenIfRequired,
     verifyIdempotency,
     async c => {
         const survey = c.get('survey');
@@ -130,14 +159,12 @@ router.post(
 router.post('/:idOrSlug/screeners', verifySurveyIsActive, async c => {
     const survey = c.get('survey');
     const body = await c.req.json();
-
     const screenerRows = await getSurveyScreeners(survey.id);
 
     if (screenerRows.length === 0) {
         return c.json({ok: true, passed: true}, 200);
     }
 
-    // validate each screener
     const results: Array<{id: string; passed: boolean; message?: string}> = [];
 
     for (const screenerRow of screenerRows) {
@@ -164,12 +191,13 @@ router.post('/:idOrSlug/screeners', verifySurveyIsActive, async c => {
             passed
         });
 
-        // if any screener fails, return failure
         if (!passed) {
             return c.json(
                 {
                     ok: false,
-                    message: screenerRow.failureMessage || 'You do not meet the requirements for this survey.',
+                    message:
+                        screenerRow.failureMessage ||
+                        'You do not meet the requirements for this survey.',
                     passed: false
                 },
                 403
@@ -177,7 +205,11 @@ router.post('/:idOrSlug/screeners', verifySurveyIsActive, async c => {
         }
     }
 
-    return c.json({ok: true, passed: true}, 200);
+    // all screeners passed, generate token
+    const token = generateScreenerToken();
+    await storeScreenerToken(survey.id, token);
+
+    return c.json({ok: true, passed: true, token}, 200);
 });
 
 export default router;
