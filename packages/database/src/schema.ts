@@ -185,7 +185,7 @@ export const respondentCohorts = pgTable(
     })
 );
 
-export const screenerTypes = ['age', 'location', 'single_choice'] as const;
+export const screenerTypes = ['age', 'location', 'selection'] as const;
 export const screenerTypeEnum = pgEnum('screener_type', screenerTypes);
 
 export const screeners = pgTable(

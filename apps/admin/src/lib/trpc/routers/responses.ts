@@ -288,7 +288,7 @@ export const responsesRouter = {
                     failureCount: f.failureCount,
                     screenerId: f.screenerId,
                     screenerName: f.screenerName,
-                    screenerType: f.screenerType as 'age' | 'location' | 'single_choice'
+                    screenerType: f.screenerType as 'age' | 'location' | 'selection'
                 })),
                 totalFailures
             };

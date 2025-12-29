@@ -23,8 +23,8 @@ const getTypeLabel = (type: string) => {
             return 'Age';
         case 'location':
             return 'Location';
-        case 'single_choice':
-            return 'Single Choice';
+        case 'selection':
+            return 'Selection';
         default:
             return type;
     }
@@ -39,25 +39,19 @@ const renderConfig = (type: string, config: unknown) => {
         const locationConfig = config as {countries: string[]};
         return locationConfig.countries.map(code => COUNTRY_CODE_LABELS[code] || code).join(', ');
     }
-    if (type === 'single_choice') {
-        const singleChoiceConfig = config as {
-            correctOptionId: string;
-            options: Array<{id: string; value: string}>;
+    if (type === 'selection') {
+        const selectionConfig = config as {
+            options: Array<{id: string; passes: boolean; value: string}>;
             question: string;
         };
         return (
             <div className="space-y-2">
-                <p className="text-sm font-medium">{singleChoiceConfig.question}</p>
+                <p className="text-sm font-medium">{selectionConfig.question}</p>
                 <ul className="list-disc list-inside space-y-1">
-                    {singleChoiceConfig.options.map(opt => (
-                        <li
-                            className={`text-sm ${
-                                opt.id === singleChoiceConfig.correctOptionId ? 'font-semibold' : ''
-                            }`}
-                            key={opt.id}
-                        >
+                    {selectionConfig.options.map(opt => (
+                        <li className={`text-sm ${opt.passes ? 'font-semibold' : ''}`} key={opt.id}>
                             {opt.value}
-                            {opt.id === singleChoiceConfig.correctOptionId && ' (correct)'}
+                            {opt.passes && ' (passes)'}
                         </li>
                     ))}
                 </ul>

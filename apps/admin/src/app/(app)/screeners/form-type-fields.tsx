@@ -5,7 +5,7 @@ import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@glint/
 import {type Control, useFormContext, useWatch} from 'react-hook-form';
 import type {ScreenerCreate} from '@/lib/schemas/screeners';
 import {COUNTRY_CODE_LABELS} from '@/utils/country-codes';
-import SingleChoiceFields from './form-single-choice-fields';
+import SelectionFields from './form-selection-fields';
 
 interface Props {
     defaultOptionIds?: Array<{id: string; tempId: string}>;
@@ -61,8 +61,7 @@ const ScreenerLocationFields: React.FC<FieldProps> = ({control}) => {
 const screenerDescriptions: Record<string, string> = {
     age: 'Only allow respondents to access the survey if they are older or younger than the specified age.',
     location: 'Only allow respondents to access the survey if they are in the specified countries.',
-    single_choice:
-        'Only allow respondents to access the survey if they answer the question correctly.'
+    selection: 'Only allow respondents to access the survey if they answer the question correctly.'
 };
 
 const ScreenerTypeFields: React.FC<Props> = ({defaultOptionIds}) => {
@@ -80,8 +79,8 @@ const ScreenerTypeFields: React.FC<Props> = ({defaultOptionIds}) => {
                 {screenerType === 'location' && (
                     <ScreenerLocationFields control={methods.control} />
                 )}
-                {screenerType === 'single_choice' && (
-                    <SingleChoiceFields defaultOptionIds={defaultOptionIds} />
+                {screenerType === 'selection' && (
+                    <SelectionFields defaultOptionIds={defaultOptionIds} />
                 )}
             </CardContent>
         </Card>

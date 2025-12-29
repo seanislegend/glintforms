@@ -5,7 +5,7 @@ import {handleFormError} from '@glint/form/utils';
 import Button from '@glint/ui/button';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {useMutation, useQueryClient} from '@tanstack/react-query';
-import {useQueryState} from 'nuqs';
+import {useRouter} from 'next/navigation';
 import {useCallback} from 'react';
 import {FormProvider, type SubmitHandler, useForm} from 'react-hook-form';
 import {toast} from 'sonner';
@@ -14,10 +14,9 @@ import {useTRPC} from '@/lib/trpc/react';
 import ScreenerTypeFields from '../form-type-fields';
 
 const Form: React.FC = () => {
+    const router = useRouter();
     const trpc = useTRPC();
     const queryClient = useQueryClient();
-    const [, setRedirect] = useQueryState('redirect');
-    const [, setSuccess] = useQueryState('success');
 
     const methods = useForm<ScreenerCreate>({
         resolver: zodResolver(screenerCreateSchema),
@@ -36,8 +35,7 @@ const Form: React.FC = () => {
                     queryKey: trpc.screeners.getAll.queryKey()
                 });
                 toast.success('Screener created successfully');
-                setSuccess('true');
-                setRedirect(`/screeners/${response?.id}`);
+                router.push(`/screeners/${response?.id}`);
             }
         })
     );
@@ -48,8 +46,6 @@ const Form: React.FC = () => {
         },
         [createScreener.mutateAsync]
     );
-
-    console.log(methods.formState);
 
     return (
         <FormProvider {...methods}>
@@ -76,7 +72,7 @@ const Form: React.FC = () => {
                         options={[
                             {label: 'Age', value: 'age'},
                             {label: 'Location', value: 'location'},
-                            {label: 'Single Choice', value: 'single_choice'}
+                            {label: 'Selection', value: 'selection'}
                         ]}
                     />
                     <ScreenerTypeFields />

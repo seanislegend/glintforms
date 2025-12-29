@@ -3,7 +3,7 @@ interface Screener {
     id: string;
     options?: Array<{id: string; label: string}>;
     question?: string;
-    type: 'age' | 'location' | 'single_choice';
+    type: 'age' | 'location' | 'selection';
 }
 
 interface BaseSurvey {

@@ -27,13 +27,16 @@ export function getScreenerSummary(screener: ScreenerRecord): string {
             const lastCountry = countryNames.at(-1);
             return `Screening for respondents in ${allButLast.join(', ')}, and ${lastCountry}.`;
         }
-        case 'single_choice': {
-            const singleChoiceConfig = config as {
-                correctOptionId: string;
-                options: Array<{id: string; value: string}>;
+        case 'selection': {
+            const selectionConfig = config as {
+                options: Array<{id: string; passes: boolean; value: string}>;
                 question: string;
             };
-            return `Screening for respondents who answer "${singleChoiceConfig.question}" correctly`;
+            const passingOptions = selectionConfig.options.filter(opt => opt.passes);
+            if (passingOptions.length === 1) {
+                return `Screening for respondents who answer "${selectionConfig.question}" with "${passingOptions[0].value}"`;
+            }
+            return `Screening for respondents who answer "${selectionConfig.question}" with one of ${passingOptions.length} options`;
         }
         default:
             return 'Screening configuration';

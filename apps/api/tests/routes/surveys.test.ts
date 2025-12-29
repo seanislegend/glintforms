@@ -9,7 +9,7 @@ import {
     mockAgeScreener,
     mockLocationScreener,
     mockScreenersList,
-    mockSingleChoiceScreener
+    mockSelectionScreener
 } from '../mocks/screeners.js';
 import {mockSurvey, mockSurveySettings, mockSurveySettingsWithPassword} from '../mocks/survey.js';
 import {mockRedis} from '../setup.js';
@@ -470,14 +470,14 @@ describe('Survey Routes', () => {
                             type: mockLocationScreener.type
                         },
                         {
-                            config: mockSingleChoiceScreener.config,
-                            id: mockSingleChoiceScreener.id,
-                            options: mockSingleChoiceScreener.config.options.map(opt => ({
+                            config: mockSelectionScreener.config,
+                            id: mockSelectionScreener.id,
+                            options: mockSelectionScreener.config.options.map(opt => ({
                                 id: opt.id,
                                 label: opt.value
                             })),
-                            question: mockSingleChoiceScreener.config.question,
-                            type: mockSingleChoiceScreener.type
+                            question: mockSelectionScreener.config.question,
+                            type: mockSelectionScreener.type
                         }
                     ],
                     slug: mockSurvey.slug,
@@ -1113,7 +1113,7 @@ describe('Survey Routes', () => {
             const requestBody = {
                 age: 25,
                 country: 'GB',
-                [mockSingleChoiceScreener.id]: 'correct_option_id'
+                [mockSelectionScreener.id]: 'correct_option_id'
             };
 
             const res = await app.request(`/surveys/${mockSurvey.id}/screeners`, {
@@ -1199,10 +1199,10 @@ describe('Survey Routes', () => {
             });
         });
 
-        it('returns failure when single choice screener fails', async () => {
-            setupSurveyMocks({screeners: [mockSingleChoiceScreener]});
+        it('returns failure when selection screener fails', async () => {
+            setupSurveyMocks({screeners: [mockSelectionScreener]});
 
-            const requestBody = {[mockSingleChoiceScreener.id]: 'wrong_option_id'};
+            const requestBody = {[mockSelectionScreener.id]: 'wrong_option_id'};
 
             const res = await app.request(`/surveys/${mockSurvey.id}/screeners`, {
                 body: JSON.stringify(requestBody),
@@ -1214,7 +1214,7 @@ describe('Survey Routes', () => {
             const data = await res.json();
             expect(data).toEqual({
                 ok: false,
-                message: mockSingleChoiceScreener.failureMessage,
+                message: mockSelectionScreener.failureMessage,
                 passed: false
             });
         });
@@ -1265,7 +1265,7 @@ describe('Survey Routes', () => {
             const requestBody = {
                 age: 15, // fails
                 country: 'GB',
-                [mockSingleChoiceScreener.id]: 'correct_option_id'
+                [mockSelectionScreener.id]: 'correct_option_id'
             };
 
             const res = await app.request(`/surveys/${mockSurvey.id}/screeners`, {
@@ -1337,7 +1337,7 @@ describe('Survey Routes', () => {
             const requestBody = {
                 age: 25,
                 country: 'US',
-                [mockSingleChoiceScreener.id]: 'correct_option_id'
+                [mockSelectionScreener.id]: 'correct_option_id'
             };
 
             const res = await app.request(`/surveys/${mockSurvey.id}/screeners`, {

@@ -28,25 +28,25 @@ const locationScreenerConfigSchema = z.object({
     countries: z.array(z.string().min(1)).min(1, 'at least one country required')
 });
 
-// single choice screener config input schema (accepts optional ids)
-const singleChoiceScreenerConfigInputSchema = z.object({
-    correctOptionId: z.string().uuid(),
+// selection screener config input schema (accepts optional ids)
+const selectionScreenerConfigInputSchema = z.object({
     options: z.array(
         z.object({
             id: z.string().uuid().optional(),
+            passes: z.boolean().optional(),
             value: z.string().min(1)
         })
     ),
     question: z.string().min(1)
 });
 
-// single choice screener config output schema (requires ids)
-const singleChoiceScreenerConfigOutputSchema = z.object({
-    correctOptionId: z.string().uuid(),
+// selection screener config output schema (requires ids)
+const selectionScreenerConfigOutputSchema = z.object({
     options: z
         .array(
             z.object({
                 id: z.string().uuid(),
+                passes: z.boolean(),
                 value: z.string().min(1)
             })
         )
@@ -54,26 +54,27 @@ const singleChoiceScreenerConfigOutputSchema = z.object({
     question: z.string().min(1, 'question is required')
 });
 
-// single choice screener config with transform
-const singleChoiceScreenerConfigSchema = singleChoiceScreenerConfigInputSchema
+// selection screener config with transform
+const selectionScreenerConfigSchema = selectionScreenerConfigInputSchema
     .transform(data => ({
-        ...data,
         options: data.options.map(opt => ({
             id: opt.id || crypto.randomUUID(),
+            passes: opt.passes ?? false,
             value: opt.value
-        }))
+        })),
+        question: data.question
     }))
-    .pipe(singleChoiceScreenerConfigOutputSchema)
-    .refine(data => data.options.some(opt => opt.id === data.correctOptionId), {
-        message: 'correctOptionId must match one of the option IDs',
-        path: ['correctOptionId']
+    .pipe(selectionScreenerConfigOutputSchema)
+    .refine(data => data.options.some(opt => opt.passes), {
+        message: 'at least one option must pass',
+        path: ['options']
     });
 
 // discriminated union for screener configs
 const screenerConfigSchema = z.discriminatedUnion('type', [
     z.object({config: ageScreenerConfigSchema, type: z.literal('age')}),
     z.object({config: locationScreenerConfigSchema, type: z.literal('location')}),
-    z.object({config: singleChoiceScreenerConfigSchema, type: z.literal('single_choice')})
+    z.object({config: selectionScreenerConfigSchema, type: z.literal('selection')})
 ]);
 
 export const screenerCreateSchema = z
@@ -92,12 +93,12 @@ export const screenerUpdateSchema = z
             .union([
                 ageScreenerConfigSchema,
                 locationScreenerConfigSchema,
-                singleChoiceScreenerConfigSchema
+                selectionScreenerConfigSchema
             ])
             .optional(),
         description: z.string().optional(),
         name: z.string().min(1).max(255).optional(),
-        type: z.enum(['age', 'location', 'single_choice']).optional()
+        type: z.enum(['age', 'location', 'selection']).optional()
     })
     .partial();
 

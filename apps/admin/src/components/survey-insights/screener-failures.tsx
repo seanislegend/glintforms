@@ -7,7 +7,7 @@ interface ScreenerFailure {
     failureCount: number;
     screenerId: string;
     screenerName: string;
-    screenerType: 'age' | 'location' | 'single_choice';
+    screenerType: 'age' | 'location' | 'selection';
 }
 
 interface ScreenerFailureStats {

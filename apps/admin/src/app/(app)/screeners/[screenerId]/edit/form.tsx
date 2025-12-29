@@ -7,7 +7,7 @@ import {zodResolver} from '@hookform/resolvers/zod';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import {useRouter} from 'next/navigation';
 import {useCallback, useEffect, useMemo} from 'react';
-import {FormProvider, type SubmitHandler, useForm} from 'react-hook-form';
+import {FormProvider, type SubmitHandler, useForm, useWatch} from 'react-hook-form';
 import {toast} from 'sonner';
 import {type ScreenerCreate, screenerCreateSchema} from '@/lib/schemas/screeners';
 import {useTRPC} from '@/lib/trpc/react';
@@ -33,6 +33,27 @@ const Form: React.FC<FormProps> = ({screenerId}) => {
         }
     });
 
+    const screenerType = useWatch({control: methods.control, name: 'type'});
+    const hasLoadedScreener = useMemo(() => !!screener, [screener]);
+
+    useEffect(() => {
+        if (hasLoadedScreener) return;
+        if (screenerType === 'age') {
+            methods.setValue('config', {operator: 'over', value: 18}, {shouldValidate: false});
+        } else if (screenerType === 'location') {
+            methods.setValue('config', {countries: []}, {shouldValidate: false});
+        } else if (screenerType === 'selection') {
+            methods.setValue(
+                'config',
+                {
+                    options: [{id: crypto.randomUUID(), passes: false, value: ''}],
+                    question: ''
+                },
+                {shouldValidate: false}
+            );
+        }
+    }, [screenerType, methods, hasLoadedScreener]);
+
     const updateScreener = useMutation(
         trpc.screeners.update.mutationOptions({
             onSuccess: async () => {
@@ -56,10 +77,10 @@ const Form: React.FC<FormProps> = ({screenerId}) => {
     );
 
     const defaultOptionIds = useMemo(() => {
-        if (screener?.type === 'single_choice' && screener?.config) {
-            return (screener.config as {options: Array<{id: string; value: string}>}).options.map(
-                opt => ({id: opt.id, tempId: crypto.randomUUID()})
-            );
+        if (screener?.type === 'selection' && screener?.config) {
+            return (
+                screener.config as {options: Array<{id: string; passes: boolean; value: string}>}
+            ).options.map(opt => ({id: opt.id, tempId: crypto.randomUUID()}));
         }
         return undefined;
     }, [screener]);
@@ -108,7 +129,7 @@ const Form: React.FC<FormProps> = ({screenerId}) => {
                         options={[
                             {label: 'Age', value: 'age'},
                             {label: 'Location', value: 'location'},
-                            {label: 'Single Choice', value: 'single_choice'}
+                            {label: 'Selection', value: 'selection'}
                         ]}
                     />
                     <ScreenerTypeFields defaultOptionIds={defaultOptionIds} />

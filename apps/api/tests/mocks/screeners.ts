@@ -14,20 +14,19 @@ export const mockLocationScreener = {
     type: 'location'
 };
 
-export const mockSingleChoiceScreener = {
+export const mockSelectionScreener = {
     config: {
-        correctOptionId: 'correct_option_id',
         options: [
-            {id: 'correct_option_id', value: 'Correct Answer'},
-            {id: 'wrong_option_id', value: 'Wrong Answer'}
+            {id: 'correct_option_id', passes: true, value: 'Correct Answer'},
+            {id: 'wrong_option_id', passes: false, value: 'Wrong Answer'}
         ],
         question: 'Are you eligible?'
     },
     failureMessage: 'You are not eligible for this survey',
-    id: 'single_choice_screener_id',
+    id: 'selection_screener_id',
     order: 2,
-    type: 'single_choice'
+    type: 'selection'
 };
 
-export const mockScreenersList = [mockAgeScreener, mockLocationScreener, mockSingleChoiceScreener];
+export const mockScreenersList = [mockAgeScreener, mockLocationScreener, mockSelectionScreener];
 

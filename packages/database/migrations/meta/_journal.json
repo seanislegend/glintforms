@@ -85,6 +85,13 @@
       "when": 1766971467587,
       "tag": "0011_opposite_junta",
       "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "7",
+      "when": 1767016860714,
+      "tag": "0012_rename_single_choice_to_selection",
+      "breakpoints": true
     }
   ]
 }

@@ -14,8 +14,8 @@ const getTypeLabel = (type: string) => {
             return 'Age';
         case 'location':
             return 'Location';
-        case 'single_choice':
-            return 'Single Choice';
+        case 'selection':
+            return 'Selection';
         default:
             return type;
     }

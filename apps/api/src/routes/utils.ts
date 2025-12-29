@@ -33,7 +33,7 @@ export const createSurveyResponse = (
         id: string;
         options?: Array<{id: string; label: string}>;
         question?: string;
-        type: 'age' | 'location' | 'single_choice';
+        type: 'age' | 'location' | 'selection';
     }> = []
 ): Omit<Survey, 'hasResponses' | 'status' | 'tenantId'> & {screeners?: typeof screeners} => {
     const baseData = {
@@ -212,12 +212,13 @@ export const validateLocationScreener = (
     return config.countries.includes(country);
 };
 
-export const validateSingleChoiceScreener = (
+export const validateSelectionScreener = (
     optionId: string | null | undefined,
-    config: {correctOptionId: string}
+    config: {options: Array<{id: string; passes: boolean}>}
 ): boolean => {
     if (!optionId) return false;
-    return optionId === config.correctOptionId;
+    const option = config.options.find(opt => opt.id === optionId);
+    return option?.passes ?? false;
 };
 
 export const getSurveyScreeners = async (surveyId: string) => {
@@ -241,13 +242,12 @@ export const transformScreener = (screener: {config: unknown; id: string; type: 
     const base = {
         config: screener.config as Record<string, unknown>,
         id: screener.id,
-        type: screener.type as 'age' | 'location' | 'single_choice'
+        type: screener.type as 'age' | 'location' | 'selection'
     };
 
-    if (screener.type === 'single_choice') {
+    if (screener.type === 'selection') {
         const config = screener.config as {
-            correctOptionId: string;
-            options: Array<{id: string; value: string}>;
+            options: Array<{id: string; passes: boolean; value: string}>;
             question: string;
         };
         return {

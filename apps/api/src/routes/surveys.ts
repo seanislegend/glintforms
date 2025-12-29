@@ -15,7 +15,7 @@ import {
     transformScreener,
     validateAgeScreener,
     validateLocationScreener,
-    validateSingleChoiceScreener,
+    validateSelectionScreener,
     verifyIdempotency,
     verifyScreenerToken,
     verifyScreenerTokenIfRequired,
@@ -182,11 +182,13 @@ router.post('/:idOrSlug/screeners', verifySurveyIsActive, async c => {
             submittedAnswer = country;
             const locationConfig = config as {countries: string[]};
             passed = validateLocationScreener(country, locationConfig);
-        } else if (screenerRow.type === 'single_choice') {
+        } else if (screenerRow.type === 'selection') {
             const optionId = body[screenerRow.id] as string | null | undefined;
             submittedAnswer = optionId;
-            const singleChoiceConfig = config as {correctOptionId: string};
-            passed = validateSingleChoiceScreener(optionId, singleChoiceConfig);
+            const selectionConfig = config as {
+                options: Array<{id: string; passes: boolean}>;
+            };
+            passed = validateSelectionScreener(optionId, selectionConfig);
         }
 
         results.push({
