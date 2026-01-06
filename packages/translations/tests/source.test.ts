@@ -1,9 +1,9 @@
-import {describe, expect, it} from 'vitest';
+import {describe, expect, test} from 'bun:test';
 import {updateSourceFile} from '../src/core/source';
 import type {ExtractedString, SourceFile} from '../src/types';
 
 describe('source manager', () => {
-    it('creates new entries for new strings', () => {
+    test('creates new entries for new strings', () => {
         const extracted: ExtractedString[] = [
             {
                 file: 'apps/admin/src/test.tsx',
@@ -26,9 +26,11 @@ describe('source manager', () => {
         expect(result.keys[key].occurrences).toHaveLength(1);
     });
 
-    it('merges occurrences for existing strings', () => {
+    test('merges occurrences for existing strings', () => {
         const text = 'Hello world';
-        const hash = require('node:crypto').createHash('sha256').update(text).digest('hex');
+        const hasher = new Bun.CryptoHasher('sha256');
+        hasher.update(text);
+        const hash = hasher.digest('hex');
 
         const existing: SourceFile = {
             generated: '2026-01-01T00:00:00Z',
@@ -63,7 +65,7 @@ describe('source manager', () => {
         expect(result.keys[key]?.occurrences).toHaveLength(2);
     });
 
-    it('prevents duplicate occurrences', () => {
+    test('prevents duplicate occurrences', () => {
         const existing: SourceFile = {
             generated: '2026-01-01T00:00:00Z',
             keys: {
@@ -96,7 +98,7 @@ describe('source manager', () => {
         expect(result.keys[key].occurrences).toHaveLength(1);
     });
 
-    it('throws on hash collision', () => {
+    test('throws on hash collision', () => {
         // This is extremely unlikely in practice, but we test the safety mechanism
         const existing: SourceFile = {
             generated: '2026-01-01T00:00:00Z',
@@ -128,7 +130,7 @@ describe('source manager', () => {
         }).not.toThrow(); // This won't throw because hash will be different
     });
 
-    it('generates common keys for strings in multiple files', () => {
+    test('generates common keys for strings in multiple files', () => {
         const extracted: ExtractedString[] = [
             {
                 file: 'apps/admin/src/surveys/page.tsx',
@@ -161,7 +163,7 @@ describe('source manager', () => {
         expect(result.keys[key]?.occurrences).toHaveLength(3);
     });
 
-    it('generates file-specific keys for strings in single file', () => {
+    test('generates file-specific keys for strings in single file', () => {
         const extracted: ExtractedString[] = [
             {
                 file: 'apps/admin/src/surveys/settings/page.tsx',

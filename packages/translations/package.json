@@ -21,6 +21,10 @@
             "types": "./dist/src/cli/index.d.ts",
             "default": "./dist/src/cli/index.js"
         },
+        "./constants": {
+            "types": "./dist/src/constants.d.ts",
+            "default": "./dist/src/constants.js"
+        },
         "./keys": {
             "types": "./locales/keys.ts",
             "default": "./locales/keys.ts"
@@ -29,7 +33,7 @@
     "scripts": {
         "build": "tsc",
         "dev": "tsc --watch",
-        "test": "vitest"
+        "test": "bun test"
     },
     "dependencies": {
         "@babel/parser": "^7.23.0",
@@ -41,9 +45,8 @@
     },
     "devDependencies": {
         "@types/babel__traverse": "^7.20.0",
-        "@types/node": "^20.0.0",
-        "typescript": "^5.0.0",
-        "vitest": "^1.0.0"
+        "bun-types": "^1.0.0",
+        "typescript": "^5.0.0"
     }
 }
 

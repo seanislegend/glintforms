@@ -1,20 +1,23 @@
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
-import { dirname, resolve } from "node:path";
-import type { LocaleFile, SourceFile } from "../types.js";
+/// <reference types="bun-types" />
 
-export const loadLocaleFile = (path: string): LocaleFile => {
+import {mkdir} from 'node:fs/promises';
+import {dirname, resolve} from 'node:path';
+import type {LocaleFile, SourceFile} from '../types.js';
+
+export const loadLocaleFile = async (path: string): Promise<LocaleFile> => {
     const resolvedPath = resolve(process.cwd(), path);
+    const file = Bun.file(resolvedPath);
 
-    if (!existsSync(resolvedPath)) {
+    if (!(await file.exists())) {
         return {};
     }
 
     try {
-        const content = readFileSync(resolvedPath, 'utf-8');
+        const content = await file.text();
         return JSON.parse(content);
     } catch (error) {
         throw new Error(
-            `Failed to load locale file from ${resolvedPath}: ${error instanceof Error ? error.message : String(error)}`,
+            `Failed to load locale file from ${resolvedPath}: ${error instanceof Error ? error.message : String(error)}`
         );
     }
 };
@@ -23,9 +26,9 @@ export const mergeLocaleFile = (
     source: SourceFile,
     existing: LocaleFile,
     locale: string,
-    primaryLocale: string,
+    primaryLocale: string
 ): LocaleFile => {
-    const merged: LocaleFile = { ...existing };
+    const merged: LocaleFile = {...existing};
 
     // add missing keys from source
     for (const [key, entry] of Object.entries(source.keys)) {
@@ -48,29 +51,31 @@ export const mergeLocaleFile = (
     return sorted;
 };
 
-export const saveLocaleFile = (locale: LocaleFile, path: string): void => {
+export const saveLocaleFile = async (locale: LocaleFile, path: string): Promise<void> => {
     const resolvedPath = resolve(process.cwd(), path);
 
     // ensure directory exists
     const dir = dirname(resolvedPath);
-    if (!existsSync(dir)) {
-        mkdirSync(dir, { recursive: true });
-    }
+    await mkdir(dir, {recursive: true});
 
     // write atomically
     const tempPath = `${resolvedPath}.tmp`;
-    writeFileSync(tempPath, JSON.stringify(locale, null, 4), 'utf-8');
+    const content = JSON.stringify(locale, null, 4);
+    await Bun.write(tempPath, content);
 
     // verify valid JSON
     try {
-        JSON.parse(readFileSync(tempPath, 'utf-8'));
+        const tempFile = Bun.file(tempPath);
+        const tempContent = await tempFile.text();
+        JSON.parse(tempContent);
     } catch (error) {
         throw new Error(
-            `Generated invalid JSON: ${error instanceof Error ? error.message : String(error)}`,
+            `Generated invalid JSON: ${error instanceof Error ? error.message : String(error)}`
         );
     }
 
     // rename atomically
-    writeFileSync(resolvedPath, readFileSync(tempPath, 'utf-8'));
+    const tempFile = Bun.file(tempPath);
+    const finalContent = await tempFile.text();
+    await Bun.write(resolvedPath, finalContent);
 };
-

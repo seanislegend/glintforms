@@ -36,4 +36,3 @@ export interface Config {
     locales: string[];
     primaryLocale: string;
 }
-

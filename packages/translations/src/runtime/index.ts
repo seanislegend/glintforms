@@ -1,2 +1,8 @@
-export { t, setLocale, getLocale, getAvailableLocales, loadLocale, initTranslations } from './i18n.js';
-
+export {
+    getAvailableLocales,
+    getLocale,
+    initTranslations,
+    loadLocale,
+    setLocale,
+    t
+} from './i18n.js';
