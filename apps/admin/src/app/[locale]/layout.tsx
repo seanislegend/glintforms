@@ -5,6 +5,7 @@ import {cn} from '@glint/ui/utils';
 import {GeistMono} from 'geist/font/mono';
 import {GeistSans} from 'geist/font/sans';
 import AppProviders from '@/components/providers';
+import {i18n, type Locale} from '@/i18n-config';
 
 export const metadata: Metadata = {
     title: 'Glint - An AI-assisted survey platform',
@@ -14,11 +15,21 @@ export const metadata: Metadata = {
     authors: [{name: 'Glint Team'}]
 };
 
-const RootLayout: React.FC<React.PropsWithChildren> = ({children}) => {
+export const generateStaticParams = () => {
+    return i18n.locales.map(locale => ({locale}));
+};
+
+interface Props {
+    params: Promise<{locale: Locale}>;
+}
+
+const RootLayout: React.FC<React.PropsWithChildren<Props>> = async ({children, params}) => {
+    const {locale} = await params;
+
     return (
         <html
-            lang="en"
             className={cn('antialiased bg-sidebar', GeistSans.variable, GeistMono.variable)}
+            lang={locale}
         >
             <head>
                 {process.env.NEXT_PUBLIC_ENABLE_REACT_SCAN === '1' && (

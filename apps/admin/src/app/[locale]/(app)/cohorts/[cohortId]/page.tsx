@@ -2,9 +2,9 @@ import Container from '@glint/ui/container';
 import SectionHeader from '@glint/ui/section-header';
 import Spacer from '@glint/ui/spacer';
 import {Suspense} from 'react';
+import CohortDetails from '@/components/cohorts/cohort-details';
 import AddRespondentsToCohortDialog from '@/components/dialogs/add-respondents-to-cohort';
 import {HydrateClient, prefetch, trpc} from '@/lib/trpc/server';
-import CohortDetails from './cohort-details';
 import CohortRespondents from './cohort-respondents';
 
 interface Props {

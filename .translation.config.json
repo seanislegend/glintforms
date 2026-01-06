@@ -2,8 +2,7 @@
     "locales": ["en", "es"],
     "primaryLocale": "en",
     "apps": {
-        "admin": { "basePath": "apps/admin" },
-        "api": { "basePath": "apps/api" }
+        "admin": { "basePath": "apps/admin" }
     },
     "exclude": [
         "**/*.test.ts",

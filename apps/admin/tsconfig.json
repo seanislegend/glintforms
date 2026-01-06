@@ -4,14 +4,17 @@
         "baseUrl": ".",
         "paths": { "@/*": ["./src/*"] },
         "plugins": [{ "name": "next" }],
-        "typeRoots": ["./node_modules/@types", "./src/types"],
+        "resolveJsonModule": true,
         "strict": true,
-        "strictNullChecks": true
+        "strictNullChecks": true,
+        "typeRoots": ["./node_modules/@types", "./src/types"]
     },
     "include": [
         "**/*.ts",
         "**/*.tsx",
         "../../types",
+        "locales/**/*.ts",
+        "locales/**/*.json",
         "next-env.d.ts",
         "next.config.js",
         "tailwind.config.ts",

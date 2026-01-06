@@ -33,7 +33,7 @@ export function getScreenerSummary(screener: ScreenerRecord): string {
                 question: string;
             };
             const passingOptions = selectionConfig.options.filter(opt => opt.passes);
-            if (passingOptions.length === 1) {
+            if (passingOptions.length === 1 && passingOptions[0]) {
                 return `Screening for respondents who answer "${selectionConfig.question}" with "${passingOptions[0].value}"`;
             }
             return `Screening for respondents who answer "${selectionConfig.question}" with one of ${passingOptions.length} options`;
