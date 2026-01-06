@@ -3,7 +3,7 @@
 import {Alert, AlertDescription, AlertTitle} from '@glint/ui/alert';
 import {WarningIcon} from '@phosphor-icons/react/dist/ssr/Warning';
 import {useSuspenseQuery} from '@tanstack/react-query';
-import {t} from '@/lib/i18n';
+import {useI18n} from '@/hooks/use-i18n';
 import {useTRPC} from '@/lib/trpc/react';
 
 interface Props {
@@ -11,6 +11,7 @@ interface Props {
 }
 
 const UnprocessedSubmissions: React.FC<Props> = ({surveyId}) => {
+    const {t} = useI18n();
     const trpc = useTRPC();
     const {data: submissions} = useSuspenseQuery(
         trpc.unprocessedSubmissions.getBySurvey.queryOptions(surveyId)

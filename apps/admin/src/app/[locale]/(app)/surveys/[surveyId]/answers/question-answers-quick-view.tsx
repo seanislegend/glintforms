@@ -1,11 +1,11 @@
 'use client';
 
 import {Sheet, SheetDescription, SheetHeader, SheetPopup, SheetTitle} from '@glint/ui/sheet';
-import {t} from '@/lib/i18n';
 import {SpinnerGapIcon} from '@phosphor-icons/react/dist/ssr/SpinnerGap';
 import {useQueryState} from 'nuqs';
 import {Suspense} from 'react';
 import QuestionAnswersQuickLook from '@/components/responses/quick-look';
+import {useI18n} from '@/hooks/use-i18n';
 
 interface Props {
     questions: QuestionWithStats[];
@@ -13,6 +13,7 @@ interface Props {
 }
 
 const QuestionAnswersQuickView: React.FC<Props> = ({questions, surveyId}) => {
+    const {t} = useI18n();
     const [questionId, setQuestionId] = useQueryState('questionId');
     const question = questions.find(q => q.id === questionId);
 

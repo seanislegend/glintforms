@@ -6,15 +6,16 @@ import {Heading5} from '@glint/ui/heading';
 import RelativeDate from '@glint/ui/relative-date';
 import {Sheet, SheetDescription, SheetHeader, SheetPopup, SheetTitle} from '@glint/ui/sheet';
 import TextLink from '@glint/ui/text-link';
-import {t} from '@/lib/i18n';
 import {SpinnerGapIcon} from '@phosphor-icons/react/dist/ssr/SpinnerGap';
 import {useSuspenseQuery} from '@tanstack/react-query';
 import {useQueryState} from 'nuqs';
 import {Suspense} from 'react';
 import RecordId from '@/components/record-id';
+import {useI18n} from '@/hooks/use-i18n';
 import {useTRPC} from '@/lib/trpc/react';
 
 const SurveyDetails = ({surveyId}: {surveyId: string}) => {
+    const {t} = useI18n();
     const trpc = useTRPC();
     const {data: survey} = useSuspenseQuery(trpc.surveys.get.queryOptions(surveyId));
 

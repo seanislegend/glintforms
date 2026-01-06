@@ -5,7 +5,7 @@ import EmptyPanel from '@glint/ui/empty-panel';
 import {Heading4} from '@glint/ui/heading';
 import RelativeDate from '@glint/ui/relative-date';
 import Spacer from '@glint/ui/spacer';
-import {t} from '@/lib/i18n';
+import {useI18n} from '@/hooks/use-i18n';
 import {useQuery} from '@tanstack/react-query';
 import DeleteScreenerDialog from '@/components/dialogs/delete/screener';
 import RecordId from '@/components/record-id';
@@ -16,6 +16,7 @@ interface FormProps {
 }
 
 const ScreenerSummary: React.FC<FormProps> = ({screenerId}) => {
+    const {t} = useI18n();
     const trpc = useTRPC();
     const {data: screener, isLoading} = useQuery(trpc.screeners.get.queryOptions(screenerId));
 

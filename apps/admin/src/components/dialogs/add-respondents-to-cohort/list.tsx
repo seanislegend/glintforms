@@ -2,11 +2,11 @@
 
 import Button from '@glint/ui/button';
 import EmptyPanel from '@glint/ui/empty-panel';
-import {t} from '@/lib/i18n';
+import {useI18n} from '@/hooks/use-i18n';
 import {PlusIcon} from '@phosphor-icons/react/dist/ssr/Plus';
 import {DataTable} from '@/components/data-table';
 import type {SearchResult} from './columns';
-import {columns} from './columns';
+import {createColumns} from './columns';
 
 interface Props {
     addRespondentsToCohort: {
@@ -22,6 +22,9 @@ export const SearchResultsList: React.FC<Props> = ({
     cohortId,
     searchResults
 }) => {
+    const {t} = useI18n();
+    const columns = createColumns(t);
+
     if (searchResults.length === 0) {
         return (
             <EmptyPanel

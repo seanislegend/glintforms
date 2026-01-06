@@ -1,10 +1,10 @@
 'use client';
 
-import RelativeDate from '@glint/ui/relative-date';
-import {t} from '@/lib/i18n';
-import type {ColumnDef} from '@tanstack/react-table';
 import Link from '@glint/ui/link';
+import RelativeDate from '@glint/ui/relative-date';
+import type {ColumnDef} from '@tanstack/react-table';
 import {DataTableColumnHeader} from '@/components/data-table/column-header';
+import {t} from '@/lib/i18n';
 
 type RespondentInCohort = {
     id: string;

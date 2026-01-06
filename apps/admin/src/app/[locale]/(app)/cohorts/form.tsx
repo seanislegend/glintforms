@@ -3,17 +3,18 @@
 import {FormField} from '@glint/form/fields';
 import {handleFormError} from '@glint/form/utils';
 import Button from '@glint/ui/button';
-import {t} from '@/lib/i18n';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {useMutation, useQueryClient} from '@tanstack/react-query';
 import {useQueryState} from 'nuqs';
 import {useCallback} from 'react';
 import {FormProvider, type SubmitHandler, useForm} from 'react-hook-form';
 import {toast} from 'sonner';
+import {useI18n} from '@/hooks/use-i18n';
 import {type CohortCreate, cohortCreateSchema} from '@/lib/schemas/cohorts';
 import {useTRPC} from '@/lib/trpc/react';
 
 const Form: React.FC = () => {
+    const {t} = useI18n();
     const trpc = useTRPC();
     const queryClient = useQueryClient();
     const [, setRedirect] = useQueryState('redirect');

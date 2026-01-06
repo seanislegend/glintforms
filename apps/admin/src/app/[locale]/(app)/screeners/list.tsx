@@ -2,16 +2,17 @@
 
 import Button from '@glint/ui/button';
 import EmptyPanel from '@glint/ui/empty-panel';
-import {t} from '@/lib/i18n';
+import Link from '@glint/ui/link';
 import {PlusIcon} from '@phosphor-icons/react/dist/ssr/Plus';
 import {useSuspenseQuery} from '@tanstack/react-query';
-import Link from '@glint/ui/link';
 import {DataTable} from '@/components/data-table';
+import {useI18n} from '@/hooks/use-i18n';
 import type {ScreenerList} from '@/lib/schemas/screeners';
 import {useTRPC} from '@/lib/trpc/react';
 import {columns} from './columns';
 
 const ScreenersList: React.FC = () => {
+    const {t} = useI18n();
     const trpc = useTRPC();
     const {data: screeners, isLoading} = useSuspenseQuery(trpc.screeners.getAll.queryOptions());
 

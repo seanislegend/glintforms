@@ -3,7 +3,7 @@
 import {FormField} from '@glint/form/fields';
 import {BasicCard} from '@glint/ui/card';
 import ToggleVisibility from '@glint/ui/toggle-visibility';
-import {t} from '@/lib/i18n';
+import {useI18n} from '@/hooks/use-i18n';
 import type {ColumnFiltersState} from '@tanstack/react-table';
 import {useFormContext, useWatch} from 'react-hook-form';
 import {humanise} from '@/utils/humanise';
@@ -13,6 +13,7 @@ interface Props {
 }
 
 const ExportResponsesFiltersControls: React.FC<Props> = ({filters}) => {
+    const {t} = useI18n();
     const {control} = useFormContext();
     const applyActiveFilters = useWatch({name: 'applyActiveFilters'});
 

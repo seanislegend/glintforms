@@ -2,7 +2,6 @@
 
 import type {ColumnDef} from '@tanstack/react-table';
 import {DataTableColumnHeader} from '@/components/data-table/column-header';
-import {t} from '@/lib/i18n';
 
 export type SearchResult = {
     email: string;
@@ -13,7 +12,7 @@ export type SearchResult = {
     name: string;
 };
 
-export const columns: ColumnDef<SearchResult>[] = [
+export const createColumns = (t: (key: string) => string): ColumnDef<SearchResult>[] => [
     {
         accessorKey: 'name',
         cell: ({row}) => <span className="max-w-[500px] truncate">{row.getValue('name')}</span>,

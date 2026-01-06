@@ -4,12 +4,13 @@ import EmptyPanel from '@glint/ui/empty-panel';
 import {useQuery} from '@tanstack/react-query';
 import * as R from 'remeda';
 import {DataTable} from '@/components/data-table';
-import {t} from '@/lib/i18n';
+import {useI18n} from '@/hooks/use-i18n';
 import type {RespondentList} from '@/lib/schemas/respondents';
 import {useTRPC} from '@/lib/trpc/react';
 import {columns} from './columns';
 
 const RespondentsList: React.FC = () => {
+    const {t} = useI18n();
     const trpc = useTRPC();
     const {data: respondents, isLoading} = useQuery(trpc.respondents.getAll.queryOptions());
 

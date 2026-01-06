@@ -1,10 +1,10 @@
 'use client';
 
 import EmptyPanel from '@glint/ui/empty-panel';
-import {t} from '@/lib/i18n';
 import {useSuspenseQuery} from '@tanstack/react-query';
 import {DataTable} from '@/components/data-table';
 import ExportResponsesDialog from '@/components/dialogs/export-responses';
+import {useI18n} from '@/hooks/use-i18n';
 import {useTRPC} from '@/lib/trpc/react';
 import {columns} from './columns';
 import ResponseQuickView from './response-quick-view';
@@ -14,6 +14,7 @@ interface Props {
 }
 
 const ResponsesList: React.FC<Props> = ({surveyId}) => {
+    const {t} = useI18n();
     const trpc = useTRPC();
     const {data, isLoading} = useSuspenseQuery(
         trpc.responses.getAll.queryOptions({surveyId, limit: 200, offset: 0})

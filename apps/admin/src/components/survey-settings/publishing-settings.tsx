@@ -13,7 +13,7 @@ import {
     StepperSeparator,
     StepperTitle
 } from '@glint/ui/stepper';
-import {t} from '@/lib/i18n';
+import {useI18n} from '@/hooks/use-i18n';
 import {ArchiveIcon} from '@phosphor-icons/react/dist/ssr/Archive';
 import {CheckIcon} from '@phosphor-icons/react/dist/ssr/Check';
 import {ChecksIcon} from '@phosphor-icons/react/dist/ssr/Checks';
@@ -44,6 +44,7 @@ const getStepIndex = (status: string) => {
 };
 
 const SurveyPublishingSettings: React.FC<Props> = ({survey}) => {
+    const {t} = useI18n();
     const trpc = useTRPC();
     const queryClient = useQueryClient();
     const [showConfirmDialog, setShowConfirmDialog] = useState(false);

@@ -9,7 +9,7 @@ import {InfoIcon} from '@phosphor-icons/react/dist/ssr/Info';
 import {useMutation, useQueryClient} from '@tanstack/react-query';
 import {FormProvider, type SubmitHandler, useForm} from 'react-hook-form';
 import {toast} from 'sonner';
-import {t} from '@/lib/i18n';
+import {useI18n} from '@/hooks/use-i18n';
 import {type SurveyUpdate, surveyUpdateSchema} from '@/lib/schemas/surveys';
 import {surveyCanBeEdited} from '@/lib/surveys/status';
 import {useTRPC} from '@/lib/trpc/react';
@@ -19,6 +19,7 @@ interface Props {
 }
 
 const DetailsStep: React.FC<Props> = ({survey}) => {
+    const {t} = useI18n();
     const trpc = useTRPC();
     const queryClient = useQueryClient();
     const canEdit = surveyCanBeEdited(survey.status);

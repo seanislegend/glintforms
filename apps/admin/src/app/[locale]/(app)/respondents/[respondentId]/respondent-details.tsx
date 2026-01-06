@@ -4,15 +4,15 @@ import Button from '@glint/ui/button';
 import {Card, CardContent, CardHeader, CardTitle} from '@glint/ui/card';
 import EmptyPanel from '@glint/ui/empty-panel';
 import {Heading3, Heading5} from '@glint/ui/heading';
+import Link from '@glint/ui/link';
 import RelativeDate from '@glint/ui/relative-date';
-import {t} from '@/lib/i18n';
 import {PencilIcon} from '@phosphor-icons/react/dist/ssr/Pencil';
 import {useSuspenseQuery} from '@tanstack/react-query';
-import Link from '@glint/ui/link';
 import {DataTable} from '@/components/data-table';
 import {cohortColumns} from '@/components/respondents/cohort-columns';
 import CohortQuickView from '@/components/respondents/cohort-quick-view';
 import ScoreBadge from '@/components/response-authenticity/score-badge';
+import {useI18n} from '@/hooks/use-i18n';
 import {useTRPC} from '@/lib/trpc/react';
 import {surveyColumns} from './survey-columns';
 import SurveyQuickView from './survey-quick-view';
@@ -22,6 +22,7 @@ interface Props {
 }
 
 const RespondentDetails: React.FC<Props> = ({respondentId}) => {
+    const {t} = useI18n();
     const trpc = useTRPC();
     const {data: respondent} = useSuspenseQuery(
         trpc.respondents.getProfile.queryOptions(respondentId)

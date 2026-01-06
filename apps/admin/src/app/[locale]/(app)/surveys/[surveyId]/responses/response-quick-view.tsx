@@ -1,14 +1,15 @@
 'use client';
 
 import {Sheet, SheetDescription, SheetHeader, SheetPopup, SheetTitle} from '@glint/ui/sheet';
-import {t} from '@/lib/i18n';
 import {SpinnerGapIcon} from '@phosphor-icons/react/dist/ssr/SpinnerGap';
 import {useParams} from 'next/navigation';
 import {useQueryState} from 'nuqs';
 import {Suspense} from 'react';
+import {useI18n} from '@/hooks/use-i18n';
 import ResponseDetails from './[responseId]/response-details';
 
 const ResponseQuickView = () => {
+    const {t} = useI18n();
     const {surveyId} = useParams<{surveyId: string}>();
     const [responseId, setResponseId] = useQueryState('responseId');
 

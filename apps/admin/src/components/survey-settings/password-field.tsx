@@ -1,10 +1,11 @@
 import {FormField} from '@glint/form/fields';
 import Button from '@glint/ui/button';
 import ToggleVisibility from '@glint/ui/toggle-visibility';
-import {t} from '@/lib/i18n';
+import {useI18n} from '@/hooks/use-i18n';
 import {useFormContext, useWatch} from 'react-hook-form';
 
 const SurveySecuritySettingsPasswordField: React.FC = () => {
+    const {t} = useI18n();
     const {control, setValue} = useFormContext();
     const isPasswordProtected = useWatch({name: 'isPasswordProtected'});
     const hasPassword = useWatch({name: 'hasPassword'});

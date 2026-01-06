@@ -3,7 +3,6 @@
 import {Badge} from '@glint/ui/badge';
 import Button from '@glint/ui/button';
 import RelativeDate from '@glint/ui/relative-date';
-import {t} from '@/lib/i18n';
 import {EyeIcon} from '@phosphor-icons/react/dist/ssr/Eye';
 import {UserCircleDashedIcon} from '@phosphor-icons/react/dist/ssr/UserCircleDashed';
 import type {ColumnDef, Row} from '@tanstack/react-table';
@@ -12,6 +11,7 @@ import AuthenticityStatusBadge from '@/components/badges/authenticity-status';
 import {DataTableColumnHeader} from '@/components/data-table/column-header';
 import {DataTableRowActions} from '@/components/data-table/row-actions';
 import RecordId from '@/components/record-id';
+import {t} from '@/lib/i18n';
 
 interface ResponseList {
     endedAt: Date | null;

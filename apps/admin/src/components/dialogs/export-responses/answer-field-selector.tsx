@@ -4,11 +4,12 @@ import {FormField} from '@glint/form/fields';
 import Switch from '@glint/form/switch';
 import {BasicCard} from '@glint/ui/card';
 import ToggleVisibility from '@glint/ui/toggle-visibility';
-import {t} from '@/lib/i18n';
+import {useI18n} from '@/hooks/use-i18n';
 import {useFormContext, useWatch} from 'react-hook-form';
 import {ANSWER_EXPORT_FIELDS} from '@/lib/schemas/constants';
 
 const ExportResponsesAnswerFieldSelector: React.FC = () => {
+    const {t} = useI18n();
     const {control, setValue} = useFormContext();
     const includeAllAnswerFields = useWatch({name: 'includeAllAnswerFields'});
     const selectedAnswerFields = useWatch({name: 'answerFields'});

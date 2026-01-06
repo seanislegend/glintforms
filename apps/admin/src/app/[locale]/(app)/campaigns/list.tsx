@@ -1,12 +1,12 @@
 'use client';
 
 import EmptyPanel from '@glint/ui/empty-panel';
-import {t} from '@/lib/i18n';
 import {PlusIcon} from '@phosphor-icons/react/dist/ssr/Plus';
 import {useSuspenseQuery} from '@tanstack/react-query';
 import {lazy} from 'react';
 import {DataTable} from '@/components/data-table';
 import FormDialog from '@/components/form-dialog';
+import {useI18n} from '@/hooks/use-i18n';
 import type {CampaignList} from '@/lib/schemas/campaigns';
 import {useTRPC} from '@/lib/trpc/react';
 import {columns} from './columns';
@@ -14,6 +14,7 @@ import {columns} from './columns';
 const CreateCampaignForm = lazy(() => import('./create/form'));
 
 const CampaignsList: React.FC = () => {
+    const {t} = useI18n();
     const trpc = useTRPC();
     const {data: campaigns, isLoading} = useSuspenseQuery(trpc.campaigns.getAll.queryOptions());
 

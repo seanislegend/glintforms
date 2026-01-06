@@ -1,7 +1,6 @@
 'use client';
 
 import {Tabs, TabsContent, TabsList, TabsTrigger} from '@glint/ui/tabs';
-import {t} from '@/lib/i18n';
 import {FileTextIcon} from '@phosphor-icons/react/dist/ssr/FileText';
 import {LockKeyIcon} from '@phosphor-icons/react/dist/ssr/LockKey';
 import {ShieldWarningIcon} from '@phosphor-icons/react/dist/ssr/ShieldWarning';
@@ -14,6 +13,7 @@ import SurveyAccessSettings from '@/components/survey-settings/access-settings';
 import DetailsStep from '@/components/survey-settings/details';
 import SurveyPublishingSettings from '@/components/survey-settings/publishing-settings';
 import ScreenersSettings from '@/components/survey-settings/screeners';
+import {useI18n} from '@/hooks/use-i18n';
 import {useTRPC} from '@/lib/trpc/react';
 
 interface Props {
@@ -21,6 +21,7 @@ interface Props {
 }
 
 const SettingsPageClient: React.FC<Props> = ({surveyId}) => {
+    const {t} = useI18n();
     const trpc = useTRPC();
     const {data: survey, isLoading} = useSuspenseQuery(trpc.surveys.get.queryOptions(surveyId));
 

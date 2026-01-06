@@ -3,12 +3,12 @@
 import Button from '@glint/ui/button';
 import {Card, CardContent, CardFooter, CardHeader, CardTitle} from '@glint/ui/card';
 import EmptyPanel from '@glint/ui/empty-panel';
-import {t} from '@/lib/i18n';
 import {EyeIcon} from '@phosphor-icons/react/dist/ssr/Eye';
 import {useQueryState} from 'nuqs';
 import QuestionTypeBadge from '@/components/badges/question-type';
 import OptionDistributionChart from '@/components/responses/option-distribution-chart';
 import ResponsesThemeList from '@/components/responses/theme-list';
+import {useI18n} from '@/hooks/use-i18n';
 import {isCodedQuestion, isFreeTextQuestion} from '@/lib/surveys/answer-formatter';
 
 interface Props {
@@ -16,6 +16,7 @@ interface Props {
 }
 
 const QuestionCard: React.FC<Props> = ({question}) => {
+    const {t} = useI18n();
     const [, setQuestionId] = useQueryState('questionId');
 
     return (

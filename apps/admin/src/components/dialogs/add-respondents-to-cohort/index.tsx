@@ -12,7 +12,7 @@ import {
 } from '@glint/ui/card';
 import {Sheet, SheetHeader, SheetPopup, SheetTitle, SheetTrigger} from '@glint/ui/sheet';
 import Spacer from '@glint/ui/spacer';
-import {t} from '@/lib/i18n';
+import {useI18n} from '@/hooks/use-i18n';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {PlusIcon} from '@phosphor-icons/react/dist/ssr/Plus';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
@@ -34,6 +34,7 @@ interface Props {
 }
 
 const AddRespondentsToCohortSheet: React.FC<Props> = ({cohortId}) => {
+    const {t} = useI18n();
     const trpc = useTRPC();
     const queryClient = useQueryClient();
     const [action, setAction] = useQueryState('action');

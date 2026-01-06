@@ -4,7 +4,7 @@ import {FormField} from '@glint/form/fields';
 import {handleFormError} from '@glint/form/utils';
 import Button from '@glint/ui/button';
 import EmptyPanel from '@glint/ui/empty-panel';
-import {t} from '@/lib/i18n';
+import {useI18n} from '@/hooks/use-i18n';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import {useRouter} from 'next/navigation';
@@ -20,6 +20,7 @@ interface FormProps {
 }
 
 const Form: React.FC<FormProps> = ({respondentId}) => {
+    const {t} = useI18n();
     const router = useRouter();
     const trpc = useTRPC();
     const queryClient = useQueryClient();

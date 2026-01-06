@@ -1,15 +1,15 @@
 'use client';
 
 import Button from '@glint/ui/button';
+import Link from '@glint/ui/link';
 import RelativeDate from '@glint/ui/relative-date';
-import {t} from '@/lib/i18n';
 import {EyeIcon} from '@phosphor-icons/react/dist/ssr/Eye';
 import type {ColumnDef} from '@tanstack/react-table';
-import Link from '@glint/ui/link';
 import {useQueryState} from 'nuqs';
 import CampaignStatusBadge from '@/components/badges/campaign-status';
 import {DataTableColumnHeader} from '@/components/data-table/column-header';
 import {DataTableRowActions} from '@/components/data-table/row-actions';
+import {t} from '@/lib/i18n';
 import type {RespondentDetails} from '@/lib/schemas/respondents';
 
 type SurveyWithCampaign = RespondentDetails['surveys'][0];

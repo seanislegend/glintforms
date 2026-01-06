@@ -1,7 +1,9 @@
+'use client';
+
 import {Heading1} from '@glint/ui/heading';
 import RelativeDate from '@glint/ui/relative-date';
 import TextLink from '@glint/ui/text-link';
-import {t} from '@/lib/i18n';
+import {useI18n} from '@/hooks/use-i18n';
 import {Suspense} from 'react';
 import RecordId from '@/components/record-id';
 
@@ -10,6 +12,8 @@ interface Props {
 }
 
 const SurveyOverviewHeader: React.FC<Props> = ({survey}) => {
+    const {t} = useI18n();
+
     return (
         <div className="lg:col-span-2 space-y-8">
             <div className="space-y-4">

@@ -32,7 +32,7 @@ import {
 import {ArrowsDownUpIcon} from '@phosphor-icons/react/dist/ssr/ArrowsDownUp';
 import {DotsSixVerticalIcon} from '@phosphor-icons/react/dist/ssr/DotsSixVertical';
 import {useState} from 'react';
-import {t} from '@/lib/i18n';
+import {useI18n} from '@/hooks/use-i18n';
 
 export interface SortItem {
     id: string;
@@ -42,7 +42,7 @@ export interface SortItem {
 }
 
 interface DialogProps {
-    ctaLabel: string;
+    ctaLabel?: string;
     description: string;
     disabledReason?: string | null;
     getItems: () => SortItem[];
@@ -86,6 +86,7 @@ const SortableItem: React.FC<React.PropsWithChildren<ItemProps>> = ({children, i
 };
 
 const SortItemsContent: React.FC<SortItemsProps> = ({items, onSorted}) => {
+    const {t} = useI18n();
     const [sortedItems, setSortedItems] = useState<SortItem[]>(items);
 
     const sensors = useSensors(
@@ -134,13 +135,15 @@ const SortItemsContent: React.FC<SortItemsProps> = ({items, onSorted}) => {
 };
 
 const SortItemsDialog: React.FC<DialogProps> = ({
-    ctaLabel = t('Reorder'),
+    ctaLabel,
     description,
     disabledReason,
     getItems,
     onSorted,
     title
 }) => {
+    const {t} = useI18n();
+    const buttonLabel = ctaLabel || t('Reorder');
     const [isOpen, setIsOpen] = useState(false);
     const [newSortedItems, setNewSortedItems] = useState<SortItem[]>([]);
 
@@ -164,7 +167,7 @@ const SortItemsDialog: React.FC<DialogProps> = ({
                         variant="accent"
                     >
                         <ArrowsDownUpIcon />
-                        {ctaLabel}
+                        {buttonLabel}
                     </ButtonWithTooltip>
                 }
             />

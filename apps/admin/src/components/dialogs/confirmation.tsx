@@ -10,7 +10,7 @@ import {
     DialogPopup,
     DialogTitle
 } from '@glint/ui/dialog';
-import {t} from '@/lib/i18n';
+import {useI18n} from '@/hooks/use-i18n';
 
 interface Props {
     cancelLabel?: string;
@@ -25,9 +25,9 @@ interface Props {
 }
 
 const ConfirmationDialog: React.FC<React.PropsWithChildren<Props>> = ({
-    cancelLabel = t('Cancel'),
+    cancelLabel,
     children,
-    confirmLabel = t('Confirm'),
+    confirmLabel,
     description,
     onConfirm,
     onOpenChange,
@@ -36,6 +36,9 @@ const ConfirmationDialog: React.FC<React.PropsWithChildren<Props>> = ({
     title,
     variant = 'default'
 }) => {
+    const {t} = useI18n();
+    const cancel = cancelLabel || t('Cancel');
+    const confirm = confirmLabel || t('Confirm');
     const handleConfirm = () => {
         onConfirm();
         onOpenChange(false, 'confirm-press');
@@ -59,10 +62,10 @@ const ConfirmationDialog: React.FC<React.PropsWithChildren<Props>> = ({
                             />
                         }
                     >
-                        {cancelLabel}
+                        {cancel}
                     </DialogClose>
                     <Button onClick={handleConfirm} pending={pending} variant={variant}>
-                        {confirmLabel}
+                        {confirm}
                     </Button>
                 </DialogFooter>
             </DialogPopup>

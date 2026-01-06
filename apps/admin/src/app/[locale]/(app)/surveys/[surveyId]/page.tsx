@@ -3,7 +3,7 @@ import SurveyOverview from '@/components/survey-overview';
 import {HydrateClient, prefetch, trpc} from '@/lib/trpc/server';
 
 interface Props {
-    params: Promise<{surveyId: string}>;
+    params: Promise<{locale: Locale; surveyId: string}>;
 }
 
 const SurveyDetailsPage: React.FC<React.PropsWithChildren<Props>> = async ({params}) => {

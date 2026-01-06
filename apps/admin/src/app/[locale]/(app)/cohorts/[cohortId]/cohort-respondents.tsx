@@ -1,7 +1,6 @@
 'use client';
 
 import EmptyPanel from '@glint/ui/empty-panel';
-import {t} from '@/lib/i18n';
 import {useMutation, useQueryClient, useSuspenseQuery} from '@tanstack/react-query';
 import type {Row} from '@tanstack/react-table';
 import {useState} from 'react';
@@ -10,6 +9,7 @@ import {DataTable} from '@/components/data-table';
 import ConfirmationDialog from '@/components/dialogs/confirmation';
 import HighlightChange from '@/components/highlight-change';
 import useHighlight from '@/hooks/use-highlight';
+import {useI18n} from '@/hooks/use-i18n';
 import type {RespondentList} from '@/lib/schemas/respondents';
 import {useTRPC} from '@/lib/trpc/react';
 import {createColumns} from './columns';
@@ -19,6 +19,7 @@ interface Props {
 }
 
 const CohortRespondents: React.FC<Props> = ({cohortId}) => {
+    const {t} = useI18n();
     const trpc = useTRPC();
     const queryClient = useQueryClient();
     const {data: respondents} = useSuspenseQuery(

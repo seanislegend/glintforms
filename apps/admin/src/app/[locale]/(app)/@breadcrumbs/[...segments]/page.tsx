@@ -8,9 +8,9 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator
 } from '@glint/ui/breadcrumb';
+import Link from '@glint/ui/link';
 import Spinner from '@glint/ui/spinner';
 import {useQuery} from '@tanstack/react-query';
-import Link from '@glint/ui/link';
 import {useParams} from 'next/navigation';
 import {Fragment, useCallback, useMemo} from 'react';
 import {useI18n} from '@/hooks/use-i18n';

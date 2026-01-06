@@ -1,6 +1,8 @@
+'use client';
+
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@glint/ui/card';
 import Spinner from '@glint/ui/spinner';
-import {t} from '@/lib/i18n';
+import {useI18n} from '@/hooks/use-i18n';
 import {useQuery} from '@tanstack/react-query';
 
 interface Props {
@@ -8,6 +10,7 @@ interface Props {
 }
 
 const SurveyTestingOverview: React.FC<Props> = ({surveyId}) => {
+    const {t} = useI18n();
     const {data, isPending} = useQuery({
         queryKey: ['surveys', surveyId, 'testing'],
         queryFn: async () => {

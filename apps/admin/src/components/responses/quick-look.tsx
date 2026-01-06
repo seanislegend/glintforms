@@ -3,7 +3,7 @@
 import EmptyPanel from '@glint/ui/empty-panel';
 import {Heading3} from '@glint/ui/heading';
 import {Tabs, TabsContent, TabsList, TabsTrigger} from '@glint/ui/tabs';
-import {t} from '@/lib/i18n';
+import {useI18n} from '@/hooks/use-i18n';
 import {useSuspenseQuery} from '@tanstack/react-query';
 import {DataTable} from '@/components/data-table';
 import {usePaginationSearchParams} from '@/components/data-table/parsers';
@@ -22,6 +22,7 @@ const QuestionAnswersQuickLook: React.FC<QuestionAnswersQuickLookProps> = ({
     questionId,
     surveyId
 }) => {
+    const {t} = useI18n();
     const trpc = useTRPC();
     const [pagination] = usePaginationSearchParams();
     const {data} = useSuspenseQuery(
@@ -100,7 +101,7 @@ const QuestionAnswersQuickLook: React.FC<QuestionAnswersQuickLookProps> = ({
                     />
                 ) : (
                     <DataTable
-                        columns={createAnswerColumns(question, surveyId, allThemes)}
+                        columns={createAnswerColumns(question, surveyId, allThemes, t)}
                         data={tableData}
                         hasPagination={true}
                         hasManualPagination={true}

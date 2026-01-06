@@ -1,7 +1,6 @@
 'use client';
 
 import RelativeDate from '@glint/ui/relative-date';
-import {t} from '@/lib/i18n';
 import type {ColumnDef} from '@tanstack/react-table';
 import {DataTableColumnHeader} from '@/components/data-table/column-header';
 import {DataTableRowActions} from '@/components/data-table/row-actions';
@@ -16,7 +15,8 @@ interface AnswerWithQuestion extends ResponseAnswer {
 export const createAnswerColumns = (
     question: Question,
     surveyId: string,
-    allThemes: QuestionTheme[] | undefined
+    allThemes: QuestionTheme[] | undefined,
+    t: (key: string) => string
 ): ColumnDef<AnswerWithQuestion>[] => {
     const columns: ColumnDef<AnswerWithQuestion>[] = [
         {

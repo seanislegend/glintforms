@@ -11,7 +11,7 @@ import {
     MenuTrigger
 } from '@glint/ui/menu';
 import {SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar} from '@glint/ui/sidebar';
-import {t} from '@/lib/i18n';
+import {useI18n} from '@/hooks/use-i18n';
 import {CaretUpDownIcon} from '@phosphor-icons/react/dist/ssr/CaretUpDown';
 import {SignOutIcon} from '@phosphor-icons/react/dist/ssr/SignOut';
 import {useState} from 'react';
@@ -20,6 +20,7 @@ import {useSession} from '@/hooks/use-session';
 import {getInitials} from '@/utils/names';
 
 const NavUser: React.FC = () => {
+    const {t} = useI18n();
     const {isMobile} = useSidebar();
     const {session} = useSession();
     const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);

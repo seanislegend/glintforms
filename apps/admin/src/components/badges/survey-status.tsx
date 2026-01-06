@@ -1,6 +1,8 @@
+'use client';
+
 import {Badge} from '@glint/ui/badge';
 import {cn} from '@glint/ui/utils';
-import {t} from '@/lib/i18n';
+import {useI18n} from '@/hooks/use-i18n';
 import {ArchiveIcon} from '@phosphor-icons/react/dist/ssr/Archive';
 import {ChecksIcon} from '@phosphor-icons/react/dist/ssr/Checks';
 import {FileIcon} from '@phosphor-icons/react/dist/ssr/File';
@@ -20,13 +22,7 @@ const STATUS_VARIANTS = {
     complete: 'success',
     archived: 'destructive'
 } as const;
-const STATUS_LABELS = {
-    draft: t('Draft'),
-    testing: t('Testing'),
-    active: t('Active'),
-    complete: t('Complete'),
-    archived: t('Archived')
-} as const;
+
 const STATUS_ICONS = {
     draft: PencilIcon,
     testing: TestTubeIcon,
@@ -34,11 +30,13 @@ const STATUS_ICONS = {
     complete: ChecksIcon,
     archived: ArchiveIcon
 } as const;
+
 const ICON_SIZE_MAP = {
     md: '!size-5',
     sm: '!size-4',
     xs: '!size-4'
 } as const;
+
 const TEXT_SIZE_MAP = {
     md: 'text-[15px]',
     sm: 'text-[13px]',
@@ -46,6 +44,15 @@ const TEXT_SIZE_MAP = {
 } as const;
 
 const SurveyStatusBadge: React.FC<Props> = ({size = 'md', status, ...props}) => {
+    const {t} = useI18n();
+    
+    const STATUS_LABELS = {
+        draft: t('Draft'),
+        testing: t('Testing'),
+        active: t('Active'),
+        complete: t('Complete'),
+        archived: t('Archived')
+    } as const;
     if (!Object.keys(STATUS_VARIANTS).includes(status)) {
         console.warn(
             `Invalid status: ${status}. Valid statuses are: ${Object.keys(STATUS_VARIANTS).join(', ')}`

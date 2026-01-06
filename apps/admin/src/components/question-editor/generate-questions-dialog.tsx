@@ -12,7 +12,7 @@ import {
     DialogTitle,
     DialogTrigger
 } from '@glint/ui/dialog';
-import {t} from '@/lib/i18n';
+import {useI18n} from '@/hooks/use-i18n';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {SparkleIcon} from '@phosphor-icons/react/dist/ssr/Sparkle';
 import {useMutation} from '@tanstack/react-query';
@@ -34,6 +34,7 @@ interface Props {
 }
 
 const GenerateQuestionsDialog: React.FC<Props> = ({isPending, surveyId}) => {
+    const {t} = useI18n();
     const [isOpen, setIsOpen] = useState(false);
     const {survey} = use(QuestionEditorContext);
     const questionCount = useAtomValue(questionCountAtom);

@@ -1,19 +1,20 @@
 import Container from '@glint/ui/container';
 import SectionHeader from '@glint/ui/section-header';
 import Spacer from '@glint/ui/spacer';
-import {t} from '@/lib/i18n';
 import {Suspense} from 'react';
 import ScreenerSummary from '@/components/screeners/summary';
+import {getServerI18n} from '@/lib/i18n-server';
 import {HydrateClient, prefetch, trpc} from '@/lib/trpc/server';
 import Form from './form';
 
 interface PageProps {
-    params: Promise<{screenerId: string}>;
+    params: Promise<{locale: Locale; screenerId: string}>;
 }
 
 const Page: React.FC<PageProps> = async ({params}) => {
-    const {screenerId} = await params;
+    const {locale, screenerId} = await params;
     prefetch(trpc.screeners.get.queryOptions(screenerId));
+    const {t} = await getServerI18n(locale);
 
     return (
         <HydrateClient>
