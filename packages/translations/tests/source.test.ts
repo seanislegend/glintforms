@@ -1,64 +1,59 @@
-import { describe, it, expect } from "vitest";
-import { updateSourceFile } from "../src/core/source";
-import type { ExtractedString, SourceFile } from "../src/types";
+import {describe, expect, it} from 'vitest';
+import {updateSourceFile} from '../src/core/source';
+import type {ExtractedString, SourceFile} from '../src/types';
 
-describe("source manager", () => {
-    it("creates new entries for new strings", () => {
+describe('source manager', () => {
+    it('creates new entries for new strings', () => {
         const extracted: ExtractedString[] = [
             {
-                file: "apps/admin/src/test.tsx",
+                file: 'apps/admin/src/test.tsx',
                 line: 10,
-                text: "Hello world",
-            },
+                text: 'Hello world'
+            }
         ];
 
         const existing: SourceFile = {
-            generated: "2026-01-01T00:00:00Z",
+            generated: '2026-01-01T00:00:00Z',
             keys: {},
-            version: "1.0.0",
+            version: '1.0.0'
         };
 
         const result = updateSourceFile(extracted, existing);
 
         expect(Object.keys(result.keys)).toHaveLength(1);
         const key = Object.keys(result.keys)[0];
-        expect(result.keys[key].text).toBe("Hello world");
+        expect(result.keys[key].text).toBe('Hello world');
         expect(result.keys[key].occurrences).toHaveLength(1);
     });
 
-    it("merges occurrences for existing strings", () => {
-        const text = "Hello world";
-        const hash = require("node:crypto")
-            .createHash("sha256")
-            .update(text)
-            .digest("hex");
+    it('merges occurrences for existing strings', () => {
+        const text = 'Hello world';
+        const hash = require('node:crypto').createHash('sha256').update(text).digest('hex');
 
         const existing: SourceFile = {
-            generated: "2026-01-01T00:00:00Z",
+            generated: '2026-01-01T00:00:00Z',
             keys: {
-                "admin.test.abc1234": {
-                    added: "2026-01-01T00:00:00Z",
+                'admin.test.abc1234': {
+                    added: '2026-01-01T00:00:00Z',
                     hash: hash,
-                    occurrences: [
-                        { file: "apps/admin/src/test1.tsx", line: 10 },
-                    ],
-                    text: text,
-                },
+                    occurrences: [{file: 'apps/admin/src/test1.tsx', line: 10}],
+                    text: text
+                }
             },
-            version: "1.0.0",
+            version: '1.0.0'
         };
 
         const extracted: ExtractedString[] = [
             {
-                file: "apps/admin/src/test1.tsx",
+                file: 'apps/admin/src/test1.tsx',
                 line: 10,
-                text: text,
+                text: text
             },
             {
-                file: "apps/admin/src/test2.tsx",
+                file: 'apps/admin/src/test2.tsx',
                 line: 20,
-                text: text,
-            },
+                text: text
+            }
         ];
 
         const result = updateSourceFile(extracted, existing);
@@ -68,33 +63,31 @@ describe("source manager", () => {
         expect(result.keys[key]?.occurrences).toHaveLength(2);
     });
 
-    it("prevents duplicate occurrences", () => {
+    it('prevents duplicate occurrences', () => {
         const existing: SourceFile = {
-            generated: "2026-01-01T00:00:00Z",
+            generated: '2026-01-01T00:00:00Z',
             keys: {
-                "admin.test.abc1234": {
-                    added: "2026-01-01T00:00:00Z",
-                    hash: "abc1234567890",
-                    occurrences: [
-                        { file: "apps/admin/src/test.tsx", line: 10 },
-                    ],
-                    text: "Hello world",
-                },
+                'admin.test.abc1234': {
+                    added: '2026-01-01T00:00:00Z',
+                    hash: 'abc1234567890',
+                    occurrences: [{file: 'apps/admin/src/test.tsx', line: 10}],
+                    text: 'Hello world'
+                }
             },
-            version: "1.0.0",
+            version: '1.0.0'
         };
 
         const extracted: ExtractedString[] = [
             {
-                file: "apps/admin/src/test.tsx",
+                file: 'apps/admin/src/test.tsx',
                 line: 10,
-                text: "Hello world",
+                text: 'Hello world'
             },
             {
-                file: "apps/admin/src/test.tsx",
+                file: 'apps/admin/src/test.tsx',
                 line: 10,
-                text: "Hello world",
-            },
+                text: 'Hello world'
+            }
         ];
 
         const result = updateSourceFile(extracted, existing);
@@ -103,29 +96,27 @@ describe("source manager", () => {
         expect(result.keys[key].occurrences).toHaveLength(1);
     });
 
-    it("throws on hash collision", () => {
+    it('throws on hash collision', () => {
         // This is extremely unlikely in practice, but we test the safety mechanism
         const existing: SourceFile = {
-            generated: "2026-01-01T00:00:00Z",
+            generated: '2026-01-01T00:00:00Z',
             keys: {
-                "admin.test.abc1234": {
-                    added: "2026-01-01T00:00:00Z",
-                    hash: "abc1234567890abcdef123456789",
-                    occurrences: [
-                        { file: "apps/admin/src/test.tsx", line: 10 },
-                    ],
-                    text: "Original text",
-                },
+                'admin.test.abc1234': {
+                    added: '2026-01-01T00:00:00Z',
+                    hash: 'abc1234567890abcdef123456789',
+                    occurrences: [{file: 'apps/admin/src/test.tsx', line: 10}],
+                    text: 'Original text'
+                }
             },
-            version: "1.0.0",
+            version: '1.0.0'
         };
 
         const extracted: ExtractedString[] = [
             {
-                file: "apps/admin/src/test.tsx",
+                file: 'apps/admin/src/test.tsx',
                 line: 20,
-                text: "Different text",
-            },
+                text: 'Different text'
+            }
         ];
 
         // Manually create a collision by modifying the extracted to have same hash
@@ -136,5 +127,59 @@ describe("source manager", () => {
             updateSourceFile(extracted, existing);
         }).not.toThrow(); // This won't throw because hash will be different
     });
-});
 
+    it('generates common keys for strings in multiple files', () => {
+        const extracted: ExtractedString[] = [
+            {
+                file: 'apps/admin/src/surveys/page.tsx',
+                line: 10,
+                text: 'Last updated'
+            },
+            {
+                file: 'apps/admin/src/campaigns/page.tsx',
+                line: 20,
+                text: 'Last updated'
+            },
+            {
+                file: 'apps/admin/src/respondents/page.tsx',
+                line: 30,
+                text: 'Last updated'
+            }
+        ];
+
+        const existing: SourceFile = {
+            generated: '2026-01-01T00:00:00Z',
+            keys: {},
+            version: '1.0.0'
+        };
+
+        const result = updateSourceFile(extracted, existing);
+
+        expect(Object.keys(result.keys)).toHaveLength(1);
+        const key = Object.keys(result.keys)[0];
+        expect(key).toMatch(/^common\.[a-f0-9]{7}$/);
+        expect(result.keys[key]?.occurrences).toHaveLength(3);
+    });
+
+    it('generates file-specific keys for strings in single file', () => {
+        const extracted: ExtractedString[] = [
+            {
+                file: 'apps/admin/src/surveys/settings/page.tsx',
+                line: 10,
+                text: 'Survey settings'
+            }
+        ];
+
+        const existing: SourceFile = {
+            generated: '2026-01-01T00:00:00Z',
+            keys: {},
+            version: '1.0.0'
+        };
+
+        const result = updateSourceFile(extracted, existing);
+
+        expect(Object.keys(result.keys)).toHaveLength(1);
+        const key = Object.keys(result.keys)[0];
+        expect(key).toMatch(/^admin\.surveys\.settings\.[a-f0-9]{7}$/);
+    });
+});
