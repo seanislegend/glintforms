@@ -1,7 +1,7 @@
 'use client';
 
 import Button from '@glint/ui/button';
-import {t} from '@/lib/i18n';
+import Link from '@glint/ui/link';
 import {ChartBarIcon} from '@phosphor-icons/react/dist/ssr/ChartBar';
 import {ChartLineIcon} from '@phosphor-icons/react/dist/ssr/ChartLine';
 import {GearIcon} from '@phosphor-icons/react/dist/ssr/Gear';
@@ -9,9 +9,9 @@ import {HouseIcon} from '@phosphor-icons/react/dist/ssr/House';
 import {QuestionMarkIcon} from '@phosphor-icons/react/dist/ssr/QuestionMark';
 import {TextAlignLeftIcon} from '@phosphor-icons/react/dist/ssr/TextAlignLeft';
 import {useSuspenseQuery} from '@tanstack/react-query';
-import Link from 'next/link';
 import {redirect, usePathname} from 'next/navigation';
 import SurveyStatusBadge from '@/components/badges/survey-status';
+import {t} from '@/lib/i18n';
 import {surveyHasLaunched, surveyIsTesting} from '@/lib/surveys/status';
 import {useTRPC} from '@/lib/trpc/react';
 

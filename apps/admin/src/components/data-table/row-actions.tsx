@@ -8,7 +8,7 @@ import {DotsThreeIcon} from '@phosphor-icons/react/dist/ssr/DotsThree';
 import {PencilSimpleIcon} from '@phosphor-icons/react/dist/ssr/PencilSimple';
 import {TrashIcon} from '@phosphor-icons/react/dist/ssr/Trash';
 import type {Row} from '@tanstack/react-table';
-import Link from 'next/link';
+import Link from '@glint/ui/link';
 
 interface Action {
     label: string;

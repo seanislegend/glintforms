@@ -7,7 +7,7 @@ import {
 } from '@glint/ui/sidebar';
 import {GearIcon} from '@phosphor-icons/react/dist/ssr/Gear';
 import {InfoIcon} from '@phosphor-icons/react/dist/ssr/Info';
-import Link from 'next/link';
+import Link from '@glint/ui/link';
 import type * as React from 'react';
 
 const data: NavItem[] = [

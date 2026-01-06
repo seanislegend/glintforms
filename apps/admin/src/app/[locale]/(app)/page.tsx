@@ -1,7 +1,7 @@
 import Container from '@glint/ui/container';
 import SectionHeader from '@glint/ui/section-header';
-import {t} from '@/lib/i18n';
 import {getSession} from '@/lib/auth/server';
+import {t} from '@/lib/i18n';
 import {getShortName} from '@/utils/names';
 
 const HomePage = async () => {

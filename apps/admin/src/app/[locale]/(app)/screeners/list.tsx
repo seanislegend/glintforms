@@ -5,7 +5,7 @@ import EmptyPanel from '@glint/ui/empty-panel';
 import {t} from '@/lib/i18n';
 import {PlusIcon} from '@phosphor-icons/react/dist/ssr/Plus';
 import {useSuspenseQuery} from '@tanstack/react-query';
-import Link from 'next/link';
+import Link from '@glint/ui/link';
 import {DataTable} from '@/components/data-table';
 import type {ScreenerList} from '@/lib/schemas/screeners';
 import {useTRPC} from '@/lib/trpc/react';

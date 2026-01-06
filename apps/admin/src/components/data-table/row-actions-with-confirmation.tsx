@@ -6,7 +6,7 @@ import {ArrowRightIcon} from '@phosphor-icons/react/dist/ssr/ArrowRight';
 import {DotsThreeIcon} from '@phosphor-icons/react/dist/ssr/DotsThree';
 import {PencilSimpleIcon} from '@phosphor-icons/react/dist/ssr/PencilSimple';
 import type {Row} from '@tanstack/react-table';
-import Link from 'next/link';
+import Link from '@glint/ui/link';
 import {useState} from 'react';
 import ConfirmationDialog from '@/components/dialogs/confirmation';
 

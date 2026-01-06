@@ -4,7 +4,7 @@ import Button from '@glint/ui/button';
 import RelativeDate from '@glint/ui/relative-date';
 import {EyeIcon} from '@phosphor-icons/react/dist/ssr/Eye';
 import type {ColumnDef} from '@tanstack/react-table';
-import Link from 'next/link';
+import Link from '@glint/ui/link';
 import {useQueryState} from 'nuqs';
 import {DataTableColumnHeader} from '@/components/data-table/column-header';
 import {DataTableRowActions} from '@/components/data-table/row-actions';
