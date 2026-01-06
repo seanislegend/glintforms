@@ -3,6 +3,7 @@
 import {FormField} from '@glint/form/fields';
 import {handleFormError} from '@glint/form/utils';
 import Button from '@glint/ui/button';
+import {t} from '@/lib/i18n';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {useMutation, useQueryClient} from '@tanstack/react-query';
 import {useRouter} from 'next/navigation';
@@ -34,7 +35,7 @@ const Form: React.FC = () => {
                 await queryClient.invalidateQueries({
                     queryKey: trpc.screeners.getAll.queryKey()
                 });
-                toast.success('Screener created successfully');
+                toast.success(t('Screener created successfully'));
                 router.push(`/screeners/${response?.id}`);
             }
         })
@@ -54,25 +55,25 @@ const Form: React.FC = () => {
                     <FormField<ScreenerCreate>
                         control={methods.control}
                         fieldType="input"
-                        label="Name"
+                        label={t('Name')}
                         name="name"
                     />
                     <FormField<ScreenerCreate>
                         control={methods.control}
                         fieldProps={{rows: '2'}}
                         fieldType="textarea"
-                        label="Description"
+                        label={t('Description')}
                         name="description"
                     />
                     <FormField<ScreenerCreate>
                         control={methods.control}
                         fieldType="radio-group"
-                        label="Type"
+                        label={t('Type')}
                         name="type"
                         options={[
-                            {label: 'Age', value: 'age'},
-                            {label: 'Location', value: 'location'},
-                            {label: 'Selection', value: 'selection'}
+                            {label: t('Age'), value: 'age'},
+                            {label: t('Location'), value: 'location'},
+                            {label: t('Selection'), value: 'selection'}
                         ]}
                     />
                     <ScreenerTypeFields />
@@ -83,7 +84,7 @@ const Form: React.FC = () => {
                         pending={createScreener.status === 'pending'}
                         type="submit"
                     >
-                        Submit
+                        {t('Submit')}
                     </Button>
                 </div>
             </form>

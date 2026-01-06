@@ -1,6 +1,7 @@
 'use client';
 
 import EmptyPanel from '@glint/ui/empty-panel';
+import {t} from '@/lib/i18n';
 import {useQuery} from '@tanstack/react-query';
 import * as R from 'remeda';
 import {DataTable} from '@/components/data-table';
@@ -15,7 +16,7 @@ const RespondentsList: React.FC = () => {
     if (isLoading || !respondents) {
         return (
             <div className="flex items-center justify-center p-8">
-                <div className="text-sm text-muted-foreground">Loading respondents...</div>
+                <div className="text-sm text-muted-foreground">{t('Loading respondents...')}</div>
             </div>
         );
     }
@@ -23,8 +24,8 @@ const RespondentsList: React.FC = () => {
     if (respondents.length === 0) {
         return (
             <EmptyPanel
-                text="Create a respondent to get started. You'll then be able to track their survey responses and engagement."
-                title="No respondents added yet"
+                text={t("Create a respondent to get started. You'll then be able to track their survey responses and engagement.")}
+                title={t('No respondents added yet')}
             />
         );
     }
@@ -77,7 +78,7 @@ const RespondentsList: React.FC = () => {
             data={respondents as RespondentList[]}
             facetedFilters={{
                 surveys: {
-                    label: 'Survey',
+                    label: t('Survey'),
                     options: uniqueSurveys.map(s => ({
                         count: s.count,
                         label: s.label,
@@ -85,7 +86,7 @@ const RespondentsList: React.FC = () => {
                     }))
                 },
                 campaigns: {
-                    label: 'Campaign',
+                    label: t('Campaign'),
                     options: uniqueCampaigns.map(c => ({
                         count: c.count,
                         label: c.label,
@@ -93,7 +94,7 @@ const RespondentsList: React.FC = () => {
                     }))
                 },
                 cohorts: {
-                    label: 'Cohort',
+                    label: t('Cohort'),
                     options: uniqueCohorts.map(c => ({
                         count: c.count,
                         label: c.label,
@@ -102,7 +103,7 @@ const RespondentsList: React.FC = () => {
                 },
                 gender: {
                     dynamic: true,
-                    label: 'Gender'
+                    label: t('Gender')
                 }
             }}
             inputFilterKey="name"

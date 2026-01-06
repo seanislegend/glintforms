@@ -3,6 +3,7 @@
 import EmptyPanel from '@glint/ui/empty-panel';
 import {Heading3} from '@glint/ui/heading';
 import {Tabs, TabsContent, TabsList, TabsTrigger} from '@glint/ui/tabs';
+import {t} from '@/lib/i18n';
 import {useSuspenseQuery} from '@tanstack/react-query';
 import {DataTable} from '@/components/data-table';
 import {usePaginationSearchParams} from '@/components/data-table/parsers';
@@ -32,7 +33,7 @@ const QuestionAnswersQuickLook: React.FC<QuestionAnswersQuickLookProps> = ({
     );
     console.log(data);
     if (!data) {
-        return <EmptyPanel text="We could not find this question." title="Question not found" />;
+        return <EmptyPanel text={t('We could not find this question.')} title={t('Question not found')} />;
     }
 
     const question = data.question;
@@ -42,24 +43,24 @@ const QuestionAnswersQuickLook: React.FC<QuestionAnswersQuickLookProps> = ({
     return (
         <Tabs defaultValue="overview" className="w-auto">
             <TabsList className="grid max-w-50 grid-cols-2 gap-1 mb-6">
-                <TabsTrigger value="overview">Overview</TabsTrigger>
-                <TabsTrigger value="answers">Answers</TabsTrigger>
+                <TabsTrigger value="overview">{t('Overview')}</TabsTrigger>
+                <TabsTrigger value="answers">{t('Answers')}</TabsTrigger>
             </TabsList>
             <TabsContent value="overview" className="space-y-8">
                 {isCodedQuestion(question.type) && (
                     <div>
-                        <Heading3>Option distribution</Heading3>
+                        <Heading3>{t('Option distribution')}</Heading3>
                         <p className="text-sm text-muted-foreground mb-4">
-                            This chart shows the distribution of selections for this question.
+                            {t('This chart shows the distribution of selections for this question.')}
                         </p>
                         <OptionDistributionChart data={question.optionCounts ?? []} />
                     </div>
                 )}
                 {question.type === 'multi_select' && (
                     <div>
-                        <Heading3>Co-occurrence patterns for selected options</Heading3>
+                        <Heading3>{t('Co-occurrence patterns for selected options')}</Heading3>
                         <p className="text-sm text-muted-foreground mb-4">
-                            Percentages show how often each pair of options was selected together
+                            {t('Percentages show how often each pair of options was selected together')}
                         </p>
                         <CoOccurrenceMatrix questionId={questionId} />
                     </div>
@@ -68,15 +69,14 @@ const QuestionAnswersQuickLook: React.FC<QuestionAnswersQuickLookProps> = ({
                     <div>
                         {data?.themes && data.themes.length > 0 ? (
                             <>
-                                <Heading3>Theme categorisation</Heading3>
+                                <Heading3>{t('Theme categorisation')}</Heading3>
                                 <p className="text-sm text-muted-foreground mb-4">
-                                    Themes are categorised based on the context of the responses.
-                                    The sentiment of the responses is also taken into account.
+                                    {t('Themes are categorised based on the context of the responses. The sentiment of the responses is also taken into account.')}
                                 </p>
                                 <ResponsesThemeOverview themes={data.themes} />
                             </>
                         ) : (
-                            <EmptyPanel className="w-full" text="No themes generated" />
+                            <EmptyPanel className="w-full" text={t('No themes generated')} />
                         )}
                     </div>
                 )}
@@ -84,8 +84,8 @@ const QuestionAnswersQuickLook: React.FC<QuestionAnswersQuickLookProps> = ({
             <TabsContent value="answers">
                 {answers.length === 0 ? (
                     <EmptyPanel
-                        text="Answers will appear here once respondents reply"
-                        title="Awaiting responses"
+                        text={t('Answers will appear here once respondents reply')}
+                        title={t('Awaiting responses')}
                     />
                 ) : (
                     <DataTable

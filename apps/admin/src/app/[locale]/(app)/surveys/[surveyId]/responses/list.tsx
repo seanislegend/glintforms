@@ -1,6 +1,7 @@
 'use client';
 
 import EmptyPanel from '@glint/ui/empty-panel';
+import {t} from '@/lib/i18n';
 import {useSuspenseQuery} from '@tanstack/react-query';
 import {DataTable} from '@/components/data-table';
 import ExportResponsesDialog from '@/components/dialogs/export-responses';
@@ -21,8 +22,8 @@ const ResponsesList: React.FC<Props> = ({surveyId}) => {
     if (data.responses.length === 0 && !isLoading) {
         return (
             <EmptyPanel
-                text="Once you start receiving responses, you'll be able to view them here."
-                title="No responses added yet"
+                text={t("Once you start receiving responses, you'll be able to view them here.")}
+                title={t('No responses added yet')}
             />
         );
     }
@@ -34,18 +35,18 @@ const ResponsesList: React.FC<Props> = ({surveyId}) => {
                 data={data.responses}
                 facetedFilters={{
                     was_completed: {
-                        label: 'Completion status',
+                        label: t('Completion status'),
                         options: [
-                            {label: 'Completed', value: true},
-                            {label: 'Incomplete', value: false}
+                            {label: t('Completed'), value: true},
+                            {label: t('Incomplete'), value: false}
                         ]
                     },
                     authentic_response: {
-                        label: 'Authenticity',
+                        label: t('Authenticity'),
                         options: [
-                            {label: 'Pass', value: true},
-                            {label: 'Fail', value: false},
-                            {label: 'Missing', value: null}
+                            {label: t('Pass'), value: true},
+                            {label: t('Fail'), value: false},
+                            {label: t('Missing'), value: null}
                         ]
                     }
                 }}

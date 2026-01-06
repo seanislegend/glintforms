@@ -2,6 +2,7 @@
 
 import EmptyPanel from '@glint/ui/empty-panel';
 import Spinner from '@glint/ui/spinner';
+import {t} from '@/lib/i18n';
 import {ArchiveIcon} from '@phosphor-icons/react/dist/ssr/Archive';
 import {CheckIcon} from '@phosphor-icons/react/dist/ssr/Check';
 import {PencilIcon} from '@phosphor-icons/react/dist/ssr/Pencil';
@@ -27,11 +28,11 @@ const SurveyList: React.FC = () => {
 
     const renderCreateForm = () => (
         <FormDialog
-            title="Create survey"
+            title={t('Create survey')}
             trigger={
                 <>
                     <PlusIcon />
-                    Create survey
+                    {t('Create survey')}
                 </>
             }
         >
@@ -42,8 +43,8 @@ const SurveyList: React.FC = () => {
     if (surveys.length === 0) {
         return (
             <EmptyPanel
-                text="Create a survey to get started. You'll then be able to add questions and begin collecting responses."
-                title="No surveys added yet"
+                text={t("Create a survey to get started. You'll then be able to add questions and begin collecting responses.")}
+                title={t('No surveys added yet')}
             >
                 {renderCreateForm()}
             </EmptyPanel>
@@ -56,13 +57,13 @@ const SurveyList: React.FC = () => {
             data={surveys}
             facetedFilters={{
                 status: {
-                    label: 'Status',
+                    label: t('Status'),
                     options: [
-                        {Icon: PencilIcon, label: 'Draft', value: 'draft'},
-                        {Icon: TestTubeIcon, label: 'Testing', value: 'testing'},
-                        {Icon: SpinnerGapIcon, label: 'Active', value: 'active'},
-                        {Icon: CheckIcon, label: 'Complete', value: 'complete'},
-                        {Icon: ArchiveIcon, label: 'Archived', value: 'archived'}
+                        {Icon: PencilIcon, label: t('Draft'), value: 'draft'},
+                        {Icon: TestTubeIcon, label: t('Testing'), value: 'testing'},
+                        {Icon: SpinnerGapIcon, label: t('Active'), value: 'active'},
+                        {Icon: CheckIcon, label: t('Complete'), value: 'complete'},
+                        {Icon: ArchiveIcon, label: t('Archived'), value: 'archived'}
                     ]
                 }
             }}

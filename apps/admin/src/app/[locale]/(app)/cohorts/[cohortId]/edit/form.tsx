@@ -3,6 +3,7 @@
 import {FormField} from '@glint/form/fields';
 import {handleFormError} from '@glint/form/utils';
 import Button from '@glint/ui/button';
+import {t} from '@/lib/i18n';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import {useRouter} from 'next/navigation';
@@ -31,7 +32,7 @@ const Form: React.FC<FormProps> = ({cohortId}) => {
                 await queryClient.invalidateQueries({
                     queryKey: trpc.cohorts.get.queryKey(cohortId)
                 });
-                toast.success('Cohort updated successfully');
+                toast.success(t('Cohort updated successfully'));
                 router.replace(`/cohorts/${cohortId}?success=true`);
             }
         })
@@ -65,11 +66,11 @@ const Form: React.FC<FormProps> = ({cohortId}) => {
     );
 
     if (isLoading) {
-        return <div>Loading...</div>;
+        return <div>{t('Loading...')}</div>;
     }
 
     if (!cohort) {
-        return <div>Cohort not found</div>;
+        return <div>{t('Cohort not found')}</div>;
     }
 
     return (
@@ -79,13 +80,13 @@ const Form: React.FC<FormProps> = ({cohortId}) => {
                     <FormField<CohortUpdate>
                         control={methods.control}
                         fieldType="input"
-                        label="Name"
+                        label={t('Name')}
                         name="name"
                     />
                     <FormField<CohortUpdate>
                         control={methods.control}
                         fieldType="input"
-                        label="Description"
+                        label={t('Description')}
                         name="description"
                     />
                 </div>
@@ -95,7 +96,7 @@ const Form: React.FC<FormProps> = ({cohortId}) => {
                         pending={updateCohort.status === 'pending'}
                         type="submit"
                     >
-                        Save changes
+                        {t('Save changes')}
                     </Button>
                 </div>
             </form>

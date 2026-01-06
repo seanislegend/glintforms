@@ -3,6 +3,7 @@
 import {FormField} from '@glint/form/fields';
 import {handleFormError} from '@glint/form/utils';
 import Button from '@glint/ui/button';
+import {t} from '@/lib/i18n';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import {useRouter} from 'next/navigation';
@@ -63,7 +64,7 @@ const Form: React.FC<FormProps> = ({screenerId}) => {
                 await queryClient.invalidateQueries({
                     queryKey: trpc.screeners.get.queryKey(screenerId)
                 });
-                toast.success('Screener updated successfully');
+                toast.success(t('Screener updated successfully'));
                 router.replace(`/screeners/${screenerId}?success=true`);
             }
         })
@@ -97,9 +98,9 @@ const Form: React.FC<FormProps> = ({screenerId}) => {
     }, [screener, methods]);
 
     if (isLoading) {
-        return <div>Loading...</div>;
+        return <div>{t('Loading...')}</div>;
     } else if (!screener) {
-        toast.error('Screener not found');
+        toast.error(t('Screener not found'));
         router.replace('/screeners');
         return null;
     }
@@ -111,25 +112,25 @@ const Form: React.FC<FormProps> = ({screenerId}) => {
                     <FormField<ScreenerCreate>
                         control={methods.control}
                         fieldType="input"
-                        label="Name"
+                        label={t('Name')}
                         name="name"
                     />
                     <FormField<ScreenerCreate>
                         control={methods.control}
                         fieldProps={{rows: '2'}}
                         fieldType="textarea"
-                        label="Description"
+                        label={t('Description')}
                         name="description"
                     />
                     <FormField<ScreenerCreate>
                         control={methods.control}
                         fieldType="radio-group"
-                        label="Type"
+                        label={t('Type')}
                         name="type"
                         options={[
-                            {label: 'Age', value: 'age'},
-                            {label: 'Location', value: 'location'},
-                            {label: 'Selection', value: 'selection'}
+                            {label: t('Age'), value: 'age'},
+                            {label: t('Location'), value: 'location'},
+                            {label: t('Selection'), value: 'selection'}
                         ]}
                     />
                     <ScreenerTypeFields defaultOptionIds={defaultOptionIds} />
@@ -140,7 +141,7 @@ const Form: React.FC<FormProps> = ({screenerId}) => {
                         pending={updateScreener.status === 'pending'}
                         type="submit"
                     >
-                        Save changes
+                        {t('Save changes')}
                     </Button>
                 </div>
             </form>

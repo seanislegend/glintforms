@@ -1,6 +1,7 @@
 import {Card, CardContent, CardHeader, CardTitle} from '@glint/ui/card';
 import EmptyPanel from '@glint/ui/empty-panel';
 import RelativeDate from '@glint/ui/relative-date';
+import {t} from '@/lib/i18n';
 import {CheckCircleIcon} from '@phosphor-icons/react/dist/ssr/CheckCircle';
 import {useSuspenseQuery} from '@tanstack/react-query';
 import {useTRPC} from '@/lib/trpc/react';
@@ -16,15 +17,15 @@ const SurveyOverviewRecentActivity: React.FC<Props> = ({surveyId}) => {
     return (
         <Card className="min-h-full">
             <CardHeader>
-                <CardTitle>Recent Activity</CardTitle>
+                <CardTitle>{t('Recent Activity')}</CardTitle>
             </CardHeader>
             <CardContent className="flex-grow flex">
                 {!activities || activities.length === 0 ? (
                     <EmptyPanel
                         className="flex-grow"
                         Icon={CheckCircleIcon}
-                        text="You're all caught up!"
-                        title="No recent activity"
+                        text={t("You're all caught up!")}
+                        title={t('No recent activity')}
                     />
                 ) : (
                     <ul>

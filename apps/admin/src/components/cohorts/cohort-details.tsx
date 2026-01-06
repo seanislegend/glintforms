@@ -5,6 +5,7 @@ import {Card, CardContent, CardHeader, CardTitle} from '@glint/ui/card';
 import EmptyPanel from '@glint/ui/empty-panel';
 import {Heading5} from '@glint/ui/heading';
 import RelativeDate from '@glint/ui/relative-date';
+import {t} from '@/lib/i18n';
 import {PencilIcon} from '@phosphor-icons/react/dist/ssr/Pencil';
 import {useSuspenseQuery} from '@tanstack/react-query';
 import Link from 'next/link';
@@ -21,8 +22,8 @@ const CohortDetails: React.FC<Props> = ({cohortId}) => {
     if (!cohort) {
         return (
             <EmptyPanel
-                text="The cohort you're looking for doesn't exist or has been removed."
-                title="Cohort not found"
+                text={t("The cohort you're looking for doesn't exist or has been removed.")}
+                title={t('Cohort not found')}
             />
         );
     }
@@ -31,11 +32,11 @@ const CohortDetails: React.FC<Props> = ({cohortId}) => {
         <>
             <Card>
                 <CardHeader className="flex flex-row items-center justify-between">
-                    <CardTitle>Cohort information</CardTitle>
+                    <CardTitle>{t('Cohort information')}</CardTitle>
                     <Link href={`/cohorts/${cohortId}/edit`}>
                         <Button size="sm" variant="outline">
                             <PencilIcon className="size-4" />
-                            Edit
+                            {t('Edit')}
                         </Button>
                     </Link>
                 </CardHeader>
@@ -44,13 +45,13 @@ const CohortDetails: React.FC<Props> = ({cohortId}) => {
                         <div className="md:col-span-8">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
-                                    <Heading5 className="text-muted-foreground">Name</Heading5>
+                                    <Heading5 className="text-muted-foreground">{t('Name')}</Heading5>
                                     <p className="text-sm">{cohort.name}</p>
                                 </div>
                                 {cohort.description && (
                                     <div className="mt-4">
                                         <Heading5 className="text-muted-foreground">
-                                            Description
+                                            {t('Description')}
                                         </Heading5>
                                         <p className="text-sm whitespace-pre-wrap">
                                             {cohort.description}
@@ -58,14 +59,14 @@ const CohortDetails: React.FC<Props> = ({cohortId}) => {
                                     </div>
                                 )}
                                 <div>
-                                    <Heading5 className="text-muted-foreground">Created</Heading5>
+                                    <Heading5 className="text-muted-foreground">{t('Created')}</Heading5>
                                     <p className="text-sm">
                                         <RelativeDate date={new Date(cohort.createdAt)} />
                                     </p>
                                 </div>
                                 <div>
                                     <Heading5 className="text-muted-foreground">
-                                        Last updated
+                                        {t('Last updated')}
                                     </Heading5>
                                     <p className="text-sm">
                                         <RelativeDate date={new Date(cohort.updatedAt)} />

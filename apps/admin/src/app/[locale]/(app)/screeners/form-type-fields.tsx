@@ -2,6 +2,7 @@
 
 import {FormField} from '@glint/form/fields';
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@glint/ui/card';
+import {t} from '@/lib/i18n';
 import {type Control, useFormContext, useWatch} from 'react-hook-form';
 import type {ScreenerCreate} from '@/lib/schemas/screeners';
 import {COUNTRY_CODE_LABELS} from '@/utils/country-codes';
@@ -22,18 +23,18 @@ const ScreenerAgeFields: React.FC<FieldProps> = ({control}) => (
             defaultValue=""
             fieldProps={{min: '1', type: 'number'}}
             fieldType="input"
-            label="Age"
+            label={t('Age')}
             name="config.value"
         />
         <FormField<ScreenerCreate>
             control={control}
             defaultValue=""
             fieldType="radio-group"
-            label="Operator"
+            label={t('Operator')}
             name="config.operator"
             options={[
-                {label: 'Over', value: 'over'},
-                {label: 'Under', value: 'under'}
+                {label: t('Over'), value: 'over'},
+                {label: t('Under'), value: 'under'}
             ]}
         />
     </>
@@ -51,7 +52,7 @@ const ScreenerLocationFields: React.FC<FieldProps> = ({control}) => {
             defaultValue={[]}
             fieldProps={{multiple: true}}
             fieldType="combobox"
-            label="Countries"
+            label={t('Countries')}
             name="config.countries"
             options={countryOptions}
         />
@@ -59,9 +60,9 @@ const ScreenerLocationFields: React.FC<FieldProps> = ({control}) => {
 };
 
 const screenerDescriptions: Record<string, string> = {
-    age: 'Only allow respondents to access the survey if they are older or younger than the specified age.',
-    location: 'Only allow respondents to access the survey if they are in the specified countries.',
-    selection: 'Only allow respondents to access the survey if they answer the question correctly.'
+    age: t('Only allow respondents to access the survey if they are older or younger than the specified age.'),
+    location: t('Only allow respondents to access the survey if they are in the specified countries.'),
+    selection: t('Only allow respondents to access the survey if they answer the question correctly.')
 };
 
 const ScreenerTypeFields: React.FC<Props> = ({defaultOptionIds}) => {
@@ -71,7 +72,7 @@ const ScreenerTypeFields: React.FC<Props> = ({defaultOptionIds}) => {
     return (
         <Card>
             <CardHeader>
-                <CardTitle>Screener configuration</CardTitle>
+                <CardTitle>{t('Screener configuration')}</CardTitle>
                 <CardDescription>{screenerDescriptions[screenerType]}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">

@@ -2,6 +2,7 @@
 
 import RelativeDate from '@glint/ui/relative-date';
 import TextLink from '@glint/ui/text-link';
+import {t} from '@/lib/i18n';
 import type {ColumnDef} from '@tanstack/react-table';
 import {Fragment} from 'react';
 import {DataTableColumnHeader} from '@/components/data-table/column-header';
@@ -13,7 +14,7 @@ import {humanise} from '@/utils/humanise';
 export const columns: ColumnDef<RespondentList>[] = [
     {
         accessorKey: 'id',
-        header: ({column}) => <DataTableColumnHeader column={column} title="ID" />,
+        header: ({column}) => <DataTableColumnHeader column={column} title={t('ID')} />,
         cell: ({row}) => {
             const id = row.getValue('id') as string;
             return <RecordId href={`/surveys/${id}`} id={id} />;
@@ -22,7 +23,7 @@ export const columns: ColumnDef<RespondentList>[] = [
     },
     {
         accessorKey: 'name',
-        header: ({column}) => <DataTableColumnHeader column={column} title="Name" />,
+        header: ({column}) => <DataTableColumnHeader column={column} title={t('Name')} />,
         cell: ({row}) => (
             <TextLink href={`/respondents/${row.original.id}`} className="max-w-[500px] truncate">
                 {row.getValue('name')}
@@ -31,7 +32,7 @@ export const columns: ColumnDef<RespondentList>[] = [
     },
     {
         accessorKey: 'cohorts',
-        header: ({column}) => <DataTableColumnHeader column={column} title="Cohorts" />,
+        header: ({column}) => <DataTableColumnHeader column={column} title={t('Cohorts')} />,
         cell: ({row}) => {
             const cohorts = row.getValue('cohorts') as RespondentList['cohorts'];
             if (!cohorts || cohorts.length === 0) {
@@ -63,7 +64,7 @@ export const columns: ColumnDef<RespondentList>[] = [
     },
     {
         accessorKey: 'campaigns',
-        header: ({column}) => <DataTableColumnHeader column={column} title="Campaigns" />,
+        header: ({column}) => <DataTableColumnHeader column={column} title={t('Campaigns')} />,
         cell: ({row}) => {
             const surveys = row.getValue('surveys') as RespondentList['surveys'];
             if (!surveys || surveys.length === 0) {
@@ -107,7 +108,7 @@ export const columns: ColumnDef<RespondentList>[] = [
     },
     {
         accessorKey: 'surveys',
-        header: ({column}) => <DataTableColumnHeader column={column} title="Surveys" />,
+        header: ({column}) => <DataTableColumnHeader column={column} title={t('Surveys')} />,
         cell: ({row}) => {
             const surveys = row.getValue('surveys') as RespondentList['surveys'];
             if (!surveys || surveys.length === 0) {
@@ -137,7 +138,7 @@ export const columns: ColumnDef<RespondentList>[] = [
     },
     {
         accessorKey: 'gender',
-        header: ({column}) => <DataTableColumnHeader column={column} title="Gender" />,
+        header: ({column}) => <DataTableColumnHeader column={column} title={t('Gender')} />,
         cell: ({row}) => {
             const gender = row.getValue('gender') as string;
             return gender ? (
@@ -152,7 +153,7 @@ export const columns: ColumnDef<RespondentList>[] = [
     },
     {
         accessorKey: 'updatedAt',
-        header: ({column}) => <DataTableColumnHeader column={column} title="Updated at" />,
+        header: ({column}) => <DataTableColumnHeader column={column} title={t('Updated at')} />,
         cell: ({row}) => {
             const updatedAt = row.getValue('updatedAt') as string;
             return <RelativeDate className="text-muted-foreground" date={new Date(updatedAt)} />;

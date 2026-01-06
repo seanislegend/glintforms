@@ -12,6 +12,7 @@ import {
 } from '@glint/ui/card';
 import {Sheet, SheetHeader, SheetPopup, SheetTitle, SheetTrigger} from '@glint/ui/sheet';
 import Spacer from '@glint/ui/spacer';
+import {t} from '@/lib/i18n';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {PlusIcon} from '@phosphor-icons/react/dist/ssr/Plus';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
@@ -97,13 +98,13 @@ const AddRespondentsToCohortSheet: React.FC<Props> = ({cohortId}) => {
             onSuccess: data => {
                 setSearchResults(data);
                 if (data.length > 0) {
-                    toast.success(`Found ${data.length} respondent${data.length !== 1 ? 's' : ''}`);
+                    toast.success(t(`Found ${data.length} respondent${data.length !== 1 ? 's' : ''}`));
                 } else {
-                    toast.info('No respondents found');
+                    toast.info(t('No respondents found'));
                 }
             },
             onError: error => {
-                toast.error(error.message || 'Failed to search respondents');
+                toast.error(error.message || t('Failed to search respondents'));
                 setSearchResults([]);
             }
         })
@@ -114,8 +115,8 @@ const AddRespondentsToCohortSheet: React.FC<Props> = ({cohortId}) => {
             onSuccess: async result => {
                 const message =
                     result.skipped > 0
-                        ? `Added ${result.added} respondent${result.added !== 1 ? 's' : ''}. ${result.skipped} already in cohort.`
-                        : `Added ${result.added} respondent${result.added !== 1 ? 's' : ''} to cohort.`;
+                        ? t(`Added ${result.added} respondent${result.added !== 1 ? 's' : ''}. ${result.skipped} already in cohort.`)
+                        : t(`Added ${result.added} respondent${result.added !== 1 ? 's' : ''} to cohort.`);
                 toast.success(message);
                 await queryClient.invalidateQueries({
                     queryKey: trpc.cohorts.get.queryKey(cohortId)
@@ -130,7 +131,7 @@ const AddRespondentsToCohortSheet: React.FC<Props> = ({cohortId}) => {
                 highlight('cohorts-respondents-list');
             },
             onError: error => {
-                toast.error(error.message || 'Failed to add respondents to cohort');
+                toast.error(error.message || t('Failed to add respondents to cohort'));
             }
         })
     );
@@ -224,16 +225,16 @@ const AddRespondentsToCohortSheet: React.FC<Props> = ({cohortId}) => {
                     render={
                         <Button disabled={true} variant="secondary">
                             <PlusIcon />
-                            Add respondents
+                            {t('Add respondents')}
                         </Button>
                     }
                 />
                 <SheetPopup className="w-[400px] sm:w-[800px] xl:w-[1000px] max-w-none sm:max-w-none xl:max-w-none">
                     <SheetHeader>
-                        <SheetTitle>Add respondents to cohort</SheetTitle>
+                        <SheetTitle>{t('Add respondents to cohort')}</SheetTitle>
                     </SheetHeader>
                     <div className="p-4">
-                        <div className="text-sm text-muted-foreground">Loading...</div>
+                        <div className="text-sm text-muted-foreground">{t('Loading...')}</div>
                     </div>
                 </SheetPopup>
             </Sheet>
@@ -244,21 +245,19 @@ const AddRespondentsToCohortSheet: React.FC<Props> = ({cohortId}) => {
         <Sheet onOpenChange={handleOpenChange} open={isOpen}>
             <SheetTrigger render={<Button variant="secondary" />}>
                 <PlusIcon />
-                Add respondents
+                {t('Add respondents')}
             </SheetTrigger>
             <SheetPopup className="w-[400px] sm:w-[800px] xl:w-[1000px] max-w-none sm:max-w-none xl:max-w-none">
                 <SheetHeader className="sticky top-0 bg-white/70 backdrop-blur-lg">
-                    <SheetTitle>Add respondents to cohort</SheetTitle>
+                    <SheetTitle>{t('Add respondents to cohort')}</SheetTitle>
                 </SheetHeader>
                 <div className="px-4 flex-grow overflow-auto">
                     <FormProvider {...methods}>
                         <Card>
                             <CardHeader>
-                                <CardTitle>Filters</CardTitle>
+                                <CardTitle>{t('Filters')}</CardTitle>
                                 <CardDescription>
-                                    Filter the respondents to add to the cohort. Only respondents
-                                    that don't already exist in the cohort and match all filters
-                                    will be added.
+                                    {t("Filter the respondents to add to the cohort. Only respondents that don't already exist in the cohort and match all filters will be added.")}
                                 </CardDescription>
                             </CardHeader>
                             <form
@@ -278,13 +277,13 @@ const AddRespondentsToCohortSheet: React.FC<Props> = ({cohortId}) => {
                                         type="button"
                                         variant="secondary"
                                     >
-                                        Reset all
+                                        {t('Reset all')}
                                     </Button>
                                     <Button
                                         pending={searchRespondents.status === 'pending'}
                                         type="submit"
                                     >
-                                        Search
+                                        {t('Search')}
                                     </Button>
                                 </CardFooter>
                             </form>

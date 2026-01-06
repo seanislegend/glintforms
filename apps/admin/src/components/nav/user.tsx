@@ -11,6 +11,7 @@ import {
     MenuTrigger
 } from '@glint/ui/menu';
 import {SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar} from '@glint/ui/sidebar';
+import {t} from '@/lib/i18n';
 import {CaretUpDownIcon} from '@phosphor-icons/react/dist/ssr/CaretUpDown';
 import {SignOutIcon} from '@phosphor-icons/react/dist/ssr/SignOut';
 import {useState} from 'react';
@@ -85,7 +86,7 @@ const NavUser: React.FC = () => {
                                     onClick={() => setShowLogoutConfirm(true)}
                                 >
                                     <SignOutIcon />
-                                    Log out
+                                    {t('Log out')}
                                 </MenuItem>
                             </MenuPopup>
                         </Menu>
@@ -94,11 +95,11 @@ const NavUser: React.FC = () => {
             </SidebarMenu>
             {user && (
                 <ConfirmationDialog
-                    description="Are you sure you want to log out? You will need to sign in again to access your account."
+                    description={t('Are you sure you want to log out? You will need to sign in again to access your account.')}
                     onConfirm={handleLogout}
                     onOpenChange={setShowLogoutConfirm}
                     open={showLogoutConfirm}
-                    title="Confirm logout"
+                    title={t('Confirm logout')}
                     variant="destructive"
                 />
             )}

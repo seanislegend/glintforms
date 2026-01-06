@@ -10,6 +10,7 @@ import {
     DialogPopup,
     DialogTitle
 } from '@glint/ui/dialog';
+import {t} from '@/lib/i18n';
 import {useAtom, useSetAtom} from 'jotai';
 import {useFormContext, useWatch} from 'react-hook-form';
 import {questionCountAtom, removeQuestionIndexAtom} from '@/lib/store';
@@ -37,7 +38,7 @@ const RemoveQuestionButton: React.FC<ButtonProps> = ({questionIndex, onRemove, o
 
     return (
         <Button onClick={handleRemove} variant="destructive">
-            Confirm
+            {t('Confirm')}
         </Button>
     );
 };
@@ -50,16 +51,16 @@ const RemoveQuestionDialog: React.FC<DialogProps> = ({onRemove}) => {
         <Dialog open={isOpen}>
             <DialogPopup>
                 <DialogHeader>
-                    <DialogTitle>Remove question</DialogTitle>
+                    <DialogTitle>{t('Remove question')}</DialogTitle>
                 </DialogHeader>
                 <DialogDescription>
-                    Are you sure you want to remove this question?
+                    {t('Are you sure you want to remove this question?')}
                 </DialogDescription>
                 <DialogFooter>
                     <DialogClose
                         render={
                             <Button onClick={() => setRemoveQuestionIndex(null)} variant="accent">
-                                Cancel
+                                {t('Cancel')}
                             </Button>
                         }
                     />

@@ -5,6 +5,7 @@ import {Card, CardContent, CardHeader, CardTitle} from '@glint/ui/card';
 import EmptyPanel from '@glint/ui/empty-panel';
 import {Heading3, Heading5} from '@glint/ui/heading';
 import RelativeDate from '@glint/ui/relative-date';
+import {t} from '@/lib/i18n';
 import {PencilIcon} from '@phosphor-icons/react/dist/ssr/Pencil';
 import {useSuspenseQuery} from '@tanstack/react-query';
 import Link from 'next/link';
@@ -29,8 +30,8 @@ const RespondentDetails: React.FC<Props> = ({respondentId}) => {
     if (!respondent) {
         return (
             <EmptyPanel
-                text="The respondent you're looking for doesn't exist or has been removed."
-                title="Respondent not found"
+                text={t("The respondent you're looking for doesn't exist or has been removed.")}
+                title={t('Respondent not found')}
             />
         );
     }
@@ -39,11 +40,11 @@ const RespondentDetails: React.FC<Props> = ({respondentId}) => {
         <>
             <Card>
                 <CardHeader className="flex flex-row items-center justify-between">
-                    <CardTitle>Respondent information</CardTitle>
+                    <CardTitle>{t('Respondent information')}</CardTitle>
                     <Link href={`/respondents/${respondentId}/edit`}>
                         <Button size="sm" variant="outline">
                             <PencilIcon className="size-4" />
-                            Edit
+                            {t('Edit')}
                         </Button>
                     </Link>
                 </CardHeader>
@@ -52,15 +53,15 @@ const RespondentDetails: React.FC<Props> = ({respondentId}) => {
                         <div className="md:col-span-8">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
-                                    <Heading5 className="text-muted-foreground">Name</Heading5>
+                                    <Heading5 className="text-muted-foreground">{t('Name')}</Heading5>
                                     <p className="text-sm">{respondent.name}</p>
                                 </div>
                                 <div>
-                                    <Heading5 className="text-muted-foreground">Email</Heading5>
+                                    <Heading5 className="text-muted-foreground">{t('Email')}</Heading5>
                                     <p className="text-sm">{respondent.email}</p>
                                 </div>
                                 <div>
-                                    <Heading5 className="text-muted-foreground">Gender</Heading5>
+                                    <Heading5 className="text-muted-foreground">{t('Gender')}</Heading5>
                                     <p className="text-sm">
                                         {respondent.gender ? (
                                             <span className="capitalize">{respondent.gender}</span>
@@ -71,7 +72,7 @@ const RespondentDetails: React.FC<Props> = ({respondentId}) => {
                                 </div>
                                 <div>
                                     <Heading5 className="text-muted-foreground">
-                                        Signup source
+                                        {t('Signup source')}
                                     </Heading5>
                                     <p className="text-sm">
                                         {respondent.signupSource ? (
@@ -84,14 +85,14 @@ const RespondentDetails: React.FC<Props> = ({respondentId}) => {
                                     </p>
                                 </div>
                                 <div>
-                                    <Heading5 className="text-muted-foreground">Created</Heading5>
+                                    <Heading5 className="text-muted-foreground">{t('Created')}</Heading5>
                                     <p className="text-sm">
                                         <RelativeDate date={new Date(respondent.createdAt)} />
                                     </p>
                                 </div>
                                 <div>
                                     <Heading5 className="text-muted-foreground">
-                                        Last updated
+                                        {t('Last updated')}
                                     </Heading5>
                                     <p className="text-sm">
                                         <RelativeDate date={new Date(respondent.updatedAt)} />
@@ -100,7 +101,7 @@ const RespondentDetails: React.FC<Props> = ({respondentId}) => {
                             </div>
                             {respondent.notes && (
                                 <div className="mt-4">
-                                    <Heading5 className="text-muted-foreground">Notes</Heading5>
+                                    <Heading5 className="text-muted-foreground">{t('Notes')}</Heading5>
                                     <p className="text-sm whitespace-pre-wrap">
                                         {respondent.notes}
                                     </p>
@@ -109,7 +110,7 @@ const RespondentDetails: React.FC<Props> = ({respondentId}) => {
                         </div>
                         <div className="md:col-span-4">
                             <Heading5 className="text-muted-foreground">
-                                Authenticity score
+                                {t('Authenticity score')}
                             </Heading5>
                             {respondent.totalResponsesWithScores > 0 ? (
                                 <div className="max-w-28 mt-2">
@@ -117,7 +118,7 @@ const RespondentDetails: React.FC<Props> = ({respondentId}) => {
                                 </div>
                             ) : (
                                 <p className="text-sm text-muted-foreground">
-                                    No authenticity scores available yet
+                                    {t('No authenticity scores available yet')}
                                 </p>
                             )}
                         </div>
@@ -125,7 +126,7 @@ const RespondentDetails: React.FC<Props> = ({respondentId}) => {
                 </CardContent>
             </Card>
             <div className="mt-8">
-                <Heading3 className="mb-4">Cohorts</Heading3>
+                <Heading3 className="mb-4">{t('Cohorts')}</Heading3>
                 {respondent.cohorts.length > 0 ? (
                     <DataTable
                         columns={cohortColumns}
@@ -135,13 +136,13 @@ const RespondentDetails: React.FC<Props> = ({respondentId}) => {
                     />
                 ) : (
                     <EmptyPanel
-                        text="This respondent hasn't been assigned to any cohorts yet."
-                        title="No cohorts assigned"
+                        text={t("This respondent hasn't been assigned to any cohorts yet.")}
+                        title={t('No cohorts assigned')}
                     />
                 )}
             </div>
             <div className="mt-8">
-                <Heading3 className="mb-4">Surveys</Heading3>
+                <Heading3 className="mb-4">{t('Surveys')}</Heading3>
                 {respondent.surveys.length > 0 ? (
                     <DataTable
                         columns={surveyColumns}
@@ -151,8 +152,8 @@ const RespondentDetails: React.FC<Props> = ({respondentId}) => {
                     />
                 ) : (
                     <EmptyPanel
-                        text="This respondent hasn't completed any surveys yet."
-                        title="No surveys completed"
+                        text={t("This respondent hasn't completed any surveys yet.")}
+                        title={t('No surveys completed')}
                     />
                 )}
             </div>

@@ -12,6 +12,7 @@ import {useState} from 'react';
 import {FormProvider, useForm} from 'react-hook-form';
 import {toast} from 'sonner';
 import ConfirmationDialog from '@/components/dialogs/confirmation';
+import {t} from '@/lib/i18n';
 import {surveyCanBeEdited} from '@/lib/surveys/status';
 import {useTRPC} from '@/lib/trpc/react';
 import {getScreenerSummary} from '@/utils/screener-summary';
@@ -35,7 +36,7 @@ const ScreenersSettings: React.FC<Props> = ({survey}) => {
                 await queryClient.invalidateQueries({
                     queryKey: trpc.surveys.getScreeners.queryKey(survey.id)
                 });
-                toast.success('Screener removed successfully');
+                toast.success(t('Screener removed successfully'));
             }
         })
     );
@@ -46,7 +47,7 @@ const ScreenersSettings: React.FC<Props> = ({survey}) => {
                 await queryClient.invalidateQueries({
                     queryKey: trpc.surveys.getScreeners.queryKey(survey.id)
                 });
-                toast.success('Failure message updated successfully');
+                toast.success(t('Failure message updated successfully'));
             }
         })
     );
@@ -73,9 +74,9 @@ const ScreenersSettings: React.FC<Props> = ({survey}) => {
         return (
             <Alert variant="warning">
                 <InfoIcon />
-                <AlertTitle>Survey is locked</AlertTitle>
+                <AlertTitle>{t('Survey is locked')}</AlertTitle>
                 <AlertDescription>
-                    Screeners cannot be changed when the survey is complete or archived.
+                    {t('Screeners cannot be changed when the survey is complete or archived.')}
                 </AlertDescription>
             </Alert>
         );
@@ -84,7 +85,7 @@ const ScreenersSettings: React.FC<Props> = ({survey}) => {
     return (
         <div className="space-y-4">
             <ConfirmationDialog
-                description="Are you sure you want to remove this screener?"
+                description={t('Are you sure you want to remove this screener?')}
                 onConfirm={handleConfirmRemove}
                 onOpenChange={open => {
                     if (!open) {
@@ -93,15 +94,16 @@ const ScreenersSettings: React.FC<Props> = ({survey}) => {
                 }}
                 open={removingScreenerId !== null}
                 pending={removeScreener.isPending}
-                title="Remove screener"
+                title={t('Remove screener')}
                 variant="destructive"
             />
             <div className="flex items-center justify-between">
                 <div>
-                    <h3 className="text-lg font-semibold">Screeners</h3>
+                    <h3 className="text-lg font-semibold">{t('Screeners')}</h3>
                     <p className="text-sm text-muted-foreground">
-                        Add screeners to filter respondents before they can access this survey. All
-                        screeners must pass for a respondent to proceed.
+                        {t(
+                            'Add screeners to filter respondents before they can access this survey. All screeners must pass for a respondent to proceed.'
+                        )}
                     </p>
                 </div>
                 <AssignScreenerDialog
@@ -112,8 +114,10 @@ const ScreenersSettings: React.FC<Props> = ({survey}) => {
 
             {!screeners || screeners.length === 0 ? (
                 <EmptyPanel
-                    text="No screeners have been added to this survey yet. Click the button above to add one."
-                    title="No screeners assigned"
+                    text={t(
+                        'No screeners have been added to this survey yet. Click the button above to add one.'
+                    )}
+                    title={t('No screeners assigned')}
                 />
             ) : (
                 <div className="space-y-4">
@@ -175,14 +179,16 @@ const FailureMessageForm: React.FC<FailureMessageFormProps> = ({defaultMessage, 
             >
                 <FormField
                     control={methods.control}
-                    description="Custom message to show when this screener fails. Leave empty for default message."
+                    description={t(
+                        'Custom message to show when this screener fails. Leave empty for default message.'
+                    )}
                     fieldType="input"
-                    label="Failure message"
+                    label={t('Failure message')}
                     name="failureMessage"
                 />
                 <div className="flex justify-end mt-2">
                     <Button size="sm" type="submit">
-                        Save message
+                        {t('Save message')}
                     </Button>
                 </div>
             </form>

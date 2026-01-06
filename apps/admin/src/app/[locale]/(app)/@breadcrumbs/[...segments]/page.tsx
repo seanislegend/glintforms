@@ -9,6 +9,7 @@ import {
     BreadcrumbSeparator
 } from '@glint/ui/breadcrumb';
 import Spinner from '@glint/ui/spinner';
+import {t} from '@/lib/i18n';
 import {useQuery} from '@tanstack/react-query';
 import Link from 'next/link';
 import {useParams} from 'next/navigation';
@@ -121,7 +122,7 @@ const DynamicBreadcrumbs: React.FC = () => {
     return (
         <Breadcrumb className="overflow-hidden text-ellipsis">
             <BreadcrumbList className="h-8 w-full flex-nowrap [&>li,&>span]:flex-shrink-0">
-                <BreadcrumbItemWithLink href="/">Home</BreadcrumbItemWithLink>
+                <BreadcrumbItemWithLink href="/">{t('Home')}</BreadcrumbItemWithLink>
                 {breadcrumbs}
             </BreadcrumbList>
         </Breadcrumb>

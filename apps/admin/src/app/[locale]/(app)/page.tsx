@@ -1,5 +1,6 @@
 import Container from '@glint/ui/container';
 import SectionHeader from '@glint/ui/section-header';
+import {t} from '@/lib/i18n';
 import {getSession} from '@/lib/auth/server';
 import {getShortName} from '@/utils/names';
 
@@ -8,7 +9,7 @@ const HomePage = async () => {
 
     return (
         <Container>
-            <SectionHeader title={`Welcome back, ${getShortName(session?.user?.name)}`} />
+            <SectionHeader title={`${t('Welcome back')}, ${getShortName(session?.user?.name)}`} />
         </Container>
     );
 };

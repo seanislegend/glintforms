@@ -1,6 +1,7 @@
 import Container from '@glint/ui/container';
 import SectionHeader from '@glint/ui/section-header';
 import Spacer from '@glint/ui/spacer';
+import {t} from '@/lib/i18n';
 import ClientOnly from '@/components/client-only';
 import {HydrateClient, prefetch, trpc} from '@/lib/trpc/server';
 import Form from './form';
@@ -16,7 +17,7 @@ const Page: React.FC<PageProps> = async ({params}) => {
     return (
         <HydrateClient>
             <Container>
-                <SectionHeader title="Edit cohort" />
+                <SectionHeader title={t('Edit cohort')} />
                 <Spacer size="md" />
                 <ClientOnly>
                     <Form cohortId={cohortId} />

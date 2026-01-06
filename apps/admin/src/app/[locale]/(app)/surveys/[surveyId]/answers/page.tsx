@@ -1,6 +1,7 @@
 import Container from '@glint/ui/container';
 import SectionHeader from '@glint/ui/section-header';
 import Spacer from '@glint/ui/spacer';
+import {t} from '@/lib/i18n';
 import {Suspense} from 'react';
 import PageSpinner from '@/components/page-spinner';
 import {HydrateClient, prefetch, trpc} from '@/lib/trpc/server';
@@ -18,8 +19,8 @@ const SurveyAnswersPage: React.FC<React.PropsWithChildren<Props>> = async ({para
         <HydrateClient>
             <Container>
                 <SectionHeader
-                    text="Review each question, its unique answers, and dive deeper when needed."
-                    title="Answers"
+                    text={t('Review each question, its unique answers, and dive deeper when needed.')}
+                    title={t('Answers')}
                 />
                 <Spacer size="md" />
                 <Suspense fallback={<PageSpinner />}>

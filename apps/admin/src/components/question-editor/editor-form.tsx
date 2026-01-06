@@ -7,6 +7,7 @@ import Container from '@glint/ui/container';
 import EmptyPanel from '@glint/ui/empty-panel';
 import SectionHeader from '@glint/ui/section-header';
 import Spacer from '@glint/ui/spacer';
+import {t} from '@/lib/i18n';
 import {InfoIcon} from '@phosphor-icons/react/dist/ssr/Info';
 import {PlusIcon} from '@phosphor-icons/react/dist/ssr/Plus';
 import {useMutation, useQueryClient} from '@tanstack/react-query';
@@ -56,7 +57,7 @@ const QuestionEditorForm: React.FC = () => {
                         trpc.activities.getAll.queryKey(surveyId)
                     ]
                 });
-                toast.success('Questions updated');
+                toast.success(t('Questions updated'));
             }
         })
     );
@@ -97,17 +98,17 @@ const QuestionEditorForm: React.FC = () => {
                         </>
                     )
                 }
-                text="Manage your survey questions and their options"
-                title="Question editor"
+                text={t('Manage your survey questions and their options')}
+                title={t('Question editor')}
             />
             <Spacer />
             {survey?.status && !canEdit && (
                 <>
                     <Alert variant="warning">
                         <InfoIcon />
-                        <AlertTitle>Survey is locked</AlertTitle>
+                        <AlertTitle>{t('Survey is locked')}</AlertTitle>
                         <AlertDescription>
-                            Questions cannot be changed when the survey is complete or archived.
+                            {t('Questions cannot be changed when the survey is complete or archived.')}
                         </AlertDescription>
                     </Alert>
                     <Spacer />
@@ -117,12 +118,9 @@ const QuestionEditorForm: React.FC = () => {
                 <>
                     <Alert variant="warning">
                         <InfoIcon />
-                        <AlertTitle>Survey has been published</AlertTitle>
+                        <AlertTitle>{t('Survey has been published')}</AlertTitle>
                         <AlertDescription>
-                            Your survey has been published and you can only edit the text content of
-                            existing questions and options. Structural changes such as adding or
-                            removing questions, changing question types, or modifying options are
-                            not allowed to ensure the integrity of the survey.
+                            {t('Your survey has been published and you can only edit the text content of existing questions and options. Structural changes such as adding or removing questions, changing question types, or modifying options are not allowed to ensure the integrity of the survey.')}
                         </AlertDescription>
                     </Alert>
                     <Spacer />
@@ -141,10 +139,8 @@ const QuestionEditorForm: React.FC = () => {
                 >
                     {fieldArray.fields.length === 0 && (
                         <EmptyPanel
-                            text="Add questions to your survey to get started. If you're not sure what
-                                to add, you can generate questions using our AI powered question
-                                generator."
-                            title="No questions added yet"
+                            text={t("Add questions to your survey to get started. If you're not sure what to add, you can generate questions using our AI powered question generator.")}
+                            title={t('No questions added yet')}
                         >
                             <div className="flex items-center gap-2 justify-center flex-wrap">
                                 {canEdit && isDraft && (
@@ -159,7 +155,7 @@ const QuestionEditorForm: React.FC = () => {
                                         />
                                         <Button onClick={handleAddQuestion} variant="outline">
                                             <PlusIcon />
-                                            Add question
+                                            {t('Add question')}
                                         </Button>
                                     </>
                                 )}

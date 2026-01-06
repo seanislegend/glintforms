@@ -1,6 +1,7 @@
 import Container from '@glint/ui/container';
 import SectionHeader from '@glint/ui/section-header';
 import Spacer from '@glint/ui/spacer';
+import {t} from '@/lib/i18n';
 import {Suspense} from 'react';
 import Form from '@/components/respondents/form';
 import RespondentSummary from '@/components/respondents/summary';
@@ -19,7 +20,7 @@ const Page: React.FC<PageProps> = async ({params}) => {
             <div className="grid md:grid-cols-12 relative min-h-full">
                 <div className="md:col-span-8 md:border-r border-accent">
                     <Container>
-                        <SectionHeader title="Edit respondent" />
+                        <SectionHeader title={t('Edit respondent')} />
                         <Spacer size="md" />
                         <Suspense>
                             <Form respondentId={respondentId} />

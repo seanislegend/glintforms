@@ -3,6 +3,7 @@
 import Button from '@glint/ui/button';
 import {Card, CardContent, CardFooter, CardHeader, CardTitle} from '@glint/ui/card';
 import EmptyPanel from '@glint/ui/empty-panel';
+import {t} from '@/lib/i18n';
 import {EyeIcon} from '@phosphor-icons/react/dist/ssr/Eye';
 import {useQueryState} from 'nuqs';
 import QuestionTypeBadge from '@/components/badges/question-type';
@@ -34,7 +35,7 @@ const QuestionCard: React.FC<Props> = ({question}) => {
                         {question.themes && question.themes.length > 0 ? (
                             <ResponsesThemeList themes={question.themes} />
                         ) : (
-                            <EmptyPanel className="w-full" text="No themes generated" />
+                            <EmptyPanel className="w-full" text={t('No themes generated')} />
                         )}
                     </span>
                 )}
@@ -46,7 +47,7 @@ const QuestionCard: React.FC<Props> = ({question}) => {
                     size="sm"
                     variant="outline"
                 >
-                    <span>View</span>
+                    <span>{t('View')}</span>
                     <EyeIcon className="size-4" />
                 </Button>
             </CardFooter>

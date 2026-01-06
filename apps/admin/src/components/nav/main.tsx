@@ -7,6 +7,7 @@ import {
     SidebarMenuButton,
     SidebarMenuItem
 } from '@glint/ui/sidebar';
+import {t} from '@/lib/i18n';
 import {ClipboardTextIcon} from '@phosphor-icons/react/dist/ssr/ClipboardText';
 import {HouseIcon} from '@phosphor-icons/react/dist/ssr/House';
 import {MegaphoneIcon} from '@phosphor-icons/react/dist/ssr/Megaphone';
@@ -19,12 +20,12 @@ import {Suspense} from 'react';
 import SubNav from '@/components/nav/sub';
 
 const data = [
-    {href: '/', Icon: HouseIcon, title: 'Dashboard'},
-    {href: '/campaigns', Icon: MegaphoneIcon, title: 'Campaigns', subnav: 'campaigns'},
-    {href: '/surveys', Icon: ClipboardTextIcon, title: 'Surveys', subnav: 'surveys'},
-    {href: '/respondents', Icon: UsersIcon, title: 'Respondents', subnav: 'respondents'},
-    {href: '/cohorts', Icon: UsersThreeIcon, title: 'Cohorts', subnav: 'cohorts'},
-    {href: '/screeners', Icon: ShieldWarningIcon, title: 'Screeners', subnav: 'screeners'}
+    {href: '/', Icon: HouseIcon, title: t('Dashboard')},
+    {href: '/campaigns', Icon: MegaphoneIcon, title: t('Campaigns'), subnav: 'campaigns'},
+    {href: '/surveys', Icon: ClipboardTextIcon, title: t('Surveys'), subnav: 'surveys'},
+    {href: '/respondents', Icon: UsersIcon, title: t('Respondents'), subnav: 'respondents'},
+    {href: '/cohorts', Icon: UsersThreeIcon, title: t('Cohorts'), subnav: 'cohorts'},
+    {href: '/screeners', Icon: ShieldWarningIcon, title: t('Screeners'), subnav: 'screeners'}
 ];
 
 export const NavMainLink: React.FC<{

@@ -1,6 +1,7 @@
 'use client';
 
 import Button from '@glint/ui/button';
+import {t} from '@/lib/i18n';
 import {ChartBarIcon} from '@phosphor-icons/react/dist/ssr/ChartBar';
 import {ChartLineIcon} from '@phosphor-icons/react/dist/ssr/ChartLine';
 import {GearIcon} from '@phosphor-icons/react/dist/ssr/Gear';
@@ -58,7 +59,7 @@ const SurveyNavbar: React.FC<Props> = ({surveyId}) => {
                         variant="ghost"
                     >
                         <HouseIcon />
-                        Overview
+                        {t('Overview')}
                     </Button>
                 </span>
                 <span>
@@ -69,7 +70,7 @@ const SurveyNavbar: React.FC<Props> = ({surveyId}) => {
                         variant="ghost"
                     >
                         <GearIcon />
-                        Settings
+                        {t('Settings')}
                     </Button>
                 </span>
                 <span>
@@ -80,7 +81,7 @@ const SurveyNavbar: React.FC<Props> = ({surveyId}) => {
                         variant="ghost"
                     >
                         <QuestionMarkIcon />
-                        Questions
+                        {t('Questions')}
                     </Button>
                 </span>
                 <span>
@@ -93,7 +94,7 @@ const SurveyNavbar: React.FC<Props> = ({surveyId}) => {
                         variant="ghost"
                     >
                         <ChartLineIcon />
-                        Responses
+                        {t('Responses')}
                     </Button>
                 </span>
                 <span>
@@ -106,7 +107,7 @@ const SurveyNavbar: React.FC<Props> = ({surveyId}) => {
                         variant="ghost"
                     >
                         <TextAlignLeftIcon />
-                        Answers
+                        {t('Answers')}
                     </Button>
                 </span>
                 <span>
@@ -119,7 +120,7 @@ const SurveyNavbar: React.FC<Props> = ({surveyId}) => {
                         variant="ghost"
                     >
                         <ChartBarIcon />
-                        Insights
+                        {t('Insights')}
                     </Button>
                 </span>
             </div>

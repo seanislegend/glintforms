@@ -4,6 +4,7 @@ import {FormField} from '@glint/form/fields';
 import {handleFormError} from '@glint/form/utils';
 import Button from '@glint/ui/button';
 import EmptyPanel from '@glint/ui/empty-panel';
+import {t} from '@/lib/i18n';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import {useRouter} from 'next/navigation';
@@ -34,7 +35,7 @@ const Form: React.FC<FormProps> = ({respondentId}) => {
                 await queryClient.invalidateQueries({
                     queryKey: trpc.respondents.get.queryKey(respondentId)
                 });
-                toast.success('Respondent updated successfully');
+                toast.success(t('Respondent updated successfully'));
                 router.replace('/respondents?success=true');
             }
         })
@@ -72,12 +73,12 @@ const Form: React.FC<FormProps> = ({respondentId}) => {
     );
 
     if (isLoading) {
-        return <div>Fetching details...</div>;
+        return <div>{t('Fetching details...')}</div>;
     } else if (!respondent) {
         return (
             <EmptyPanel
-                text="The respondent you're looking for doesn't exist or has been removed."
-                title="Respondent not found"
+                text={t("The respondent you're looking for doesn't exist or has been removed.")}
+                title={t('Respondent not found')}
             />
         );
     }
@@ -90,7 +91,7 @@ const Form: React.FC<FormProps> = ({respondentId}) => {
                         <FormField
                             control={methods.control}
                             fieldType="input"
-                            label="Name"
+                            label={t('Name')}
                             name="name"
                         />
                     </div>
@@ -98,7 +99,7 @@ const Form: React.FC<FormProps> = ({respondentId}) => {
                         <FormField
                             control={methods.control}
                             fieldType="input"
-                            label="Email"
+                            label={t('Email')}
                             name="email"
                         />
                     </div>
@@ -106,9 +107,9 @@ const Form: React.FC<FormProps> = ({respondentId}) => {
                         <FormField
                             control={methods.control}
                             fieldType="textarea"
-                            label="Notes"
+                            label={t('Notes')}
                             name="notes"
-                            placeholder="any additional notes about this respondent"
+                            placeholder={t('any additional notes about this respondent')}
                         />
                     </div>
                 </div>
@@ -119,7 +120,7 @@ const Form: React.FC<FormProps> = ({respondentId}) => {
                         pending={updateRespondent.status === 'pending'}
                         type="submit"
                     >
-                        Update
+                        {t('Update')}
                     </Button>
                 </div>
             </form>

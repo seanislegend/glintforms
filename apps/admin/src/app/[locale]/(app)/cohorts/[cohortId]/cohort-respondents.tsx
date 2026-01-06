@@ -1,6 +1,7 @@
 'use client';
 
 import EmptyPanel from '@glint/ui/empty-panel';
+import {t} from '@/lib/i18n';
 import {useMutation, useQueryClient, useSuspenseQuery} from '@tanstack/react-query';
 import type {Row} from '@tanstack/react-table';
 import {useState} from 'react';
@@ -32,12 +33,12 @@ const CohortRespondents: React.FC<Props> = ({cohortId}) => {
                 await queryClient.invalidateQueries({
                     queryKey: trpc.cohorts.getRespondents.queryKey(cohortId)
                 });
-                toast.success('Respondent removed from cohort');
+                toast.success(t('Respondent removed from cohort'));
                 setDeleteRow(null);
                 highlight('cohorts-respondents-list');
             },
             onError: error => {
-                toast.error(error.message || 'Failed to remove respondent from cohort');
+                toast.error(error.message || t('Failed to remove respondent from cohort'));
             }
         })
     );
@@ -60,8 +61,8 @@ const CohortRespondents: React.FC<Props> = ({cohortId}) => {
     if (respondents.length === 0) {
         return (
             <EmptyPanel
-                text="Add respondents to this cohort using the button above."
-                title="No respondents in this cohort"
+                text={t('Add respondents to this cohort using the button above.')}
+                title={t('No respondents in this cohort')}
             />
         );
     }
@@ -76,7 +77,7 @@ const CohortRespondents: React.FC<Props> = ({cohortId}) => {
                 />
             </HighlightChange>
             <ConfirmationDialog
-                description="Are you sure you want to remove this respondent from the cohort? This action cannot be undone."
+                description={t('Are you sure you want to remove this respondent from the cohort? This action cannot be undone.')}
                 onConfirm={handleConfirmDelete}
                 onOpenChange={(open, reason) => {
                     if (!open && reason !== 'confirm-press') {
@@ -85,7 +86,7 @@ const CohortRespondents: React.FC<Props> = ({cohortId}) => {
                 }}
                 open={deleteRow !== null}
                 pending={removeRespondent.isPending}
-                title="Confirm remove"
+                title={t('Confirm remove')}
                 variant="destructive"
             />
         </>

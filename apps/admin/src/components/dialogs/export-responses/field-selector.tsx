@@ -4,6 +4,7 @@ import {FormField} from '@glint/form/fields';
 import Switch from '@glint/form/switch';
 import {BasicCard} from '@glint/ui/card';
 import ToggleVisibility from '@glint/ui/toggle-visibility';
+import {t} from '@/lib/i18n';
 import {useFormContext, useWatch} from 'react-hook-form';
 import {RESPONSE_EXPORT_FIELDS} from '@/lib/schemas/constants';
 
@@ -22,8 +23,8 @@ const ExportResponsesFieldSelector: React.FC = () => {
     return (
         <ToggleVisibility visible={!includeAllFields}>
             <BasicCard
-                description="Only fields that are selected will be included in the export. If you want to include all fields, enable the 'Include all fields' switch."
-                title="Select fields to include"
+                description={t("Only fields that are selected will be included in the export. If you want to include all fields, enable the 'Include all fields' switch.")}
+                title={t('Select fields to include')}
             >
                 <div className="space-y-3">
                     {RESPONSE_EXPORT_FIELDS.map(field => (

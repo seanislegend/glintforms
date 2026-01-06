@@ -13,6 +13,7 @@ import {
     SheetTitle,
     SheetTrigger
 } from '@glint/ui/sheet';
+import {t} from '@/lib/i18n';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {BracketsCurlyIcon} from '@phosphor-icons/react/dist/ssr/BracketsCurly';
 import {DownloadSimpleIcon} from '@phosphor-icons/react/dist/ssr/DownloadSimple';
@@ -63,17 +64,17 @@ const ImportQuestionsDialog: React.FC<Props> = ({surveyId}) => {
             });
 
             if (!response.ok) {
-                throw new Error('Export failed');
+                throw new Error(t('Export failed'));
             }
 
             const blob = await response.blob();
             const filename = `survey-questions-${surveyId}.${format === 'excel' || format === 'xlsform' ? 'xlsx' : format}`;
             saveAs(blob, filename);
             setIsOpen(false);
-            toast.success('Export successful');
+            toast.success(t('Export successful'));
         } catch (error) {
             console.error('Export error:', error);
-            toast.error('Export failed');
+            toast.error(t('Export failed'));
         } finally {
             setIsExporting(false);
         }
@@ -85,7 +86,7 @@ const ImportQuestionsDialog: React.FC<Props> = ({surveyId}) => {
                 render={
                     <Button variant="secondary">
                         <DownloadSimpleIcon />
-                        Export questions
+                        {t('Export questions')}
                     </Button>
                 }
             />
@@ -96,9 +97,9 @@ const ImportQuestionsDialog: React.FC<Props> = ({surveyId}) => {
                         onSubmit={methods.handleSubmit(handleFormSubmit, handleFormError)}
                     >
                         <SheetHeader className="sticky top-0 bg-white/70 backdrop-blur-lg">
-                            <SheetTitle>Export Questions</SheetTitle>
+                            <SheetTitle>{t('Export Questions')}</SheetTitle>
                             <SheetDescription>
-                                Choose the format and fields to export your survey questions.
+                                {t('Choose the format and fields to export your survey questions.')}
                             </SheetDescription>
                         </SheetHeader>
                         <div className="px-4 flex-grow overflow-auto">
@@ -106,41 +107,41 @@ const ImportQuestionsDialog: React.FC<Props> = ({surveyId}) => {
                                 <FormField
                                     control={methods.control}
                                     fieldType="select"
-                                    label="Format"
+                                    label={t('Format')}
                                     name="format"
                                     options={[
                                         {
-                                            description: 'Commonly used format for data exchange',
+                                            description: t('Commonly used format for data exchange'),
                                             icon: FileCsvIcon,
                                             label: 'CSV',
                                             value: 'csv'
                                         },
                                         {
-                                            description: 'Commonly used for API integrations',
+                                            description: t('Commonly used for API integrations'),
                                             icon: BracketsCurlyIcon,
                                             label: 'JSON',
                                             value: 'json'
                                         },
                                         {
-                                            description: 'Commonly used for data analysis',
+                                            description: t('Commonly used for data analysis'),
                                             icon: FileXlsIcon,
                                             label: 'Excel',
                                             value: 'excel'
                                         },
                                         {
-                                            description: 'Commonly used for building ODK forms',
+                                            description: t('Commonly used for building ODK forms'),
                                             icon: FileXlsIcon,
                                             label: 'XLSForm',
                                             value: 'xlsform'
                                         }
                                     ]}
-                                    placeholder="Select format"
+                                    placeholder={t('Select format')}
                                 />
                                 <FormField
                                     control={methods.control}
-                                    description="Fields will include timestamps and any metadata recorded."
+                                    description={t('Fields will include timestamps and any metadata recorded.')}
                                     fieldType="switch"
-                                    label="Include all fields"
+                                    label={t('Include all fields')}
                                     name="includeAllFields"
                                 />
                                 <ExportQuestionsFieldSelector />
@@ -154,13 +155,13 @@ const ImportQuestionsDialog: React.FC<Props> = ({surveyId}) => {
                                         disabled={isExporting}
                                         variant="accent"
                                     >
-                                        Cancel
+                                        {t('Cancel')}
                                     </Button>
                                 }
                             />
                             <Button className="flex-grow" pending={isExporting} type="submit">
                                 <DownloadSimpleIcon />
-                                Export
+                                {t('Export')}
                             </Button>
                         </SheetFooter>
                     </form>

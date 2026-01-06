@@ -1,6 +1,7 @@
 import Container from '@glint/ui/container';
 import SectionHeader from '@glint/ui/section-header';
 import Spacer from '@glint/ui/spacer';
+import {t} from '@/lib/i18n';
 import {Suspense} from 'react';
 import CohortDetails from '@/components/cohorts/cohort-details';
 import AddRespondentsToCohortDialog from '@/components/dialogs/add-respondents-to-cohort';
@@ -20,7 +21,7 @@ const Page: React.FC<Props> = async ({params}) => {
     return (
         <HydrateClient>
             <Container>
-                <SectionHeader title="Cohort details" />
+                <SectionHeader title={t('Cohort details')} />
                 <Spacer size="md" />
                 <Suspense>
                     <CohortDetails cohortId={cohortId} />
@@ -28,7 +29,7 @@ const Page: React.FC<Props> = async ({params}) => {
                 <Spacer size="md" />
                 <SectionHeader
                     actions={<AddRespondentsToCohortDialog cohortId={cohortId} />}
-                    title="Respondents"
+                    title={t('Respondents')}
                 />
                 <Spacer size="md" />
                 <Suspense>
