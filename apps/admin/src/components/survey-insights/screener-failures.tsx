@@ -2,6 +2,7 @@
 
 import {Card, CardContent, CardHeader, CardTitle} from '@glint/ui/card';
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from '@glint/ui/table';
+import {useI18n} from '@/hooks/use-i18n';
 
 interface ScreenerFailure {
     failureCount: number;
@@ -21,6 +22,8 @@ interface Props {
 }
 
 const ScreenerFailures: React.FC<Props> = ({screenerStats, surveyScreeners}) => {
+    const {t} = useI18n();
+
     if (!surveyScreeners || surveyScreeners.length === 0 || !screenerStats) {
         return null;
     }
@@ -34,15 +37,15 @@ const ScreenerFailures: React.FC<Props> = ({screenerStats, surveyScreeners}) => 
     return (
         <Card>
             <CardHeader>
-                <CardTitle>Screener failures</CardTitle>
+                <CardTitle>{t('Screener failures')}</CardTitle>
             </CardHeader>
             <CardContent>
                 <Table>
                     <TableHeader>
                         <TableRow>
-                            <TableHead>Screener</TableHead>
-                            <TableHead>Type</TableHead>
-                            <TableHead className="text-right">Failures</TableHead>
+                            <TableHead>{t('Screener')}</TableHead>
+                            <TableHead>{t('Type')}</TableHead>
+                            <TableHead className="text-right">{t('Failures')}</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
