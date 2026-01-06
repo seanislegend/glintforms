@@ -2,7 +2,7 @@
 
 import {t} from '@/lib/i18n';
 import type {ColumnDef} from '@tanstack/react-table';
-import Link from 'next/link';
+import Link from '@glint/ui/link';
 import {DataTableColumnHeader} from '@/components/data-table/column-header';
 import {DataTableRowActions} from '@/components/data-table/row-actions';
 import type {ScreenerDetails} from '@/lib/schemas/screeners';

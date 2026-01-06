@@ -5,7 +5,7 @@ import RelativeDate from '@glint/ui/relative-date';
 import {t} from '@/lib/i18n';
 import {EyeIcon} from '@phosphor-icons/react/dist/ssr/Eye';
 import type {ColumnDef} from '@tanstack/react-table';
-import Link from 'next/link';
+import Link from '@glint/ui/link';
 import {useQueryState} from 'nuqs';
 import CampaignStatusBadge from '@/components/badges/campaign-status';
 import {DataTableColumnHeader} from '@/components/data-table/column-header';

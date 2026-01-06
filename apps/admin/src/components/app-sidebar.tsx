@@ -8,7 +8,7 @@ import {
     SidebarMenuItem
 } from '@glint/ui/sidebar';
 import {LightningIcon} from '@phosphor-icons/react/dist/ssr/Lightning';
-import Link from 'next/link';
+import Link from '@glint/ui/link';
 import type * as React from 'react';
 import NavMain from './nav/main';
 import NavSecondary from './nav/secondary';

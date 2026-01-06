@@ -7,26 +7,17 @@ import {
     SidebarMenuButton,
     SidebarMenuItem
 } from '@glint/ui/sidebar';
-import {t} from '@/lib/i18n';
 import {ClipboardTextIcon} from '@phosphor-icons/react/dist/ssr/ClipboardText';
 import {HouseIcon} from '@phosphor-icons/react/dist/ssr/House';
 import {MegaphoneIcon} from '@phosphor-icons/react/dist/ssr/Megaphone';
 import {ShieldWarningIcon} from '@phosphor-icons/react/dist/ssr/ShieldWarning';
 import {UsersIcon} from '@phosphor-icons/react/dist/ssr/Users';
 import {UsersThreeIcon} from '@phosphor-icons/react/dist/ssr/UsersThree';
-import Link from 'next/link';
+import Link from '@glint/ui/link';
 import {usePathname} from 'next/navigation';
 import {Suspense} from 'react';
 import SubNav from '@/components/nav/sub';
-
-const data = [
-    {href: '/', Icon: HouseIcon, title: t('Dashboard')},
-    {href: '/campaigns', Icon: MegaphoneIcon, title: t('Campaigns'), subnav: 'campaigns'},
-    {href: '/surveys', Icon: ClipboardTextIcon, title: t('Surveys'), subnav: 'surveys'},
-    {href: '/respondents', Icon: UsersIcon, title: t('Respondents'), subnav: 'respondents'},
-    {href: '/cohorts', Icon: UsersThreeIcon, title: t('Cohorts'), subnav: 'cohorts'},
-    {href: '/screeners', Icon: ShieldWarningIcon, title: t('Screeners'), subnav: 'screeners'}
-];
+import {useI18n} from '@/hooks/use-i18n';
 
 export const NavMainLink: React.FC<{
     href: string;
@@ -43,7 +34,17 @@ export const NavMainLink: React.FC<{
 };
 
 const NavMain: React.FC = () => {
+    const {t} = useI18n();
     const pathname = usePathname();
+
+    const data = [
+        {href: '/', Icon: HouseIcon, title: t('Dashboard')},
+        {href: '/campaigns', Icon: MegaphoneIcon, title: t('Campaigns'), subnav: 'campaigns'},
+        {href: '/surveys', Icon: ClipboardTextIcon, title: t('Surveys'), subnav: 'surveys'},
+        {href: '/respondents', Icon: UsersIcon, title: t('Respondents'), subnav: 'respondents'},
+        {href: '/cohorts', Icon: UsersThreeIcon, title: t('Cohorts'), subnav: 'cohorts'},
+        {href: '/screeners', Icon: ShieldWarningIcon, title: t('Screeners'), subnav: 'screeners'}
+    ];
 
     const isActivePath = (path: string) => {
         if (path === '/') return pathname === path;

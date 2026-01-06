@@ -1,8 +1,12 @@
+'use client';
+
 import {Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList} from '@glint/ui/breadcrumb';
-import {t} from '@/lib/i18n';
-import Link from 'next/link';
+import Link from '@glint/ui/link';
+import {useI18n} from '@/hooks/use-i18n';
 
 const BreadcrumbSlot: React.FC = () => {
+    const {t} = useI18n();
+
     return (
         <Breadcrumb>
             <BreadcrumbList>

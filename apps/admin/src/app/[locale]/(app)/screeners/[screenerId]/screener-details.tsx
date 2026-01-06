@@ -8,7 +8,7 @@ import RelativeDate from '@glint/ui/relative-date';
 import {t} from '@/lib/i18n';
 import {PencilIcon} from '@phosphor-icons/react/dist/ssr/Pencil';
 import {useSuspenseQuery} from '@tanstack/react-query';
-import Link from 'next/link';
+import Link from '@glint/ui/link';
 import {DataTable} from '@/components/data-table';
 import {useTRPC} from '@/lib/trpc/react';
 import {COUNTRY_CODE_LABELS} from '@/utils/country-codes';

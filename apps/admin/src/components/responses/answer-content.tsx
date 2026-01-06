@@ -4,7 +4,7 @@ import Button from '@glint/ui/button';
 import {Card, CardContent} from '@glint/ui/card';
 import RelativeDate from '@glint/ui/relative-date';
 import {ArrowRightIcon} from '@phosphor-icons/react/dist/ssr/ArrowRight';
-import Link from 'next/link';
+import Link from '@glint/ui/link';
 import RecordId from '@/components/record-id';
 import type {AnswerContentProps} from '../../types/question-and-answers';
 import ResponseAnswerValue from './answer-value';

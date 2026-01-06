@@ -11,7 +11,7 @@ import {
 import {cn} from '@glint/ui/utils';
 import {CaretRightIcon} from '@phosphor-icons/react/dist/ssr/CaretRight';
 import {useQuery} from '@tanstack/react-query';
-import Link from 'next/link';
+import Link from '@glint/ui/link';
 import {usePathname} from 'next/navigation';
 import {useEffect, useState} from 'react';
 import {NavMainLink} from '@/components/nav/main';

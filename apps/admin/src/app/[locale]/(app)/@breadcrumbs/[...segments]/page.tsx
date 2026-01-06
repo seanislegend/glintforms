@@ -9,11 +9,11 @@ import {
     BreadcrumbSeparator
 } from '@glint/ui/breadcrumb';
 import Spinner from '@glint/ui/spinner';
-import {t} from '@/lib/i18n';
 import {useQuery} from '@tanstack/react-query';
-import Link from 'next/link';
+import Link from '@glint/ui/link';
 import {useParams} from 'next/navigation';
 import {Fragment, useCallback, useMemo} from 'react';
+import {useI18n} from '@/hooks/use-i18n';
 import {useSession} from '@/hooks/use-session';
 import {useTRPC} from '@/lib/trpc/react';
 import {parseRouteSegments} from '@/utils/breadcrumb';
@@ -35,6 +35,7 @@ const BreadcrumbItemWithLink: React.FC<React.PropsWithChildren<{href: string}>> 
 };
 
 const DynamicBreadcrumbs: React.FC = () => {
+    const {t} = useI18n();
     const {segments} = useParams<{segments: string[]}>();
     const routeSegments = parseRouteSegments(segments);
     const {session} = useSession();
