@@ -1,0 +1,89 @@
+// translations storage - populated by createTranslations()
+let translations: Record<string, Record<string, string>> = {};
+let textToKeyMap: Record<string, string> = {};
+let currentLocale = 'en';
+
+/**
+ * Initialize translations with locale data
+ * @param localeData - Translation data for primary locale
+ * @param locale - Locale code (default: 'en')
+ */
+export const initTranslations = (localeData: Record<string, string>, locale = 'en'): void => {
+    translations = {
+        [locale]: localeData,
+    };
+    
+    // create reverse lookup: text -> key
+    textToKeyMap = {};
+    for (const [key, text] of Object.entries(localeData)) {
+        textToKeyMap[text] = key;
+    }
+    
+    currentLocale = locale;
+};
+
+/**
+ * Translation function with type safety
+ * @param keyOrText - Translation key or original text
+ * @returns Translated string for current locale
+ */
+export const t = (keyOrText: string): string => {
+    const currentTranslations = translations[currentLocale];
+    
+    if (!currentTranslations) {
+        return keyOrText;
+    }
+
+    // check if it's a valid key
+    if (keyOrText in currentTranslations) {
+        return currentTranslations[keyOrText] || keyOrText;
+    }
+
+    // try to find by original text
+    const key = textToKeyMap[keyOrText];
+    if (key && key in currentTranslations) {
+        return currentTranslations[key] || keyOrText;
+    }
+
+    // fallback: return the input
+    if (process.env.NODE_ENV === 'development') {
+        console.warn(`Translation not found: "${keyOrText}" (locale: ${currentLocale})`);
+    }
+    return keyOrText;
+};
+
+/**
+ * Set the current locale
+ * @param locale - Locale code (e.g., 'en', 'fr', 'es')
+ */
+export const setLocale = (locale: string): void => {
+    if (!translations[locale]) {
+        console.warn(`Locale not found: ${locale}`);
+        return;
+    }
+    currentLocale = locale;
+};
+
+/**
+ * Get the current locale
+ */
+export const getLocale = (): string => {
+    return currentLocale;
+};
+
+/**
+ * Get available locales
+ */
+export const getAvailableLocales = (): string[] => {
+    return Object.keys(translations);
+};
+
+/**
+ * Load additional locale at runtime
+ * @param locale - Locale code
+ * @param translations - Translation key-value pairs
+ */
+export const loadLocale = (locale: string, localeTranslations: Record<string, string>): void => {
+    translations[locale] = localeTranslations;
+};
+

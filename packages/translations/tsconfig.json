@@ -1,0 +1,17 @@
+{
+    "extends": "@glint/tsconfig/base.json",
+    "compilerOptions": {
+        "outDir": "./dist",
+        "rootDir": ".",
+        "module": "ESNext",
+        "moduleResolution": "bundler",
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "declaration": true,
+        "declarationMap": true,
+        "sourceMap": true
+    },
+    "include": ["src/**/*", "locales/**/*"],
+    "exclude": ["node_modules", "dist", "tests", "example"]
+}
+
