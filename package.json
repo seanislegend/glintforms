@@ -28,7 +28,8 @@
         "db:studio": "turbo run db:studio",
         "types:generate": "turbo run types:generate",
         "test:e2e": "turbo run test:e2e",
-        "test:run": "turbo run test:run"
+        "test:run": "turbo run test:run",
+        "translation": "bun run packages/translations/dist/src/cli/index.js"
     },
     "workspaces": ["apps/*", "packages/*"]
 }

@@ -57,3 +57,10 @@ Thumbs.db
 **/.trigger/*
 
 **/spikes/**/*
+
+# translation artifacts
+**/locales/*.js
+**/locales/*.js.map
+**/locales/*.d.ts
+**/locales/*.d.ts.map
+**/locales/*.tmp
