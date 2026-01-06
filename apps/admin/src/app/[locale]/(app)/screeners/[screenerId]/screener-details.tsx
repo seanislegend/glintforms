@@ -5,6 +5,7 @@ import {Card, CardContent, CardHeader, CardTitle} from '@glint/ui/card';
 import EmptyPanel from '@glint/ui/empty-panel';
 import {Heading3, Heading5} from '@glint/ui/heading';
 import RelativeDate from '@glint/ui/relative-date';
+import {t} from '@/lib/i18n';
 import {PencilIcon} from '@phosphor-icons/react/dist/ssr/Pencil';
 import {useSuspenseQuery} from '@tanstack/react-query';
 import Link from 'next/link';
@@ -20,11 +21,11 @@ interface Props {
 const getTypeLabel = (type: string) => {
     switch (type) {
         case 'age':
-            return 'Age';
+            return t('Age');
         case 'location':
-            return 'Location';
+            return t('Location');
         case 'selection':
-            return 'Selection';
+            return t('Selection');
         default:
             return type;
     }
@@ -51,7 +52,7 @@ const renderConfig = (type: string, config: unknown) => {
                     {selectionConfig.options.map(opt => (
                         <li className={`text-sm ${opt.passes ? 'font-semibold' : ''}`} key={opt.id}>
                             {opt.value}
-                            {opt.passes && ' (passes)'}
+                            {opt.passes && ` (${t('passes')})`}
                         </li>
                     ))}
                 </ul>
@@ -68,8 +69,8 @@ const ScreenerDetails: React.FC<Props> = ({screenerId}) => {
     if (!screener) {
         return (
             <EmptyPanel
-                text="The screener you're looking for doesn't exist or has been removed."
-                title="Screener not found"
+                text={t("The screener you're looking for doesn't exist or has been removed.")}
+                title={t('Screener not found')}
             />
         );
     }
@@ -78,11 +79,11 @@ const ScreenerDetails: React.FC<Props> = ({screenerId}) => {
         <>
             <Card>
                 <CardHeader className="flex flex-row items-center justify-between">
-                    <CardTitle>Screener information</CardTitle>
+                    <CardTitle>{t('Screener information')}</CardTitle>
                     <Link href={`/screeners/${screenerId}/edit`}>
                         <Button size="sm" variant="outline">
                             <PencilIcon className="size-4" />
-                            Edit
+                            {t('Edit')}
                         </Button>
                     </Link>
                 </CardHeader>
@@ -91,17 +92,17 @@ const ScreenerDetails: React.FC<Props> = ({screenerId}) => {
                         <div className="md:col-span-8">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
-                                    <Heading5 className="text-muted-foreground">Name</Heading5>
+                                    <Heading5 className="text-muted-foreground">{t('Name')}</Heading5>
                                     <p className="text-sm">{screener.name}</p>
                                 </div>
                                 <div>
-                                    <Heading5 className="text-muted-foreground">Type</Heading5>
+                                    <Heading5 className="text-muted-foreground">{t('Type')}</Heading5>
                                     <p className="text-sm">{getTypeLabel(screener.type)}</p>
                                 </div>
                                 {screener.description && (
                                     <div className="md:col-span-2">
                                         <Heading5 className="text-muted-foreground">
-                                            Description
+                                            {t('Description')}
                                         </Heading5>
                                         <p className="text-sm whitespace-pre-wrap">
                                             {screener.description}
@@ -110,21 +111,21 @@ const ScreenerDetails: React.FC<Props> = ({screenerId}) => {
                                 )}
                                 <div className="md:col-span-2">
                                     <Heading5 className="text-muted-foreground">
-                                        Configuration
+                                        {t('Configuration')}
                                     </Heading5>
                                     <div className="text-sm">
                                         {renderConfig(screener.type, screener.config)}
                                     </div>
                                 </div>
                                 <div>
-                                    <Heading5 className="text-muted-foreground">Created</Heading5>
+                                    <Heading5 className="text-muted-foreground">{t('Created')}</Heading5>
                                     <p className="text-sm">
                                         <RelativeDate date={new Date(screener.createdAt)} />
                                     </p>
                                 </div>
                                 <div>
                                     <Heading5 className="text-muted-foreground">
-                                        Last updated
+                                        {t('Last updated')}
                                     </Heading5>
                                     <p className="text-sm">
                                         <RelativeDate date={new Date(screener.updatedAt)} />
@@ -136,7 +137,7 @@ const ScreenerDetails: React.FC<Props> = ({screenerId}) => {
                 </CardContent>
             </Card>
             <div className="mt-8">
-                <Heading3 className="mb-4">Used in surveys</Heading3>
+                <Heading3 className="mb-4">{t('Used in surveys')}</Heading3>
                 {screener.surveys && screener.surveys.length > 0 ? (
                     <DataTable
                         columns={surveyColumns}
@@ -146,8 +147,8 @@ const ScreenerDetails: React.FC<Props> = ({screenerId}) => {
                     />
                 ) : (
                     <EmptyPanel
-                        text="This screener hasn't been assigned to any surveys yet."
-                        title="No surveys assigned"
+                        text={t("This screener hasn't been assigned to any surveys yet.")}
+                        title={t('No surveys assigned')}
                     />
                 )}
             </div>

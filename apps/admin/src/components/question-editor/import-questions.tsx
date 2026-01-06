@@ -14,6 +14,7 @@ import {
     DialogTitle,
     DialogTrigger
 } from '@glint/ui/dialog';
+import {t} from '@/lib/i18n';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {TrashIcon} from '@phosphor-icons/react/dist/ssr/Trash';
 import {UploadSimpleIcon} from '@phosphor-icons/react/dist/ssr/UploadSimple';
@@ -60,7 +61,7 @@ const ImportQuestionsDialog: React.FC<Props> = ({onImport, surveyId}) => {
     const handleFormSubmit: SubmitHandler<ImportQuestions> = useCallback(
         async data => {
             if (!data.file) {
-                toast.error('Please select a file to import');
+                toast.error(t('Please select a file to import'));
                 return;
             }
 
@@ -76,20 +77,20 @@ const ImportQuestionsDialog: React.FC<Props> = ({onImport, surveyId}) => {
 
                 if (!response.ok) {
                     const errorData = await response.json();
-                    throw new Error(errorData.error || 'Import failed');
+                    throw new Error(errorData.error || t('Import failed'));
                 }
 
                 const result = await response.json();
-                toast.success(`Successfully imported ${result.importedCount} questions`);
+                toast.success(t(`Successfully imported ${result.importedCount} questions`));
                 if (result.warnings && result.warnings.length > 0) {
-                    toast.warning(`Import completed with warnings: ${result.warnings.join(', ')}`);
+                    toast.warning(t(`Import completed with warnings: ${result.warnings.join(', ')}`));
                 }
                 setIsOpen(false);
                 setSelectedFile(null);
                 onImport(result.questions);
                 setIsImporting(false);
             } catch (error) {
-                toast.error(error instanceof Error ? error.message : 'Import failed');
+                toast.error(error instanceof Error ? error.message : t('Import failed'));
                 setIsImporting(false);
             }
         },
@@ -102,7 +103,7 @@ const ImportQuestionsDialog: React.FC<Props> = ({onImport, surveyId}) => {
                 render={
                     <Button>
                         <UploadSimpleIcon />
-                        Import questions
+                        {t('Import questions')}
                     </Button>
                 }
             />
@@ -113,10 +114,9 @@ const ImportQuestionsDialog: React.FC<Props> = ({onImport, surveyId}) => {
                         onSubmit={methods.handleSubmit(handleFormSubmit, handleFormError)}
                     >
                         <DialogHeader className="sticky top-0 bg-white/70 backdrop-blur-lg">
-                            <DialogTitle>Import questions</DialogTitle>
+                            <DialogTitle>{t('Import questions')}</DialogTitle>
                             <DialogDescription>
-                                Upload a CSV or XLSX file with your survey questions. Our AI will
-                                automatically convert them to the correct format.
+                                {t('Upload a CSV or XLSX file with your survey questions. Our AI will automatically convert them to the correct format.')}
                             </DialogDescription>
                         </DialogHeader>
                         <div className="flex-grow overflow-auto">
@@ -124,7 +124,7 @@ const ImportQuestionsDialog: React.FC<Props> = ({onImport, surveyId}) => {
                                 {selectedFile ? (
                                     <div className="animate-in fade-in-0 duration-300">
                                         <div className="mb-2 text-sm font-medium">
-                                            Selected File
+                                            {t('Selected File')}
                                         </div>
                                         <div className="p-3 border rounded-md bg-muted/50 flex items-center gap-2">
                                             <div className="flex-grow">
@@ -132,7 +132,7 @@ const ImportQuestionsDialog: React.FC<Props> = ({onImport, surveyId}) => {
                                                     {selectedFile.name}
                                                 </p>
                                                 <p className="text-xs text-muted-foreground">
-                                                    Size: {(selectedFile.size / 1024).toFixed(1)} KB
+                                                    {t('Size:')} {(selectedFile.size / 1024).toFixed(1)} KB
                                                 </p>
                                             </div>
                                             <Button
@@ -141,7 +141,7 @@ const ImportQuestionsDialog: React.FC<Props> = ({onImport, surveyId}) => {
                                                 variant="destructive"
                                             >
                                                 <TrashIcon />
-                                                Remove File
+                                                {t('Remove File')}
                                             </Button>
                                         </div>
                                     </div>
@@ -151,7 +151,7 @@ const ImportQuestionsDialog: React.FC<Props> = ({onImport, surveyId}) => {
                                             htmlFor="file-upload"
                                             className="text-sm font-medium inline-block"
                                         >
-                                            Upload File
+                                            {t('Upload File')}
                                         </label>
                                         <Input
                                             accept=".csv,.xlsx,.xls"
@@ -166,27 +166,23 @@ const ImportQuestionsDialog: React.FC<Props> = ({onImport, surveyId}) => {
                                             </p>
                                         )}
                                         <p className="text-xs text-muted-foreground">
-                                            Supported formats: CSV, XLSX. The file should contain
-                                            headers and at least one row of data.
+                                            {t('Supported formats: CSV, XLSX. The file should contain headers and at least one row of data.')}
                                         </p>
                                     </div>
                                 )}
                                 <Card>
                                     <CardContent>
-                                        <div className="text-sm font-medium">How it works</div>
+                                        <div className="text-sm font-medium">{t('How it works')}</div>
                                         <ol className="text-sm space-y-1 text-muted-foreground list-decimal list-inside">
-                                            <li>Upload your CSV or XLSX file with questions</li>
+                                            <li>{t('Upload your CSV or XLSX file with questions')}</li>
                                             <li>
-                                                Our AI will analyse the file structure and convert
-                                                it to our format
+                                                {t('Our AI will analyse the file structure and convert it to our format')}
                                             </li>
                                             <li>
-                                                Questions will be added to your survey in the
-                                                correct order
+                                                {t('Questions will be added to your survey in the correct order')}
                                             </li>
                                             <li>
-                                                You'll receive warnings if any data couldn't be
-                                                converted
+                                                {t("You'll receive warnings if any data couldn't be converted")}
                                             </li>
                                         </ol>
                                     </CardContent>
@@ -197,7 +193,7 @@ const ImportQuestionsDialog: React.FC<Props> = ({onImport, surveyId}) => {
                             <DialogClose
                                 render={
                                     <Button disabled={isImporting} variant="accent">
-                                        Cancel
+                                        {t('Cancel')}
                                     </Button>
                                 }
                             />
@@ -207,7 +203,7 @@ const ImportQuestionsDialog: React.FC<Props> = ({onImport, surveyId}) => {
                                 pending={isImporting}
                             >
                                 <UploadSimpleIcon />
-                                Import Questions
+                                {t('Import Questions')}
                             </Button>
                         </DialogFooter>
                     </form>

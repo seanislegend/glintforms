@@ -3,6 +3,7 @@
 import {FormField} from '@glint/form/fields';
 import {handleFormError} from '@glint/form/utils';
 import Button from '@glint/ui/button';
+import {t} from '@/lib/i18n';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {useMutation, useQueryClient} from '@tanstack/react-query';
 import {useQueryState} from 'nuqs';
@@ -32,7 +33,7 @@ const Form: React.FC = () => {
                 await queryClient.invalidateQueries({
                     queryKey: trpc.cohorts.getAll.queryKey()
                 });
-                toast.success('Cohort created successfully');
+                toast.success(t('Cohort created successfully'));
                 setSuccess('true');
                 setRedirect(`/cohorts/${response?.id}`);
             }
@@ -53,13 +54,13 @@ const Form: React.FC = () => {
                     <FormField<CohortCreate>
                         control={methods.control}
                         fieldType="input"
-                        label="Name"
+                        label={t('Name')}
                         name="name"
                     />
                     <FormField<CohortCreate>
                         control={methods.control}
                         fieldType="input"
-                        label="Description"
+                        label={t('Description')}
                         name="description"
                     />
                 </div>
@@ -69,7 +70,7 @@ const Form: React.FC = () => {
                         pending={createCohort.status === 'pending'}
                         type="submit"
                     >
-                        Submit
+                        {t('Submit')}
                     </Button>
                 </div>
             </form>

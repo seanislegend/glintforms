@@ -32,6 +32,7 @@ import {
 import {ArrowsDownUpIcon} from '@phosphor-icons/react/dist/ssr/ArrowsDownUp';
 import {DotsSixVerticalIcon} from '@phosphor-icons/react/dist/ssr/DotsSixVertical';
 import {useState} from 'react';
+import {t} from '@/lib/i18n';
 
 export interface SortItem {
     id: string;
@@ -111,7 +112,7 @@ const SortItemsContent: React.FC<SortItemsProps> = ({items, onSorted}) => {
         return (
             <div className="overflow-ellipsis">
                 <div className="font-medium truncate">
-                    {index + 1}. {item.value || `Question ${index + 1}`}
+                    {index + 1}. {item.value || t(`Question ${index + 1}`)}
                 </div>
             </div>
         );
@@ -133,7 +134,7 @@ const SortItemsContent: React.FC<SortItemsProps> = ({items, onSorted}) => {
 };
 
 const SortItemsDialog: React.FC<DialogProps> = ({
-    ctaLabel = 'Reorder',
+    ctaLabel = t('Reorder'),
     description,
     disabledReason,
     getItems,
@@ -174,9 +175,9 @@ const SortItemsDialog: React.FC<DialogProps> = ({
                 <DialogDescription>{description}</DialogDescription>
                 {isOpen && <SortItemsContent items={getItems()} onSorted={setNewSortedItems} />}
                 <DialogFooter>
-                    <DialogClose render={<Button variant="accent">Cancel</Button>} />
+                    <DialogClose render={<Button variant="accent">{t('Cancel')}</Button>} />
                     <ButtonWithTooltip disabled={!newSortedItems.length} onClick={handleSave}>
-                        Save changes
+                        {t('Save changes')}
                     </ButtonWithTooltip>
                 </DialogFooter>
             </DialogPopup>

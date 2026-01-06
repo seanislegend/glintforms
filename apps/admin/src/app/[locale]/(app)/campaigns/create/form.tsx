@@ -3,6 +3,7 @@
 import {FormField} from '@glint/form/fields';
 import {handleFormError} from '@glint/form/utils';
 import Button from '@glint/ui/button';
+import {t} from '@/lib/i18n';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {useMutation, useQueryClient} from '@tanstack/react-query';
 import {useRouter} from 'next/navigation';
@@ -25,7 +26,7 @@ const Form: React.FC = () => {
                 await queryClient.invalidateQueries({
                     queryKey: trpc.campaigns.getAll.queryKey()
                 });
-                toast.success('Campaign created successfully');
+                toast.success(t('Campaign created successfully'));
                 router.replace(`/campaigns?success=true&id=${response?.id}`);
             }
         })
@@ -49,7 +50,7 @@ const Form: React.FC = () => {
                     <FormField
                         control={methods.control}
                         fieldType="input"
-                        label="Title"
+                        label={t('Title')}
                         name="title"
                     />
                 </div>
@@ -59,7 +60,7 @@ const Form: React.FC = () => {
                         pending={createCampaign.status === 'pending'}
                         type="submit"
                     >
-                        Submit
+                        {t('Submit')}
                     </Button>
                 </div>
             </form>

@@ -2,6 +2,7 @@
 
 import RelativeDate from '@glint/ui/relative-date';
 import TextLink from '@glint/ui/text-link';
+import {t} from '@/lib/i18n';
 import type {ColumnDef} from '@tanstack/react-table';
 import {DataTableColumnHeader} from '@/components/data-table/column-header';
 import {DataTableRowActions} from '@/components/data-table/row-actions';
@@ -11,7 +12,7 @@ import type {CohortList} from '@/lib/schemas/cohorts';
 export const columns: ColumnDef<CohortList>[] = [
     {
         accessorKey: 'id',
-        header: ({column}) => <DataTableColumnHeader column={column} title="ID" />,
+        header: ({column}) => <DataTableColumnHeader column={column} title={t('ID')} />,
         cell: ({row}) => {
             const id = row.getValue('id') as string;
             return <RecordId href={`/cohorts/${id}`} id={id} />;
@@ -20,7 +21,7 @@ export const columns: ColumnDef<CohortList>[] = [
     },
     {
         accessorKey: 'name',
-        header: ({column}) => <DataTableColumnHeader column={column} title="Name" />,
+        header: ({column}) => <DataTableColumnHeader column={column} title={t('Name')} />,
         cell: ({row}) => (
             <TextLink href={`/cohorts/${row.original.id}`} className="max-w-[500px] truncate">
                 {row.getValue('name')}
@@ -29,7 +30,7 @@ export const columns: ColumnDef<CohortList>[] = [
     },
     {
         accessorKey: 'description',
-        header: ({column}) => <DataTableColumnHeader column={column} title="Description" />,
+        header: ({column}) => <DataTableColumnHeader column={column} title={t('Description')} />,
         cell: ({row}) => {
             const description = row.getValue('description') as string | null;
             return (
@@ -41,7 +42,7 @@ export const columns: ColumnDef<CohortList>[] = [
     },
     {
         accessorKey: 'respondentCount',
-        header: ({column}) => <DataTableColumnHeader column={column} title="Respondents" />,
+        header: ({column}) => <DataTableColumnHeader column={column} title={t('Respondents')} />,
         cell: ({row}) => {
             const count = row.getValue('respondentCount') as number;
             return <span className="text-sm text-muted-foreground">{count}</span>;
@@ -49,7 +50,7 @@ export const columns: ColumnDef<CohortList>[] = [
     },
     {
         accessorKey: 'updatedAt',
-        header: ({column}) => <DataTableColumnHeader column={column} title="Last updated" />,
+        header: ({column}) => <DataTableColumnHeader column={column} title={t('Last updated')} />,
         cell: ({row}) => {
             const date = row.getValue('updatedAt') as Date;
             return <RelativeDate date={new Date(date)} />;

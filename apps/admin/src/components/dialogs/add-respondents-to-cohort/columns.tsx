@@ -2,6 +2,7 @@
 
 import type {ColumnDef} from '@tanstack/react-table';
 import {DataTableColumnHeader} from '@/components/data-table/column-header';
+import {t} from '@/lib/i18n';
 
 export type SearchResult = {
     email: string;
@@ -16,12 +17,12 @@ export const columns: ColumnDef<SearchResult>[] = [
     {
         accessorKey: 'name',
         cell: ({row}) => <span className="max-w-[500px] truncate">{row.getValue('name')}</span>,
-        header: ({column}) => <DataTableColumnHeader column={column} title="Name" />
+        header: ({column}) => <DataTableColumnHeader column={column} title={t('Name')} />
     },
     {
         accessorKey: 'email',
         cell: ({row}) => <span className="max-w-[300px] truncate">{row.getValue('email')}</span>,
-        header: ({column}) => <DataTableColumnHeader column={column} title="Email" />
+        header: ({column}) => <DataTableColumnHeader column={column} title={t('Email')} />
     },
     {
         accessorKey: 'gender',
@@ -30,18 +31,18 @@ export const columns: ColumnDef<SearchResult>[] = [
             return gender ? (
                 <span>{gender}</span>
             ) : (
-                <span className="text-muted-foreground">—</span>
+                <span className="text-muted-foreground">{t('—')}</span>
             );
         },
-        header: ({column}) => <DataTableColumnHeader column={column} title="Gender" />
+        header: ({column}) => <DataTableColumnHeader column={column} title={t('Gender')} />
     },
     {
         accessorKey: 'locationCity',
         cell: ({row}) => {
             const city = row.getValue('locationCity') as string | null;
-            return city ? <span>{city}</span> : <span className="text-muted-foreground">—</span>;
+            return city ? <span>{city}</span> : <span className="text-muted-foreground">{t('—')}</span>;
         },
-        header: ({column}) => <DataTableColumnHeader column={column} title="City" />
+        header: ({column}) => <DataTableColumnHeader column={column} title={t('City')} />
     },
     {
         accessorKey: 'locationCountry',
@@ -50,9 +51,9 @@ export const columns: ColumnDef<SearchResult>[] = [
             return country ? (
                 <span>{country}</span>
             ) : (
-                <span className="text-muted-foreground">—</span>
+                <span className="text-muted-foreground">{t('—')}</span>
             );
         },
-        header: ({column}) => <DataTableColumnHeader column={column} title="Country" />
+        header: ({column}) => <DataTableColumnHeader column={column} title={t('Country')} />
     }
 ];

@@ -2,6 +2,7 @@
 
 import Button from '@glint/ui/button';
 import RelativeDate from '@glint/ui/relative-date';
+import {t} from '@/lib/i18n';
 import {EyeIcon} from '@phosphor-icons/react/dist/ssr/Eye';
 import type {ColumnDef} from '@tanstack/react-table';
 import Link from 'next/link';
@@ -18,7 +19,7 @@ const QuickViewSurveyButton = ({surveyId}: {surveyId: string}) => {
     return (
         <Button onClick={() => setSurveyId(surveyId)} size="sm" variant="outline">
             <EyeIcon />
-            <span className="sr-only">Quick view</span>
+            <span className="sr-only">{t('Quick view')}</span>
         </Button>
     );
 };
@@ -26,7 +27,7 @@ const QuickViewSurveyButton = ({surveyId}: {surveyId: string}) => {
 export const surveyColumns: ColumnDef<SurveyWithCampaign>[] = [
     {
         accessorKey: 'title',
-        header: ({column}) => <DataTableColumnHeader column={column} title="Survey" />,
+        header: ({column}) => <DataTableColumnHeader column={column} title={t('Survey')} />,
         cell: ({row}) => (
             <Link
                 href={`/surveys/${row.original.id}/responses?filters=respondentId:${row.original.id}`}
@@ -38,7 +39,7 @@ export const surveyColumns: ColumnDef<SurveyWithCampaign>[] = [
     },
     {
         accessorKey: 'campaignTitle',
-        header: ({column}) => <DataTableColumnHeader column={column} title="Campaign" />,
+        header: ({column}) => <DataTableColumnHeader column={column} title={t('Campaign')} />,
         cell: ({row}) => {
             const survey = row.original;
             if (!survey.campaignTitle) {
@@ -63,7 +64,7 @@ export const surveyColumns: ColumnDef<SurveyWithCampaign>[] = [
     },
     {
         accessorKey: 'campaignIsActive',
-        header: ({column}) => <DataTableColumnHeader column={column} title="Campaign Status" />,
+        header: ({column}) => <DataTableColumnHeader column={column} title={t('Campaign Status')} />,
         cell: ({row}) => {
             const survey = row.original;
             if (survey.campaignIsActive === null) {
@@ -74,7 +75,7 @@ export const surveyColumns: ColumnDef<SurveyWithCampaign>[] = [
     },
     {
         accessorKey: 'campaignCreatedAt',
-        header: ({column}) => <DataTableColumnHeader column={column} title="Campaign Created" />,
+        header: ({column}) => <DataTableColumnHeader column={column} title={t('Campaign Created')} />,
         cell: ({row}) => {
             const survey = row.original;
             if (!survey.campaignCreatedAt) {

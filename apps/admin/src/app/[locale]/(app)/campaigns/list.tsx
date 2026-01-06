@@ -1,6 +1,7 @@
 'use client';
 
 import EmptyPanel from '@glint/ui/empty-panel';
+import {t} from '@/lib/i18n';
 import {PlusIcon} from '@phosphor-icons/react/dist/ssr/Plus';
 import {useSuspenseQuery} from '@tanstack/react-query';
 import {lazy} from 'react';
@@ -18,11 +19,11 @@ const CampaignsList: React.FC = () => {
 
     const renderCreateForm = () => (
         <FormDialog
-            title="Create campaign"
+            title={t('Create campaign')}
             trigger={
                 <>
                     <PlusIcon />
-                    Create campaign
+                    {t('Create campaign')}
                 </>
             }
         >
@@ -33,8 +34,8 @@ const CampaignsList: React.FC = () => {
     if (campaigns.length === 0 && !isLoading) {
         return (
             <EmptyPanel
-                text="Create a campaign to get started. You'll then be able to create surveys and begin collecting responses."
-                title="No campaigns added yet"
+                text={t("Create a campaign to get started. You'll then be able to create surveys and begin collecting responses.")}
+                title={t('No campaigns added yet')}
             >
                 {renderCreateForm()}
             </EmptyPanel>

@@ -1,6 +1,7 @@
 import {Heading1} from '@glint/ui/heading';
 import RelativeDate from '@glint/ui/relative-date';
 import TextLink from '@glint/ui/text-link';
+import {t} from '@/lib/i18n';
 import {Suspense} from 'react';
 import RecordId from '@/components/record-id';
 
@@ -20,22 +21,22 @@ const SurveyOverviewHeader: React.FC<Props> = ({survey}) => {
                             <RecordId id={survey.id} />
                         </span>
                         <span>
-                            <strong>Campaign:</strong>{' '}
+                            <strong>{t('Campaign:')}</strong>{' '}
                             <TextLink href={`/campaigns/${survey.campaign?.id}`}>
                                 {survey.campaign?.title}
                             </TextLink>
                         </span>
                         <span>•</span>
                         <span>
-                            <strong>Created:</strong> <RelativeDate date={survey.createdAt} />
+                            <strong>{t('Created:')}</strong> <RelativeDate date={survey.createdAt} />
                         </span>
                         <span>•</span>
                         <span>
-                            <strong>Launched:</strong>{' '}
+                            <strong>{t('Launched:')}</strong>{' '}
                             {survey.launchedAt ? (
                                 <RelativeDate date={new Date(survey.launchedAt)} />
                             ) : (
-                                'Pending'
+                                t('Pending')
                             )}
                         </span>
                     </div>

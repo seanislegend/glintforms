@@ -1,6 +1,7 @@
 import Container from '@glint/ui/container';
 import SectionHeader from '@glint/ui/section-header';
 import Spacer from '@glint/ui/spacer';
+import {t} from '@/lib/i18n';
 import {Suspense} from 'react';
 import ScreenerSummary from '@/components/screeners/summary';
 import {HydrateClient, prefetch, trpc} from '@/lib/trpc/server';
@@ -19,7 +20,7 @@ const Page: React.FC<PageProps> = async ({params}) => {
             <div className="grid lg:grid-cols-12 relative min-h-full">
                 <div className="lg:col-span-8 2xl:col-span-9 lg:border-r border-accent">
                     <Container>
-                        <SectionHeader title="Edit screener" />
+                        <SectionHeader title={t('Edit screener')} />
                         <Spacer size="md" />
                         <Suspense>
                             <Form screenerId={screenerId} />

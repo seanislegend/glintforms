@@ -13,6 +13,7 @@ import {
     StepperSeparator,
     StepperTitle
 } from '@glint/ui/stepper';
+import {t} from '@/lib/i18n';
 import {ArchiveIcon} from '@phosphor-icons/react/dist/ssr/Archive';
 import {CheckIcon} from '@phosphor-icons/react/dist/ssr/Check';
 import {ChecksIcon} from '@phosphor-icons/react/dist/ssr/Checks';
@@ -52,7 +53,7 @@ const SurveyPublishingSettings: React.FC<Props> = ({survey}) => {
     const updateStatus = useMutation(
         trpc.surveys.updateStatus.mutationOptions({
             onError: () => {
-                toast.error('Failed to update survey status');
+                toast.error(t('Failed to update survey status'));
             },
             onSuccess: async () => {
                 setShowConfirmDialog(false);
@@ -69,7 +70,7 @@ const SurveyPublishingSettings: React.FC<Props> = ({survey}) => {
             id: survey.id,
             status: newStatus as any
         });
-        toast.success('Survey status updated successfully');
+        toast.success(t('Survey status updated successfully'));
         setCurrentStep(getStepIndex(newStatus));
         setShowConfirmDialog(false);
         setPendingStatus(null);
@@ -78,15 +79,15 @@ const SurveyPublishingSettings: React.FC<Props> = ({survey}) => {
     const getStatusDescription = (status: string) => {
         switch (status) {
             case 'draft':
-                return "Your survey is in draft mode and you can edit questions and settings freely. Once you're ready, you can move to 'testing' to preview and test responses before launching.";
+                return t("Your survey is in draft mode and you can edit questions and settings freely. Once you're ready, you can move to 'testing' to preview and test responses before launching.");
             case 'testing':
-                return "Your survey is in testing mode and you can preview and test responses. You can either move back to 'draft' to make changes or launch the survey.";
+                return t("Your survey is in testing mode and you can preview and test responses. You can either move back to 'draft' to make changes or launch the survey.");
             case 'active':
-                return 'Your survey is live and collecting responses. You can complete the survey to stop collecting responses or archive the survey. Depending on the survey settings, it may complete automatically.';
+                return t('Your survey is live and collecting responses. You can complete the survey to stop collecting responses or archive the survey. Depending on the survey settings, it may complete automatically.');
             case 'complete':
-                return 'Your survey has been completed and is no longer accepting responses. You can reopen the survey to continue collecting responses.';
+                return t('Your survey has been completed and is no longer accepting responses. You can reopen the survey to continue collecting responses.');
             case 'archived':
-                return 'Your survey has been archived and is no longer accessible.';
+                return t('Your survey has been archived and is no longer accessible.');
             default:
                 return '';
         }
@@ -98,13 +99,13 @@ const SurveyPublishingSettings: React.FC<Props> = ({survey}) => {
                 return [
                     {
                         icon: TestTubeIcon,
-                        label: 'Move to testing',
+                        label: t('Move to testing'),
                         status: 'testing',
                         variant: 'default'
                     },
                     {
                         icon: RocketLaunchIcon,
-                        label: 'Launch survey',
+                        label: t('Launch survey'),
                         status: 'active',
                         variant: 'secondary'
                     }
@@ -113,13 +114,13 @@ const SurveyPublishingSettings: React.FC<Props> = ({survey}) => {
                 return [
                     {
                         icon: PencilIcon,
-                        label: 'Back to draft',
+                        label: t('Back to draft'),
                         status: 'draft',
                         variant: 'secondary'
                     },
                     {
                         icon: RocketLaunchIcon,
-                        label: 'Launch survey',
+                        label: t('Launch survey'),
                         status: 'active',
                         variant: 'default'
                     }
@@ -128,13 +129,13 @@ const SurveyPublishingSettings: React.FC<Props> = ({survey}) => {
                 return [
                     {
                         icon: ChecksIcon,
-                        label: 'Complete survey',
+                        label: t('Complete survey'),
                         status: 'complete',
                         variant: 'default'
                     },
                     {
                         icon: ArchiveIcon,
-                        label: 'Archive survey',
+                        label: t('Archive survey'),
                         status: 'archived',
                         variant: 'destructive'
                     }
@@ -143,13 +144,13 @@ const SurveyPublishingSettings: React.FC<Props> = ({survey}) => {
                 return [
                     {
                         icon: PencilIcon,
-                        label: 'Reopen survey',
+                        label: t('Reopen survey'),
                         status: 'active',
                         variant: 'secondary'
                     },
                     {
                         icon: ArchiveIcon,
-                        label: 'Archive survey',
+                        label: t('Archive survey'),
                         status: 'archived',
                         variant: 'destructive'
                     }
@@ -195,7 +196,7 @@ const SurveyPublishingSettings: React.FC<Props> = ({survey}) => {
                                                     size="sm"
                                                     variant="secondary"
                                                 >
-                                                    In Progress
+                                                    {t('In Progress')}
                                                 </Badge>
                                             )}
                                             <Badge
@@ -203,7 +204,7 @@ const SurveyPublishingSettings: React.FC<Props> = ({survey}) => {
                                                 size="sm"
                                                 variant="success"
                                             >
-                                                Completed
+                                                {t('Completed')}
                                             </Badge>
                                             {step.status !== 'archived' && (
                                                 <Badge
@@ -211,7 +212,7 @@ const SurveyPublishingSettings: React.FC<Props> = ({survey}) => {
                                                     size="sm"
                                                     variant="outline"
                                                 >
-                                                    Pending
+                                                    {t('Pending')}
                                                 </Badge>
                                             )}
                                         </div>
@@ -247,7 +248,7 @@ const SurveyPublishingSettings: React.FC<Props> = ({survey}) => {
                 </div>
             )}
             <ConfirmationDialog
-                description={`Are you sure you want to change the survey status?`}
+                description={t('Are you sure you want to change the survey status?')}
                 onConfirm={() => pendingStatus && handleStatusChange(pendingStatus)}
                 onOpenChange={(newStatus, reason) => {
                     if (newStatus === false && reason !== 'confirm-press') {
@@ -257,7 +258,7 @@ const SurveyPublishingSettings: React.FC<Props> = ({survey}) => {
                 }}
                 open={showConfirmDialog}
                 pending={updateStatus.status === 'pending'}
-                title="Confirm status change"
+                title={t('Confirm status change')}
                 variant={pendingStatus === 'archived' ? 'destructive' : 'default'}
             >
                 {updateStatus.error && (

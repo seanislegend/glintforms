@@ -1,6 +1,7 @@
 import {Card, CardContent, CardHeader, CardTitle} from '@glint/ui/card';
 import EmptyPanel from '@glint/ui/empty-panel';
 import TextLink from '@glint/ui/text-link';
+import {t} from '@/lib/i18n';
 import {CheckCircleIcon} from '@phosphor-icons/react/dist/ssr/CheckCircle';
 import {useSuspenseQuery} from '@tanstack/react-query';
 import {useTRPC} from '@/lib/trpc/react';
@@ -17,7 +18,7 @@ const SurveyOverviewOutstandingActions: React.FC<Props> = ({surveyId}) => {
     return (
         <Card className="min-h-full">
             <CardHeader>
-                <CardTitle>Outstanding Actions</CardTitle>
+                <CardTitle>{t('Outstanding Actions')}</CardTitle>
             </CardHeader>
             <CardContent className="flex-grow flex">
                 {hasData && (
@@ -41,7 +42,7 @@ const SurveyOverviewOutstandingActions: React.FC<Props> = ({surveyId}) => {
                     <EmptyPanel
                         className="flex-grow"
                         Icon={CheckCircleIcon}
-                        title="No outstanding actions"
+                        title={t('No outstanding actions')}
                     />
                 )}
             </CardContent>

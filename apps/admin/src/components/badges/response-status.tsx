@@ -1,4 +1,5 @@
 import {Badge} from '@glint/ui/badge';
+import {t} from '@/lib/i18n';
 import {ChecksIcon} from '@phosphor-icons/react/dist/ssr/Checks';
 import {FileIcon} from '@phosphor-icons/react/dist/ssr/File';
 import {SpinnerGapIcon} from '@phosphor-icons/react/dist/ssr/SpinnerGap';
@@ -13,8 +14,8 @@ const STATUS_VARIANTS = {
     incomplete: 'warning'
 } as const;
 const STATUS_LABELS = {
-    completed: 'Completed',
-    incomplete: 'Incomplete'
+    completed: t('Completed'),
+    incomplete: t('Incomplete')
 } as const;
 const STATUS_ICONS = {
     completed: ChecksIcon,

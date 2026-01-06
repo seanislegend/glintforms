@@ -5,6 +5,7 @@ import {handleFormError} from '@glint/form/utils';
 import {Alert, AlertDescription, AlertTitle} from '@glint/ui/alert';
 import Button from '@glint/ui/button';
 import {BasicCard} from '@glint/ui/card';
+import {t} from '@/lib/i18n';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {InfoIcon} from '@phosphor-icons/react/dist/ssr/Info';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
@@ -41,7 +42,7 @@ const SurveySecuritySettingsForm: React.FC<FormProps> = ({settings, survey}) => 
                 // reset changePassword state after successful update
                 methods.setValue('changePassword', false);
                 methods.setValue('password', '');
-                toast.success('Survey settings updated successfully');
+                toast.success(t('Survey settings updated successfully'));
             }
         })
     );
@@ -62,41 +63,41 @@ const SurveySecuritySettingsForm: React.FC<FormProps> = ({settings, survey}) => 
             {!canEdit && (
                 <Alert className="mb-6" variant="warning">
                     <InfoIcon />
-                    <AlertTitle>Survey is locked</AlertTitle>
+                    <AlertTitle>{t('Survey is locked')}</AlertTitle>
                     <AlertDescription>
-                        Survey settings cannot be changed when the survey is complete or archived.
+                        {t('Survey settings cannot be changed when the survey is complete or archived.')}
                     </AlertDescription>
                 </Alert>
             )}
             <form onSubmit={methods.handleSubmit(handleFormSubmit, handleFormError)}>
                 <div className="grid gap-4 xl:grid-cols-2">
-                    <BasicCard title="Access Controls">
+                    <BasicCard title={t('Access Controls')}>
                         <div className="space-y-4">
                             <FormField
                                 control={methods.control}
                                 fieldType="switch"
-                                label="Password protected"
+                                label={t('Password protected')}
                                 name="isPasswordProtected"
-                                description="Require users to enter a password to access the survey"
+                                description={t('Require users to enter a password to access the survey')}
                             />
                             <SurveySecuritySettingsPasswordField />
                             <FormField
                                 control={methods.control}
                                 fieldType="switch"
-                                label="Allow Anonymous Responses"
+                                label={t('Allow Anonymous Responses')}
                                 name="allowAnonymous"
-                                description="Allow users to submit responses without creating an account"
+                                description={t('Allow users to submit responses without creating an account')}
                             />
                         </div>
                     </BasicCard>
-                    <BasicCard title="Response limits">
+                    <BasicCard title={t('Response limits')}>
                         <div className="space-y-4">
                             <FormField
                                 control={methods.control}
                                 fieldType="input"
-                                label="Maximum Responses"
+                                label={t('Maximum Responses')}
                                 name="maxResponses"
-                                description={`Maximum number of responses allowed (a hard limit of ${formatNumber(MAX_RESPONSE_HARD_LIMIT)} responses applies by default)`}
+                                description={t(`Maximum number of responses allowed (a hard limit of ${formatNumber(MAX_RESPONSE_HARD_LIMIT)} responses applies by default)`)}
                             />
                             <SurveySecuritySettingsCloseOnResponseLimitField />
                         </div>
@@ -105,7 +106,7 @@ const SurveySecuritySettingsForm: React.FC<FormProps> = ({settings, survey}) => 
                 {canEdit && (
                     <div className="flex justify-end mt-6">
                         <Button pending={updateSettings.status === 'pending'} type="submit">
-                            Save settings
+                            {t('Save settings')}
                         </Button>
                     </div>
                 )}

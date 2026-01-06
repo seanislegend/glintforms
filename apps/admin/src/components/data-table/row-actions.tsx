@@ -2,6 +2,7 @@
 
 import Button from '@glint/ui/button';
 import {Menu, MenuItem, MenuPopup, MenuSeparator, MenuShortcut, MenuTrigger} from '@glint/ui/menu';
+import {t} from '@/lib/i18n';
 import {ArrowRightIcon} from '@phosphor-icons/react/dist/ssr/ArrowRight';
 import {DotsThreeIcon} from '@phosphor-icons/react/dist/ssr/DotsThree';
 import {PencilSimpleIcon} from '@phosphor-icons/react/dist/ssr/PencilSimple';
@@ -48,7 +49,7 @@ export const DataTableRowActions = <TData,>({
                                 className="flex h-8 w-8 p-0 data-[state=open]:bg-muted"
                             >
                                 <DotsThreeIcon weight="bold" />
-                                <span className="sr-only">Open menu</span>
+                                <span className="sr-only">{t('Open menu')}</span>
                             </Button>
                         }
                     />
@@ -63,7 +64,7 @@ export const DataTableRowActions = <TData,>({
                         {deleteAction && (
                             <MenuItem onClick={deleteAction.onClick} variant="destructive">
                                 <TrashIcon />
-                                {deleteAction.label || 'Delete'}
+                                {deleteAction.label || t('Delete')}
                                 {deleteAction.shortcut && (
                                     <MenuShortcut>{deleteAction.shortcut}</MenuShortcut>
                                 )}
@@ -76,7 +77,7 @@ export const DataTableRowActions = <TData,>({
                 <Link href={editUrl}>
                     <Button variant="outline" size="sm">
                         <PencilSimpleIcon />
-                        <span className="sr-only">Edit</span>
+                        <span className="sr-only">{t('Edit')}</span>
                     </Button>
                 </Link>
             )}
@@ -84,7 +85,7 @@ export const DataTableRowActions = <TData,>({
                 <Link href={detailsUrl}>
                     <Button variant="secondary" size="sm">
                         <ArrowRightIcon />
-                        <span className="sr-only">View</span>
+                        <span className="sr-only">{t('View')}</span>
                     </Button>
                 </Link>
             )}

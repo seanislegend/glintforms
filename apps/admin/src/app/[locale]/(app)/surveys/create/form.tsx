@@ -3,6 +3,7 @@
 import {FormField} from '@glint/form/fields';
 import {handleFormError} from '@glint/form/utils';
 import Button from '@glint/ui/button';
+import {t} from '@/lib/i18n';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
 import {useRouter} from 'next/navigation';
@@ -25,7 +26,7 @@ const Form: React.FC = () => {
                 await queryClient.invalidateQueries({
                     queryKey: trpc.surveys.getAll.queryKey()
                 });
-                toast.success('Survey created successfully');
+                toast.success(t('Survey created successfully'));
                 router.push(`/surveys/${data?.id}?success=true`);
             }
         })
@@ -54,34 +55,34 @@ const Form: React.FC = () => {
                     {sortedCampaigns.length === 0 && !isLoading ? (
                         <FormField
                             control={methods.control}
-                            description="You don't have any campaigns yet. This will be your first campaign."
+                            description={t("You don't have any campaigns yet. This will be your first campaign.")}
                             fieldType="input"
-                            label="Campaign"
+                            label={t('Campaign')}
                             name="newCampaignTitle"
                         />
                     ) : (
                         <FormField
                             control={methods.control}
                             fieldType="select"
-                            label="Campaign"
+                            label={t('Campaign')}
                             name="campaignId"
                             options={sortedCampaigns.map(campaign => ({
                                 label: campaign.title,
                                 value: campaign.id
                             }))}
-                            placeholder="Select campaign"
+                            placeholder={t('Select campaign')}
                         />
                     )}
                     <FormField
                         control={methods.control}
                         fieldType="input"
-                        label="Title"
+                        label={t('Title')}
                         name="title"
                     />
                     <FormField
                         control={methods.control}
                         fieldType="input"
-                        label="Description"
+                        label={t('Description')}
                         name="description"
                     />
                 </div>
@@ -91,7 +92,7 @@ const Form: React.FC = () => {
                         pending={createSurvey.status === 'pending'}
                         type="submit"
                     >
-                        Submit
+                        {t('Submit')}
                     </Button>
                 </div>
             </form>

@@ -1,6 +1,7 @@
 'use client';
 
 import Button from '@glint/ui/button';
+import {t} from '@/lib/i18n';
 import {TrashIcon} from '@phosphor-icons/react/dist/ssr';
 import {useMutation, useQueryClient} from '@tanstack/react-query';
 import {useRouter} from 'next/navigation';
@@ -22,7 +23,7 @@ const DeleteScreenerDialog: React.FC<Props> = ({screenerId}) => {
     const deleteScreener = useMutation(
         trpc.screeners.delete.mutationOptions({
             onError: error => {
-                toast.error(error.message || 'Failed to delete screener');
+                toast.error(error.message || t('Failed to delete screener'));
             },
             onSuccess: async () => {
                 await queryClient.invalidateQueries({
@@ -31,7 +32,7 @@ const DeleteScreenerDialog: React.FC<Props> = ({screenerId}) => {
                 await queryClient.invalidateQueries({
                     queryKey: trpc.nav.getAll.queryKey()
                 });
-                toast.success('Screener deleted successfully');
+                toast.success(t('Screener deleted successfully'));
                 router.push('/screeners');
             }
         })
@@ -44,17 +45,17 @@ const DeleteScreenerDialog: React.FC<Props> = ({screenerId}) => {
     return (
         <>
             <ConfirmationDialog
-                description="Are you sure you want to delete this screener? This action cannot be undone."
+                description={t('Are you sure you want to delete this screener? This action cannot be undone.')}
                 onConfirm={handleConfirm}
                 onOpenChange={setIsOpen}
                 open={isOpen}
                 pending={deleteScreener.isPending}
-                title="Delete screener"
+                title={t('Delete screener')}
                 variant="destructive"
             />
             <Button onClick={() => setIsOpen(true)} variant="destructive">
                 <TrashIcon />
-                Delete screener
+                {t('Delete screener')}
             </Button>
         </>
     );

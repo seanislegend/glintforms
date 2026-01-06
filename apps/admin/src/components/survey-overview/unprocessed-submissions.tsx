@@ -1,6 +1,7 @@
 'use client';
 
 import {Alert, AlertDescription, AlertTitle} from '@glint/ui/alert';
+import {t} from '@/lib/i18n';
 import {WarningIcon} from '@phosphor-icons/react/dist/ssr/Warning';
 import {useSuspenseQuery} from '@tanstack/react-query';
 import {useTRPC} from '@/lib/trpc/react';
@@ -22,16 +23,15 @@ const UnprocessedSubmissions: React.FC<Props> = ({surveyId}) => {
     return (
         <Alert variant="warning">
             <WarningIcon weight="fill" />
-            <AlertTitle>Unprocessed submissions found</AlertTitle>
+            <AlertTitle>{t('Unprocessed submissions found')}</AlertTitle>
             <AlertDescription>
                 <p className="mb-2">
-                    {submissions.length} submission{submissions.length === 1 ? '' : 's'} failed to
-                    process:
+                    {t(`${submissions.length} submission${submissions.length === 1 ? '' : 's'} failed to process:`)}
                 </p>
                 <ul className="list-disc list-outside ml-4 space-y-1">
                     {submissions.map(submission => (
                         <li key={submission.id}>
-                            {submission.failureReason || 'Unknown error'} (submitted{' '}
+                            {submission.failureReason || t('Unknown error')} ({t('submitted')}{' '}
                             {new Date(submission.createdAt).toLocaleString()})
                         </li>
                     ))}

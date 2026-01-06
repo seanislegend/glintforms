@@ -2,6 +2,7 @@
 
 import RelativeDate from '@glint/ui/relative-date';
 import TextLink from '@glint/ui/text-link';
+import {t} from '@/lib/i18n';
 import type {ColumnDef} from '@tanstack/react-table';
 import SurveyStatusBadge from '@/components/badges/survey-status';
 import {DataTableColumnHeader} from '@/components/data-table/column-header';
@@ -12,7 +13,7 @@ import type {SurveyList} from '@/lib/schemas/surveys';
 export const columns: ColumnDef<SurveyList>[] = [
     {
         accessorKey: 'id',
-        header: ({column}) => <DataTableColumnHeader column={column} title="ID" />,
+        header: ({column}) => <DataTableColumnHeader column={column} title={t('ID')} />,
         cell: ({row}) => {
             const id = row.getValue('id') as string;
             return <RecordId href={`/surveys/${id}`} id={id} />;
@@ -21,7 +22,7 @@ export const columns: ColumnDef<SurveyList>[] = [
     },
     {
         accessorKey: 'title',
-        header: ({column}) => <DataTableColumnHeader column={column} title="Title" />,
+        header: ({column}) => <DataTableColumnHeader column={column} title={t('Title')} />,
         cell: ({row}) => (
             <TextLink href={`/surveys/${row.original.id}`} className="max-w-[500px] truncate">
                 {row.getValue('title')}
@@ -30,7 +31,7 @@ export const columns: ColumnDef<SurveyList>[] = [
     },
     {
         accessorKey: 'campaignTitle',
-        header: ({column}) => <DataTableColumnHeader column={column} title="Campaign" />,
+        header: ({column}) => <DataTableColumnHeader column={column} title={t('Campaign')} />,
         cell: ({row}) => (
             <TextLink
                 href={`/campaigns/${row.original.campaignId}`}
@@ -42,7 +43,7 @@ export const columns: ColumnDef<SurveyList>[] = [
     },
     {
         accessorKey: 'status',
-        header: ({column}) => <DataTableColumnHeader column={column} title="Status" />,
+        header: ({column}) => <DataTableColumnHeader column={column} title={t('Status')} />,
         cell: ({row}) => {
             const status = row.getValue('status') as SurveyStatus;
             return <SurveyStatusBadge size="xs" status={status} />;
@@ -53,7 +54,7 @@ export const columns: ColumnDef<SurveyList>[] = [
     },
     {
         accessorKey: 'createdAt',
-        header: ({column}) => <DataTableColumnHeader column={column} title="Created At" />,
+        header: ({column}) => <DataTableColumnHeader column={column} title={t('Created At')} />,
         cell: ({row}) => {
             const createdAt = row.getValue('createdAt') as string;
             return <RelativeDate className="text-muted-foreground" date={new Date(createdAt)} />;

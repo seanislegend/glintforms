@@ -1,6 +1,7 @@
 'use client';
 
 import EmptyPanel from '@glint/ui/empty-panel';
+import {t} from '@/lib/i18n';
 import {PlusIcon} from '@phosphor-icons/react/dist/ssr/Plus';
 import {useSuspenseQuery} from '@tanstack/react-query';
 import {DataTable} from '@/components/data-table';
@@ -17,18 +18,18 @@ const CohortsList: React.FC = () => {
     if (isLoading || !cohorts) {
         return (
             <div className="flex items-center justify-center p-8">
-                <div className="text-sm text-muted-foreground">Loading cohorts...</div>
+                <div className="text-sm text-muted-foreground">{t('Loading cohorts...')}</div>
             </div>
         );
     }
 
     const renderCreateForm = () => (
         <FormDialog
-            title="Create cohort"
+            title={t('Create cohort')}
             trigger={
                 <>
                     <PlusIcon />
-                    Create cohort
+                    {t('Create cohort')}
                 </>
             }
         >
@@ -39,8 +40,8 @@ const CohortsList: React.FC = () => {
     if (cohorts.length === 0) {
         return (
             <EmptyPanel
-                text="Create a cohort to group respondents for segmentation and analysis."
-                title="No cohorts created yet"
+                text={t('Create a cohort to group respondents for segmentation and analysis.')}
+                title={t('No cohorts created yet')}
             >
                 {renderCreateForm()}
             </EmptyPanel>

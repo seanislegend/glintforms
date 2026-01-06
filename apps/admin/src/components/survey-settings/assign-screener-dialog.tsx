@@ -3,6 +3,7 @@
 import {FormField} from '@glint/form/fields';
 import {handleFormError} from '@glint/form/utils';
 import Button from '@glint/ui/button';
+import {t} from '@/lib/i18n';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {PlusIcon} from '@phosphor-icons/react/dist/ssr/Plus';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
@@ -36,7 +37,7 @@ const AssignScreenerDialog: React.FC<Props> = ({assignedScreenerIds, surveyId}) 
                 await queryClient.invalidateQueries({
                     queryKey: trpc.surveys.getScreeners.queryKey(surveyId)
                 });
-                toast.success('Screener assigned successfully');
+                toast.success(t('Screener assigned successfully'));
             }
         })
     );
@@ -63,18 +64,18 @@ const AssignScreenerDialog: React.FC<Props> = ({assignedScreenerIds, surveyId}) 
         return (
             <Button disabled size="sm">
                 <PlusIcon />
-                Add screener
+                {t('Add screener')}
             </Button>
         );
     }
 
     return (
         <FormDialog
-            title="Assign screener"
+            title={t('Assign screener')}
             trigger={
                 <>
                     <PlusIcon />
-                    Add screener
+                    {t('Add screener')}
                 </>
             }
         >
@@ -86,24 +87,24 @@ const AssignScreenerDialog: React.FC<Props> = ({assignedScreenerIds, surveyId}) 
                     <FormField<AssignScreenerForm>
                         control={methods.control}
                         fieldType="select"
-                        label="Screener"
+                        label={t('Screener')}
                         name="screenerId"
                         options={availableScreeners.map(s => ({
                             label: s.name,
                             value: s.id
                         }))}
-                        placeholder="Select a screener..."
+                        placeholder={t('Select a screener...')}
                     />
                     <FormField<AssignScreenerForm>
                         control={methods.control}
-                        description="Optional custom message to show when this screener fails"
+                        description={t('Optional custom message to show when this screener fails')}
                         fieldType="textarea"
-                        label="Failure message"
+                        label={t('Failure message')}
                         name="failureMessage"
                     />
                     <div className="flex justify-end">
                         <Button pending={assignScreener.status === 'pending'} type="submit">
-                            Assign
+                            {t('Assign')}
                         </Button>
                     </div>
                 </form>

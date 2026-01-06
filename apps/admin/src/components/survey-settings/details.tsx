@@ -9,6 +9,7 @@ import {InfoIcon} from '@phosphor-icons/react/dist/ssr/Info';
 import {useMutation, useQueryClient} from '@tanstack/react-query';
 import {FormProvider, type SubmitHandler, useForm} from 'react-hook-form';
 import {toast} from 'sonner';
+import {t} from '@/lib/i18n';
 import {type SurveyUpdate, surveyUpdateSchema} from '@/lib/schemas/surveys';
 import {surveyCanBeEdited} from '@/lib/surveys/status';
 import {useTRPC} from '@/lib/trpc/react';
@@ -35,7 +36,7 @@ const DetailsStep: React.FC<Props> = ({survey}) => {
                         queryKey: trpc.nav.getAll.queryKey()
                     });
                 }
-                toast.success('Survey details updated successfully');
+                toast.success(t('Survey details updated successfully'));
             }
         })
     );
@@ -59,9 +60,11 @@ const DetailsStep: React.FC<Props> = ({survey}) => {
             {!canEdit && (
                 <Alert className="mb-6" variant="warning">
                     <InfoIcon />
-                    <AlertTitle>Survey is locked</AlertTitle>
+                    <AlertTitle>{t('Survey is locked')}</AlertTitle>
                     <AlertDescription>
-                        Survey details cannot be changed when the survey is complete or archived.
+                        {t(
+                            'Survey details cannot be changed when the survey is complete or archived.'
+                        )}
                     </AlertDescription>
                 </Alert>
             )}
@@ -70,26 +73,26 @@ const DetailsStep: React.FC<Props> = ({survey}) => {
                     <FormField
                         control={methods.control}
                         fieldType="input"
-                        label="Title"
+                        label={t('Title')}
                         name="title"
                     />
                     <FormField
                         control={methods.control}
                         fieldType="input"
-                        label="Slug"
+                        label={t('Slug')}
                         name="slug"
                     />
                     <FormField
                         control={methods.control}
                         fieldType="textarea"
-                        label="Description"
+                        label={t('Description')}
                         name="description"
                     />
                 </div>
                 {canEdit && (
                     <div className="flex justify-end mt-6">
                         <Button pending={updateSurvey.status === 'pending'} type="submit">
-                            Save Changes
+                            {t('Save Changes')}
                         </Button>
                     </div>
                 )}

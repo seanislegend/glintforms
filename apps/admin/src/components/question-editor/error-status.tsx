@@ -1,6 +1,7 @@
 'use client';
 
 import {Tooltip, TooltipPopup, TooltipProvider, TooltipTrigger} from '@glint/ui/tooltip';
+import {t} from '@/lib/i18n';
 import {InfoIcon} from '@phosphor-icons/react/dist/ssr/Info';
 import {useFormContext} from 'react-hook-form';
 
@@ -18,7 +19,7 @@ const QuestionEditorErrorStatus: React.FC = () => {
                 .map(part => {
                     // handle array indices
                     if (/^\d+$/.test(part)) {
-                        return `Question ${parseInt(part, 10) + 1}`;
+                        return t(`Question ${parseInt(part, 10) + 1}`);
                     }
 
                     // convert camelCase and snake_case to readable format
@@ -65,7 +66,7 @@ const QuestionEditorErrorStatus: React.FC = () => {
                         render={
                             <p className="flex items-center gap-1 text-destructive text-sm">
                                 <InfoIcon className="!size-4" weight="bold" />
-                                {totalErrors} error{totalErrors === 1 ? '' : 's'}
+                                {t(`${totalErrors} error${totalErrors === 1 ? '' : 's'}`)}
                             </p>
                         }
                     />

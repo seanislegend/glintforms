@@ -5,6 +5,7 @@ import Input from '@glint/form/input';
 import {LABEL_CLASSNAME} from '@glint/form/label';
 import Button from '@glint/ui/button';
 import ToggleVisibility from '@glint/ui/toggle-visibility';
+import {t} from '@/lib/i18n';
 import {XIcon} from '@phosphor-icons/react/dist/ssr/X';
 import clsx from 'clsx';
 import {useWatch} from 'react-hook-form';
@@ -37,7 +38,7 @@ const Filters: React.FC<Props> = ({filterValues, handleClearField, methods}) => 
                     className={clsx([LABEL_CLASSNAME, 'w-3/12 flex-shrink-0'])}
                     htmlFor="age.type"
                 >
-                    Age
+                    {t('Age')}
                 </label>
                 <div className="w-2/12 flex-shrink-0">
                     <FormField<FilterForm>
@@ -45,12 +46,12 @@ const Filters: React.FC<Props> = ({filterValues, handleClearField, methods}) => 
                         fieldType="select"
                         name="age.type"
                         options={[
-                            {label: 'Equal', value: 'equal'},
-                            {label: 'Between', value: 'between'},
-                            {label: 'Over', value: 'over'},
-                            {label: 'Under', value: 'under'}
+                            {label: t('Equal'), value: 'equal'},
+                            {label: t('Between'), value: 'between'},
+                            {label: t('Over'), value: 'over'},
+                            {label: t('Under'), value: 'under'}
                         ]}
-                        placeholder="Select age filter type"
+                        placeholder={t('Select age filter type')}
                     />
                 </div>
                 <div className="w-full">
@@ -69,7 +70,7 @@ const Filters: React.FC<Props> = ({filterValues, handleClearField, methods}) => 
                                 return (
                                     <Input
                                         onChange={e => field.onChange(e.target.value)}
-                                        placeholder="Enter age"
+                                        placeholder={t('Enter age')}
                                         type="number"
                                         value={value}
                                     />
@@ -88,7 +89,7 @@ const Filters: React.FC<Props> = ({filterValues, handleClearField, methods}) => 
                                     return (
                                         <Input
                                             onChange={e => field.onChange(e.target.value)}
-                                            placeholder="Min age"
+                                            placeholder={t('Min age')}
                                             type="number"
                                             value={value}
                                         />
@@ -104,7 +105,7 @@ const Filters: React.FC<Props> = ({filterValues, handleClearField, methods}) => 
                                     return (
                                         <Input
                                             onChange={e => field.onChange(e.target.value)}
-                                            placeholder="Max age"
+                                            placeholder={t('Max age')}
                                             type="number"
                                             value={value}
                                         />
@@ -131,7 +132,7 @@ const Filters: React.FC<Props> = ({filterValues, handleClearField, methods}) => 
                     className={clsx([LABEL_CLASSNAME, 'w-3/12 flex-shrink-0'])}
                     htmlFor="genderQualifier"
                 >
-                    Gender
+                    {t('Gender')}
                 </label>
                 <div className="w-2/12 flex-shrink-0">
                     <FormField<FilterForm>
@@ -139,8 +140,8 @@ const Filters: React.FC<Props> = ({filterValues, handleClearField, methods}) => 
                         fieldType="select"
                         name="genderQualifier"
                         options={[
-                            {label: 'Is', value: 'is'},
-                            {label: 'Is not', value: 'is_not'}
+                            {label: t('Is'), value: 'is'},
+                            {label: t('Is not'), value: 'is_not'}
                         ]}
                     />
                 </div>
@@ -150,7 +151,7 @@ const Filters: React.FC<Props> = ({filterValues, handleClearField, methods}) => 
                         fieldProps={{multiple: true}}
                         fieldType="combobox"
                         name="gender"
-                        options={[{label: 'Any gender', value: ''}, ...filterValues.genders]}
+                        options={[{label: t('Any gender'), value: ''}, ...filterValues.genders]}
                     />
                 </div>
                 <div className="w-[50px]">
@@ -170,7 +171,7 @@ const Filters: React.FC<Props> = ({filterValues, handleClearField, methods}) => 
                     className={clsx([LABEL_CLASSNAME, 'w-3/12 flex-shrink-0'])}
                     htmlFor="locationCityQualifier"
                 >
-                    Location city
+                    {t('Location city')}
                 </label>
                 <div className="w-2/12 flex-shrink-0">
                     <FormField<FilterForm>
@@ -178,8 +179,8 @@ const Filters: React.FC<Props> = ({filterValues, handleClearField, methods}) => 
                         fieldType="select"
                         name="locationCityQualifier"
                         options={[
-                            {label: 'Is', value: 'is'},
-                            {label: 'Is not', value: 'is_not'}
+                            {label: t('Is'), value: 'is'},
+                            {label: t('Is not'), value: 'is_not'}
                         ]}
                     />
                 </div>
@@ -189,7 +190,7 @@ const Filters: React.FC<Props> = ({filterValues, handleClearField, methods}) => 
                         fieldProps={{multiple: true}}
                         fieldType="combobox"
                         name="locationCity"
-                        options={[{label: 'Any city', value: ''}, ...filterValues.cities]}
+                        options={[{label: t('Any city'), value: ''}, ...filterValues.cities]}
                     />
                 </div>
                 <div className="w-[50px]">
@@ -209,7 +210,7 @@ const Filters: React.FC<Props> = ({filterValues, handleClearField, methods}) => 
                     className={clsx([LABEL_CLASSNAME, 'w-3/12 flex-shrink-0'])}
                     htmlFor="locationCountryQualifier"
                 >
-                    Location country
+                    {t('Location country')}
                 </label>
                 <div className="w-2/12 flex-shrink-0">
                     <FormField<FilterForm>
@@ -217,8 +218,8 @@ const Filters: React.FC<Props> = ({filterValues, handleClearField, methods}) => 
                         fieldType="select"
                         name="locationCountryQualifier"
                         options={[
-                            {label: 'Is', value: 'is'},
-                            {label: 'Is not', value: 'is_not'}
+                            {label: t('Is'), value: 'is'},
+                            {label: t('Is not'), value: 'is_not'}
                         ]}
                     />
                 </div>
@@ -228,7 +229,7 @@ const Filters: React.FC<Props> = ({filterValues, handleClearField, methods}) => 
                         fieldProps={{multiple: true}}
                         fieldType="combobox"
                         name="locationCountry"
-                        options={[{label: 'Any country', value: ''}, ...filterValues.countries]}
+                        options={[{label: t('Any country'), value: ''}, ...filterValues.countries]}
                     />
                 </div>
                 <div className="w-[50px]">
@@ -248,7 +249,7 @@ const Filters: React.FC<Props> = ({filterValues, handleClearField, methods}) => 
                     className={clsx([LABEL_CLASSNAME, 'w-3/12 flex-shrink-0'])}
                     htmlFor="surveyQualifier"
                 >
-                    Survey
+                    {t('Survey')}
                 </label>
                 <div className="w-2/12 flex-shrink-0">
                     <FormField<FilterForm>
@@ -256,8 +257,8 @@ const Filters: React.FC<Props> = ({filterValues, handleClearField, methods}) => 
                         fieldType="select"
                         name="surveyQualifier"
                         options={[
-                            {label: 'Is', value: 'is'},
-                            {label: 'Is not', value: 'is_not'}
+                            {label: t('Is'), value: 'is'},
+                            {label: t('Is not'), value: 'is_not'}
                         ]}
                     />
                 </div>
@@ -267,7 +268,7 @@ const Filters: React.FC<Props> = ({filterValues, handleClearField, methods}) => 
                         fieldProps={{multiple: true}}
                         fieldType="combobox"
                         name="survey"
-                        options={[{label: 'Any survey', value: ''}, ...filterValues.surveys]}
+                        options={[{label: t('Any survey'), value: ''}, ...filterValues.surveys]}
                     />
                 </div>
                 <div className="w-[50px]">

@@ -1,6 +1,7 @@
 'use client';
 
 import {Tabs, TabsContent, TabsList, TabsTrigger} from '@glint/ui/tabs';
+import {t} from '@/lib/i18n';
 import {FileTextIcon} from '@phosphor-icons/react/dist/ssr/FileText';
 import {LockKeyIcon} from '@phosphor-icons/react/dist/ssr/LockKey';
 import {ShieldWarningIcon} from '@phosphor-icons/react/dist/ssr/ShieldWarning';
@@ -26,7 +27,7 @@ const SettingsPageClient: React.FC<Props> = ({surveyId}) => {
     if (isLoading) {
         return <PageSpinner />;
     } else if (!survey) {
-        toast.error('Survey not found', {id: 'error'});
+        toast.error(t('Survey not found'), {id: 'error'});
         redirect(`/surveys`);
     }
 
@@ -35,19 +36,19 @@ const SettingsPageClient: React.FC<Props> = ({surveyId}) => {
             <TabsList className="flex flex-row md:flex-col justify-start gap-1 w-full md:w-40 h-fit shrink-0 [&_svg]:text-primary">
                 <TabsTrigger className="md:w-full md:flex md:justify-start" value="publishing">
                     <StepsIcon />
-                    Publishing
+                    {t('Publishing')}
                 </TabsTrigger>
                 <TabsTrigger className="md:w-full md:flex md:justify-start" value="access">
                     <LockKeyIcon />
-                    Access
+                    {t('Access')}
                 </TabsTrigger>
                 <TabsTrigger className="md:w-full md:flex md:justify-start" value="screeners">
                     <ShieldWarningIcon />
-                    Screeners
+                    {t('Screeners')}
                 </TabsTrigger>
                 <TabsTrigger className="md:w-full md:flex md:justify-start" value="details">
                     <FileTextIcon />
-                    Details
+                    {t('Details')}
                 </TabsTrigger>
             </TabsList>
             <div className="flex-grow">

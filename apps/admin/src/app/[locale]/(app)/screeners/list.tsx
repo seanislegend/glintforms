@@ -2,6 +2,7 @@
 
 import Button from '@glint/ui/button';
 import EmptyPanel from '@glint/ui/empty-panel';
+import {t} from '@/lib/i18n';
 import {PlusIcon} from '@phosphor-icons/react/dist/ssr/Plus';
 import {useSuspenseQuery} from '@tanstack/react-query';
 import Link from 'next/link';
@@ -17,7 +18,7 @@ const ScreenersList: React.FC = () => {
     if (isLoading || !screeners) {
         return (
             <div className="flex items-center justify-center p-8">
-                <div className="text-sm text-muted-foreground">Loading screeners...</div>
+                <div className="text-sm text-muted-foreground">{t('Loading screeners...')}</div>
             </div>
         );
     }
@@ -25,15 +26,15 @@ const ScreenersList: React.FC = () => {
     const renderCreateButton = () => (
         <Button render={<Link href="/screeners/create" />}>
             <PlusIcon />
-            Create screener
+            {t('Create screener')}
         </Button>
     );
 
     if (screeners.length === 0) {
         return (
             <EmptyPanel
-                text="Create a screener to filter respondents before they can access a survey."
-                title="No screeners created yet"
+                text={t('Create a screener to filter respondents before they can access a survey.')}
+                title={t('No screeners created yet')}
             >
                 {renderCreateButton()}
             </EmptyPanel>

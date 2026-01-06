@@ -4,6 +4,7 @@ import {Badge} from '@glint/ui/badge';
 import {Card, CardContent, CardHeader, CardTitle} from '@glint/ui/card';
 import RelativeDate from '@glint/ui/relative-date';
 import TextLink from '@glint/ui/text-link';
+import {t} from '@/lib/i18n';
 import {ClockIcon} from '@phosphor-icons/react/dist/ssr/Clock';
 import {useSuspenseQuery} from '@tanstack/react-query';
 import {redirect} from 'next/navigation';
@@ -29,7 +30,7 @@ const ResponseDetails: React.FC<React.PropsWithChildren<Props>> = ({responseId, 
     const response = data?.response;
 
     if (!answers || !questions || !response) {
-        toast.error('Response not found', {id: '404'});
+        toast.error(t('Response not found'), {id: '404'});
         redirect(`/surveys/${surveyId}/responses`);
     }
 
@@ -43,14 +44,14 @@ const ResponseDetails: React.FC<React.PropsWithChildren<Props>> = ({responseId, 
         <div className="space-y-6">
             <Card className="animate-in fade-in duration-300">
                 <CardHeader>
-                    <CardTitle>Response information</CardTitle>
+                    <CardTitle>{t('Response information')}</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 text-sm">
                         {response.respondent ? (
                             <>
                                 <div>
-                                    <div className="font-medium text-muted-foreground">Name</div>
+                                    <div className="font-medium text-muted-foreground">{t('Name')}</div>
                                     <div>
                                         <TextLink href={`/respondents/${response.respondentId}`}>
                                             {response.respondent.name}
@@ -58,13 +59,13 @@ const ResponseDetails: React.FC<React.PropsWithChildren<Props>> = ({responseId, 
                                     </div>
                                 </div>
                                 <div>
-                                    <div className="font-medium text-muted-foreground">Email</div>
+                                    <div className="font-medium text-muted-foreground">{t('Email')}</div>
                                     <div>{response.respondent.email}</div>
                                 </div>
                                 {response.respondent.signupSource && (
                                     <div>
                                         <div className="font-medium text-muted-foreground">
-                                            Source
+                                            {t('Source')}
                                         </div>
                                         <div>{response.respondent.signupSource}</div>
                                     </div>
@@ -73,10 +74,10 @@ const ResponseDetails: React.FC<React.PropsWithChildren<Props>> = ({responseId, 
                         ) : (
                             <div>
                                 <div className="font-medium text-muted-foreground">
-                                    Respondent ID
+                                    {t('Respondent ID')}
                                 </div>
                                 <div className="font-mono">
-                                    {response.respondentId || 'Anonymous'}
+                                    {response.respondentId || t('Anonymous')}
                                 </div>
                             </div>
                         )}
@@ -91,21 +92,21 @@ const ResponseDetails: React.FC<React.PropsWithChildren<Props>> = ({responseId, 
                                 </div>
                             ))}
                         <div>
-                            <div className="font-medium text-muted-foreground">Status</div>
+                            <div className="font-medium text-muted-foreground">{t('Status')}</div>
                             <ResponseStatusBadge
                                 status={response.wasCompleted ? 'completed' : 'incomplete'}
                             />
                         </div>
                         <div>
-                            <div className="font-medium text-muted-foreground">Duration</div>
+                            <div className="font-medium text-muted-foreground">{t('Duration')}</div>
                             <div>{duration ? `${minutes}m ${seconds}s` : '—'}</div>
                         </div>
                         <div>
-                            <div className="font-medium text-muted-foreground">Started</div>
+                            <div className="font-medium text-muted-foreground">{t('Started')}</div>
                             <RelativeDate date={startedAt} />
                         </div>
                         <div>
-                            <div className="font-medium text-muted-foreground">Ended</div>
+                            <div className="font-medium text-muted-foreground">{t('Ended')}</div>
                             {endedAt ? <RelativeDate date={endedAt} /> : '—'}
                         </div>
                     </div>
@@ -114,7 +115,7 @@ const ResponseDetails: React.FC<React.PropsWithChildren<Props>> = ({responseId, 
             <AuthenticityScoreOverview responseId={responseId} surveyId={surveyId} />
             <Card>
                 <CardHeader>
-                    <CardTitle>Answers</CardTitle>
+                    <CardTitle>{t('Answers')}</CardTitle>
                 </CardHeader>
                 <CardContent>
                     <div className="space-y-6">
@@ -156,7 +157,7 @@ const ResponseDetails: React.FC<React.PropsWithChildren<Props>> = ({responseId, 
                                             </div>
                                             {answer.wasSkipped && (
                                                 <Badge variant="secondary" className="text-xs">
-                                                    Skipped
+                                                    {t('Skipped')}
                                                 </Badge>
                                             )}
                                         </div>

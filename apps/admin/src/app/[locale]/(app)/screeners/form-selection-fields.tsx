@@ -4,6 +4,7 @@ import {FormField} from '@glint/form/fields';
 import {LABEL_CLASSNAME} from '@glint/form/label';
 import Button from '@glint/ui/button';
 import {cn} from '@glint/ui/utils';
+import {t} from '@/lib/i18n';
 import {PlusIcon, TrashIcon} from '@phosphor-icons/react/dist/ssr';
 import {useState} from 'react';
 import {useFormContext} from 'react-hook-form';
@@ -44,10 +45,10 @@ const SelectionFields: React.FC<Props> = ({defaultOptionIds}) => {
             <FormField<ScreenerCreate>
                 control={methods.control}
                 fieldType="input"
-                label="Question"
+                label={t('Question')}
                 name="config.question"
             />
-            <span className={cn(LABEL_CLASSNAME, 'mb-2')}>Options</span>
+            <span className={cn(LABEL_CLASSNAME, 'mb-2')}>{t('Options')}</span>
             <div className="space-y-2">
                 {optionIds.map((opt, index) => (
                     <div className="flex items-center gap-2" key={opt.tempId}>
@@ -63,7 +64,7 @@ const SelectionFields: React.FC<Props> = ({defaultOptionIds}) => {
                                 control={methods.control}
                                 defaultValue={false}
                                 fieldType="checkbox"
-                                label="Passes"
+                                label={t('Passes')}
                                 name={`config.options.${index}.passes`}
                             />
                         </div>
@@ -83,7 +84,7 @@ const SelectionFields: React.FC<Props> = ({defaultOptionIds}) => {
             </div>
             <Button onClick={addOption} size="sm" type="button" variant="secondary">
                 <PlusIcon />
-                Add option
+                {t('Add option')}
             </Button>
         </>
     );

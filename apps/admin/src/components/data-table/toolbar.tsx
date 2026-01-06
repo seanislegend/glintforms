@@ -3,6 +3,7 @@
 
 import Input from '@glint/form/input';
 import Button from '@glint/ui/button';
+import {t} from '@/lib/i18n';
 import {XIcon} from '@phosphor-icons/react/dist/ssr/X';
 import type {Table} from '@tanstack/react-table';
 import type React from 'react';
@@ -39,7 +40,7 @@ export const DataTableToolbar = <TData,>({
             <div className="flex items-center space-x-2">
                 {inputFilterKey && (
                     <Input
-                        placeholder="Type to filter data..."
+                        placeholder={t('Type to filter data...')}
                         value={(table.getColumn(inputFilterKey)?.getFilterValue() as string) ?? ''}
                         onChange={event => {
                             table.getColumn(inputFilterKey)?.setFilterValue(event.target.value);
@@ -65,7 +66,7 @@ export const DataTableToolbar = <TData,>({
                         );
                         const options = uniqeValues
                             .map(value => {
-                                const label = value ? humanise(value) : 'Empty';
+                                const label = value ? humanise(value) : t('Empty');
                                 return {label, value};
                             })
                             .sort((a, b) => a.label.localeCompare(b.label));
@@ -85,7 +86,7 @@ export const DataTableToolbar = <TData,>({
                         onClick={handleResetFilters}
                         className="h-8 px-2 lg:px-3"
                     >
-                        Reset
+                        {t('Reset')}
                         <XIcon />
                     </Button>
                 )}

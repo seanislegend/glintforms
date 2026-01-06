@@ -2,6 +2,7 @@
 
 import {FormField} from '@glint/form/fields';
 import ToggleVisibility from '@glint/ui/toggle-visibility';
+import {t} from '@/lib/i18n';
 import {useFormContext, useWatch} from 'react-hook-form';
 import AnswerFieldSelector from './answer-field-selector';
 import DelimiterSelector from './delimiter-selector';
@@ -15,17 +16,17 @@ const ExportResponsesAnswerControls: React.FC = () => {
             <div className="grid gap-3">
                 <FormField
                     control={control}
-                    description="Answer fields will include question names, values, and metadata."
+                    description={t('Answer fields will include question names, values, and metadata.')}
                     fieldType="switch"
-                    label="Include all answer fields"
+                    label={t('Include all answer fields')}
                     name="includeAllAnswerFields"
                 />
                 <AnswerFieldSelector />
                 <FormField
                     control={control}
-                    description="Use a custom delimiter for multiple choice answers."
+                    description={t('Use a custom delimiter for multiple choice answers.')}
                     fieldType="switch"
-                    label="Use custom delimiter for coded answers"
+                    label={t('Use custom delimiter for coded answers')}
                     name="useCustomDelimiter"
                 />
                 <DelimiterSelector />

@@ -1,6 +1,7 @@
 import {FormField} from '@glint/form/fields';
 import Button from '@glint/ui/button';
 import ToggleVisibility from '@glint/ui/toggle-visibility';
+import {t} from '@/lib/i18n';
 import {useFormContext, useWatch} from 'react-hook-form';
 
 const SurveySecuritySettingsPasswordField: React.FC = () => {
@@ -20,20 +21,20 @@ const SurveySecuritySettingsPasswordField: React.FC = () => {
                 <>
                     <ToggleVisibility visible={!changePassword}>
                         <Button variant="outline" onClick={() => setValue('changePassword', true)}>
-                            Change current password
+                            {t('Change current password')}
                         </Button>
                     </ToggleVisibility>
                     <ToggleVisibility visible={changePassword}>
                         <div className="space-y-2">
                             <FormField
                                 control={control}
-                                description="Enter the new password that will be required to access the survey."
+                                description={t('Enter the new password that will be required to access the survey.')}
                                 fieldType="password-input"
                                 name="password"
                                 label=""
                             />
                             <Button variant="outline" onClick={handleCancelPasswordChange}>
-                                Cancel
+                                {t('Cancel')}
                             </Button>
                         </div>
                     </ToggleVisibility>
@@ -41,7 +42,7 @@ const SurveySecuritySettingsPasswordField: React.FC = () => {
             ) : (
                 <FormField
                     control={control}
-                    description="Enter the password that will be required to access the survey. This will be securely stored."
+                    description={t('Enter the password that will be required to access the survey. This will be securely stored.')}
                     fieldType="password-input"
                     name="password"
                     label=""

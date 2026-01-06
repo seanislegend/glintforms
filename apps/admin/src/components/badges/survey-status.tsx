@@ -1,5 +1,6 @@
 import {Badge} from '@glint/ui/badge';
 import {cn} from '@glint/ui/utils';
+import {t} from '@/lib/i18n';
 import {ArchiveIcon} from '@phosphor-icons/react/dist/ssr/Archive';
 import {ChecksIcon} from '@phosphor-icons/react/dist/ssr/Checks';
 import {FileIcon} from '@phosphor-icons/react/dist/ssr/File';
@@ -20,11 +21,11 @@ const STATUS_VARIANTS = {
     archived: 'destructive'
 } as const;
 const STATUS_LABELS = {
-    draft: 'Draft',
-    testing: 'Testing',
-    active: 'Active',
-    complete: 'Complete',
-    archived: 'Archived'
+    draft: t('Draft'),
+    testing: t('Testing'),
+    active: t('Active'),
+    complete: t('Complete'),
+    archived: t('Archived')
 } as const;
 const STATUS_ICONS = {
     draft: PencilIcon,

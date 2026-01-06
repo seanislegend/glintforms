@@ -2,6 +2,7 @@ import Container from '@glint/ui/container';
 import SectionHeader from '@glint/ui/section-header';
 import Spacer from '@glint/ui/spacer';
 import Spinner from '@glint/ui/spinner';
+import {t} from '@/lib/i18n';
 import {Suspense} from 'react';
 import {HydrateClient, prefetch, trpc} from '@/lib/trpc/server';
 import RespondentDetails from './respondent-details';
@@ -19,11 +20,11 @@ const Page: React.FC<PageProps> = async ({params}) => {
             <Container>
                 <SectionHeader
                     backAction={{
-                        text: 'All respondents',
+                        text: t('All respondents'),
                         href: '/respondents'
                     }}
-                    text="View respondent details, surveys, and authenticity scores."
-                    title="Respondent details"
+                    text={t('View respondent details, surveys, and authenticity scores.')}
+                    title={t('Respondent details')}
                 />
                 <Spacer size="md" />
                 <Suspense fallback={<Spinner />}>

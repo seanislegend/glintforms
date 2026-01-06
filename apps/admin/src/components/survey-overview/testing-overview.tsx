@@ -1,5 +1,6 @@
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@glint/ui/card';
 import Spinner from '@glint/ui/spinner';
+import {t} from '@/lib/i18n';
 import {useQuery} from '@tanstack/react-query';
 
 interface Props {
@@ -22,10 +23,9 @@ const SurveyTestingOverview: React.FC<Props> = ({surveyId}) => {
     return (
         <Card className="min-h-full">
             <CardHeader>
-                <CardTitle>Test your survey</CardTitle>
+                <CardTitle>{t('Test your survey')}</CardTitle>
                 <CardDescription>
-                    While your survey is in testing mode, you can test it by sending requests to the
-                    API. Any responses you receive will be discarded when you move to active mode.
+                    {t('While your survey is in testing mode, you can test it by sending requests to the API. Any responses you receive will be discarded when you move to active mode.')}
                 </CardDescription>
             </CardHeader>
             <CardContent>

@@ -1,5 +1,6 @@
 'use client';
 
+import {t} from '@/lib/i18n';
 import type {ColumnDef} from '@tanstack/react-table';
 import Link from 'next/link';
 import {DataTableColumnHeader} from '@/components/data-table/column-header';
@@ -11,7 +12,7 @@ type Survey = ScreenerDetails['surveys'][0];
 export const surveyColumns: ColumnDef<Survey>[] = [
     {
         accessorKey: 'title',
-        header: ({column}) => <DataTableColumnHeader column={column} title="Survey" />,
+        header: ({column}) => <DataTableColumnHeader column={column} title={t('Survey')} />,
         cell: ({row}) => (
             <Link
                 href={`/surveys/${row.original.id}`}
@@ -23,7 +24,7 @@ export const surveyColumns: ColumnDef<Survey>[] = [
     },
     {
         accessorKey: 'failureMessage',
-        header: ({column}) => <DataTableColumnHeader column={column} title="Failure message" />,
+        header: ({column}) => <DataTableColumnHeader column={column} title={t('Failure message')} />,
         cell: ({row}) => {
             const message = row.getValue('failureMessage') as string | null;
             if (!message) {

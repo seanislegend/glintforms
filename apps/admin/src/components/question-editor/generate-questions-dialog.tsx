@@ -12,6 +12,7 @@ import {
     DialogTitle,
     DialogTrigger
 } from '@glint/ui/dialog';
+import {t} from '@/lib/i18n';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {SparkleIcon} from '@phosphor-icons/react/dist/ssr/Sparkle';
 import {useMutation} from '@tanstack/react-query';
@@ -58,13 +59,13 @@ const GenerateQuestionsDialog: React.FC<Props> = ({isPending, surveyId}) => {
                 setValue('questions', updatedQuestions);
                 highlight('questions-list');
                 toast.success(
-                    `Generated ${generatedQuestions.length} questions, please review them and save the survey.`
+                    t(`Generated ${generatedQuestions.length} questions, please review them and save the survey.`)
                 );
                 setIsOpen(false);
                 generateFormMethods.reset();
             },
             onError: error => {
-                toast.error(error.message || 'Failed to generate questions');
+                toast.error(error.message || t('Failed to generate questions'));
             }
         })
     );
@@ -74,7 +75,7 @@ const GenerateQuestionsDialog: React.FC<Props> = ({isPending, surveyId}) => {
         const remainingSlots = MAX_QUESTIONS - questionCount;
 
         if (remainingSlots <= 0) {
-            toast.error('Maximum number of questions reached');
+            toast.error(t('Maximum number of questions reached'));
             return;
         }
 
@@ -106,17 +107,17 @@ const GenerateQuestionsDialog: React.FC<Props> = ({isPending, surveyId}) => {
                 render={
                     <Button disabled={isDisabled} variant="secondary">
                         <SparkleIcon />
-                        Generate questions
+                        {t('Generate questions')}
                     </Button>
                 }
             />
             <DialogPopup className="sm:max-w-[500px]">
                 <DialogHeader>
-                    <DialogTitle>Generate questions</DialogTitle>
+                    <DialogTitle>{t('Generate questions')}</DialogTitle>
                     <DialogDescription>
-                        Describe the topic and context for the questions you want to generate.
+                        {t('Describe the topic and context for the questions you want to generate.')}
                         {remainingSlots < 5 &&
-                            ` You can generate up to ${remainingSlots} more questions.`}
+                            ` ${t(`You can generate up to ${remainingSlots} more questions.`)}`}
                     </DialogDescription>
                 </DialogHeader>
                 <FormProvider {...generateFormMethods}>
@@ -125,9 +126,9 @@ const GenerateQuestionsDialog: React.FC<Props> = ({isPending, surveyId}) => {
                             <FormField
                                 control={generateFormMethods.control}
                                 fieldType="input"
-                                label="Topic"
+                                label={t('Topic')}
                                 name="topic"
-                                placeholder="e.g., Customer satisfaction, Product feedback, Employee engagement"
+                                placeholder={t('e.g., Customer satisfaction, Product feedback, Employee engagement')}
                             />
                             {survey?.description && (
                                 <Button
@@ -138,7 +139,7 @@ const GenerateQuestionsDialog: React.FC<Props> = ({isPending, surveyId}) => {
                                     size="xs"
                                     variant="accent"
                                 >
-                                    Use survey title
+                                    {t('Use survey title')}
                                 </Button>
                             )}
                         </div>
@@ -146,9 +147,9 @@ const GenerateQuestionsDialog: React.FC<Props> = ({isPending, surveyId}) => {
                             <FormField
                                 control={generateFormMethods.control}
                                 fieldType="textarea"
-                                label="Description"
+                                label={t('Description')}
                                 name="description"
-                                placeholder="Provide context about what you want to learn, target audience, or specific areas to focus on..."
+                                placeholder={t('Provide context about what you want to learn, target audience, or specific areas to focus on...')}
                             ></FormField>
                             {survey?.description && (
                                 <Button
@@ -162,14 +163,14 @@ const GenerateQuestionsDialog: React.FC<Props> = ({isPending, surveyId}) => {
                                     size="xs"
                                     variant="accent"
                                 >
-                                    Use survey description
+                                    {t('Use survey description')}
                                 </Button>
                             )}
                         </div>
                         <FormField
                             control={generateFormMethods.control}
                             name="questionCount"
-                            label="Number of questions"
+                            label={t('Number of questions')}
                             render={({field}) => (
                                 <Input type="number" {...field} value={String(field.value ?? '')} />
                             )}
@@ -182,10 +183,10 @@ const GenerateQuestionsDialog: React.FC<Props> = ({isPending, surveyId}) => {
                         onClick={() => setIsOpen(false)}
                         variant="accent"
                     >
-                        Cancel
+                        {t('Cancel')}
                     </Button>
                     <Button onClick={handleSubmit} pending={generateQuestions.isPending}>
-                        Generate questions
+                        {t('Generate questions')}
                     </Button>
                 </DialogFooter>
             </DialogPopup>

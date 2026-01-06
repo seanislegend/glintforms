@@ -10,6 +10,7 @@ import {
     DialogPopup,
     DialogTitle
 } from '@glint/ui/dialog';
+import {t} from '@/lib/i18n';
 
 interface Props {
     cancelLabel?: string;
@@ -24,9 +25,9 @@ interface Props {
 }
 
 const ConfirmationDialog: React.FC<React.PropsWithChildren<Props>> = ({
-    cancelLabel = 'Cancel',
+    cancelLabel = t('Cancel'),
     children,
-    confirmLabel = 'Confirm',
+    confirmLabel = t('Confirm'),
     description,
     onConfirm,
     onOpenChange,

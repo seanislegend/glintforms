@@ -3,6 +3,7 @@
 import {Badge} from '@glint/ui/badge';
 import Button from '@glint/ui/button';
 import RelativeDate from '@glint/ui/relative-date';
+import {t} from '@/lib/i18n';
 import {EyeIcon} from '@phosphor-icons/react/dist/ssr/Eye';
 import {UserCircleDashedIcon} from '@phosphor-icons/react/dist/ssr/UserCircleDashed';
 import type {ColumnDef, Row} from '@tanstack/react-table';
@@ -27,7 +28,7 @@ const CompletionStatusCell = ({row}: {row: Row<ResponseList>}) => {
 
     return (
         <Badge variant={wasCompleted ? 'success' : 'warning'}>
-            {wasCompleted ? 'Completed' : 'Incomplete'}
+            {wasCompleted ? t('Completed') : t('Incomplete')}
         </Badge>
     );
 };
@@ -37,7 +38,7 @@ const QuickViewResponseButton = ({responseId}: {responseId: string}) => {
     return (
         <Button onClick={() => setResponseId(responseId)} size="sm" variant="outline">
             <EyeIcon />
-            <span className="sr-only">Quick view</span>
+            <span className="sr-only">{t('Quick view')}</span>
         </Button>
     );
 };
@@ -45,14 +46,14 @@ const QuickViewResponseButton = ({responseId}: {responseId: string}) => {
 export const columns: ColumnDef<ResponseList>[] = [
     {
         accessorKey: 'respondentId',
-        header: ({column}) => <DataTableColumnHeader column={column} title="Respondent" />,
+        header: ({column}) => <DataTableColumnHeader column={column} title={t('Respondent')} />,
         cell: ({row}) => {
             const respondentId = row.getValue('respondentId') as string | null;
             if (!respondentId) {
                 return (
                     <div className="flex items-center gap-x-1">
                         <UserCircleDashedIcon className="size-5" />
-                        <span className="text-muted-foreground">Anonymous</span>
+                        <span className="text-muted-foreground">{t('Anonymous')}</span>
                     </div>
                 );
             }
@@ -66,7 +67,7 @@ export const columns: ColumnDef<ResponseList>[] = [
     },
     {
         accessorKey: 'was_completed',
-        header: ({column}) => <DataTableColumnHeader column={column} title="Status" />,
+        header: ({column}) => <DataTableColumnHeader column={column} title={t('Status')} />,
         cell: ({row}) => <CompletionStatusCell row={row} />,
         filterFn: (row, id, value) => {
             const filterValues = Array.isArray(value) ? value : [value];
@@ -75,7 +76,7 @@ export const columns: ColumnDef<ResponseList>[] = [
     },
     {
         accessorKey: 'authentic_response',
-        header: ({column}) => <DataTableColumnHeader column={column} title="Authenticity" />,
+        header: ({column}) => <DataTableColumnHeader column={column} title={t('Authenticity')} />,
         cell: ({row}) => <AuthenticityStatusBadge pass={row.getValue('authentic_response')} />,
         filterFn: (row, id, value) => {
             const filterValues = Array.isArray(value) ? value : [value];
@@ -84,7 +85,7 @@ export const columns: ColumnDef<ResponseList>[] = [
     },
     {
         accessorKey: 'startedAt',
-        header: ({column}) => <DataTableColumnHeader column={column} title="Started" />,
+        header: ({column}) => <DataTableColumnHeader column={column} title={t('Started')} />,
         cell: ({row}) => {
             const startedAt = row.getValue('startedAt') as Date;
             return <RelativeDate date={startedAt} />;
@@ -92,7 +93,7 @@ export const columns: ColumnDef<ResponseList>[] = [
     },
     {
         accessorKey: 'endedAt',
-        header: ({column}) => <DataTableColumnHeader column={column} title="Ended" />,
+        header: ({column}) => <DataTableColumnHeader column={column} title={t('Ended')} />,
         cell: ({row}) => {
             const endedAt = row.getValue('endedAt') as Date;
             return <RelativeDate className="text-muted-foreground" date={endedAt} />;

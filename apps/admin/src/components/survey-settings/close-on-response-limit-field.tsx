@@ -1,5 +1,6 @@
 import {FormField} from '@glint/form/fields';
 import ToggleVisibility from '@glint/ui/toggle-visibility';
+import {t} from '@/lib/i18n';
 import {useFormContext, useWatch} from 'react-hook-form';
 
 const SurveySecuritySettingsPasswordField: React.FC = () => {
@@ -10,17 +11,17 @@ const SurveySecuritySettingsPasswordField: React.FC = () => {
         <>
             <FormField
                 control={control}
-                description="When the response limit is reached, the survey will be closed."
+                description={t('When the response limit is reached, the survey will be closed.')}
                 fieldType="switch"
-                label="Close on response limit"
+                label={t('Close on response limit')}
                 name="closeOnResponseLimit"
             />
             <ToggleVisibility visible={willCloseOnResponseLimit}>
                 <FormField
                     control={control}
-                    description="The text that will be displayed when the response limit is reached."
+                    description={t('The text that will be displayed when the response limit is reached.')}
                     fieldType="input"
-                    label="Closed text"
+                    label={t('Closed text')}
                     name="closedText"
                 />
             </ToggleVisibility>
