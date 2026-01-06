@@ -5,6 +5,7 @@ import {type ChartConfig, ChartContainer, ChartTooltip} from '@glint/ui/chart';
 import {Tooltip, TooltipPopup, TooltipTrigger} from '@glint/ui/tooltip';
 import {InfoIcon} from '@phosphor-icons/react/dist/ssr/Info';
 import {Cell, Pie, PieChart} from 'recharts';
+import {useI18n} from '@/hooks/use-i18n';
 import {COUNTRY_CODE_LABELS} from '@/utils/country-codes';
 
 interface GeolocationDistributionData {
@@ -25,18 +26,20 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 const GeolocationDistributionChart: React.FC<Props> = ({data}) => {
+    const {t} = useI18n();
     const total = data.reduce((sum, item) => sum + item.count, 0);
 
     return (
-        <BasicCard title="Geolocation Distribution">
+        <BasicCard title={t('Geolocation distribution')}>
             <Tooltip>
                 <TooltipTrigger className="absolute top-4 right-4 lg:top-6 lg:right-6">
                     <InfoIcon className="size-4" />
                 </TooltipTrigger>
                 <TooltipPopup>
                     <p>
-                        Geolocations are inferred from the IP address of the user and may not be
-                        accurate.
+                        {t(
+                            'Geolocations are inferred from the IP address of the user and may not be accurate.'
+                        )}
                     </p>
                 </TooltipPopup>
             </Tooltip>
@@ -61,7 +64,7 @@ const GeolocationDistributionChart: React.FC<Props> = ({data}) => {
                                     <div className="font-medium">
                                         {item.payload.geolocation
                                             ? COUNTRY_CODE_LABELS[item.payload.geolocation]
-                                            : 'Unknown location'}
+                                            : t('Unknown location')}
                                     </div>
                                     <div className="grid gap-1.5">
                                         <div className="flex items-center gap-2">
@@ -72,7 +75,7 @@ const GeolocationDistributionChart: React.FC<Props> = ({data}) => {
                                                 }}
                                             />
                                             <span>
-                                                {item.value} responses ({percentage}%)
+                                                {item.value} {t('responses')} ({percentage}%)
                                             </span>
                                         </div>
                                     </div>
@@ -118,7 +121,7 @@ const GeolocationDistributionChart: React.FC<Props> = ({data}) => {
                             <span>
                                 {entry.country
                                     ? COUNTRY_CODE_LABELS[entry.country]
-                                    : 'Unknown location'}
+                                    : t('Unknown location')}
                             </span>
                         </li>
                     ))}

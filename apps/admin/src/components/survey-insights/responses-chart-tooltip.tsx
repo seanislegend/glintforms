@@ -1,3 +1,7 @@
+'use client';
+
+import {useI18n} from '@/hooks/use-i18n';
+
 interface DataItem extends Record<string, unknown> {
     color: string;
     dataKey: string;
@@ -13,12 +17,14 @@ interface DataItem extends Record<string, unknown> {
 
 interface Props {
     active: boolean;
-    payload: DataItem[];
     label: string;
     labelFormatter?: (value: number | string) => string;
+    payload: DataItem[];
 }
 
-const ResponsesChartTooltip: React.FC<Props> = ({active, payload, label, labelFormatter}) => {
+const ResponsesChartTooltip: React.FC<Props> = ({active, label, labelFormatter, payload}) => {
+    const {t} = useI18n();
+
     if (!active || !payload?.length) {
         return null;
     }
@@ -54,9 +60,9 @@ const ResponsesChartTooltip: React.FC<Props> = ({active, payload, label, labelFo
                                 <div className="grid gap-1.5">
                                     <span className="text-muted-foreground capitalize">
                                         {isAuthenticityField
-                                            ? 'Authenticity rate'
+                                            ? t('Authenticity rate')
                                             : isCompletionField
-                                              ? 'Completion rate'
+                                              ? t('Completion rate')
                                               : item.name}
                                     </span>
                                 </div>

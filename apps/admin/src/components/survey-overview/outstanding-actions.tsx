@@ -3,9 +3,9 @@
 import {Card, CardContent, CardHeader, CardTitle} from '@glint/ui/card';
 import EmptyPanel from '@glint/ui/empty-panel';
 import TextLink from '@glint/ui/text-link';
-import {useI18n} from '@/hooks/use-i18n';
 import {CheckCircleIcon} from '@phosphor-icons/react/dist/ssr/CheckCircle';
 import {useSuspenseQuery} from '@tanstack/react-query';
+import {useI18n} from '@/hooks/use-i18n';
 import {useTRPC} from '@/lib/trpc/react';
 
 interface Props {

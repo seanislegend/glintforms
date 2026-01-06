@@ -3,6 +3,7 @@
 import {BasicCard} from '@glint/ui/card';
 import {type ChartConfig, ChartContainer, ChartTooltip} from '@glint/ui/chart';
 import {Cell, Pie, PieChart} from 'recharts';
+import {useI18n} from '@/hooks/use-i18n';
 import {humanise} from '@/utils/humanise';
 
 interface GenderDistributionData {
@@ -22,10 +23,11 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 const GenderDistributionChart: React.FC<Props> = ({data}) => {
+    const {t} = useI18n();
     const total = data.reduce((sum, item) => sum + item.count, 0);
 
     return (
-        <BasicCard title="Gender Distribution">
+        <BasicCard title={t('Gender distribution')}>
             <ChartContainer config={chartConfig} className="aspect-square h-[300px] w-full">
                 <PieChart
                     accessibilityLayer
@@ -45,7 +47,7 @@ const GenderDistributionChart: React.FC<Props> = ({data}) => {
                             return (
                                 <div className="border-border/50 bg-background grid min-w-[8rem] items-start gap-1.5 rounded-lg border px-2.5 py-1.5 text-xs shadow-xl">
                                     <div className="font-medium">
-                                        {humanise(item.payload.gender || 'Not specified')}
+                                        {humanise(item.payload.gender || t('Not specified'))}
                                     </div>
                                     <div className="grid gap-1.5">
                                         <div className="flex items-center gap-2">
@@ -55,7 +57,7 @@ const GenderDistributionChart: React.FC<Props> = ({data}) => {
                                             />
 
                                             <span>
-                                                {item.value} responses ({percentage}%)
+                                                {item.value} {t('responses')} ({percentage}%)
                                             </span>
                                         </div>
                                     </div>
