@@ -1,6 +1,6 @@
 import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
-import type { SourceFile } from "../types.js";
+import type { SourceEntry, SourceFile } from "../types.js";
 
 export const generateTypes = (source: SourceFile): string => {
     let output = '/**\n';
@@ -22,7 +22,8 @@ export const generateTypes = (source: SourceFile): string => {
         const escapedText = entry.text.replace(/"/g, '\\"');
 
         output += '    /**\n';
-        output += `     * "${escapedText}"\n`;
+        output += `     * **Text:** "${escapedText}"\n`;
+        output += '     *\n';
 
         for (const occ of entry.occurrences) {
             output += `     * @see ${occ.file}:${occ.line}\n`;
@@ -33,7 +34,25 @@ export const generateTypes = (source: SourceFile): string => {
     }
 
     output += '}\n\n';
-    output += 'export type TranslationKey = keyof TranslationKeys;\n';
+    output += 'export type TranslationKey = keyof TranslationKeys;\n\n';
+    
+    // add utility type to extract all text values
+    output += '/**\n';
+    output += ' * Union type of all translation text values for use in t() function\n';
+    output += ' * Only original text strings appear in autocomplete, not internal key names\n';
+    output += ' */\n';
+    output += 'export type TranslationText =\n';
+    
+    const texts = sortedKeys
+        .map(key => source.keys[key])
+        .filter((entry): entry is SourceEntry => entry !== undefined)
+        .map(entry => entry.text.replace(/"/g, '\\"').replace(/\n/g, '\\n'));
+    
+    for (let i = 0; i < texts.length; i++) {
+        const text = texts[i];
+        const isLast = i === texts.length - 1;
+        output += `    | "${text}"${isLast ? ';\n' : '\n'}`;
+    }
 
     return output;
 };

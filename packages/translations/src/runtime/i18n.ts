@@ -24,32 +24,43 @@ export const initTranslations = (localeData: Record<string, string>, locale = 'e
 
 /**
  * Translation function with type safety
- * @param keyOrText - Translation key or original text
+ * 
+ * Accepts original text strings only.
+ * Autocomplete shows all extracted text strings, not internal key names.
+ * 
+ * @example
+ * ```ts
+ * t('All campaigns')
+ * t('Last updated')
+ * t('Welcome back')
+ * ```
+ * 
+ * @param text - Original text string to translate
  * @returns Translated string for current locale
  */
-export const t = (keyOrText: string): string => {
+export const t = <T extends string = string>(text: T): string => {
     const currentTranslations = translations[currentLocale];
     
     if (!currentTranslations) {
-        return keyOrText;
+        return text;
     }
 
     // check if it's a valid key
-    if (keyOrText in currentTranslations) {
-        return currentTranslations[keyOrText] || keyOrText;
+    if (text in currentTranslations) {
+        return currentTranslations[text] || text;
     }
 
     // try to find by original text
-    const key = textToKeyMap[keyOrText];
+    const key = textToKeyMap[text];
     if (key && key in currentTranslations) {
-        return currentTranslations[key] || keyOrText;
+        return currentTranslations[key] || text;
     }
 
     // fallback: return the input
     if (process.env.NODE_ENV === 'development') {
-        console.warn(`Translation not found: "${keyOrText}" (locale: ${currentLocale})`);
+        console.warn(`Translation not found: "${text}" (locale: ${currentLocale})`);
     }
-    return keyOrText;
+    return text;
 };
 
 /**
