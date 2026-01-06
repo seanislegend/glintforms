@@ -1,11 +1,17 @@
 import Container from '@glint/ui/container';
 import SectionHeader from '@glint/ui/section-header';
 import {getSession} from '@/lib/auth/server';
-import {t} from '@/lib/i18n';
+import {getServerI18n} from '@/lib/i18n-server';
 import {getShortName} from '@/utils/names';
 
-const HomePage = async () => {
+interface Props {
+    params: Promise<{locale: Locale}>;
+}
+
+const HomePage: React.FC<Props> = async ({params}) => {
+    const {locale} = await params;
     const session = await getSession();
+    const {t} = await getServerI18n(locale);
 
     return (
         <Container>

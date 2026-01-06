@@ -2,7 +2,6 @@
 
 import EmptyPanel from '@glint/ui/empty-panel';
 import Spinner from '@glint/ui/spinner';
-import {t} from '@/lib/i18n';
 import {ArchiveIcon} from '@phosphor-icons/react/dist/ssr/Archive';
 import {CheckIcon} from '@phosphor-icons/react/dist/ssr/Check';
 import {PencilIcon} from '@phosphor-icons/react/dist/ssr/Pencil';
@@ -13,12 +12,14 @@ import {useSuspenseQuery} from '@tanstack/react-query';
 import {lazy} from 'react';
 import {DataTable} from '@/components/data-table';
 import FormDialog from '@/components/form-dialog';
+import {useI18n} from '@/hooks/use-i18n';
 import {useTRPC} from '@/lib/trpc/react';
 import {columns} from './columns';
 
 const CreateSurveyForm = lazy(() => import('./create/form'));
 
 const SurveyList: React.FC = () => {
+    const {t} = useI18n();
     const trpc = useTRPC();
     const {data: surveys, isLoading} = useSuspenseQuery(trpc.surveys.getAll.queryOptions());
 

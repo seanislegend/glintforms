@@ -4,10 +4,10 @@ import {FormField} from '@glint/form/fields';
 import {LABEL_CLASSNAME} from '@glint/form/label';
 import Button from '@glint/ui/button';
 import {cn} from '@glint/ui/utils';
-import {t} from '@/lib/i18n';
 import {PlusIcon, TrashIcon} from '@phosphor-icons/react/dist/ssr';
 import {useState} from 'react';
 import {useFormContext} from 'react-hook-form';
+import {useI18n} from '@/hooks/use-i18n';
 import type {ScreenerCreate} from '@/lib/schemas/screeners';
 
 interface Props {
@@ -15,6 +15,7 @@ interface Props {
 }
 
 const SelectionFields: React.FC<Props> = ({defaultOptionIds}) => {
+    const {t} = useI18n();
     const methods = useFormContext<ScreenerCreate>();
     const [optionIds, setOptionIds] = useState<Array<{id: string; tempId: string}>>(
         defaultOptionIds || [{id: crypto.randomUUID(), tempId: crypto.randomUUID()}]

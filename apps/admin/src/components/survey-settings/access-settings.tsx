@@ -5,7 +5,7 @@ import {handleFormError} from '@glint/form/utils';
 import {Alert, AlertDescription, AlertTitle} from '@glint/ui/alert';
 import Button from '@glint/ui/button';
 import {BasicCard} from '@glint/ui/card';
-import {t} from '@/lib/i18n';
+import {useI18n} from '@/hooks/use-i18n';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {InfoIcon} from '@phosphor-icons/react/dist/ssr/Info';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
@@ -30,6 +30,7 @@ interface FormProps extends Props {
 }
 
 const SurveySecuritySettingsForm: React.FC<FormProps> = ({settings, survey}) => {
+    const {t} = useI18n();
     const trpc = useTRPC();
     const queryClient = useQueryClient();
     const canEdit = surveyCanBeEdited(survey.status);

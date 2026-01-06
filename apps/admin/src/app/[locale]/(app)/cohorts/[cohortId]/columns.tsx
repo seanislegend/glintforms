@@ -1,10 +1,10 @@
 'use client';
 
 import RelativeDate from '@glint/ui/relative-date';
-import {t} from '@/lib/i18n';
 import type {ColumnDef, Row} from '@tanstack/react-table';
 import {DataTableColumnHeader} from '@/components/data-table/column-header';
 import {DataTableRowActions} from '@/components/data-table/row-actions';
+import {t} from '@/lib/i18n';
 import type {RespondentList} from '@/lib/schemas/respondents';
 import {columns as respondentColumns} from '../../respondents/columns';
 

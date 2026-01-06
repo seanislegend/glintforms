@@ -3,7 +3,7 @@
 
 import Input from '@glint/form/input';
 import Button from '@glint/ui/button';
-import {t} from '@/lib/i18n';
+import {useI18n} from '@/hooks/use-i18n';
 import {XIcon} from '@phosphor-icons/react/dist/ssr/X';
 import type {Table} from '@tanstack/react-table';
 import type React from 'react';
@@ -29,6 +29,7 @@ export const DataTableToolbar = <TData,>({
     inputFilterKey = 'title',
     table
 }: React.PropsWithChildren<DataTableToolbarProps<TData>>) => {
+    const {t} = useI18n();
     const isFiltered = table.getState().columnFilters.length > 0;
 
     if (!facetedFilters && !isFiltered && !inputFilterKey && !children) {

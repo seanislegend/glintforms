@@ -3,7 +3,7 @@
 import {FormField} from '@glint/form/fields';
 import {handleFormError} from '@glint/form/utils';
 import Button from '@glint/ui/button';
-import {t} from '@/lib/i18n';
+import {useI18n} from '@/hooks/use-i18n';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {PlusIcon} from '@phosphor-icons/react/dist/ssr/Plus';
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query';
@@ -26,6 +26,7 @@ const assignScreenerSchema = z.object({
 type AssignScreenerForm = z.infer<typeof assignScreenerSchema>;
 
 const AssignScreenerDialog: React.FC<Props> = ({assignedScreenerIds, surveyId}) => {
+    const {t} = useI18n();
     const trpc = useTRPC();
     const queryClient = useQueryClient();
 

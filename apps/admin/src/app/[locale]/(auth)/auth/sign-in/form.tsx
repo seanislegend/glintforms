@@ -5,11 +5,12 @@ import Input from '@glint/form/input';
 import {LABEL_CLASSNAME} from '@glint/form/label';
 import {Alert, AlertDescription} from '@glint/ui/alert';
 import Button from '@glint/ui/button';
-import {t} from '@/lib/i18n';
 import {useActionState} from 'react';
+import {useI18n} from '@/hooks/use-i18n';
 import {handleSubmit} from './action';
 
 const Form = () => {
+    const {t} = useI18n();
     const [state, action, pending] = useActionState(handleSubmit, {
         error: null,
         success: false

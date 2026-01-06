@@ -1,0 +1,285 @@
+---
+alwaysApply: false
+description: Server vs client translation patterns. Apply when implementing or modifying i18n translations, adding text to UI components, or converting hardcoded strings to translatable text.
+---
+
+# Translations
+
+This document defines how to use translations in the Glint admin application. Follow these patterns to ensure consistent translation implementation across server and client components.
+
+## Core principles
+
+- Use server-side translations for server components
+- Use client-side translations for client components
+- Always use the `t()` function for user-facing text
+- Pass English text as the argument to `t()`
+- Never hardcode translated text
+
+## Server components
+
+Server components must use the async `getServerI18n` function.
+
+### Import pattern
+
+```typescript
+import {getServerI18n} from '@/lib/i18n-server';
+```
+
+### Usage pattern
+
+```typescript
+const Page: React.FC<Props> = async ({params}) => {
+    const {locale, screenerId} = await params;
+    const {t} = await getServerI18n(locale);
+
+    return (
+        <div>
+            <h1>{t('Page title')}</h1>
+            <p>{t('Page description')}</p>
+        </div>
+    );
+};
+```
+
+### Key requirements
+
+- Extract `locale` from params
+- Await both `params` and `getServerI18n(locale)`
+- Destructure `{t}` from the result
+- Use `t()` for all user-facing text
+
+### Example
+
+```typescript
+import {getServerI18n} from '@/lib/i18n-server';
+
+interface Props {
+    params: Promise<{locale: Locale; screenerId: string}>;
+}
+
+const Page: React.FC<Props> = async ({params}) => {
+    const {locale, screenerId} = await params;
+    const {t} = await getServerI18n(locale);
+
+    return (
+        <Container>
+            <SectionHeader title={t('Screener details')} />
+        </Container>
+    );
+};
+```
+
+## Client components
+
+Client components must use the synchronous `useI18n` hook.
+
+### Import pattern
+
+```typescript
+import {useI18n} from '@/hooks/use-i18n';
+```
+
+### Usage pattern
+
+```typescript
+'use client';
+
+const Component: React.FC = () => {
+    const {t} = useI18n();
+
+    return (
+        <div>
+            <button>{t('Click me')}</button>
+            <span>{t('Status')}</span>
+        </div>
+    );
+};
+```
+
+### Key requirements
+
+- Add `'use client'` directive at the top of the file
+- Call `useI18n()` within the component
+- Destructure `{t}` from the result
+- Use `t()` for all user-facing text
+
+### Example
+
+```typescript
+'use client';
+
+import Button from '@glint/ui/button';
+import {useI18n} from '@/hooks/use-i18n';
+
+const SurveyNavbar: React.FC<Props> = ({surveyId}) => {
+    const {t} = useI18n();
+
+    return (
+        <nav>
+            <Button>{t('Overview')}</Button>
+            <Button>{t('Settings')}</Button>
+            <Button>{t('Questions')}</Button>
+        </nav>
+    );
+};
+```
+
+## Common patterns
+
+### Translation keys
+
+Pass English text as the translation key:
+
+```typescript
+// ✅ Correct
+t('User settings')
+t('Save changes')
+t('Delete survey')
+
+// ❌ Incorrect - do not use key-based translations
+t('user.settings')
+t('actions.save')
+t('survey.delete')
+```
+
+### Dynamic text
+
+For text with dynamic values, use template literals outside the translation:
+
+```typescript
+// ✅ Correct
+const message = `${t('Responses')}: ${count}`;
+const title = `${survey.title} - ${t('Settings')}`;
+
+// ❌ Incorrect - do not interpolate inside t()
+const message = t(`Responses: ${count}`);
+```
+
+### Conditional text
+
+Keep translation calls separate for different conditions:
+
+```typescript
+// ✅ Correct
+const label = isActive ? t('Active') : t('Inactive');
+const status = hasLaunched ? t('Live') : t('Draft');
+
+// ❌ Incorrect - translate the entire condition
+const label = t(isActive ? 'Active' : 'Inactive');
+```
+
+## Common mistakes
+
+### Using server translations in client components
+
+```typescript
+// ❌ Incorrect - getServerI18n cannot be used in client components
+'use client';
+
+const Component = async () => {
+    const {t} = await getServerI18n('en');
+    return <div>{t('Text')}</div>;
+};
+```
+
+### Using client translations in server components
+
+```typescript
+// ❌ Incorrect - useI18n is a hook and cannot be used in server components
+const Page = async () => {
+    const {t} = useI18n();
+    return <div>{t('Text')}</div>;
+};
+```
+
+### Not awaiting server translations
+
+```typescript
+// ❌ Incorrect - must await getServerI18n
+const Page = async ({params}) => {
+    const {locale} = await params;
+    const {t} = getServerI18n(locale); // Missing await
+    return <div>{t('Text')}</div>;
+};
+```
+
+### Forgetting 'use client' directive
+
+```typescript
+// ❌ Incorrect - missing 'use client' directive
+import {useI18n} from '@/hooks/use-i18n';
+
+const Component = () => {
+    const {t} = useI18n(); // Will fail without 'use client'
+    return <div>{t('Text')}</div>;
+};
+```
+
+## Type safety
+
+Both translation functions accept strings and provide type-safe autocomplete for existing translations. The translation system uses English text as keys, so you can type any English phrase and it will be automatically added to the translation system.
+
+## Verification checklist
+
+Before completing any translation implementation, verify:
+
+1. **Component type**: Is this a server or client component?
+2. **Correct import**: Using `getServerI18n` for server, `useI18n` for client
+3. **Async handling**: Server translations are awaited
+4. **Client directive**: Client components have `'use client'` directive
+5. **English text**: All user-facing text uses `t()` with English strings
+6. **Locale parameter**: Server components extract locale from params
+
+## Migration guide
+
+### Converting hardcoded text to translations
+
+```typescript
+// Before
+<button>Save Changes</button>
+
+// After (client component)
+const {t} = useI18n();
+<button>{t('Save changes')}</button>
+
+// After (server component)
+const {t} = await getServerI18n(locale);
+<button>{t('Save changes')}</button>
+```
+
+### Converting server component to use translations
+
+```typescript
+// Before
+const Page = async ({params}) => {
+    return <h1>Survey Details</h1>;
+};
+
+// After
+import {getServerI18n} from '@/lib/i18n-server';
+
+const Page = async ({params}) => {
+    const {locale} = await params;
+    const {t} = await getServerI18n(locale);
+    return <h1>{t('Survey details')}</h1>;
+};
+```
+
+### Converting client component to use translations
+
+```typescript
+// Before
+const Component = () => {
+    return <button>Click Me</button>;
+};
+
+// After
+'use client';
+
+import {useI18n} from '@/hooks/use-i18n';
+
+const Component = () => {
+    const {t} = useI18n();
+    return <button>{t('Click me')}</button>;
+};
+```

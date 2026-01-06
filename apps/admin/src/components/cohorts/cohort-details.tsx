@@ -5,7 +5,7 @@ import {Card, CardContent, CardHeader, CardTitle} from '@glint/ui/card';
 import EmptyPanel from '@glint/ui/empty-panel';
 import {Heading5} from '@glint/ui/heading';
 import RelativeDate from '@glint/ui/relative-date';
-import {t} from '@/lib/i18n';
+import {useI18n} from '@/hooks/use-i18n';
 import {PencilIcon} from '@phosphor-icons/react/dist/ssr/Pencil';
 import {useSuspenseQuery} from '@tanstack/react-query';
 import Link from '@glint/ui/link';
@@ -16,6 +16,7 @@ interface Props {
 }
 
 const CohortDetails: React.FC<Props> = ({cohortId}) => {
+    const {t} = useI18n();
     const trpc = useTRPC();
     const {data: cohort} = useSuspenseQuery(trpc.cohorts.get.queryOptions(cohortId));
 

@@ -2,8 +2,8 @@
 
 import {FormField} from '@glint/form/fields';
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@glint/ui/card';
-import {t} from '@/lib/i18n';
 import {type Control, useFormContext, useWatch} from 'react-hook-form';
+import {useI18n} from '@/hooks/use-i18n';
 import type {ScreenerCreate} from '@/lib/schemas/screeners';
 import {COUNTRY_CODE_LABELS} from '@/utils/country-codes';
 import SelectionFields from './form-selection-fields';
@@ -16,31 +16,36 @@ interface FieldProps {
     control: Control<ScreenerCreate>;
 }
 
-const ScreenerAgeFields: React.FC<FieldProps> = ({control}) => (
-    <>
-        <FormField<ScreenerCreate>
-            control={control}
-            defaultValue=""
-            fieldProps={{min: '1', type: 'number'}}
-            fieldType="input"
-            label={t('Age')}
-            name="config.value"
-        />
-        <FormField<ScreenerCreate>
-            control={control}
-            defaultValue=""
-            fieldType="radio-group"
-            label={t('Operator')}
-            name="config.operator"
-            options={[
-                {label: t('Over'), value: 'over'},
-                {label: t('Under'), value: 'under'}
-            ]}
-        />
-    </>
-);
+const ScreenerAgeFields: React.FC<FieldProps> = ({control}) => {
+    const {t} = useI18n();
+
+    return (
+        <>
+            <FormField<ScreenerCreate>
+                control={control}
+                defaultValue=""
+                fieldProps={{min: '1', type: 'number'}}
+                fieldType="input"
+                label={t('Age')}
+                name="config.value"
+            />
+            <FormField<ScreenerCreate>
+                control={control}
+                defaultValue=""
+                fieldType="radio-group"
+                label={t('Operator')}
+                name="config.operator"
+                options={[
+                    {label: t('Over'), value: 'over'},
+                    {label: t('Under'), value: 'under'}
+                ]}
+            />
+        </>
+    );
+};
 
 const ScreenerLocationFields: React.FC<FieldProps> = ({control}) => {
+    const {t} = useI18n();
     const countryOptions = Object.entries(COUNTRY_CODE_LABELS).map(([code, label]) => ({
         label,
         value: code
@@ -72,6 +77,7 @@ const screenerDescriptions: Record<string, string> = {
 };
 
 const ScreenerTypeFields: React.FC<Props> = ({defaultOptionIds}) => {
+    const {t} = useI18n();
     const methods = useFormContext<ScreenerCreate>();
     const screenerType = useWatch({control: methods.control, name: 'type'});
 

@@ -1,19 +1,20 @@
 import Container from '@glint/ui/container';
 import SectionHeader from '@glint/ui/section-header';
 import Spacer from '@glint/ui/spacer';
-import {t} from '@/lib/i18n';
 import {Suspense} from 'react';
 import Form from '@/components/respondents/form';
 import RespondentSummary from '@/components/respondents/summary';
+import {getServerI18n} from '@/lib/i18n-server';
 import {HydrateClient, prefetch, trpc} from '@/lib/trpc/server';
 
 interface PageProps {
-    params: Promise<{respondentId: string}>;
+    params: Promise<{locale: Locale; respondentId: string}>;
 }
 
 const Page: React.FC<PageProps> = async ({params}) => {
-    const {respondentId} = await params;
+    const {locale, respondentId} = await params;
     prefetch(trpc.respondents.get.queryOptions(respondentId));
+    const {t} = await getServerI18n(locale);
 
     return (
         <HydrateClient>

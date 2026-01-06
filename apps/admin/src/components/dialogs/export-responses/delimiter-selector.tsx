@@ -3,10 +3,11 @@
 import {FormField} from '@glint/form/fields';
 import {BasicCard} from '@glint/ui/card';
 import ToggleVisibility from '@glint/ui/toggle-visibility';
-import {t} from '@/lib/i18n';
+import {useI18n} from '@/hooks/use-i18n';
 import {useFormContext, useWatch} from 'react-hook-form';
 
 const ExportResponsesDelimiterSelector: React.FC = () => {
+    const {t} = useI18n();
     const {control} = useFormContext();
     const useCustomDelimiter = useWatch({name: 'useCustomDelimiter'});
 

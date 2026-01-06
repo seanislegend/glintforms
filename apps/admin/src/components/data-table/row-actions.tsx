@@ -2,7 +2,7 @@
 
 import Button from '@glint/ui/button';
 import {Menu, MenuItem, MenuPopup, MenuSeparator, MenuShortcut, MenuTrigger} from '@glint/ui/menu';
-import {t} from '@/lib/i18n';
+import {useI18n} from '@/hooks/use-i18n';
 import {ArrowRightIcon} from '@phosphor-icons/react/dist/ssr/ArrowRight';
 import {DotsThreeIcon} from '@phosphor-icons/react/dist/ssr/DotsThree';
 import {PencilSimpleIcon} from '@phosphor-icons/react/dist/ssr/PencilSimple';
@@ -37,6 +37,8 @@ export const DataTableRowActions = <TData,>({
     detailsUrl,
     editUrl
 }: React.PropsWithChildren<DataTableRowActionsProps<TData>>) => {
+    const {t} = useI18n();
+
     return (
         <div className="flex flex-row space-x-2 justify-end">
             {children}

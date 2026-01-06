@@ -10,7 +10,7 @@ import {
     DialogPopup,
     DialogTitle
 } from '@glint/ui/dialog';
-import {t} from '@/lib/i18n';
+import {useI18n} from '@/hooks/use-i18n';
 import {useAtom, useSetAtom} from 'jotai';
 import {useFormContext, useWatch} from 'react-hook-form';
 import {questionCountAtom, removeQuestionIndexAtom} from '@/lib/store';
@@ -25,6 +25,7 @@ interface ButtonProps extends DialogProps {
 }
 
 const RemoveQuestionButton: React.FC<ButtonProps> = ({questionIndex, onRemove, onSuccess}) => {
+    const {t} = useI18n();
     const {setValue} = useFormContext();
     const question = useWatch({name: `questions.${questionIndex}`});
     const setQuestionCount = useSetAtom(questionCountAtom);
@@ -44,6 +45,7 @@ const RemoveQuestionButton: React.FC<ButtonProps> = ({questionIndex, onRemove, o
 };
 
 const RemoveQuestionDialog: React.FC<DialogProps> = ({onRemove}) => {
+    const {t} = useI18n();
     const [removeQuestionIndex, setRemoveQuestionIndex] = useAtom(removeQuestionIndexAtom);
     const isOpen = removeQuestionIndex !== null;
 

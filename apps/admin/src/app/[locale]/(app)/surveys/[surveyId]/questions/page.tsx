@@ -2,7 +2,7 @@ import {QuestionEditorForm, QuestionEditorWrapper} from '@/components/question-e
 import {HydrateClient, prefetch, trpc} from '@/lib/trpc/server';
 
 interface Props {
-    params: Promise<{surveyId: string}>;
+    params: Promise<{locale: Locale; surveyId: string}>;
 }
 
 const QuestionEditorPage: React.FC<Props> = async ({params}) => {

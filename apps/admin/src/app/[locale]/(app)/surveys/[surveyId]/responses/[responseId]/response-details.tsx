@@ -4,7 +4,6 @@ import {Badge} from '@glint/ui/badge';
 import {Card, CardContent, CardHeader, CardTitle} from '@glint/ui/card';
 import RelativeDate from '@glint/ui/relative-date';
 import TextLink from '@glint/ui/text-link';
-import {t} from '@/lib/i18n';
 import {ClockIcon} from '@phosphor-icons/react/dist/ssr/Clock';
 import {useSuspenseQuery} from '@tanstack/react-query';
 import {redirect} from 'next/navigation';
@@ -13,6 +12,7 @@ import QuestionTypeBadge from '@/components/badges/question-type';
 import ResponseStatusBadge from '@/components/badges/response-status';
 import AuthenticityScoreOverview from '@/components/response-authenticity/overview';
 import ResponseAnswerValue from '@/components/responses/answer-value';
+import {useI18n} from '@/hooks/use-i18n';
 import {useTRPC} from '@/lib/trpc/react';
 import {humanise} from '@/utils/humanise';
 import {formatDurationToClosestSecond} from '@/utils/time';
@@ -23,6 +23,7 @@ interface Props {
 }
 
 const ResponseDetails: React.FC<React.PropsWithChildren<Props>> = ({responseId, surveyId}) => {
+    const {t} = useI18n();
     const trpc = useTRPC();
     const {data} = useSuspenseQuery(trpc.responses.get.queryOptions({responseId}));
     const answers = data?.answers;

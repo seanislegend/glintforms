@@ -1,7 +1,9 @@
+'use client';
+
 import {Card, CardContent, CardHeader, CardTitle} from '@glint/ui/card';
 import EmptyPanel from '@glint/ui/empty-panel';
 import RelativeDate from '@glint/ui/relative-date';
-import {t} from '@/lib/i18n';
+import {useI18n} from '@/hooks/use-i18n';
 import {CheckCircleIcon} from '@phosphor-icons/react/dist/ssr/CheckCircle';
 import {useSuspenseQuery} from '@tanstack/react-query';
 import {useTRPC} from '@/lib/trpc/react';
@@ -11,6 +13,7 @@ interface Props {
 }
 
 const SurveyOverviewRecentActivity: React.FC<Props> = ({surveyId}) => {
+    const {t} = useI18n();
     const trpc = useTRPC();
     const {data: activities} = useSuspenseQuery(trpc.activities.getAll.queryOptions(surveyId));
 

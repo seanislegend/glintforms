@@ -4,7 +4,7 @@ import Container from '@glint/ui/container';
 import EmptyPanel from '@glint/ui/empty-panel';
 import {Heading4} from '@glint/ui/heading';
 import RelativeDate from '@glint/ui/relative-date';
-import {t} from '@/lib/i18n';
+import {useI18n} from '@/hooks/use-i18n';
 import {useQuery} from '@tanstack/react-query';
 import RecordId from '@/components/record-id';
 import {useTRPC} from '@/lib/trpc/react';
@@ -14,6 +14,7 @@ interface FormProps {
 }
 
 const RespondentSummary: React.FC<FormProps> = ({respondentId}) => {
+    const {t} = useI18n();
     const trpc = useTRPC();
     const {data: respondent, isLoading} = useQuery(trpc.respondents.get.queryOptions(respondentId));
 

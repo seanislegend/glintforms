@@ -5,7 +5,7 @@ import Input from '@glint/form/input';
 import {LABEL_CLASSNAME} from '@glint/form/label';
 import Button from '@glint/ui/button';
 import ToggleVisibility from '@glint/ui/toggle-visibility';
-import {t} from '@/lib/i18n';
+import {useI18n} from '@/hooks/use-i18n';
 import {XIcon} from '@phosphor-icons/react/dist/ssr/X';
 import clsx from 'clsx';
 import {useWatch} from 'react-hook-form';
@@ -25,6 +25,7 @@ interface Props {
 }
 
 const Filters: React.FC<Props> = ({filterValues, handleClearField, methods}) => {
+    const {t} = useI18n();
     const ageFilterType = useWatch({control: methods.control, name: 'age.type'});
     const gender = useWatch({control: methods.control, name: 'gender'});
     const locationCity = useWatch({control: methods.control, name: 'locationCity'});

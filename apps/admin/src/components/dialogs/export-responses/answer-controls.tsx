@@ -2,12 +2,13 @@
 
 import {FormField} from '@glint/form/fields';
 import ToggleVisibility from '@glint/ui/toggle-visibility';
-import {t} from '@/lib/i18n';
+import {useI18n} from '@/hooks/use-i18n';
 import {useFormContext, useWatch} from 'react-hook-form';
 import AnswerFieldSelector from './answer-field-selector';
 import DelimiterSelector from './delimiter-selector';
 
 const ExportResponsesAnswerControls: React.FC = () => {
+    const {t} = useI18n();
     const {control} = useFormContext();
     const includeAnswers = useWatch({name: 'includeAnswers'});
 

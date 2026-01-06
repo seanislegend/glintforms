@@ -1,11 +1,12 @@
 'use client';
 
 import {Tooltip, TooltipPopup, TooltipProvider, TooltipTrigger} from '@glint/ui/tooltip';
-import {t} from '@/lib/i18n';
 import {InfoIcon} from '@phosphor-icons/react/dist/ssr/Info';
 import {useFormContext} from 'react-hook-form';
+import {useI18n} from '@/hooks/use-i18n';
 
 const QuestionEditorErrorStatus: React.FC = () => {
+    const {t} = useI18n();
     const {formState} = useFormContext();
     const {errors} = formState;
 

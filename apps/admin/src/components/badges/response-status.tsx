@@ -1,5 +1,7 @@
+'use client';
+
 import {Badge} from '@glint/ui/badge';
-import {t} from '@/lib/i18n';
+import {useI18n} from '@/hooks/use-i18n';
 import {ChecksIcon} from '@phosphor-icons/react/dist/ssr/Checks';
 import {FileIcon} from '@phosphor-icons/react/dist/ssr/File';
 import {SpinnerGapIcon} from '@phosphor-icons/react/dist/ssr/SpinnerGap';
@@ -13,16 +15,19 @@ const STATUS_VARIANTS = {
     completed: 'success',
     incomplete: 'warning'
 } as const;
-const STATUS_LABELS = {
-    completed: t('Completed'),
-    incomplete: t('Incomplete')
-} as const;
+
 const STATUS_ICONS = {
     completed: ChecksIcon,
     incomplete: SpinnerGapIcon
 } as const;
 
 const ResponseStatusBadge: React.FC<Props> = ({size = 'md', status, ...props}) => {
+    const {t} = useI18n();
+    
+    const STATUS_LABELS = {
+        completed: t('Completed'),
+        incomplete: t('Incomplete')
+    } as const;
     if (!Object.keys(STATUS_VARIANTS).includes(status)) {
         console.warn(
             `Invalid status: ${status}. Valid statuses are: ${Object.keys(STATUS_VARIANTS).join(', ')}`

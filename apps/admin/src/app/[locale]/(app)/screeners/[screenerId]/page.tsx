@@ -7,7 +7,7 @@ import {HydrateClient, prefetch, trpc} from '@/lib/trpc/server';
 import ScreenerDetails from './screener-details';
 
 interface Props {
-    params: Promise<{locale: string; screenerId: string}>;
+    params: Promise<{locale: Locale; screenerId: string}>;
 }
 
 const Page: React.FC<Props> = async ({params}) => {

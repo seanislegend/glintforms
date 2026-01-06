@@ -1,10 +1,10 @@
 'use client';
 
-import {t} from '@/lib/i18n';
-import type {ColumnDef} from '@tanstack/react-table';
 import Link from '@glint/ui/link';
+import type {ColumnDef} from '@tanstack/react-table';
 import {DataTableColumnHeader} from '@/components/data-table/column-header';
 import {DataTableRowActions} from '@/components/data-table/row-actions';
+import {t} from '@/lib/i18n';
 import type {ScreenerDetails} from '@/lib/schemas/screeners';
 
 type Survey = ScreenerDetails['surveys'][0];

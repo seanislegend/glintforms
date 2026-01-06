@@ -1,10 +1,17 @@
 import {Card, CardContent, CardDescription, CardHeader} from '@glint/ui/card';
 import TextLink from '@glint/ui/text-link';
-import {t} from '@/lib/i18n';
 import {LightningIcon} from '@phosphor-icons/react/dist/ssr/Lightning';
+import {getServerI18n} from '@/lib/i18n-server';
 import Form from './form';
 
-const SignInPage: React.FC = () => {
+interface Props {
+    params: Promise<{locale: Locale}>;
+}
+
+const SignInPage: React.FC<Props> = async ({params}) => {
+    const {locale} = await params;
+    const {t} = await getServerI18n(locale);
+
     return (
         <div className="bg-muted flex min-h-svh flex-col items-center justify-center gap-6 p-6 md:p-10">
             <div className="flex w-full max-w-sm flex-col gap-6">

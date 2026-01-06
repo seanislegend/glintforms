@@ -1,7 +1,7 @@
 'use client';
 
 import Button from '@glint/ui/button';
-import {t} from '@/lib/i18n';
+import {useI18n} from '@/hooks/use-i18n';
 import {TrashIcon} from '@phosphor-icons/react/dist/ssr';
 import {useMutation, useQueryClient} from '@tanstack/react-query';
 import {useRouter} from 'next/navigation';
@@ -15,6 +15,7 @@ interface Props {
 }
 
 const DeleteScreenerDialog: React.FC<Props> = ({screenerId}) => {
+    const {t} = useI18n();
     const [isOpen, setIsOpen] = useState(false);
     const router = useRouter();
     const trpc = useTRPC();

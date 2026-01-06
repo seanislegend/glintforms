@@ -1,17 +1,18 @@
 'use client';
 
 import EmptyPanel from '@glint/ui/empty-panel';
-import {t} from '@/lib/i18n';
 import {PlusIcon} from '@phosphor-icons/react/dist/ssr/Plus';
 import {useSuspenseQuery} from '@tanstack/react-query';
 import {DataTable} from '@/components/data-table';
 import FormDialog from '@/components/form-dialog';
+import {useI18n} from '@/hooks/use-i18n';
 import type {CohortList} from '@/lib/schemas/cohorts';
 import {useTRPC} from '@/lib/trpc/react';
 import {columns} from './columns';
 import CohortForm from './form';
 
 const CohortsList: React.FC = () => {
+    const {t} = useI18n();
     const trpc = useTRPC();
     const {data: cohorts, isLoading} = useSuspenseQuery(trpc.cohorts.getAll.queryOptions());
 

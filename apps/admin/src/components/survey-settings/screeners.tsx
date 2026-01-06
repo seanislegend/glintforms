@@ -12,7 +12,7 @@ import {useState} from 'react';
 import {FormProvider, useForm} from 'react-hook-form';
 import {toast} from 'sonner';
 import ConfirmationDialog from '@/components/dialogs/confirmation';
-import {t} from '@/lib/i18n';
+import {useI18n} from '@/hooks/use-i18n';
 import {surveyCanBeEdited} from '@/lib/surveys/status';
 import {useTRPC} from '@/lib/trpc/react';
 import {getScreenerSummary} from '@/utils/screener-summary';
@@ -23,6 +23,7 @@ interface Props {
 }
 
 const ScreenersSettings: React.FC<Props> = ({survey}) => {
+    const {t} = useI18n();
     const trpc = useTRPC();
     const queryClient = useQueryClient();
     const canEdit = surveyCanBeEdited(survey.status);
@@ -165,6 +166,7 @@ interface FailureMessageFormProps {
 }
 
 const FailureMessageForm: React.FC<FailureMessageFormProps> = ({defaultMessage, onSave}) => {
+    const {t} = useI18n();
     const methods = useForm<{failureMessage: string}>({
         defaultValues: {failureMessage: defaultMessage}
     });

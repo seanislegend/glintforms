@@ -7,7 +7,7 @@ import Container from '@glint/ui/container';
 import EmptyPanel from '@glint/ui/empty-panel';
 import SectionHeader from '@glint/ui/section-header';
 import Spacer from '@glint/ui/spacer';
-import {t} from '@/lib/i18n';
+import {useI18n} from '@/hooks/use-i18n';
 import {InfoIcon} from '@phosphor-icons/react/dist/ssr/Info';
 import {PlusIcon} from '@phosphor-icons/react/dist/ssr/Plus';
 import {useMutation, useQueryClient} from '@tanstack/react-query';
@@ -32,6 +32,7 @@ import useQuestionEditor from './use-question-editor';
 import {QuestionEditorContext} from './wrapper';
 
 const QuestionEditorForm: React.FC = () => {
+    const {t} = useI18n();
     const {control, handleSubmit} = useFormContext<QuestionsUpdate>();
     const fieldArray = useFieldArray({control, name: 'questions'});
     const {getNewQuestion, normaliseQuestions, surveyId} = useQuestionEditor();

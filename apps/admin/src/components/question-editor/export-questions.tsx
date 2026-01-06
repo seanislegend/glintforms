@@ -13,7 +13,7 @@ import {
     SheetTitle,
     SheetTrigger
 } from '@glint/ui/sheet';
-import {t} from '@/lib/i18n';
+import {useI18n} from '@/hooks/use-i18n';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {BracketsCurlyIcon} from '@phosphor-icons/react/dist/ssr/BracketsCurly';
 import {DownloadSimpleIcon} from '@phosphor-icons/react/dist/ssr/DownloadSimple';
@@ -31,6 +31,7 @@ interface Props {
 }
 
 const ImportQuestionsDialog: React.FC<Props> = ({surveyId}) => {
+    const {t} = useI18n();
     const [isOpen, setIsOpen] = useState(false);
     const [isExporting, setIsExporting] = useState(false);
 

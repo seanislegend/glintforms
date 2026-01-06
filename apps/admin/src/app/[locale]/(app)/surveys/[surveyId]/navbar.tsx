@@ -11,7 +11,7 @@ import {TextAlignLeftIcon} from '@phosphor-icons/react/dist/ssr/TextAlignLeft';
 import {useSuspenseQuery} from '@tanstack/react-query';
 import {redirect, usePathname} from 'next/navigation';
 import SurveyStatusBadge from '@/components/badges/survey-status';
-import {t} from '@/lib/i18n';
+import {useI18n} from '@/hooks/use-i18n';
 import {surveyHasLaunched, surveyIsTesting} from '@/lib/surveys/status';
 import {useTRPC} from '@/lib/trpc/react';
 
@@ -28,6 +28,7 @@ export const SurveyNavbarWrapper: React.FC<React.PropsWithChildren> = ({children
 };
 
 const SurveyNavbar: React.FC<Props> = ({surveyId}) => {
+    const {t} = useI18n();
     const trpc = useTRPC();
     const {data: survey, isLoading} = useSuspenseQuery(trpc.surveys.get.queryOptions(surveyId));
     const pathname = usePathname();
