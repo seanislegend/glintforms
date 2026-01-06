@@ -2,9 +2,9 @@ import Container from '@glint/ui/container';
 import SectionHeader from '@glint/ui/section-header';
 import Spacer from '@glint/ui/spacer';
 import {Suspense} from 'react';
+import Form from '@/components/respondents/form';
 import RespondentSummary from '@/components/respondents/summary';
 import {HydrateClient, prefetch, trpc} from '@/lib/trpc/server';
-import Form from './form';
 
 interface PageProps {
     params: Promise<{respondentId: string}>;

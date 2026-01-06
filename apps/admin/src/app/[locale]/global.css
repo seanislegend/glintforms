@@ -1,8 +1,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @custom-variant dark (&:is(.dark *));
-@source "../../../../packages/form/src/";
-@source "../../../../packages/ui/src/";
+@source "../../../../../packages/form/src/";
+@source "../../../../../packages/ui/src/";
 
 /* blue is : #1c54f2;
 red is: #d23951
