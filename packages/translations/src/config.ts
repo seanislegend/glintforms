@@ -1,5 +1,7 @@
 /// <reference types="bun-types" />
 
+import {existsSync} from 'node:fs';
+import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {z} from 'zod';
 import type {Config} from './types.js';
@@ -14,9 +16,7 @@ const appConfigSchema = z
     .refine(
         data => {
             // either basePath or all explicit paths must be provided
-            const hasBasePath = Boolean(data.basePath);
-            const hasExplicitPaths = Boolean(data.scanPaths && data.localesDir && data.typesOutput);
-            return hasBasePath || hasExplicitPaths;
+            return !!(data.basePath || (data.scanPaths && data.localesDir && data.typesOutput));
         },
         {
             message:
@@ -41,33 +41,65 @@ const configSchema = z.object({
     primaryLocale: z.string()
 });
 
+const findConfigFile = (startDir: string, configName: string): string | null => {
+    let currentDir = startDir;
+    const root = resolve('/');
+
+    while (currentDir !== root) {
+        const configPath = resolve(currentDir, configName);
+        if (existsSync(configPath)) {
+            return configPath;
+        }
+        currentDir = resolve(currentDir, '..');
+    }
+
+    // check root directory
+    const rootConfigPath = resolve(root, configName);
+    return existsSync(rootConfigPath) ? rootConfigPath : null;
+};
+
 export const loadConfig = async (configPath?: string): Promise<Config> => {
-    const path = configPath || '.translation.config.json';
-    const resolvedPath = resolve(process.cwd(), path);
+    // resolve config path
+    const resolvedPath = configPath
+        ? resolve(process.cwd(), configPath)
+        : (() => {
+              const configName = '.translation.config.json';
+              const found = findConfigFile(process.cwd(), configName);
+              if (!found) {
+                  throw new Error(
+                      `Could not find ${configName} in ${process.cwd()} or any parent directory`
+                  );
+              }
+              return found;
+          })();
 
     try {
-        const file = Bun.file(resolvedPath);
-        const content = await file.text();
+        // use Bun APIs if available, otherwise fall back to Node.js
+        const content =
+            typeof Bun !== 'undefined'
+                ? await Bun.file(resolvedPath).text()
+                : await readFile(resolvedPath, 'utf-8');
+
         const json = JSON.parse(content);
         const parsed = configSchema.parse(json);
 
         // normalize app configs to always have explicit paths
-        const normalizedApps: Record<string, Config['apps'][string]> = {};
-        for (const [appName, appConfig] of Object.entries(parsed.apps)) {
-            if (appConfig.basePath) {
-                normalizedApps[appName] = {
-                    localesDir: `${appConfig.basePath}/locales`,
-                    scanPaths: [`${appConfig.basePath}/src`],
-                    typesOutput: `${appConfig.basePath}/locales/keys.ts`
-                };
-            } else if (appConfig.localesDir && appConfig.scanPaths && appConfig.typesOutput) {
-                normalizedApps[appName] = {
-                    localesDir: appConfig.localesDir,
-                    scanPaths: appConfig.scanPaths,
-                    typesOutput: appConfig.typesOutput
-                };
-            }
-        }
+        const normalizedApps = Object.fromEntries(
+            Object.entries(parsed.apps).map(([appName, appConfig]) => {
+                const normalized = appConfig.basePath
+                    ? {
+                          localesDir: `${appConfig.basePath}/locales`,
+                          scanPaths: [`${appConfig.basePath}/src`],
+                          typesOutput: `${appConfig.basePath}/locales/keys.ts`
+                      }
+                    : {
+                          localesDir: appConfig.localesDir as string,
+                          scanPaths: appConfig.scanPaths as string[],
+                          typesOutput: appConfig.typesOutput as string
+                      };
+                return [appName, normalized];
+            })
+        );
 
         return {
             ...parsed,
