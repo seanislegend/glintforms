@@ -94,7 +94,13 @@ export const updateSourceFile = (
             }
         } else {
             // create new entry
-            const key = generateKey(text, firstItem.file);
+            // check if text appears in multiple distinct files
+            const uniqueFiles = new Set(items.map(item => item.file));
+            const isCommon = uniqueFiles.size > 1;
+            
+            const key = isCommon 
+                ? generateKey(text, 'common')
+                : generateKey(text, firstItem.file);
 
             // check if key already exists (shouldn't happen, but defensive)
             if (updated.keys[key]) {

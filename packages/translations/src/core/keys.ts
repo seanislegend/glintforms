@@ -2,6 +2,12 @@ import {createHash} from 'node:crypto';
 import {basename} from 'node:path';
 
 export const generateKey = (text: string, filepath: string): string => {
+    // handle common strings used across multiple files
+    if (filepath === 'common') {
+        const hash = hashText(text).slice(0, 7);
+        return `common.${hash}`;
+    }
+    
     const pathParts = extractPathParts(filepath);
     const hash = hashText(text).slice(0, 7);
 
