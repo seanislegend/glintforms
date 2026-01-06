@@ -32,7 +32,8 @@ const QuestionAnswersQuickView: React.FC<Props> = ({questions, surveyId}) => {
                         <Suspense
                             fallback={
                                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                                    <SpinnerGapIcon className="animate-spin" /> {t('Fetching answers...')}
+                                    <SpinnerGapIcon className="animate-spin" />{' '}
+                                    {t('Fetching answers...')}
                                 </div>
                             }
                         >

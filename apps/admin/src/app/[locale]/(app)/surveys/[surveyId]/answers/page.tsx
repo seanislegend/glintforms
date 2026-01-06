@@ -19,7 +19,9 @@ const SurveyAnswersPage: React.FC<React.PropsWithChildren<Props>> = async ({para
         <HydrateClient>
             <Container>
                 <SectionHeader
-                    text={t('Review each question, its unique answers, and dive deeper when needed.')}
+                    text={t(
+                        'Review each question, its unique answers, and dive deeper when needed.'
+                    )}
                     title={t('Answers')}
                 />
                 <Spacer size="md" />

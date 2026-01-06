@@ -98,7 +98,9 @@ const AddRespondentsToCohortSheet: React.FC<Props> = ({cohortId}) => {
             onSuccess: data => {
                 setSearchResults(data);
                 if (data.length > 0) {
-                    toast.success(t(`Found ${data.length} respondent${data.length !== 1 ? 's' : ''}`));
+                    toast.success(
+                        t(`Found ${data.length} respondent${data.length !== 1 ? 's' : ''}`)
+                    );
                 } else {
                     toast.info(t('No respondents found'));
                 }
@@ -115,8 +117,12 @@ const AddRespondentsToCohortSheet: React.FC<Props> = ({cohortId}) => {
             onSuccess: async result => {
                 const message =
                     result.skipped > 0
-                        ? t(`Added ${result.added} respondent${result.added !== 1 ? 's' : ''}. ${result.skipped} already in cohort.`)
-                        : t(`Added ${result.added} respondent${result.added !== 1 ? 's' : ''} to cohort.`);
+                        ? t(
+                              `Added ${result.added} respondent${result.added !== 1 ? 's' : ''}. ${result.skipped} already in cohort.`
+                          )
+                        : t(
+                              `Added ${result.added} respondent${result.added !== 1 ? 's' : ''} to cohort.`
+                          );
                 toast.success(message);
                 await queryClient.invalidateQueries({
                     queryKey: trpc.cohorts.get.queryKey(cohortId)
@@ -257,7 +263,9 @@ const AddRespondentsToCohortSheet: React.FC<Props> = ({cohortId}) => {
                             <CardHeader>
                                 <CardTitle>{t('Filters')}</CardTitle>
                                 <CardDescription>
-                                    {t("Filter the respondents to add to the cohort. Only respondents that don't already exist in the cohort and match all filters will be added.")}
+                                    {t(
+                                        "Filter the respondents to add to the cohort. Only respondents that don't already exist in the cohort and match all filters will be added."
+                                    )}
                                 </CardDescription>
                             </CardHeader>
                             <form

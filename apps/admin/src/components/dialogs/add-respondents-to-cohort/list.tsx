@@ -25,7 +25,9 @@ export const SearchResultsList: React.FC<Props> = ({
     if (searchResults.length === 0) {
         return (
             <EmptyPanel
-                text={t("Submit the filters to search for respondents, or try different filters if you don't see any results.")}
+                text={t(
+                    "Submit the filters to search for respondents, or try different filters if you don't see any results."
+                )}
                 title={t('No respondents')}
             />
         );
@@ -34,7 +36,9 @@ export const SearchResultsList: React.FC<Props> = ({
     return (
         <>
             <div className="mb-4 flex items-center justify-between">
-                <strong className="font-medium">{t(`${searchResults.length} respondents found`)}</strong>
+                <strong className="font-medium">
+                    {t(`${searchResults.length} respondents found`)}
+                </strong>
                 <Button
                     onClick={() => {
                         addRespondentsToCohort.mutateAsync({

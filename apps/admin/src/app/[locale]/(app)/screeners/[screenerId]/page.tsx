@@ -29,4 +29,3 @@ const Page: React.FC<Props> = async ({params}) => {
 };
 
 export default Page;
-

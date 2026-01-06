@@ -145,7 +145,9 @@ const ExportResponsesDialog: React.FC<Props> = ({filters, surveyId}) => {
                                     name="format"
                                     options={[
                                         {
-                                            description: t('Commonly used format for data exchange'),
+                                            description: t(
+                                                'Commonly used format for data exchange'
+                                            ),
                                             icon: FileCsvIcon,
                                             label: 'CSV',
                                             value: 'csv'
@@ -166,7 +168,9 @@ const ExportResponsesDialog: React.FC<Props> = ({filters, surveyId}) => {
                                 />
                                 <FormField
                                     control={methods.control}
-                                    description={t('Fields will include timestamps and any metadata recorded.')}
+                                    description={t(
+                                        'Fields will include timestamps and any metadata recorded.'
+                                    )}
                                     fieldType="switch"
                                     label={t('Include all fields')}
                                     name="includeAllFields"
@@ -174,7 +178,9 @@ const ExportResponsesDialog: React.FC<Props> = ({filters, surveyId}) => {
                                 <ExportResponsesFieldSelector />
                                 <FormField
                                     control={methods.control}
-                                    description={t('Include individual question answers in the export. This will create multiple rows per response (one for each answer).')}
+                                    description={t(
+                                        'Include individual question answers in the export. This will create multiple rows per response (one for each answer).'
+                                    )}
                                     fieldType="switch"
                                     label={t('Include answers')}
                                     name="includeAnswers"

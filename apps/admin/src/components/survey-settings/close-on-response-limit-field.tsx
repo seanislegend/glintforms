@@ -19,7 +19,9 @@ const SurveySecuritySettingsPasswordField: React.FC = () => {
             <ToggleVisibility visible={willCloseOnResponseLimit}>
                 <FormField
                     control={control}
-                    description={t('The text that will be displayed when the response limit is reached.')}
+                    description={t(
+                        'The text that will be displayed when the response limit is reached.'
+                    )}
                     fieldType="input"
                     label={t('Closed text')}
                     name="closedText"

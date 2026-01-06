@@ -15,7 +15,9 @@ const ExportResponsesDelimiterSelector: React.FC = () => {
             <BasicCard>
                 <FormField
                     control={control}
-                    description={t('Choose a custom delimiter for multiple choice answers, e.g. pipe (|), comma (,) or semicolon (;). If you want to use a space, be sure to include it in the delimiter.')}
+                    description={t(
+                        'Choose a custom delimiter for multiple choice answers, e.g. pipe (|), comma (,) or semicolon (;). If you want to use a space, be sure to include it in the delimiter.'
+                    )}
                     fieldType="input"
                     label={t('Delimiter')}
                     name="codedAnswerDelimiter"

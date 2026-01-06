@@ -108,7 +108,9 @@ const QuestionEditorForm: React.FC = () => {
                         <InfoIcon />
                         <AlertTitle>{t('Survey is locked')}</AlertTitle>
                         <AlertDescription>
-                            {t('Questions cannot be changed when the survey is complete or archived.')}
+                            {t(
+                                'Questions cannot be changed when the survey is complete or archived.'
+                            )}
                         </AlertDescription>
                     </Alert>
                     <Spacer />
@@ -120,7 +122,9 @@ const QuestionEditorForm: React.FC = () => {
                         <InfoIcon />
                         <AlertTitle>{t('Survey has been published')}</AlertTitle>
                         <AlertDescription>
-                            {t('Your survey has been published and you can only edit the text content of existing questions and options. Structural changes such as adding or removing questions, changing question types, or modifying options are not allowed to ensure the integrity of the survey.')}
+                            {t(
+                                'Your survey has been published and you can only edit the text content of existing questions and options. Structural changes such as adding or removing questions, changing question types, or modifying options are not allowed to ensure the integrity of the survey.'
+                            )}
                         </AlertDescription>
                     </Alert>
                     <Spacer />
@@ -139,7 +143,9 @@ const QuestionEditorForm: React.FC = () => {
                 >
                     {fieldArray.fields.length === 0 && (
                         <EmptyPanel
-                            text={t("Add questions to your survey to get started. If you're not sure what to add, you can generate questions using our AI powered question generator.")}
+                            text={t(
+                                "Add questions to your survey to get started. If you're not sure what to add, you can generate questions using our AI powered question generator."
+                            )}
                             title={t('No questions added yet')}
                         >
                             <div className="flex items-center gap-2 justify-center flex-wrap">

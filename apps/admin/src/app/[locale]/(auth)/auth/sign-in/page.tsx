@@ -16,7 +16,9 @@ const SignInPage: React.FC = () => {
                                 <span>Glint</span>
                             </h1>
                             <CardDescription>
-                                {t("Enter your email address. We'll send you an email containing your login link.")}
+                                {t(
+                                    "Enter your email address. We'll send you an email containing your login link."
+                                )}
                             </CardDescription>
                         </CardHeader>
                         <CardContent>

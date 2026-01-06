@@ -41,13 +41,17 @@ const ScreenerSummary: React.FC<FormProps> = ({screenerId}) => {
                     </dd>
                 </div>
                 <div>
-                    <dt className="text-sm font-medium text-muted-foreground mb-1">{t('Created at')}</dt>
+                    <dt className="text-sm font-medium text-muted-foreground mb-1">
+                        {t('Created at')}
+                    </dt>
                     <dd className="text-sm">
                         <RelativeDate date={new Date(screener.createdAt)} />
                     </dd>
                 </div>
                 <div>
-                    <dt className="text-sm font-medium text-muted-foreground mb-1">{t('Updated at')}</dt>
+                    <dt className="text-sm font-medium text-muted-foreground mb-1">
+                        {t('Updated at')}
+                    </dt>
                     <dd className="text-sm">
                         <RelativeDate date={new Date(screener.updatedAt)} />
                     </dd>

@@ -34,7 +34,9 @@ const CampaignsList: React.FC = () => {
     if (campaigns.length === 0 && !isLoading) {
         return (
             <EmptyPanel
-                text={t("Create a campaign to get started. You'll then be able to create surveys and begin collecting responses.")}
+                text={t(
+                    "Create a campaign to get started. You'll then be able to create surveys and begin collecting responses."
+                )}
                 title={t('No campaigns added yet')}
             >
                 {renderCreateForm()}

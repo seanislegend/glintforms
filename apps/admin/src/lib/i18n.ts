@@ -13,10 +13,10 @@ initTranslations(enTranslations, 'en');
 
 /**
  * Type-safe translation function
- * 
+ *
  * Provides autocomplete for original text strings only.
  * Hover over any text to see all file locations where it's used.
- * 
+ *
  * @example
  * ```ts
  * t('All campaigns')

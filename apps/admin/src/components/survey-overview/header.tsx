@@ -28,7 +28,8 @@ const SurveyOverviewHeader: React.FC<Props> = ({survey}) => {
                         </span>
                         <span>•</span>
                         <span>
-                            <strong>{t('Created:')}</strong> <RelativeDate date={survey.createdAt} />
+                            <strong>{t('Created:')}</strong>{' '}
+                            <RelativeDate date={survey.createdAt} />
                         </span>
                         <span>•</span>
                         <span>

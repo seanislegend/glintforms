@@ -79,13 +79,21 @@ const SurveyPublishingSettings: React.FC<Props> = ({survey}) => {
     const getStatusDescription = (status: string) => {
         switch (status) {
             case 'draft':
-                return t("Your survey is in draft mode and you can edit questions and settings freely. Once you're ready, you can move to 'testing' to preview and test responses before launching.");
+                return t(
+                    "Your survey is in draft mode and you can edit questions and settings freely. Once you're ready, you can move to 'testing' to preview and test responses before launching."
+                );
             case 'testing':
-                return t("Your survey is in testing mode and you can preview and test responses. You can either move back to 'draft' to make changes or launch the survey.");
+                return t(
+                    "Your survey is in testing mode and you can preview and test responses. You can either move back to 'draft' to make changes or launch the survey."
+                );
             case 'active':
-                return t('Your survey is live and collecting responses. You can complete the survey to stop collecting responses or archive the survey. Depending on the survey settings, it may complete automatically.');
+                return t(
+                    'Your survey is live and collecting responses. You can complete the survey to stop collecting responses or archive the survey. Depending on the survey settings, it may complete automatically.'
+                );
             case 'complete':
-                return t('Your survey has been completed and is no longer accepting responses. You can reopen the survey to continue collecting responses.');
+                return t(
+                    'Your survey has been completed and is no longer accepting responses. You can reopen the survey to continue collecting responses.'
+                );
             case 'archived':
                 return t('Your survey has been archived and is no longer accessible.');
             default:

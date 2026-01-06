@@ -55,7 +55,9 @@ const Form: React.FC = () => {
                     {sortedCampaigns.length === 0 && !isLoading ? (
                         <FormField
                             control={methods.control}
-                            description={t("You don't have any campaigns yet. This will be your first campaign.")}
+                            description={t(
+                                "You don't have any campaigns yet. This will be your first campaign."
+                            )}
                             fieldType="input"
                             label={t('Campaign')}
                             name="newCampaignTitle"

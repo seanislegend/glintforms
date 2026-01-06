@@ -29,4 +29,3 @@ export const mockSelectionScreener = {
 };
 
 export const mockScreenersList = [mockAgeScreener, mockLocationScreener, mockSelectionScreener];
-

@@ -24,7 +24,9 @@ const ExportResponsesAnswerFieldSelector: React.FC = () => {
         <ToggleVisibility visible={!includeAllAnswerFields}>
             <BasicCard
                 title={t('Select answer fields to include')}
-                description={t("Only answer fields that are selected will be included in the export. If you want to include all answer fields, enable the 'Include all answer fields' switch.")}
+                description={t(
+                    "Only answer fields that are selected will be included in the export. If you want to include all answer fields, enable the 'Include all answer fields' switch."
+                )}
             >
                 <div className="space-y-3 mt-4">
                     {ANSWER_EXPORT_FIELDS.map(field => (

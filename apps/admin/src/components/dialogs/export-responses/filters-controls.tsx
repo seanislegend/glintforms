@@ -31,7 +31,9 @@ const ExportResponsesFiltersControls: React.FC<Props> = ({filters}) => {
             />
             <ToggleVisibility visible={applyActiveFilters}>
                 <BasicCard
-                    description={t('The active filters will be applied to the export. If you want to remove or apply different filters, you can do so by changing the filters in the table.')}
+                    description={t(
+                        'The active filters will be applied to the export. If you want to remove or apply different filters, you can do so by changing the filters in the table.'
+                    )}
                     title={t('Active filters')}
                 >
                     <div className="grid gap-2 text-sm">

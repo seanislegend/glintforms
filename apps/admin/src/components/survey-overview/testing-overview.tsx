@@ -25,7 +25,9 @@ const SurveyTestingOverview: React.FC<Props> = ({surveyId}) => {
             <CardHeader>
                 <CardTitle>{t('Test your survey')}</CardTitle>
                 <CardDescription>
-                    {t('While your survey is in testing mode, you can test it by sending requests to the API. Any responses you receive will be discarded when you move to active mode.')}
+                    {t(
+                        'While your survey is in testing mode, you can test it by sending requests to the API. Any responses you receive will be discarded when you move to active mode.'
+                    )}
                 </CardDescription>
             </CardHeader>
             <CardContent>
