@@ -24,7 +24,9 @@ export const surveyColumns: ColumnDef<Survey>[] = [
     },
     {
         accessorKey: 'failureMessage',
-        header: ({column}) => <DataTableColumnHeader column={column} title={t('Failure message')} />,
+        header: ({column}) => (
+            <DataTableColumnHeader column={column} title={t('Failure message')} />
+        ),
         cell: ({row}) => {
             const message = row.getValue('failureMessage') as string | null;
             if (!message) {

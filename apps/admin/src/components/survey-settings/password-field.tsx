@@ -28,7 +28,9 @@ const SurveySecuritySettingsPasswordField: React.FC = () => {
                         <div className="space-y-2">
                             <FormField
                                 control={control}
-                                description={t('Enter the new password that will be required to access the survey.')}
+                                description={t(
+                                    'Enter the new password that will be required to access the survey.'
+                                )}
                                 fieldType="password-input"
                                 name="password"
                                 label=""
@@ -42,7 +44,9 @@ const SurveySecuritySettingsPasswordField: React.FC = () => {
             ) : (
                 <FormField
                     control={control}
-                    description={t('Enter the password that will be required to access the survey. This will be securely stored.')}
+                    description={t(
+                        'Enter the password that will be required to access the survey. This will be securely stored.'
+                    )}
                     fieldType="password-input"
                     name="password"
                     label=""

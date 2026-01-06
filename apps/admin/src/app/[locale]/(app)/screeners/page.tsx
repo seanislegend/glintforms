@@ -23,4 +23,3 @@ const Page: React.FC = async () => {
 };
 
 export default Page;
-

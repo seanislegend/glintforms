@@ -45,7 +45,9 @@ const DeleteScreenerDialog: React.FC<Props> = ({screenerId}) => {
     return (
         <>
             <ConfirmationDialog
-                description={t('Are you sure you want to delete this screener? This action cannot be undone.')}
+                description={t(
+                    'Are you sure you want to delete this screener? This action cannot be undone.'
+                )}
                 onConfirm={handleConfirm}
                 onOpenChange={setIsOpen}
                 open={isOpen}

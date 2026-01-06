@@ -64,7 +64,9 @@ export const surveyColumns: ColumnDef<SurveyWithCampaign>[] = [
     },
     {
         accessorKey: 'campaignIsActive',
-        header: ({column}) => <DataTableColumnHeader column={column} title={t('Campaign Status')} />,
+        header: ({column}) => (
+            <DataTableColumnHeader column={column} title={t('Campaign Status')} />
+        ),
         cell: ({row}) => {
             const survey = row.original;
             if (survey.campaignIsActive === null) {
@@ -75,7 +77,9 @@ export const surveyColumns: ColumnDef<SurveyWithCampaign>[] = [
     },
     {
         accessorKey: 'campaignCreatedAt',
-        header: ({column}) => <DataTableColumnHeader column={column} title={t('Campaign Created')} />,
+        header: ({column}) => (
+            <DataTableColumnHeader column={column} title={t('Campaign Created')} />
+        ),
         cell: ({row}) => {
             const survey = row.original;
             if (!survey.campaignCreatedAt) {

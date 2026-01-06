@@ -53,15 +53,21 @@ const RespondentDetails: React.FC<Props> = ({respondentId}) => {
                         <div className="md:col-span-8">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
-                                    <Heading5 className="text-muted-foreground">{t('Name')}</Heading5>
+                                    <Heading5 className="text-muted-foreground">
+                                        {t('Name')}
+                                    </Heading5>
                                     <p className="text-sm">{respondent.name}</p>
                                 </div>
                                 <div>
-                                    <Heading5 className="text-muted-foreground">{t('Email')}</Heading5>
+                                    <Heading5 className="text-muted-foreground">
+                                        {t('Email')}
+                                    </Heading5>
                                     <p className="text-sm">{respondent.email}</p>
                                 </div>
                                 <div>
-                                    <Heading5 className="text-muted-foreground">{t('Gender')}</Heading5>
+                                    <Heading5 className="text-muted-foreground">
+                                        {t('Gender')}
+                                    </Heading5>
                                     <p className="text-sm">
                                         {respondent.gender ? (
                                             <span className="capitalize">{respondent.gender}</span>
@@ -85,7 +91,9 @@ const RespondentDetails: React.FC<Props> = ({respondentId}) => {
                                     </p>
                                 </div>
                                 <div>
-                                    <Heading5 className="text-muted-foreground">{t('Created')}</Heading5>
+                                    <Heading5 className="text-muted-foreground">
+                                        {t('Created')}
+                                    </Heading5>
                                     <p className="text-sm">
                                         <RelativeDate date={new Date(respondent.createdAt)} />
                                     </p>
@@ -101,7 +109,9 @@ const RespondentDetails: React.FC<Props> = ({respondentId}) => {
                             </div>
                             {respondent.notes && (
                                 <div className="mt-4">
-                                    <Heading5 className="text-muted-foreground">{t('Notes')}</Heading5>
+                                    <Heading5 className="text-muted-foreground">
+                                        {t('Notes')}
+                                    </Heading5>
                                     <p className="text-sm whitespace-pre-wrap">
                                         {respondent.notes}
                                     </p>

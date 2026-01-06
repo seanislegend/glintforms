@@ -18,7 +18,9 @@ const Form = () => {
     if (state?.success) {
         return (
             <Alert variant="success">
-                <AlertDescription>{t('Success! Check your email for the login link')}</AlertDescription>
+                <AlertDescription>
+                    {t('Success! Check your email for the login link')}
+                </AlertDescription>
             </Alert>
         );
     }

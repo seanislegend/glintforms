@@ -19,7 +19,9 @@ const SettingsPage: React.FC<Props> = async ({params}) => {
         <HydrateClient>
             <Container>
                 <SectionHeader
-                    text={t('Manage your survey settings, including access controls and publishing status.')}
+                    text={t(
+                        'Manage your survey settings, including access controls and publishing status.'
+                    )}
                     title={t('Survey settings')}
                 />
                 <Spacer />

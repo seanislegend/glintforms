@@ -43,7 +43,9 @@ const SurveyList: React.FC = () => {
     if (surveys.length === 0) {
         return (
             <EmptyPanel
-                text={t("Create a survey to get started. You'll then be able to add questions and begin collecting responses.")}
+                text={t(
+                    "Create a survey to get started. You'll then be able to add questions and begin collecting responses."
+                )}
                 title={t('No surveys added yet')}
             >
                 {renderCreateForm()}

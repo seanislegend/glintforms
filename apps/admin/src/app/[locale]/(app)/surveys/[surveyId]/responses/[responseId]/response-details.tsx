@@ -51,7 +51,9 @@ const ResponseDetails: React.FC<React.PropsWithChildren<Props>> = ({responseId, 
                         {response.respondent ? (
                             <>
                                 <div>
-                                    <div className="font-medium text-muted-foreground">{t('Name')}</div>
+                                    <div className="font-medium text-muted-foreground">
+                                        {t('Name')}
+                                    </div>
                                     <div>
                                         <TextLink href={`/respondents/${response.respondentId}`}>
                                             {response.respondent.name}
@@ -59,7 +61,9 @@ const ResponseDetails: React.FC<React.PropsWithChildren<Props>> = ({responseId, 
                                     </div>
                                 </div>
                                 <div>
-                                    <div className="font-medium text-muted-foreground">{t('Email')}</div>
+                                    <div className="font-medium text-muted-foreground">
+                                        {t('Email')}
+                                    </div>
                                     <div>{response.respondent.email}</div>
                                 </div>
                                 {response.respondent.signupSource && (

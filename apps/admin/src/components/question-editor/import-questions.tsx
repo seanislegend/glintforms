@@ -83,7 +83,9 @@ const ImportQuestionsDialog: React.FC<Props> = ({onImport, surveyId}) => {
                 const result = await response.json();
                 toast.success(t(`Successfully imported ${result.importedCount} questions`));
                 if (result.warnings && result.warnings.length > 0) {
-                    toast.warning(t(`Import completed with warnings: ${result.warnings.join(', ')}`));
+                    toast.warning(
+                        t(`Import completed with warnings: ${result.warnings.join(', ')}`)
+                    );
                 }
                 setIsOpen(false);
                 setSelectedFile(null);
@@ -116,7 +118,9 @@ const ImportQuestionsDialog: React.FC<Props> = ({onImport, surveyId}) => {
                         <DialogHeader className="sticky top-0 bg-white/70 backdrop-blur-lg">
                             <DialogTitle>{t('Import questions')}</DialogTitle>
                             <DialogDescription>
-                                {t('Upload a CSV or XLSX file with your survey questions. Our AI will automatically convert them to the correct format.')}
+                                {t(
+                                    'Upload a CSV or XLSX file with your survey questions. Our AI will automatically convert them to the correct format.'
+                                )}
                             </DialogDescription>
                         </DialogHeader>
                         <div className="flex-grow overflow-auto">
@@ -132,7 +136,8 @@ const ImportQuestionsDialog: React.FC<Props> = ({onImport, surveyId}) => {
                                                     {selectedFile.name}
                                                 </p>
                                                 <p className="text-xs text-muted-foreground">
-                                                    {t('Size:')} {(selectedFile.size / 1024).toFixed(1)} KB
+                                                    {t('Size:')}{' '}
+                                                    {(selectedFile.size / 1024).toFixed(1)} KB
                                                 </p>
                                             </div>
                                             <Button
@@ -166,23 +171,35 @@ const ImportQuestionsDialog: React.FC<Props> = ({onImport, surveyId}) => {
                                             </p>
                                         )}
                                         <p className="text-xs text-muted-foreground">
-                                            {t('Supported formats: CSV, XLSX. The file should contain headers and at least one row of data.')}
+                                            {t(
+                                                'Supported formats: CSV, XLSX. The file should contain headers and at least one row of data.'
+                                            )}
                                         </p>
                                     </div>
                                 )}
                                 <Card>
                                     <CardContent>
-                                        <div className="text-sm font-medium">{t('How it works')}</div>
+                                        <div className="text-sm font-medium">
+                                            {t('How it works')}
+                                        </div>
                                         <ol className="text-sm space-y-1 text-muted-foreground list-decimal list-inside">
-                                            <li>{t('Upload your CSV or XLSX file with questions')}</li>
                                             <li>
-                                                {t('Our AI will analyse the file structure and convert it to our format')}
+                                                {t('Upload your CSV or XLSX file with questions')}
                                             </li>
                                             <li>
-                                                {t('Questions will be added to your survey in the correct order')}
+                                                {t(
+                                                    'Our AI will analyse the file structure and convert it to our format'
+                                                )}
                                             </li>
                                             <li>
-                                                {t("You'll receive warnings if any data couldn't be converted")}
+                                                {t(
+                                                    'Questions will be added to your survey in the correct order'
+                                                )}
+                                            </li>
+                                            <li>
+                                                {t(
+                                                    "You'll receive warnings if any data couldn't be converted"
+                                                )}
                                             </li>
                                         </ol>
                                     </CardContent>

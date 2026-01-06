@@ -59,7 +59,9 @@ const GenerateQuestionsDialog: React.FC<Props> = ({isPending, surveyId}) => {
                 setValue('questions', updatedQuestions);
                 highlight('questions-list');
                 toast.success(
-                    t(`Generated ${generatedQuestions.length} questions, please review them and save the survey.`)
+                    t(
+                        `Generated ${generatedQuestions.length} questions, please review them and save the survey.`
+                    )
                 );
                 setIsOpen(false);
                 generateFormMethods.reset();
@@ -115,7 +117,9 @@ const GenerateQuestionsDialog: React.FC<Props> = ({isPending, surveyId}) => {
                 <DialogHeader>
                     <DialogTitle>{t('Generate questions')}</DialogTitle>
                     <DialogDescription>
-                        {t('Describe the topic and context for the questions you want to generate.')}
+                        {t(
+                            'Describe the topic and context for the questions you want to generate.'
+                        )}
                         {remainingSlots < 5 &&
                             ` ${t(`You can generate up to ${remainingSlots} more questions.`)}`}
                     </DialogDescription>
@@ -128,7 +132,9 @@ const GenerateQuestionsDialog: React.FC<Props> = ({isPending, surveyId}) => {
                                 fieldType="input"
                                 label={t('Topic')}
                                 name="topic"
-                                placeholder={t('e.g., Customer satisfaction, Product feedback, Employee engagement')}
+                                placeholder={t(
+                                    'e.g., Customer satisfaction, Product feedback, Employee engagement'
+                                )}
                             />
                             {survey?.description && (
                                 <Button
@@ -149,7 +155,9 @@ const GenerateQuestionsDialog: React.FC<Props> = ({isPending, surveyId}) => {
                                 fieldType="textarea"
                                 label={t('Description')}
                                 name="description"
-                                placeholder={t('Provide context about what you want to learn, target audience, or specific areas to focus on...')}
+                                placeholder={t(
+                                    'Provide context about what you want to learn, target audience, or specific areas to focus on...'
+                                )}
                             ></FormField>
                             {survey?.description && (
                                 <Button

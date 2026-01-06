@@ -39,20 +39,26 @@ const RespondentSummary: React.FC<FormProps> = ({respondentId}) => {
                     </dd>
                 </div>
                 <div>
-                    <dt className="text-sm font-medium text-muted-foreground mb-1">{t('Created at')}</dt>
+                    <dt className="text-sm font-medium text-muted-foreground mb-1">
+                        {t('Created at')}
+                    </dt>
                     <dd className="text-sm">
                         <RelativeDate date={new Date(respondent.createdAt)} />
                     </dd>
                 </div>
                 <div>
-                    <dt className="text-sm font-medium text-muted-foreground mb-1">{t('Updated at')}</dt>
+                    <dt className="text-sm font-medium text-muted-foreground mb-1">
+                        {t('Updated at')}
+                    </dt>
                     <dd className="text-sm">
                         <RelativeDate date={new Date(respondent.updatedAt)} />
                     </dd>
                 </div>
                 {respondent.gender && (
                     <div>
-                        <dt className="text-sm font-medium text-muted-foreground mb-1">{t('Gender')}</dt>
+                        <dt className="text-sm font-medium text-muted-foreground mb-1">
+                            {t('Gender')}
+                        </dt>
                         <dd className="text-sm capitalize">{respondent.gender}</dd>
                     </div>
                 )}
@@ -82,7 +88,9 @@ const RespondentSummary: React.FC<FormProps> = ({respondentId}) => {
                 )}
                 {respondent.notes && (
                     <div className="md:col-span-2">
-                        <dt className="text-sm font-medium text-muted-foreground mb-1">{t('Notes')}</dt>
+                        <dt className="text-sm font-medium text-muted-foreground mb-1">
+                            {t('Notes')}
+                        </dt>
                         <dd className="text-sm whitespace-pre-wrap">{respondent.notes}</dd>
                     </div>
                 )}

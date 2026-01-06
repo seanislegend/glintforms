@@ -1,10 +1,10 @@
 'use client';
 
 import EmptyPanel from '@glint/ui/empty-panel';
-import {t} from '@/lib/i18n';
 import {useQuery} from '@tanstack/react-query';
 import * as R from 'remeda';
 import {DataTable} from '@/components/data-table';
+import {t} from '@/lib/i18n';
 import type {RespondentList} from '@/lib/schemas/respondents';
 import {useTRPC} from '@/lib/trpc/react';
 import {columns} from './columns';
@@ -24,7 +24,9 @@ const RespondentsList: React.FC = () => {
     if (respondents.length === 0) {
         return (
             <EmptyPanel
-                text={t("Create a respondent to get started. You'll then be able to track their survey responses and engagement.")}
+                text={t(
+                    "Create a respondent to get started. You'll then be able to track their survey responses and engagement."
+                )}
                 title={t('No respondents added yet')}
             />
         );

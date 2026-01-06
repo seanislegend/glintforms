@@ -40,7 +40,11 @@ export const columns: ColumnDef<SearchResult>[] = [
         accessorKey: 'locationCity',
         cell: ({row}) => {
             const city = row.getValue('locationCity') as string | null;
-            return city ? <span>{city}</span> : <span className="text-muted-foreground">{t('—')}</span>;
+            return city ? (
+                <span>{city}</span>
+            ) : (
+                <span className="text-muted-foreground">{t('—')}</span>
+            );
         },
         header: ({column}) => <DataTableColumnHeader column={column} title={t('City')} />
     },

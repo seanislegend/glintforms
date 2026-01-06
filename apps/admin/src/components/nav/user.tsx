@@ -95,7 +95,9 @@ const NavUser: React.FC = () => {
             </SidebarMenu>
             {user && (
                 <ConfirmationDialog
-                    description={t('Are you sure you want to log out? You will need to sign in again to access your account.')}
+                    description={t(
+                        'Are you sure you want to log out? You will need to sign in again to access your account.'
+                    )}
                     onConfirm={handleLogout}
                     onOpenChange={setShowLogoutConfirm}
                     open={showLogoutConfirm}

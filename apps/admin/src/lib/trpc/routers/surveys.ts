@@ -317,9 +317,7 @@ export const surveysRouter = {
             const [screener] = await ctx.db
                 .select({id: screeners.id})
                 .from(screeners)
-                .where(
-                    and(eq(screeners.id, input.screenerId), eq(screeners.tenantId, ctx.tenant))
-                )
+                .where(and(eq(screeners.id, input.screenerId), eq(screeners.tenantId, ctx.tenant)))
                 .limit(1);
 
             if (!screener) {

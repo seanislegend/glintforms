@@ -32,7 +32,9 @@ export const createAnswerColumns = (
                 };
 
                 if (answer.wasSkipped) {
-                    return <span className="italic text-muted-foreground">{t('Answer skipped')}</span>;
+                    return (
+                        <span className="italic text-muted-foreground">{t('Answer skipped')}</span>
+                    );
                 }
 
                 return <ResponseAnswerValue answer={answer} question={questionForAnswer} />;

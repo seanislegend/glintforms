@@ -92,11 +92,15 @@ const ScreenerDetails: React.FC<Props> = ({screenerId}) => {
                         <div className="md:col-span-8">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
-                                    <Heading5 className="text-muted-foreground">{t('Name')}</Heading5>
+                                    <Heading5 className="text-muted-foreground">
+                                        {t('Name')}
+                                    </Heading5>
                                     <p className="text-sm">{screener.name}</p>
                                 </div>
                                 <div>
-                                    <Heading5 className="text-muted-foreground">{t('Type')}</Heading5>
+                                    <Heading5 className="text-muted-foreground">
+                                        {t('Type')}
+                                    </Heading5>
                                     <p className="text-sm">{getTypeLabel(screener.type)}</p>
                                 </div>
                                 {screener.description && (
@@ -118,7 +122,9 @@ const ScreenerDetails: React.FC<Props> = ({screenerId}) => {
                                     </div>
                                 </div>
                                 <div>
-                                    <Heading5 className="text-muted-foreground">{t('Created')}</Heading5>
+                                    <Heading5 className="text-muted-foreground">
+                                        {t('Created')}
+                                    </Heading5>
                                     <p className="text-sm">
                                         <RelativeDate date={new Date(screener.createdAt)} />
                                     </p>

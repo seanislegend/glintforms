@@ -88,4 +88,3 @@ export const columns: ColumnDef<ScreenerList>[] = [
         )
     }
 ];
-

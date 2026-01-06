@@ -65,7 +65,9 @@ const SurveySecuritySettingsForm: React.FC<FormProps> = ({settings, survey}) => 
                     <InfoIcon />
                     <AlertTitle>{t('Survey is locked')}</AlertTitle>
                     <AlertDescription>
-                        {t('Survey settings cannot be changed when the survey is complete or archived.')}
+                        {t(
+                            'Survey settings cannot be changed when the survey is complete or archived.'
+                        )}
                     </AlertDescription>
                 </Alert>
             )}
@@ -78,7 +80,9 @@ const SurveySecuritySettingsForm: React.FC<FormProps> = ({settings, survey}) => 
                                 fieldType="switch"
                                 label={t('Password protected')}
                                 name="isPasswordProtected"
-                                description={t('Require users to enter a password to access the survey')}
+                                description={t(
+                                    'Require users to enter a password to access the survey'
+                                )}
                             />
                             <SurveySecuritySettingsPasswordField />
                             <FormField
@@ -86,7 +90,9 @@ const SurveySecuritySettingsForm: React.FC<FormProps> = ({settings, survey}) => 
                                 fieldType="switch"
                                 label={t('Allow Anonymous Responses')}
                                 name="allowAnonymous"
-                                description={t('Allow users to submit responses without creating an account')}
+                                description={t(
+                                    'Allow users to submit responses without creating an account'
+                                )}
                             />
                         </div>
                     </BasicCard>
@@ -97,7 +103,9 @@ const SurveySecuritySettingsForm: React.FC<FormProps> = ({settings, survey}) => 
                                 fieldType="input"
                                 label={t('Maximum Responses')}
                                 name="maxResponses"
-                                description={t(`Maximum number of responses allowed (a hard limit of ${formatNumber(MAX_RESPONSE_HARD_LIMIT)} responses applies by default)`)}
+                                description={t(
+                                    `Maximum number of responses allowed (a hard limit of ${formatNumber(MAX_RESPONSE_HARD_LIMIT)} responses applies by default)`
+                                )}
                             />
                             <SurveySecuritySettingsCloseOnResponseLimitField />
                         </div>

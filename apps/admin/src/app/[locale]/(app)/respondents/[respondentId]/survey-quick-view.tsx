@@ -58,7 +58,9 @@ const SurveyDetails = ({surveyId}: {surveyId: string}) => {
                             </div>
                             {survey.campaign && (
                                 <div>
-                                    <Heading5 className="text-muted-foreground">{t('Campaign')}</Heading5>
+                                    <Heading5 className="text-muted-foreground">
+                                        {t('Campaign')}
+                                    </Heading5>
                                     <p className="text-sm">
                                         <TextLink href={`/campaigns/${survey.campaign.id}`}>
                                             {survey.campaign.title}
@@ -71,21 +73,27 @@ const SurveyDetails = ({surveyId}: {surveyId: string}) => {
                                 <p className="text-sm capitalize">{survey.status}</p>
                             </div>
                             <div>
-                                <Heading5 className="text-muted-foreground">{t('Created')}</Heading5>
+                                <Heading5 className="text-muted-foreground">
+                                    {t('Created')}
+                                </Heading5>
                                 <p className="text-sm">
                                     <RelativeDate date={new Date(survey.createdAt)} />
                                 </p>
                             </div>
                             {survey.launchedAt && (
                                 <div>
-                                    <Heading5 className="text-muted-foreground">{t('Launched')}</Heading5>
+                                    <Heading5 className="text-muted-foreground">
+                                        {t('Launched')}
+                                    </Heading5>
                                     <p className="text-sm">
                                         <RelativeDate date={new Date(survey.launchedAt)} />
                                     </p>
                                 </div>
                             )}
                             <div>
-                                <Heading5 className="text-muted-foreground">{t('Last updated')}</Heading5>
+                                <Heading5 className="text-muted-foreground">
+                                    {t('Last updated')}
+                                </Heading5>
                                 <p className="text-sm">
                                     <RelativeDate date={new Date(survey.updatedAt)} />
                                 </p>
@@ -113,7 +121,8 @@ const SurveyQuickView = () => {
                         <Suspense
                             fallback={
                                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                                    <SpinnerGapIcon className="animate-spin" /> {t('Fetching survey...')}
+                                    <SpinnerGapIcon className="animate-spin" />{' '}
+                                    {t('Fetching survey...')}
                                 </div>
                             }
                         >

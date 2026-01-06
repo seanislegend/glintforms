@@ -23,7 +23,9 @@ const ExportResponsesFieldSelector: React.FC = () => {
     return (
         <ToggleVisibility visible={!includeAllFields}>
             <BasicCard
-                description={t("Only fields that are selected will be included in the export. If you want to include all fields, enable the 'Include all fields' switch.")}
+                description={t(
+                    "Only fields that are selected will be included in the export. If you want to include all fields, enable the 'Include all fields' switch."
+                )}
                 title={t('Select fields to include')}
             >
                 <div className="space-y-3">

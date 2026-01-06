@@ -77,7 +77,9 @@ const CohortRespondents: React.FC<Props> = ({cohortId}) => {
                 />
             </HighlightChange>
             <ConfirmationDialog
-                description={t('Are you sure you want to remove this respondent from the cohort? This action cannot be undone.')}
+                description={t(
+                    'Are you sure you want to remove this respondent from the cohort? This action cannot be undone.'
+                )}
                 onConfirm={handleConfirmDelete}
                 onOpenChange={(open, reason) => {
                     if (!open && reason !== 'confirm-press') {

@@ -33,7 +33,12 @@ const QuestionAnswersQuickLook: React.FC<QuestionAnswersQuickLookProps> = ({
     );
     console.log(data);
     if (!data) {
-        return <EmptyPanel text={t('We could not find this question.')} title={t('Question not found')} />;
+        return (
+            <EmptyPanel
+                text={t('We could not find this question.')}
+                title={t('Question not found')}
+            />
+        );
     }
 
     const question = data.question;
@@ -51,7 +56,9 @@ const QuestionAnswersQuickLook: React.FC<QuestionAnswersQuickLookProps> = ({
                     <div>
                         <Heading3>{t('Option distribution')}</Heading3>
                         <p className="text-sm text-muted-foreground mb-4">
-                            {t('This chart shows the distribution of selections for this question.')}
+                            {t(
+                                'This chart shows the distribution of selections for this question.'
+                            )}
                         </p>
                         <OptionDistributionChart data={question.optionCounts ?? []} />
                     </div>
@@ -60,7 +67,9 @@ const QuestionAnswersQuickLook: React.FC<QuestionAnswersQuickLookProps> = ({
                     <div>
                         <Heading3>{t('Co-occurrence patterns for selected options')}</Heading3>
                         <p className="text-sm text-muted-foreground mb-4">
-                            {t('Percentages show how often each pair of options was selected together')}
+                            {t(
+                                'Percentages show how often each pair of options was selected together'
+                            )}
                         </p>
                         <CoOccurrenceMatrix questionId={questionId} />
                     </div>
@@ -71,7 +80,9 @@ const QuestionAnswersQuickLook: React.FC<QuestionAnswersQuickLookProps> = ({
                             <>
                                 <Heading3>{t('Theme categorisation')}</Heading3>
                                 <p className="text-sm text-muted-foreground mb-4">
-                                    {t('Themes are categorised based on the context of the responses. The sentiment of the responses is also taken into account.')}
+                                    {t(
+                                        'Themes are categorised based on the context of the responses. The sentiment of the responses is also taken into account.'
+                                    )}
                                 </p>
                                 <ResponsesThemeOverview themes={data.themes} />
                             </>

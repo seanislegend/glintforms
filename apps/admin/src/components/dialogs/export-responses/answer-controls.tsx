@@ -16,7 +16,9 @@ const ExportResponsesAnswerControls: React.FC = () => {
             <div className="grid gap-3">
                 <FormField
                     control={control}
-                    description={t('Answer fields will include question names, values, and metadata.')}
+                    description={t(
+                        'Answer fields will include question names, values, and metadata.'
+                    )}
                     fieldType="switch"
                     label={t('Include all answer fields')}
                     name="includeAllAnswerFields"
