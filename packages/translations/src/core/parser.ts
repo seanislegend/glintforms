@@ -1,12 +1,9 @@
-import { parse } from '@babel/parser';
+/// <reference types="bun-types" />
+
+import {parse} from '@babel/parser';
 import traverseImport from '@babel/traverse';
-import type {
-    CallExpression,
-    StringLiteral,
-    TemplateLiteral,
-} from '@babel/types';
-import { readFileSync } from 'node:fs';
-import type { ExtractedString } from '../types.js';
+import type {CallExpression, StringLiteral, TemplateLiteral} from '@babel/types';
+import type {ExtractedString} from '../types.js';
 
 // handle ESM/CJS default export
 const traverse = (traverseImport as any).default || traverseImport;
@@ -22,15 +19,16 @@ export interface ParseResult {
     warnings: Warning[];
 }
 
-export const parseFile = (filepath: string): ParseResult => {
+export const parseFile = async (filepath: string): Promise<ParseResult> => {
     const extracted: ExtractedString[] = [];
     const warnings: Warning[] = [];
 
     try {
-        const content = readFileSync(filepath, 'utf-8');
+        const file = Bun.file(filepath);
+        const content = await file.text();
         const ast = parse(content, {
             plugins: ['typescript', 'jsx'],
-            sourceType: 'module',
+            sourceType: 'module'
         });
 
         traverse(ast, {
@@ -38,17 +36,14 @@ export const parseFile = (filepath: string): ParseResult => {
                 const node = path.node as CallExpression;
 
                 // check if this is a t() call
-                if (
-                    node.callee.type === 'Identifier' &&
-                    node.callee.name === 't'
-                ) {
+                if (node.callee.type === 'Identifier' && node.callee.name === 't') {
                     const arg = node.arguments[0];
 
                     if (!arg) {
                         warnings.push({
                             file: filepath,
                             line: node.loc?.start.line || 0,
-                            reason: 't() called without arguments',
+                            reason: 't() called without arguments'
                         });
                         return;
                     }
@@ -59,7 +54,7 @@ export const parseFile = (filepath: string): ParseResult => {
                         extracted.push({
                             file: filepath,
                             line: node.loc?.start.line || 0,
-                            text: literal.value,
+                            text: literal.value
                         });
                         return;
                     }
@@ -71,15 +66,14 @@ export const parseFile = (filepath: string): ParseResult => {
                             extracted.push({
                                 file: filepath,
                                 line: node.loc?.start.line || 0,
-                                text: template.quasis[0].value.cooked || '',
+                                text: template.quasis[0].value.cooked || ''
                             });
                             return;
                         }
                         warnings.push({
                             file: filepath,
                             line: node.loc?.start.line || 0,
-                            reason:
-                                't() called with template literal containing expressions (not supported)',
+                            reason: 't() called with template literal containing expressions (not supported)'
                         });
                         return;
                     }
@@ -88,17 +82,16 @@ export const parseFile = (filepath: string): ParseResult => {
                     warnings.push({
                         file: filepath,
                         line: node.loc?.start.line || 0,
-                        reason: `t() called with ${arg.type} (only string literals supported)`,
+                        reason: `t() called with ${arg.type} (only string literals supported)`
                     });
                 }
-            },
+            }
         });
 
-        return { extracted, warnings };
+        return {extracted, warnings};
     } catch (error) {
         throw new Error(
-            `Failed to parse ${filepath}: ${error instanceof Error ? error.message : String(error)}`,
+            `Failed to parse ${filepath}: ${error instanceof Error ? error.message : String(error)}`
         );
     }
 };
-

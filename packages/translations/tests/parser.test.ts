@@ -1,21 +1,21 @@
-import { writeFileSync, mkdirSync, rmSync } from "node:fs";
-import { join } from "node:path";
-import { describe, it, expect, beforeEach, afterEach } from "vitest";
-import { parseFile } from "../src/core/parser";
+import {afterEach, beforeEach, describe, expect, test} from 'bun:test';
+import {mkdirSync, rmSync, writeFileSync} from 'node:fs';
+import {join} from 'node:path';
+import {parseFile} from '../src/core/parser';
 
-const TEST_DIR = join(process.cwd(), "tests", "__fixtures__");
+const TEST_DIR = join(process.cwd(), 'tests', '__fixtures__');
 
 beforeEach(() => {
-    mkdirSync(TEST_DIR, { recursive: true });
+    mkdirSync(TEST_DIR, {recursive: true});
 });
 
 afterEach(() => {
-    rmSync(TEST_DIR, { recursive: true, force: true });
+    rmSync(TEST_DIR, {recursive: true, force: true});
 });
 
-describe("parser", () => {
-    it("extracts string literals", () => {
-        const file = join(TEST_DIR, "test1.tsx");
+describe('parser', () => {
+    test('extracts string literals', async () => {
+        const file = join(TEST_DIR, 'test1.tsx');
         writeFileSync(
             file,
             `
@@ -23,80 +23,80 @@ describe("parser", () => {
             export default function Test() {
                 return <div>{t('Hello world')}</div>;
             }
-        `,
+        `
         );
 
-        const result = parseFile(file);
+        const result = await parseFile(file);
         expect(result.extracted).toHaveLength(1);
-        expect(result.extracted[0].text).toBe("Hello world");
+        expect(result.extracted[0].text).toBe('Hello world');
         expect(result.warnings).toHaveLength(0);
     });
 
-    it("extracts double quoted strings", () => {
-        const file = join(TEST_DIR, "test2.tsx");
+    test('extracts double quoted strings', async () => {
+        const file = join(TEST_DIR, 'test2.tsx');
         writeFileSync(
             file,
             `
             import { t } from './i18n';
             const text = t("Save changes");
-        `,
+        `
         );
 
-        const result = parseFile(file);
+        const result = await parseFile(file);
         expect(result.extracted).toHaveLength(1);
-        expect(result.extracted[0].text).toBe("Save changes");
+        expect(result.extracted[0].text).toBe('Save changes');
     });
 
-    it("extracts template literals without expressions", () => {
-        const file = join(TEST_DIR, "test3.tsx");
+    test('extracts template literals without expressions', async () => {
+        const file = join(TEST_DIR, 'test3.tsx');
         writeFileSync(
             file,
             `
             import { t } from './i18n';
             const text = t(\`Delete item\`);
-        `,
+        `
         );
 
-        const result = parseFile(file);
+        const result = await parseFile(file);
         expect(result.extracted).toHaveLength(1);
-        expect(result.extracted[0].text).toBe("Delete item");
+        expect(result.extracted[0].text).toBe('Delete item');
     });
 
-    it("warns on template literals with expressions", () => {
-        const file = join(TEST_DIR, "test4.tsx");
+    test('warns on template literals with expressions', async () => {
+        const file = join(TEST_DIR, 'test4.tsx');
         writeFileSync(
             file,
             `
             import { t } from './i18n';
             const name = 'John';
             const text = t(\`Hello \${name}\`);
-        `,
+        `
         );
 
-        const result = parseFile(file);
+        const result = await parseFile(file);
         expect(result.extracted).toHaveLength(0);
         expect(result.warnings).toHaveLength(1);
-        expect(result.warnings[0].reason).toContain("expressions");
+        expect(result.warnings[0].reason).toContain('expressions');
     });
 
-    it("warns on dynamic calls", () => {
-        const file = join(TEST_DIR, "test5.tsx");
+    test('warns on dynamic calls', async () => {
+        const file = join(TEST_DIR, 'test5.tsx');
         writeFileSync(
             file,
             `
             import { t } from './i18n';
             const key = 'some.key';
             const text = t(key);
-        `,
+        `
         );
 
-        const result = parseFile(file);
+        const result = await parseFile(file);
         expect(result.extracted).toHaveLength(0);
         expect(result.warnings).toHaveLength(1);
     });
 
-    it("extracts multiple t() calls", () => {
-        const file = join(TEST_DIR, "test6.tsx");
+    test('extracts multiple t() calls', async () => {
+        const file = join(TEST_DIR, 'test6.tsx');
         writeFileSync(
             file,
             `
@@ -110,16 +110,11 @@ describe("parser", () => {
                     </div>
                 );
             }
-        `,
+        `
         );
 
-        const result = parseFile(file);
+        const result = await parseFile(file);
         expect(result.extracted).toHaveLength(3);
-        expect(result.extracted.map((e) => e.text)).toEqual([
-            "Save",
-            "Cancel",
-            "Loading...",
-        ]);
+        expect(result.extracted.map(e => e.text)).toEqual(['Save', 'Cancel', 'Loading...']);
     });
 });
-

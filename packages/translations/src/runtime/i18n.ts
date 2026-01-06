@@ -10,37 +10,37 @@ let currentLocale = 'en';
  */
 export const initTranslations = (localeData: Record<string, string>, locale = 'en'): void => {
     translations = {
-        [locale]: localeData,
+        [locale]: localeData
     };
-    
+
     // create reverse lookup: text -> key
     textToKeyMap = {};
     for (const [key, text] of Object.entries(localeData)) {
         textToKeyMap[text] = key;
     }
-    
+
     currentLocale = locale;
 };
 
 /**
  * Translation function with type safety
- * 
+ *
  * Accepts original text strings only.
  * Autocomplete shows all extracted text strings, not internal key names.
- * 
+ *
  * @example
  * ```ts
  * t('All campaigns')
  * t('Last updated')
  * t('Welcome back')
  * ```
- * 
+ *
  * @param text - Original text string to translate
  * @returns Translated string for current locale
  */
 export const t = <T extends string = string>(text: T): string => {
     const currentTranslations = translations[currentLocale];
-    
+
     if (!currentTranslations) {
         return text;
     }
@@ -97,4 +97,3 @@ export const getAvailableLocales = (): string[] => {
 export const loadLocale = (locale: string, localeTranslations: Record<string, string>): void => {
     translations[locale] = localeTranslations;
 };
-

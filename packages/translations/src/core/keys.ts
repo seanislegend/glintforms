@@ -1,4 +1,5 @@
-import {createHash} from 'node:crypto';
+/// <reference types="bun-types" />
+
 import {basename} from 'node:path';
 
 export const generateKey = (text: string, filepath: string): string => {
@@ -7,7 +8,7 @@ export const generateKey = (text: string, filepath: string): string => {
         const hash = hashText(text).slice(0, 7);
         return `common.${hash}`;
     }
-    
+
     const pathParts = extractPathParts(filepath);
     const hash = hashText(text).slice(0, 7);
 
@@ -16,7 +17,9 @@ export const generateKey = (text: string, filepath: string): string => {
 };
 
 export const hashText = (text: string): string => {
-    return createHash('sha256').update(text).digest('hex');
+    const hasher = new Bun.CryptoHasher('sha256');
+    hasher.update(text);
+    return hasher.digest('hex');
 };
 
 const extractPathParts = (filepath: string): string[] => {

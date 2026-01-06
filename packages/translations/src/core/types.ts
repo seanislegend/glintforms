@@ -1,6 +1,8 @@
-import { existsSync, mkdirSync, writeFileSync } from "node:fs";
-import { dirname, resolve } from "node:path";
-import type { SourceEntry, SourceFile } from "../types.js";
+/// <reference types="bun-types" />
+
+import {mkdir} from 'node:fs/promises';
+import {dirname, resolve} from 'node:path';
+import type {SourceEntry, SourceFile} from '../types.js';
 
 export const generateTypes = (source: SourceFile): string => {
     let output = '/**\n';
@@ -15,7 +17,7 @@ export const generateTypes = (source: SourceFile): string => {
 
     for (const key of sortedKeys) {
         const entry = source.keys[key];
-        
+
         if (!entry) continue;
 
         // escape quotes in text
@@ -35,19 +37,19 @@ export const generateTypes = (source: SourceFile): string => {
 
     output += '}\n\n';
     output += 'export type TranslationKey = keyof TranslationKeys;\n\n';
-    
+
     // add utility type to extract all text values
     output += '/**\n';
     output += ' * Union type of all translation text values for use in t() function\n';
     output += ' * Only original text strings appear in autocomplete, not internal key names\n';
     output += ' */\n';
     output += 'export type TranslationText =\n';
-    
+
     const texts = sortedKeys
         .map(key => source.keys[key])
         .filter((entry): entry is SourceEntry => entry !== undefined)
         .map(entry => entry.text.replace(/"/g, '\\"').replace(/\n/g, '\\n'));
-    
+
     for (let i = 0; i < texts.length; i++) {
         const text = texts[i];
         const isLast = i === texts.length - 1;
@@ -57,16 +59,13 @@ export const generateTypes = (source: SourceFile): string => {
     return output;
 };
 
-export const saveTypes = (source: SourceFile, path: string): void => {
+export const saveTypes = async (source: SourceFile, path: string): Promise<void> => {
     const resolvedPath = resolve(process.cwd(), path);
 
     // ensure directory exists
     const dir = dirname(resolvedPath);
-    if (!existsSync(dir)) {
-        mkdirSync(dir, { recursive: true });
-    }
+    await mkdir(dir, {recursive: true});
 
     const types = generateTypes(source);
-    writeFileSync(resolvedPath, types, 'utf-8');
+    await Bun.write(resolvedPath, types);
 };
-
