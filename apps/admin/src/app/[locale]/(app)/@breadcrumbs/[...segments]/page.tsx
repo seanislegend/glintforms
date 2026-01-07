@@ -13,6 +13,7 @@ import Spinner from '@glint/ui/spinner';
 import {useQuery} from '@tanstack/react-query';
 import {useParams} from 'next/navigation';
 import {Fragment, useCallback, useMemo} from 'react';
+import * as R from 'remeda';
 import {useI18n} from '@/hooks/use-i18n';
 import {useSession} from '@/hooks/use-session';
 import {useTRPC} from '@/lib/trpc/react';
@@ -104,13 +105,13 @@ const DynamicBreadcrumbs: React.FC = () => {
                     if (isLastItem) {
                         acc.push(
                             <BreadcrumbPage key={href} className="capitalize">
-                                {segment}
+                                {t(R.capitalize(segment))}
                             </BreadcrumbPage>
                         );
                     } else {
                         acc.push(
                             <BreadcrumbItemWithLink key={href} href={href}>
-                                {segment}
+                                {t(R.capitalize(segment))}
                             </BreadcrumbItemWithLink>
                         );
                     }
@@ -118,7 +119,7 @@ const DynamicBreadcrumbs: React.FC = () => {
                 return acc;
             }, [] as React.ReactNode[])
             .reverse();
-    }, [segments, routeSegments, isLoading, isStale, data, getSegmentValue]);
+    }, [segments, routeSegments, isLoading, isStale, data, getSegmentValue, t]);
 
     return (
         <Breadcrumb className="overflow-hidden text-ellipsis">
