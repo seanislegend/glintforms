@@ -9,6 +9,7 @@ import {
 } from '@glint/database';
 import {and, count, desc, eq, inArray} from 'drizzle-orm';
 import {z} from 'zod';
+import {getServerI18n} from '@/lib/i18n-server';
 import type {CohortList} from '@/lib/schemas/cohorts';
 import {cohortCreateSchema, cohortUpdateSchema} from '@/lib/schemas/cohorts';
 import type {RespondentList} from '@/lib/schemas/respondents';
@@ -101,9 +102,10 @@ export const cohortsRouter = createTRPCRouter({
             })
         )
         .mutation(async ({ctx, input}) => {
+            const {t} = await getServerI18n(ctx.locale);
             const cohort = await verifyCohortAccess(ctx.db, ctx.tenant, input.cohortId);
             if (!cohort) {
-                throw new Error('Cohort not found');
+                throw new Error(t('Cohort not found'));
             }
 
             if (input.respondentIds.length === 0) {
@@ -232,9 +234,10 @@ export const cohortsRouter = createTRPCRouter({
             })
         )
         .mutation(async ({ctx, input}) => {
+            const {t} = await getServerI18n(ctx.locale);
             const cohort = await verifyCohortAccess(ctx.db, ctx.tenant, input.cohortId);
             if (!cohort) {
-                throw new Error('Cohort not found');
+                throw new Error(t('Cohort not found'));
             }
 
             await ctx.db

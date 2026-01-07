@@ -12,6 +12,7 @@ import {tasks} from '@trigger.dev/sdk';
 import {TRPCError} from '@trpc/server';
 import {and, desc, eq, max, or} from 'drizzle-orm';
 import {z} from 'zod';
+import {getServerI18n} from '@/lib/i18n-server';
 import {
     assignScreenerSchema,
     removeScreenerSchema,
@@ -64,6 +65,7 @@ export const surveysRouter = {
         return surveyWithCampaign;
     }),
     create: protectedProcedure.input(surveyInsertSchema).mutation(async ({input, ctx}) => {
+        const {t} = await getServerI18n(ctx.locale);
         let finalCampaignId = input.campaignId;
         // create new campaign if a title is provided and no campaign is selected
         if (input.newCampaignTitle && !input.campaignId) {
@@ -75,13 +77,13 @@ export const surveysRouter = {
                 })
                 .returning();
             if (!newCampaign) {
-                throw new Error('Failed to create campaign');
+                throw new Error(t('Failed to create campaign'));
             }
             finalCampaignId = newCampaign.id;
         }
 
         if (!finalCampaignId) {
-            throw new Error('No campaign ID provided');
+            throw new Error(t('No campaign ID provided'));
         }
 
         // generate slug from title if not provided
@@ -125,6 +127,7 @@ export const surveysRouter = {
             })
         )
         .mutation(async ({input, ctx}) => {
+            const {t} = await getServerI18n(ctx.locale);
             const {id, status} = input;
             const updateData: any = {status, updatedAt: new Date()};
 
@@ -133,7 +136,7 @@ export const surveysRouter = {
                 .from(surveys)
                 .where(and(eq(surveys.id, id), eq(surveys.tenantId, ctx.tenant)));
             if (!survey) {
-                throw new TRPCError({code: 'NOT_FOUND', message: 'Survey not found'});
+                throw new TRPCError({code: 'NOT_FOUND', message: t('Survey not found')});
             }
 
             // if the status is changing to anything but draft, we need to check if the
@@ -146,8 +149,9 @@ export const surveysRouter = {
                 if (!allQuestions) {
                     throw new TRPCError({
                         code: 'BAD_REQUEST',
-                        message:
+                        message: t(
                             'This survey has no questions. Before the status can be changed, at least one question must be added.'
+                        )
                     });
                 }
             }
@@ -210,6 +214,7 @@ export const surveysRouter = {
     updateSettings: surveyEditableProcedure
         .input(z.object({surveyId: z.string(), ...surveySettingsSchema.shape}))
         .mutation(async ({input, ctx}) => {
+            const {t} = await getServerI18n(ctx.locale);
             const {surveyId, ...settings} = input;
 
             // get current settings to check if password exists
@@ -238,7 +243,9 @@ export const surveysRouter = {
                     // only throw error if no existing password OR user wants to change password but hasn't provided new one
                     throw new TRPCError({
                         code: 'BAD_REQUEST',
-                        message: 'You must provide a password when password protection is enabled'
+                        message: t(
+                            'You must provide a password when password protection is enabled'
+                        )
                     });
                 } else {
                     // keep existing password hash if not changing
@@ -295,6 +302,7 @@ export const surveysRouter = {
     assignScreener: surveyEditableProcedure
         .input(assignScreenerSchema)
         .mutation(async ({input, ctx}) => {
+            const {t} = await getServerI18n(ctx.locale);
             // verify survey belongs to tenant and can be edited
             const [survey] = await ctx.db
                 .select({id: surveys.id, status: surveys.status})
@@ -303,13 +311,13 @@ export const surveysRouter = {
                 .limit(1);
 
             if (!survey) {
-                throw new TRPCError({code: 'NOT_FOUND', message: 'Survey not found'});
+                throw new TRPCError({code: 'NOT_FOUND', message: t('Survey not found')});
             }
 
             if (!surveyCanBeEdited(survey.status)) {
                 throw new TRPCError({
                     code: 'BAD_REQUEST',
-                    message: 'Cannot modify survey when it is complete or archived'
+                    message: t('Cannot modify survey when it is complete or archived')
                 });
             }
 
@@ -321,7 +329,7 @@ export const surveysRouter = {
                 .limit(1);
 
             if (!screener) {
-                throw new TRPCError({code: 'NOT_FOUND', message: 'Screener not found'});
+                throw new TRPCError({code: 'NOT_FOUND', message: t('Screener not found')});
             }
 
             // check if already assigned
@@ -339,7 +347,7 @@ export const surveysRouter = {
             if (existing) {
                 throw new TRPCError({
                     code: 'BAD_REQUEST',
-                    message: 'Screener is already assigned to this survey'
+                    message: t('Screener is already assigned to this survey')
                 });
             }
 
@@ -367,6 +375,7 @@ export const surveysRouter = {
     removeScreener: surveyEditableProcedure
         .input(removeScreenerSchema)
         .mutation(async ({input, ctx}) => {
+            const {t} = await getServerI18n(ctx.locale);
             // verify survey belongs to tenant
             const [survey] = await ctx.db
                 .select({id: surveys.id})
@@ -375,7 +384,7 @@ export const surveysRouter = {
                 .limit(1);
 
             if (!survey) {
-                throw new TRPCError({code: 'NOT_FOUND', message: 'Survey not found'});
+                throw new TRPCError({code: 'NOT_FOUND', message: t('Survey not found')});
             }
 
             await ctx.db
@@ -392,6 +401,7 @@ export const surveysRouter = {
     updateScreenerOrder: surveyEditableProcedure
         .input(updateScreenerOrderSchema)
         .mutation(async ({input, ctx}) => {
+            const {t} = await getServerI18n(ctx.locale);
             // verify survey belongs to tenant
             const [survey] = await ctx.db
                 .select({id: surveys.id})
@@ -400,7 +410,7 @@ export const surveysRouter = {
                 .limit(1);
 
             if (!survey) {
-                throw new TRPCError({code: 'NOT_FOUND', message: 'Survey not found'});
+                throw new TRPCError({code: 'NOT_FOUND', message: t('Survey not found')});
             }
 
             const [updated] = await ctx.db
@@ -417,7 +427,7 @@ export const surveysRouter = {
             if (!updated) {
                 throw new TRPCError({
                     code: 'NOT_FOUND',
-                    message: 'Screener assignment not found'
+                    message: t('Screener assignment not found')
                 });
             }
 
@@ -426,6 +436,7 @@ export const surveysRouter = {
     updateScreenerFailureMessage: surveyEditableProcedure
         .input(updateScreenerFailureMessageSchema)
         .mutation(async ({input, ctx}) => {
+            const {t} = await getServerI18n(ctx.locale);
             // verify survey belongs to tenant
             const [survey] = await ctx.db
                 .select({id: surveys.id})
@@ -434,7 +445,7 @@ export const surveysRouter = {
                 .limit(1);
 
             if (!survey) {
-                throw new TRPCError({code: 'NOT_FOUND', message: 'Survey not found'});
+                throw new TRPCError({code: 'NOT_FOUND', message: t('Survey not found')});
             }
 
             const [updated] = await ctx.db
@@ -451,7 +462,7 @@ export const surveysRouter = {
             if (!updated) {
                 throw new TRPCError({
                     code: 'NOT_FOUND',
-                    message: 'Screener assignment not found'
+                    message: t('Screener assignment not found')
                 });
             }
 

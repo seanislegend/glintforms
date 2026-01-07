@@ -1,5 +1,5 @@
 {
-  "generated": "2026-01-07T02:46:05.041Z",
+  "generated": "2026-01-07T04:18:45.699Z",
   "keys": {
     "admin.6621249": {
       "added": "2026-01-06T20:43:32.516Z",
@@ -21,6 +21,10 @@
       "hash": "291b09b049c94c0f9865e46f620c49fc76a4a86e23687c1d3a2e07611590b570",
       "occurrences": [
         {
+          "file": "apps/admin/src/app/[locale]/api/surveys/[surveyId]/questions/export/xlsform/route.ts",
+          "line": 48
+        },
+        {
           "file": "apps/admin/src/app/api/surveys/[surveyId]/questions/export/xlsform/route.ts",
           "line": 48
         }
@@ -31,6 +35,10 @@
       "added": "2026-01-07T01:57:53.346Z",
       "hash": "d089c8a9fc28e4e50223eb38c9409e362521be9380a37341304fbac7a4cd9e5f",
       "occurrences": [
+        {
+          "file": "apps/admin/src/app/[locale]/api/surveys/[surveyId]/questions/export/xlsform/route.ts",
+          "line": 18
+        },
         {
           "file": "apps/admin/src/app/api/surveys/[surveyId]/questions/export/xlsform/route.ts",
           "line": 18
@@ -571,6 +579,14 @@
         {
           "file": "apps/admin/src/components/cohorts/cohort-details.tsx",
           "line": 27
+        },
+        {
+          "file": "apps/admin/src/lib/trpc/routers/cohorts.ts",
+          "line": 108
+        },
+        {
+          "file": "apps/admin/src/lib/trpc/routers/cohorts.ts",
+          "line": 240
         }
       ],
       "text": "Cohort not found"
@@ -6812,8 +6828,32 @@
           "line": 31
         },
         {
+          "file": "apps/admin/src/app/[locale]/api/surveys/[surveyId]/questions/export/xlsform/route.ts",
+          "line": 27
+        },
+        {
           "file": "apps/admin/src/app/api/surveys/[surveyId]/questions/export/xlsform/route.ts",
           "line": 27
+        },
+        {
+          "file": "apps/admin/src/lib/trpc/routers/surveys.ts",
+          "line": 139
+        },
+        {
+          "file": "apps/admin/src/lib/trpc/routers/surveys.ts",
+          "line": 314
+        },
+        {
+          "file": "apps/admin/src/lib/trpc/routers/surveys.ts",
+          "line": 387
+        },
+        {
+          "file": "apps/admin/src/lib/trpc/routers/surveys.ts",
+          "line": 413
+        },
+        {
+          "file": "apps/admin/src/lib/trpc/routers/surveys.ts",
+          "line": 448
         }
       ],
       "text": "Survey not found"
@@ -8850,6 +8890,10 @@
         {
           "file": "apps/admin/src/lib/schemas/surveys.ts",
           "line": 70
+        },
+        {
+          "file": "apps/admin/src/lib/trpc/routers/surveys.ts",
+          "line": 246
         }
       ],
       "text": "You must provide a password when password protection is enabled"
@@ -12084,6 +12128,124 @@
       ],
       "text": "h"
     },
+    "admin.trpc.routers.05cd1c2": {
+      "added": "2026-01-07T04:18:28.115Z",
+      "hash": "05cd1c2837f0393991550a39460729f4613b8adea9529aea2b0c29ff2899504b",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/trpc/routers/questions.ts",
+          "line": 291
+        }
+      ],
+      "text": "Cannot generate questions for a survey that is no longer in draft status"
+    },
+    "admin.trpc.routers.1176459": {
+      "added": "2026-01-07T04:18:28.114Z",
+      "hash": "11764590ea4269d9bc527b4650e14dd3d35120129eb6a2437228ed70436b95cd",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/trpc/routers/authenticity.ts",
+          "line": 80
+        }
+      ],
+      "text": "Authenticity score not found"
+    },
+    "admin.trpc.routers.1b9c726": {
+      "added": "2026-01-07T04:18:28.115Z",
+      "hash": "1b9c72619ca79ed7d582cba31e4d5da733b4aadfd95b61e660d2b21c4dda4305",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/trpc/routers/questions.ts",
+          "line": 42
+        },
+        {
+          "file": "apps/admin/src/lib/trpc/routers/questions.ts",
+          "line": 286
+        }
+      ],
+      "text": "Survey not found or access denied"
+    },
+    "admin.trpc.routers.213e592": {
+      "added": "2026-01-07T04:18:28.115Z",
+      "hash": "213e5929f38da73d653e7a7b9e184cee7fbe0c2efe2e0ab7243161614e697b04",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/trpc/routers/surveys.ts",
+          "line": 152
+        }
+      ],
+      "text": "This survey has no questions. Before the status can be changed, at least one question must be added."
+    },
+    "admin.trpc.routers.2a729eb": {
+      "added": "2026-01-07T04:18:28.115Z",
+      "hash": "2a729eb5d0518f8868140c6da4574b5ad34422eb307b9caf4c19c34090006b0f",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/trpc/routers/surveys.ts",
+          "line": 430
+        },
+        {
+          "file": "apps/admin/src/lib/trpc/routers/surveys.ts",
+          "line": 465
+        }
+      ],
+      "text": "Screener assignment not found"
+    },
+    "admin.trpc.routers.7194ed2": {
+      "added": "2026-01-07T04:18:28.114Z",
+      "hash": "7194ed2b9c2a995098cbfa8895df93b9cc012c1000e3c21b927b26a0d23b69a8",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/trpc/routers/surveys.ts",
+          "line": 80
+        }
+      ],
+      "text": "Failed to create campaign"
+    },
+    "admin.trpc.routers.7852c59": {
+      "added": "2026-01-07T04:18:28.115Z",
+      "hash": "7852c595f65621979972a6c00249c9b7a440a0cec4fc3ca180ef6e70ea02f00a",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/trpc/routers/surveys.ts",
+          "line": 320
+        }
+      ],
+      "text": "Cannot modify survey when it is complete or archived"
+    },
+    "admin.trpc.routers.83ffb27": {
+      "added": "2026-01-07T04:18:28.114Z",
+      "hash": "83ffb2732b239386318343399824494aa4cab300b2f676022478ebae60bf21a3",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/trpc/routers/screeners.ts",
+          "line": 158
+        }
+      ],
+      "text": "Cannot delete screener that is assigned to surveys"
+    },
+    "admin.trpc.routers.e08d9ae": {
+      "added": "2026-01-07T04:18:28.115Z",
+      "hash": "e08d9ae95d09129b01a9e786ff60acd9ab497d1c05cd1acfe47029cf3bbd0336",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/trpc/routers/surveys.ts",
+          "line": 350
+        }
+      ],
+      "text": "Screener is already assigned to this survey"
+    },
+    "admin.trpc.routers.f499eee": {
+      "added": "2026-01-07T04:18:28.114Z",
+      "hash": "f499eeee5fb3f17a07735da87b40a3ec3d3704f4fb29b57bc04faab46ddbb1ef",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/trpc/routers/surveys.ts",
+          "line": 86
+        }
+      ],
+      "text": "No campaign ID provided"
+    },
     "common.062c929": {
       "added": "2026-01-06T20:43:32.518Z",
       "hash": "062c92926b3b98543a154c290d51ee6f3d162731c54f168d482f9022322cc7fd",
@@ -13620,6 +13782,18 @@
         {
           "file": "apps/admin/src/components/screeners/summary.tsx",
           "line": 29
+        },
+        {
+          "file": "apps/admin/src/lib/trpc/routers/screeners.ts",
+          "line": 107
+        },
+        {
+          "file": "apps/admin/src/lib/trpc/routers/screeners.ts",
+          "line": 146
+        },
+        {
+          "file": "apps/admin/src/lib/trpc/routers/surveys.ts",
+          "line": 332
         }
       ],
       "text": "Screener not found"

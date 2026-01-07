@@ -2,6 +2,7 @@ import {generateAuthenticityScore} from '@glint/authenticity';
 import {authenticityScores, user} from '@glint/database';
 import {eq} from 'drizzle-orm';
 import {z} from 'zod';
+import {getServerI18n} from '@/lib/i18n-server';
 import {isAuthenticityPass} from '@/utils/authenticity';
 import {protectedProcedure} from '../init';
 
@@ -60,6 +61,7 @@ export const authenticityRouter = {
             })
         )
         .mutation(async ({input: {id, originalScore, overrideReason}, ctx}) => {
+            const {t} = await getServerI18n(ctx.locale);
             const [authenticityScore] = await ctx.db
                 .update(authenticityScores)
                 .set({
@@ -75,7 +77,7 @@ export const authenticityRouter = {
                 .returning();
 
             if (!authenticityScore) {
-                throw new Error('authenticity score not found');
+                throw new Error(t('Authenticity score not found'));
             }
 
             return {

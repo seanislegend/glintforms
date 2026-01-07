@@ -1,6 +1,7 @@
 import {activities, questions, surveys} from '@glint/database';
 import {and, asc, eq, inArray} from 'drizzle-orm';
 import {z} from 'zod';
+import {getServerI18n} from '@/lib/i18n-server';
 import {questionSchema, questionsUpdateSchema} from '@/lib/schemas/questions';
 import {generateQuestions} from '@/lib/surveys/question-generation-service';
 import {hasPublishedStructureChanges} from '@/lib/surveys/validate-published-structure';
@@ -29,6 +30,7 @@ export const questionsRouter = {
         return data;
     }),
     update: surveyEditableProcedure.input(questionsUpdateSchema).mutation(async ({input, ctx}) => {
+        const {t} = await getServerI18n(ctx.locale);
         const surveyId = input.surveyId;
 
         // middleware already verified survey exists, belongs to tenant, and can be edited
@@ -37,7 +39,7 @@ export const questionsRouter = {
             .from(surveys)
             .where(and(eq(surveys.id, surveyId), eq(surveys.tenantId, ctx.tenant)));
         if (!survey) {
-            return {success: false, error: 'Survey not found or access denied'};
+            return {success: false, error: t('Survey not found or access denied')};
         }
 
         const isDraft = survey.status === 'draft';
@@ -275,17 +277,18 @@ export const questionsRouter = {
             })
         )
         .mutation(async ({input, ctx}) => {
+            const {t} = await getServerI18n(ctx.locale);
             const [survey] = await ctx.db
                 .select()
                 .from(surveys)
                 .where(and(eq(surveys.id, input.surveyId), eq(surveys.tenantId, ctx.tenant)));
             if (!survey) {
-                throw new Error('Survey not found or access denied');
+                throw new Error(t('Survey not found or access denied'));
             }
 
             if (survey.status !== 'draft') {
                 throw new Error(
-                    'Cannot generate questions for a survey that is no longer in draft status'
+                    t('Cannot generate questions for a survey that is no longer in draft status')
                 );
             }
 
