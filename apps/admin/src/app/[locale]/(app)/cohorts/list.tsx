@@ -8,7 +8,7 @@ import FormDialog from '@/components/form-dialog';
 import {useI18n} from '@/hooks/use-i18n';
 import type {CohortList} from '@/lib/schemas/cohorts';
 import {useTRPC} from '@/lib/trpc/react';
-import {columns} from './columns';
+import {createColumns} from './columns';
 import CohortForm from './form';
 
 const CohortsList: React.FC = () => {
@@ -51,7 +51,7 @@ const CohortsList: React.FC = () => {
 
     return (
         <DataTable
-            columns={columns}
+            columns={createColumns(t)}
             data={cohorts as CohortList[]}
             inputFilterKey="name"
             toolbarActions={renderCreateForm}

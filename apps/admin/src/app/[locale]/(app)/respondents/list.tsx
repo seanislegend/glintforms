@@ -7,7 +7,7 @@ import {DataTable} from '@/components/data-table';
 import {useI18n} from '@/hooks/use-i18n';
 import type {RespondentList} from '@/lib/schemas/respondents';
 import {useTRPC} from '@/lib/trpc/react';
-import {columns} from './columns';
+import {createColumns} from './columns';
 
 const RespondentsList: React.FC = () => {
     const {t} = useI18n();
@@ -77,7 +77,7 @@ const RespondentsList: React.FC = () => {
 
     return (
         <DataTable
-            columns={columns}
+            columns={createColumns(t)}
             data={respondents as RespondentList[]}
             facetedFilters={{
                 surveys: {

@@ -11,7 +11,6 @@ import AuthenticityStatusBadge from '@/components/badges/authenticity-status';
 import {DataTableColumnHeader} from '@/components/data-table/column-header';
 import {DataTableRowActions} from '@/components/data-table/row-actions';
 import RecordId from '@/components/record-id';
-import {t} from '@/lib/i18n';
 
 interface ResponseList {
     endedAt: Date | null;
@@ -23,91 +22,95 @@ interface ResponseList {
     was_completed: boolean;
 }
 
-const CompletionStatusCell = ({row}: {row: Row<ResponseList>}) => {
-    const wasCompleted = row.getValue('was_completed') as boolean;
+export const createColumns = (t: (text: string) => string): ColumnDef<ResponseList>[] => {
+    const CompletionStatusCell = ({row}: {row: Row<ResponseList>}) => {
+        const wasCompleted = row.getValue('was_completed') as boolean;
 
-    return (
-        <Badge variant={wasCompleted ? 'success' : 'warning'}>
-            {wasCompleted ? t('Completed') : t('Incomplete')}
-        </Badge>
-    );
-};
+        return (
+            <Badge variant={wasCompleted ? 'success' : 'warning'}>
+                {wasCompleted ? t('Completed') : t('Incomplete')}
+            </Badge>
+        );
+    };
 
-const QuickViewResponseButton = ({responseId}: {responseId: string}) => {
-    const [, setResponseId] = useQueryState('responseId');
-    return (
-        <Button onClick={() => setResponseId(responseId)} size="sm" variant="outline">
-            <EyeIcon />
-            <span className="sr-only">{t('Quick view')}</span>
-        </Button>
-    );
-};
+    const QuickViewResponseButton = ({responseId}: {responseId: string}) => {
+        const [, setResponseId] = useQueryState('responseId');
+        return (
+            <Button onClick={() => setResponseId(responseId)} size="sm" variant="outline">
+                <EyeIcon />
+                <span className="sr-only">{t('Quick view')}</span>
+            </Button>
+        );
+    };
 
-export const columns: ColumnDef<ResponseList>[] = [
-    {
-        accessorKey: 'respondentId',
-        header: ({column}) => <DataTableColumnHeader column={column} title={t('Respondent')} />,
-        cell: ({row}) => {
-            const respondentId = row.getValue('respondentId') as string | null;
-            if (!respondentId) {
-                return (
-                    <div className="flex items-center gap-x-1">
-                        <UserCircleDashedIcon className="size-5" />
-                        <span className="text-muted-foreground">{t('Anonymous')}</span>
-                    </div>
-                );
+    return [
+        {
+            accessorKey: 'respondentId',
+            header: ({column}) => <DataTableColumnHeader column={column} title={t('Respondent')} />,
+            cell: ({row}) => {
+                const respondentId = row.getValue('respondentId') as string | null;
+                if (!respondentId) {
+                    return (
+                        <div className="flex items-center gap-x-1">
+                            <UserCircleDashedIcon className="size-5" />
+                            <span className="text-muted-foreground">{t('Anonymous')}</span>
+                        </div>
+                    );
+                }
+
+                return <RecordId href={`/respondents/${respondentId}`} id={respondentId} />;
+            },
+            filterFn: (row, id, value) => {
+                const filterValues = Array.isArray(value) ? value : [value];
+                return filterValues.includes(row.getValue(id) as string);
             }
-
-            return <RecordId href={`/respondents/${respondentId}`} id={respondentId} />;
         },
-        filterFn: (row, id, value) => {
-            const filterValues = Array.isArray(value) ? value : [value];
-            return filterValues.includes(row.getValue(id) as string);
+        {
+            accessorKey: 'was_completed',
+            header: ({column}) => <DataTableColumnHeader column={column} title={t('Status')} />,
+            cell: ({row}) => <CompletionStatusCell row={row} />,
+            filterFn: (row, id, value) => {
+                const filterValues = Array.isArray(value) ? value : [value];
+                return filterValues.includes(row.getValue(id));
+            }
+        },
+        {
+            accessorKey: 'authentic_response',
+            header: ({column}) => (
+                <DataTableColumnHeader column={column} title={t('Authenticity')} />
+            ),
+            cell: ({row}) => <AuthenticityStatusBadge pass={row.getValue('authentic_response')} />,
+            filterFn: (row, id, value) => {
+                const filterValues = Array.isArray(value) ? value : [value];
+                return filterValues.includes(row.getValue(id) as boolean);
+            }
+        },
+        {
+            accessorKey: 'startedAt',
+            header: ({column}) => <DataTableColumnHeader column={column} title={t('Started')} />,
+            cell: ({row}) => {
+                const startedAt = row.getValue('startedAt') as Date;
+                return <RelativeDate date={startedAt} />;
+            }
+        },
+        {
+            accessorKey: 'endedAt',
+            header: ({column}) => <DataTableColumnHeader column={column} title={t('Ended')} />,
+            cell: ({row}) => {
+                const endedAt = row.getValue('endedAt') as Date;
+                return <RelativeDate className="text-muted-foreground" date={endedAt} />;
+            }
+        },
+        {
+            id: 'actions',
+            cell: ({row}) => (
+                <DataTableRowActions
+                    detailsUrl={`/surveys/${row.original.surveyId}/responses/${row.original.id}`}
+                    row={row}
+                >
+                    <QuickViewResponseButton responseId={row.original.id} />
+                </DataTableRowActions>
+            )
         }
-    },
-    {
-        accessorKey: 'was_completed',
-        header: ({column}) => <DataTableColumnHeader column={column} title={t('Status')} />,
-        cell: ({row}) => <CompletionStatusCell row={row} />,
-        filterFn: (row, id, value) => {
-            const filterValues = Array.isArray(value) ? value : [value];
-            return filterValues.includes(row.getValue(id));
-        }
-    },
-    {
-        accessorKey: 'authentic_response',
-        header: ({column}) => <DataTableColumnHeader column={column} title={t('Authenticity')} />,
-        cell: ({row}) => <AuthenticityStatusBadge pass={row.getValue('authentic_response')} />,
-        filterFn: (row, id, value) => {
-            const filterValues = Array.isArray(value) ? value : [value];
-            return filterValues.includes(row.getValue(id) as boolean);
-        }
-    },
-    {
-        accessorKey: 'startedAt',
-        header: ({column}) => <DataTableColumnHeader column={column} title={t('Started')} />,
-        cell: ({row}) => {
-            const startedAt = row.getValue('startedAt') as Date;
-            return <RelativeDate date={startedAt} />;
-        }
-    },
-    {
-        accessorKey: 'endedAt',
-        header: ({column}) => <DataTableColumnHeader column={column} title={t('Ended')} />,
-        cell: ({row}) => {
-            const endedAt = row.getValue('endedAt') as Date;
-            return <RelativeDate className="text-muted-foreground" date={endedAt} />;
-        }
-    },
-    {
-        id: 'actions',
-        cell: ({row}) => (
-            <DataTableRowActions
-                detailsUrl={`/surveys/${row.original.surveyId}/responses/${row.original.id}`}
-                row={row}
-            >
-                <QuickViewResponseButton responseId={row.original.id} />
-            </DataTableRowActions>
-        )
-    }
-];
+    ];
+};

@@ -57,8 +57,6 @@ const CohortRespondents: React.FC<Props> = ({cohortId}) => {
         }
     };
 
-    const columns = createColumns(handleDelete);
-
     if (respondents.length === 0) {
         return (
             <EmptyPanel
@@ -72,7 +70,7 @@ const CohortRespondents: React.FC<Props> = ({cohortId}) => {
         <>
             <HighlightChange id="cohorts-respondents-list">
                 <DataTable
-                    columns={columns}
+                    columns={createColumns(t, handleDelete)}
                     data={respondents as RespondentList[]}
                     inputFilterKey={null}
                 />

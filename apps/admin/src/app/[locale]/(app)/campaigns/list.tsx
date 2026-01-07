@@ -9,7 +9,7 @@ import FormDialog from '@/components/form-dialog';
 import {useI18n} from '@/hooks/use-i18n';
 import type {CampaignList} from '@/lib/schemas/campaigns';
 import {useTRPC} from '@/lib/trpc/react';
-import {columns} from './columns';
+import {createColumns} from './columns';
 
 const CreateCampaignForm = lazy(() => import('./create/form'));
 
@@ -47,7 +47,7 @@ const CampaignsList: React.FC = () => {
 
     return (
         <DataTable
-            columns={columns}
+            columns={createColumns(t)}
             data={campaigns as CampaignList[]}
             inputFilterKey="title"
             toolbarActions={renderCreateForm}
