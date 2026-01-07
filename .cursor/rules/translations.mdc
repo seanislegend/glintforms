@@ -11,8 +11,9 @@ This document defines how to use translations in the Glint admin application. Fo
 
 - Use server-side translations for server components
 - Use client-side translations for client components
-- Always use the `t()` function for user-facing text
-- Pass English text as the argument to `t()`
+- Always use the `t()` function for user-facing text in components
+- Use `/* i18n */` comments for translatable strings outside components
+- Pass English text as the argument to `t()` or after `/* i18n */`
 - Never hardcode translated text
 
 ## Server components
@@ -124,6 +125,156 @@ const SurveyNavbar: React.FC<Props> = ({surveyId}) => {
 };
 ```
 
+## Non-component code
+
+For strings outside React components (utilities, constants, schemas), use the `/* i18n */` comment to mark translatable strings.
+
+### When to use `/* i18n */` comments
+
+Use this pattern for:
+
+- Utility functions that return user-facing text
+- Constant objects with translatable strings
+- Schema error messages
+- Configuration objects with labels
+- Any non-component code with user-facing strings
+
+### Usage pattern
+
+Add `/* i18n */` comment before any string that needs translation:
+
+```typescript
+// utility function
+export function getStatusLabel(status: string): string {
+    switch (status) {
+        case 'active':
+            return /* i18n */ 'Active';
+        case 'inactive':
+            return /* i18n */ 'Inactive';
+        default:
+            return /* i18n */ 'Unknown';
+    }
+}
+
+// constant object
+export const QUESTION_TYPES = {
+    text: /* i18n */ 'Text',
+    number: /* i18n */ 'Number',
+    select: /* i18n */ 'Selection',
+} as const;
+
+// schema error messages
+export const surveySchema = z.object({
+    title: z.string().min(1, /* i18n */ 'Title is required'),
+    description: z.string().min(10, /* i18n */ 'Description must be at least 10 characters'),
+});
+```
+
+### Key requirements
+
+- Place `/* i18n */` immediately before the string literal
+- Use English text as the string value
+- The translation system will extract these strings automatically
+- **Only use `/* i18n */` in non-component code** - never in React components
+- **Never combine `/* i18n */` with `t()`** - they are mutually exclusive patterns
+- These strings will be translated at runtime when used in components
+
+### Example with utility function
+
+```typescript
+// utilities/format.ts
+export function formatQuestionType(type: string): string {
+    const labels: Record<string, string> = {
+        text: /* i18n */ 'Text input',
+        number: /* i18n */ 'Number input',
+        select_one: /* i18n */ 'Single choice',
+        select_multiple: /* i18n */ 'Multiple choice',
+        date: /* i18n */ 'Date picker',
+    };
+    return labels[type] || /* i18n */ 'Unknown type';
+}
+```
+
+### Example with constants
+
+```typescript
+// constants/statuses.ts
+export const SURVEY_STATUSES = {
+    draft: {
+        label: /* i18n */ 'Draft',
+        color: 'gray',
+    },
+    active: {
+        label: /* i18n */ 'Active',
+        color: 'green',
+    },
+    archived: {
+        label: /* i18n */ 'Archived',
+        color: 'red',
+    },
+} as const;
+```
+
+### Example with validation schemas
+
+```typescript
+// schemas/campaign.ts
+import {z} from 'zod';
+
+export const campaignSchema = z.object({
+    name: z.string().min(1, /* i18n */ 'Campaign name is required'),
+    startDate: z.date({
+        required_error: /* i18n */ 'Start date is required',
+        invalid_type_error: /* i18n */ 'Invalid date format',
+    }),
+    budget: z.number().positive(/* i18n */ 'Budget must be positive'),
+});
+```
+
+### Using marked strings in components
+
+The marked strings can be used in components by passing them through `t()`:
+
+```typescript
+'use client';
+
+import {useI18n} from '@/hooks/use-i18n';
+import {getStatusLabel} from '@/utils/format';
+
+const StatusDisplay: React.FC<{status: string}> = ({status}) => {
+    const {t} = useI18n();
+    const label = getStatusLabel(status);
+    
+    return <span>{t(label)}</span>;
+};
+```
+
+### Do not mix patterns
+
+```typescript
+// ❌ Incorrect - never use /* i18n */ with t()
+const {t} = useI18n();
+return <button>{t(/* i18n */ 'Click me')}</button>;
+
+// ✅ Correct - use t() only in components
+const {t} = useI18n();
+return <button>{t('Click me')}</button>;
+
+// ❌ Incorrect - never use /* i18n */ with t()
+const message = t(/* i18n */ 'Hello world');
+
+// ✅ Correct - use t() only
+const message = t('Hello world');
+```
+
+### Important notes
+
+- The `/* i18n */` comment is for marking strings, not translating them
+- Actual translation happens when the string is passed to `t()` in a component
+- This pattern helps the translation system extract all translatable strings
+- **Never add `/* i18n */` comments to strings already wrapped in `t()`** - choose one or the other
+- Use `t()` in components, use `/* i18n */` in non-component code
+
 ## Common patterns
 
 ### Translation keys
@@ -223,12 +374,13 @@ Both translation functions accept strings and provide type-safe autocomplete for
 
 Before completing any translation implementation, verify:
 
-1. **Component type**: Is this a server or client component?
+1. **Component type**: Is this a server or client component, or non-component code?
 2. **Correct import**: Using `getServerI18n` for server, `useI18n` for client
 3. **Async handling**: Server translations are awaited
 4. **Client directive**: Client components have `'use client'` directive
-5. **English text**: All user-facing text uses `t()` with English strings
+5. **English text**: All user-facing text uses `t()` with English strings or `/* i18n */` comments
 6. **Locale parameter**: Server components extract locale from params
+7. **Non-component strings**: All translatable strings outside components have `/* i18n */` comments
 
 ## Migration guide
 
@@ -282,4 +434,38 @@ const Component = () => {
     const {t} = useI18n();
     return <button>{t('Click me')}</button>;
 };
+```
+
+### Converting non-component code to use translations
+
+```typescript
+// Before
+export const STATUS_LABELS = {
+    active: 'Active',
+    inactive: 'Inactive',
+    pending: 'Pending',
+};
+
+// After
+export const STATUS_LABELS = {
+    active: /* i18n */ 'Active',
+    inactive: /* i18n */ 'Inactive',
+    pending: /* i18n */ 'Pending',
+};
+```
+
+```typescript
+// Before
+export function validateSurvey(data: unknown) {
+    return z.object({
+        title: z.string().min(1, 'Title is required'),
+    }).parse(data);
+}
+
+// After
+export function validateSurvey(data: unknown) {
+    return z.object({
+        title: z.string().min(1, /* i18n */ 'Title is required'),
+    }).parse(data);
+}
 ```

@@ -21,7 +21,10 @@ export type AuthenticityScore = Pick<
 
 export const authenticityScoreOverrideSchema = z.object({
     id: z.string(),
-    overrideReason: z.string().min(1, 'You must provide a reason').max(1000, 'Reason is too long'),
+    overrideReason: z
+        .string()
+        .min(1, /* i18n */ 'You must provide a reason')
+        .max(1000, /* i18n */ 'Reason is too long'),
     originalScore: z.number().min(0).max(100)
 }) satisfies z.ZodType<
     Omit<typeof authenticityScores.$inferInsert, 'surveyId' | 'responseId' | 'percentage'>

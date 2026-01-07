@@ -7,10 +7,13 @@ export type CampaignList = Pick<
 >;
 
 export const campaignInsertSchema = z.object({
-    description: z.string().max(1000, 'Description is too long').optional(),
+    description: z.string().max(1000, /* i18n */ 'Description is too long').optional(),
     isActive: z.boolean().default(true),
     tenantId: z.string(),
-    title: z.string().max(200, 'Title is too long').min(2, 'Title is too short')
+    title: z
+        .string()
+        .max(200, /* i18n */ 'Title is too long')
+        .min(2, /* i18n */ 'Title is too short')
 }) satisfies z.ZodType<Omit<typeof campaigns.$inferInsert, 'userId'>>;
 
 export type CampaignInsert = z.infer<typeof campaignInsertSchema>;

@@ -31,7 +31,7 @@ interface Props {
 }
 
 const ImportQuestionsDialog: React.FC<Props> = ({surveyId}) => {
-    const {t} = useI18n();
+    const {locale, t} = useI18n();
     const [isOpen, setIsOpen] = useState(false);
     const [isExporting, setIsExporting] = useState(false);
 
@@ -60,7 +60,7 @@ const ImportQuestionsDialog: React.FC<Props> = ({surveyId}) => {
                     : `/api/surveys/${surveyId}/questions/export`;
             const response = await fetch(endpoint, {
                 body: JSON.stringify({format, fields: includeAllFields ? 'all' : fields}),
-                headers: {'Content-Type': 'application/json'},
+                headers: {'Accept-Language': locale, 'Content-Type': 'application/json'},
                 method: 'POST'
             });
 
@@ -79,7 +79,7 @@ const ImportQuestionsDialog: React.FC<Props> = ({surveyId}) => {
         } finally {
             setIsExporting(false);
         }
-    }, [surveyId, methods.getValues, t]);
+    }, [surveyId, methods.getValues, t, locale]);
 
     return (
         <Sheet open={isOpen} onOpenChange={handleOpenChange}>

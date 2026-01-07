@@ -10,13 +10,16 @@ interface Props {
 }
 
 const SurveyTestingOverview: React.FC<Props> = ({surveyId}) => {
-    const {t} = useI18n();
+    const {locale, t} = useI18n();
     const {data, isPending} = useQuery({
         queryKey: ['surveys', surveyId, 'testing'],
         queryFn: async () => {
             const response = await fetch(
                 `${process.env.NEXT_PUBLIC_API_URL}/v1/surveys/${surveyId}`,
-                {method: 'GET', headers: {'Content-Type': 'application/json'}}
+                {
+                    method: 'GET',
+                    headers: {'Accept-Language': locale, 'Content-Type': 'application/json'}
+                }
             );
             const data = await response.json();
             return data;

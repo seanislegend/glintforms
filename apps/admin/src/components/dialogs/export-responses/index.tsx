@@ -13,7 +13,6 @@ import {
     SheetTitle,
     SheetTrigger
 } from '@glint/ui/sheet';
-import {useI18n} from '@/hooks/use-i18n';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {BracketsCurlyIcon} from '@phosphor-icons/react/dist/ssr/BracketsCurly';
 import {DownloadSimpleIcon} from '@phosphor-icons/react/dist/ssr/DownloadSimple';
@@ -24,6 +23,7 @@ import {saveAs} from 'file-saver';
 import {useCallback, useState} from 'react';
 import {FormProvider, type SubmitHandler, useForm} from 'react-hook-form';
 import {toast} from 'sonner';
+import {useI18n} from '@/hooks/use-i18n';
 import {DEFAULT_CODED_ANSWER_DELIMITER} from '@/lib/schemas/constants';
 import {type ResponsesExport, responsesExportSchema} from '@/lib/schemas/exports';
 import ExportResponsesAnswerControls from './answer-controls';
@@ -37,7 +37,7 @@ interface Props {
 }
 
 const ExportResponsesDialog: React.FC<Props> = ({filters, surveyId}) => {
-    const {t} = useI18n();
+    const {locale, t} = useI18n();
     const [isOpen, setIsOpen] = useState(false);
     const [isExporting, setIsExporting] = useState(false);
 
@@ -94,7 +94,7 @@ const ExportResponsesDialog: React.FC<Props> = ({filters, surveyId}) => {
                     codedAnswerDelimiter,
                     useCustomDelimiter
                 }),
-                headers: {'Content-Type': 'application/json'},
+                headers: {'Accept-Language': locale, 'Content-Type': 'application/json'},
                 method: 'POST'
             });
 
@@ -113,7 +113,7 @@ const ExportResponsesDialog: React.FC<Props> = ({filters, surveyId}) => {
         } finally {
             setIsExporting(false);
         }
-    }, [filters, methods.getValues, surveyId]);
+    }, [filters, methods.getValues, surveyId, t, locale]);
 
     return (
         <Sheet open={isOpen} onOpenChange={handleOpenChange}>

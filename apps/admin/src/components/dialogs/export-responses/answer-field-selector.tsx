@@ -4,8 +4,8 @@ import {FormField} from '@glint/form/fields';
 import Switch from '@glint/form/switch';
 import {BasicCard} from '@glint/ui/card';
 import ToggleVisibility from '@glint/ui/toggle-visibility';
-import {useI18n} from '@/hooks/use-i18n';
 import {useFormContext, useWatch} from 'react-hook-form';
+import {useI18n} from '@/hooks/use-i18n';
 import {ANSWER_EXPORT_FIELDS} from '@/lib/schemas/constants';
 
 const ExportResponsesAnswerFieldSelector: React.FC = () => {
@@ -56,11 +56,11 @@ const ExportResponsesAnswerFieldSelector: React.FC = () => {
                                                 className="text-sm font-medium"
                                                 htmlFor={field.name}
                                             >
-                                                {fieldText?.label}
+                                                {t(fieldText?.label || '')}
                                             </label>
                                             {fieldText?.description && (
                                                 <p className="text-xs text-muted-foreground">
-                                                    {fieldText.description}
+                                                    {t(fieldText.description)}
                                                 </p>
                                             )}
                                         </div>

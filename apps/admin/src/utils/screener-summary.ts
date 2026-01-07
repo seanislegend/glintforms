@@ -9,8 +9,9 @@ export function getScreenerSummary(screener: ScreenerRecord): string {
     switch (type) {
         case 'age': {
             const ageConfig = config as {operator: 'over' | 'under'; value: number};
-            const operatorText = ageConfig.operator === 'over' ? 'over' : 'under';
-            return `Screening for respondents ${operatorText} the age of ${ageConfig.value}`;
+            const operatorText =
+                ageConfig.operator === 'over' ? /* i18n */ 'over' : /* i18n */ 'under';
+            return `${/* i18n */ 'Screening for respondents'} ${operatorText} ${/* i18n */ 'the age of'} ${ageConfig.value}`;
         }
         case 'location': {
             const locationConfig = config as {countries: string[]};
@@ -18,14 +19,14 @@ export function getScreenerSummary(screener: ScreenerRecord): string {
                 code => COUNTRY_CODE_LABELS[code] || code
             );
             if (countryNames.length === 1) {
-                return `Screening for respondents in ${countryNames[0]}.`;
+                return `${/* i18n */ 'Screening for respondents in'} ${countryNames[0]}.`;
             }
             if (countryNames.length === 2) {
-                return `Screening for respondents in ${countryNames[0]} and ${countryNames[1]}.`;
+                return `${/* i18n */ 'Screening for respondents in'} ${countryNames[0]} ${/* i18n */ 'and'} ${countryNames[1]}.`;
             }
             const allButLast = countryNames.slice(0, -1);
             const lastCountry = countryNames.at(-1);
-            return `Screening for respondents in ${allButLast.join(', ')}, and ${lastCountry}.`;
+            return `${/* i18n */ 'Screening for respondents in'} ${allButLast.join(', ')}, ${/* i18n */ 'and'} ${lastCountry}.`;
         }
         case 'selection': {
             const selectionConfig = config as {
@@ -34,11 +35,11 @@ export function getScreenerSummary(screener: ScreenerRecord): string {
             };
             const passingOptions = selectionConfig.options.filter(opt => opt.passes);
             if (passingOptions.length === 1 && passingOptions[0]) {
-                return `Screening for respondents who answer "${selectionConfig.question}" with "${passingOptions[0].value}"`;
+                return `${/* i18n */ 'Screening for respondents who answer'} "${selectionConfig.question}" ${/* i18n */ 'with'} "${passingOptions[0].value}"`;
             }
-            return `Screening for respondents who answer "${selectionConfig.question}" with one of ${passingOptions.length} options`;
+            return `${/* i18n */ 'Screening for respondents who answer'} "${selectionConfig.question}" ${/* i18n */ 'with one of'} ${passingOptions.length} ${/* i18n */ 'options'}`;
         }
         default:
-            return 'Screening configuration';
+            return /* i18n */ 'Screening configuration';
     }
 }

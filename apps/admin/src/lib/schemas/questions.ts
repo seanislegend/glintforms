@@ -1,7 +1,12 @@
 import {z} from 'zod';
 import {EXPORT_FORMATS} from '@/lib/schemas/constants';
 
-export const questionTypeSchema = z.enum(['text', 'number', 'single_select', 'multi_select']);
+export const questionTypeSchema = z.enum([
+    /* i18n */ 'text',
+    /* i18n */ 'number',
+    /* i18n */ 'single_select',
+    /* i18n */ 'multi_select'
+]);
 
 export type QuestionType = z.infer<typeof questionTypeSchema>;
 
@@ -30,7 +35,10 @@ export type ValidationRule = z.infer<typeof validationRuleSchema>;
 
 export const questionOptionSchema = z.object({
     id: z.string(),
-    value: z.string().max(200, 'Value is too long').min(1, 'Value is too short')
+    value: z
+        .string()
+        .max(200, /* i18n */ 'Value is too long')
+        .min(1, /* i18n */ 'Value is too short')
 });
 
 export type QuestionOption = z.infer<typeof questionOptionSchema>;
@@ -38,13 +46,16 @@ export type QuestionOption = z.infer<typeof questionOptionSchema>;
 export const questionSchema = z
     .object({
         allowOther: z.boolean(),
-        description: z.string().max(1000, 'Description is too long').optional(),
+        description: z.string().max(1000, /* i18n */ 'Description is too long').optional(),
         id: z.string(),
         order: z.number(),
         randomiseOptionsOrder: z.boolean(),
         required: z.boolean(),
         surveyId: z.string(),
-        title: z.string().max(200, 'Title is too long').min(2, 'Title is too short'),
+        title: z
+            .string()
+            .max(200, /* i18n */ 'Title is too long')
+            .min(2, /* i18n */ 'Title is too short'),
         type: questionTypeSchema,
         validations: z.array(validationRuleSchema)
     })
@@ -56,11 +67,15 @@ export const questionSchema = z
             }),
             z.object({
                 type: z.literal('single_select'),
-                options: z.array(questionOptionSchema).min(2, 'At least two options are required')
+                options: z
+                    .array(questionOptionSchema)
+                    .min(2, /* i18n */ 'At least two options are required')
             }),
             z.object({
                 type: z.literal('multi_select'),
-                options: z.array(questionOptionSchema).min(2, 'At least two options are required')
+                options: z
+                    .array(questionOptionSchema)
+                    .min(2, /* i18n */ 'At least two options are required')
             }),
             z.object({
                 type: z.literal('number'),
@@ -91,78 +106,84 @@ export const validationRuleConfigs: Record<
     }
 > = {
     minLength: {
-        label: 'Minimum length',
-        description: 'Minimum number of characters',
+        label: /* i18n */ 'Minimum length',
+        description: /* i18n */ 'Minimum number of characters',
         requiresValue: true,
         valueType: 'number',
         applicableTypes: ['text'],
-        defaultMessage: 'Must be at least {value} characters'
+        defaultMessage: /* i18n */ 'Must be at least {value} characters'
     },
     maxLength: {
-        label: 'Maximum length',
-        description: 'Maximum number of characters',
+        label: /* i18n */ 'Maximum length',
+        description: /* i18n */ 'Maximum number of characters',
         requiresValue: true,
         valueType: 'number',
         applicableTypes: ['text'],
-        defaultMessage: 'Must be no more than {value} characters'
+        defaultMessage: /* i18n */ 'Must be no more than {value} characters'
     },
     min: {
-        label: 'Minimum value',
-        description: 'Minimum numeric value',
+        label: /* i18n */ 'Minimum value',
+        description: /* i18n */ 'Minimum numeric value',
         requiresValue: true,
         valueType: 'number',
         applicableTypes: ['number'],
-        defaultMessage: 'Must be at least {value}'
+        defaultMessage: /* i18n */ 'Must be at least {value}'
     },
     max: {
-        label: 'Maximum value',
-        description: 'Maximum numeric value',
+        label: /* i18n */ 'Maximum value',
+        description: /* i18n */ 'Maximum numeric value',
         requiresValue: true,
         valueType: 'number',
         applicableTypes: ['number'],
-        defaultMessage: 'Must be no more than {value}'
+        defaultMessage: /* i18n */ 'Must be no more than {value}'
     },
     maxSelections: {
-        label: 'Maximum selections',
-        description: 'Maximum number of options that can be selected',
+        label: /* i18n */ 'Maximum selections',
+        description: /* i18n */ 'Maximum number of options that can be selected',
         requiresValue: true,
         valueType: 'number',
         applicableTypes: ['multi_select'],
-        defaultMessage: 'You can select no more than {value} options'
+        defaultMessage: /* i18n */ 'You can select no more than {value} options'
     },
     minSelections: {
-        label: 'Minimum selections',
-        description: 'Minimum number of options that must be selected',
+        label: /* i18n */ 'Minimum selections',
+        description: /* i18n */ 'Minimum number of options that must be selected',
         requiresValue: true,
         valueType: 'number',
         applicableTypes: ['multi_select'],
-        defaultMessage: 'You must select at least {value} options'
+        defaultMessage: /* i18n */ 'You must select at least {value} options'
     },
     email: {
-        label: 'Email format',
-        description: 'Must be a valid email address',
+        label: /* i18n */ 'Email format',
+        description: /* i18n */ 'Must be a valid email address',
         requiresValue: false,
         valueType: 'none',
         applicableTypes: ['text'],
-        defaultMessage: 'Must be a valid email address'
+        defaultMessage: /* i18n */ 'Must be a valid email address'
     },
     url: {
-        label: 'URL format',
-        description: 'Must be a valid URL',
+        label: /* i18n */ 'URL format',
+        description: /* i18n */ 'Must be a valid URL',
         requiresValue: false,
         valueType: 'none',
         applicableTypes: ['text'],
-        defaultMessage: 'Must be a valid URL'
+        defaultMessage: /* i18n */ 'Must be a valid URL'
     }
 };
 
 export const generateQuestionsSchema = z.object({
-    topic: z.string().min(1, 'Topic is required').max(200, 'Topic is too long'),
-    description: z.string().min(1, 'Description is required').max(1000, 'Description is too long'),
+    topic: z
+        .string()
+        .min(1, /* i18n */ 'Topic is required')
+        .max(200, /* i18n */ 'Topic is too long'),
+    description: z
+        .string()
+        .min(1, /* i18n */ 'Description is required')
+        .max(1000, /* i18n */ 'Description is too long'),
     questionCount: z
         .string()
-        .refine(val => Number(val) >= 1, 'Must generate at least 1 question')
-        .refine(val => Number(val) <= 10, 'Cannot generate more than 10 questions')
+        .refine(val => Number(val) >= 1, /* i18n */ 'Must generate at least 1 question')
+        .refine(val => Number(val) <= 10, /* i18n */ 'Cannot generate more than 10 questions')
 });
 
 export type GenerateQuestionsForm = z.infer<typeof generateQuestionsSchema>;
@@ -206,7 +227,7 @@ export const importQuestionsSchema = z.object({
         const validExtensions = ['.csv', '.xlsx', '.xls'];
 
         return validExtensions.some(ext => fileName.endsWith(ext));
-    }, 'Please upload a CSV or XLSX file'),
+    }, /* i18n */ 'Please upload a CSV or XLSX file'),
     surveyId: z.string()
 });
 
@@ -216,8 +237,11 @@ export type ImportQuestions = z.infer<typeof importQuestionsSchema>;
 export const aiParsedQuestionSchema = z.object({
     questions: z.array(
         z.object({
-            title: z.string().min(2, 'Title is too short').max(200, 'Title is too long'),
-            description: z.string().max(1000, 'Description is too long').optional(),
+            title: z
+                .string()
+                .min(2, /* i18n */ 'Title is too short')
+                .max(200, /* i18n */ 'Title is too long'),
+            description: z.string().max(1000, /* i18n */ 'Description is too long').optional(),
             type: z.enum(['text', 'number', 'single_select', 'multi_select']),
             required: z.boolean(),
             allowOther: z.boolean(),

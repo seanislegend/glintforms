@@ -22,6 +22,7 @@ export const hasPublishedStructureChanges = ({
 }: HasPublishedStructureChangesProps) => {
     // prevent deleting questions
     if (deletedQuestionIds && Object.keys(deletedQuestionIds).length > 0) {
+        /* i18n */
         return 'Cannot delete questions from a survey that is no longer in draft status';
     }
 
@@ -31,6 +32,7 @@ export const hasPublishedStructureChanges = ({
     for (const q of questions) {
         // prevent adding new questions
         if (!existingQuestionIds.has(q.id)) {
+            /* i18n */
             return 'Cannot add new questions to a survey that is no longer in draft status';
         }
 
@@ -38,6 +40,7 @@ export const hasPublishedStructureChanges = ({
         if (existing) {
             // prevent changing question type
             if (existing.type !== q.type) {
+                /* i18n */
                 return 'Cannot change question type for a survey that is no longer in draft status';
             }
 
@@ -45,6 +48,7 @@ export const hasPublishedStructureChanges = ({
             const existingOptions = Array.isArray(existing.options) ? existing.options : [];
             const newOptions = Array.isArray(q.options) ? q.options : [];
             if (newOptions.length !== existingOptions.length) {
+                /* i18n */
                 return 'Cannot add or remove options from questions in a survey that is no longer in draft status';
             }
 
@@ -53,6 +57,7 @@ export const hasPublishedStructureChanges = ({
                 const existingOpt = existingOptions[i] as {id?: string};
                 const newOpt = newOptions[i] as {id?: string};
                 if (existingOpt?.id && newOpt?.id && existingOpt.id !== newOpt.id) {
+                    /* i18n */
                     return 'Cannot reorder options in a survey that is no longer in draft status';
                 }
             }

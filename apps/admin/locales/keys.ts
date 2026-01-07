@@ -1,7 +1,7 @@
 /**
  * Auto-generated translation keys
  * Do not edit manually - run `bun translation extract` to regenerate
- * Generated: 2026-01-07T01:35:20.306Z
+ * Generated: 2026-01-07T02:46:05.041Z
  */
 
 export interface TranslationKeys {
@@ -12,6 +12,21 @@ export interface TranslationKeys {
      * @see apps/admin/src/app/[locale]/(app)/page.tsx:18
      */
     "admin.6621249": string;
+
+    /**
+     * **Text:** "XLSForm export failed"
+     *
+     * @see apps/admin/src/app/api/surveys/[surveyId]/questions/export/xlsform/route.ts:48
+     */
+    "admin.api.surveys.291b09b": string;
+
+    /**
+     * **Text:** "Unauthorized"
+     *
+     * @see apps/admin/src/app/api/surveys/[surveyId]/questions/export/xlsform/route.ts:18
+     * @see apps/admin/src/lib/schemas/export-utils.ts:32
+     */
+    "admin.api.surveys.d089c8a": string;
 
     /**
      * **Text:** "Terms of Service"
@@ -37,6 +52,8 @@ export interface TranslationKeys {
      * @see apps/admin/src/app/[locale]/(auth)/auth/sign-in/page.tsx:28
      * @see apps/admin/src/app/[locale]/(auth)/auth/sign-in/page.tsx:30
      * @see apps/admin/src/app/[locale]/(auth)/auth/sign-in/page.tsx:37
+     * @see apps/admin/src/utils/screener-summary.ts:25
+     * @see apps/admin/src/utils/screener-summary.ts:29
      */
     "admin.auth.signIn.6201111": string;
 
@@ -372,6 +389,1749 @@ export interface TranslationKeys {
      * @see apps/admin/src/app/[locale]/(app)/cohorts/[cohortId]/respondent-columns.tsx:49
      */
     "admin.cohorts.respondentColumns.f5ecade": string;
+
+    /**
+     * **Text:** "São Tomé and Príncipe"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:210
+     */
+    "admin.countryCodes.003c6e4": string;
+
+    /**
+     * **Text:** "Saint Martin"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:142
+     */
+    "admin.countryCodes.00d7cbf": string;
+
+    /**
+     * **Text:** "Eritrea"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:68
+     */
+    "admin.countryCodes.01bc400": string;
+
+    /**
+     * **Text:** "Venezuela"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:239
+     */
+    "admin.countryCodes.020e438": string;
+
+    /**
+     * **Text:** "Ireland"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:103
+     */
+    "admin.countryCodes.02bf1df": string;
+
+    /**
+     * **Text:** "Nigeria"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:165
+     */
+    "admin.countryCodes.04952a0": string;
+
+    /**
+     * **Text:** "Grenada"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:79
+     */
+    "admin.countryCodes.0593aa0": string;
+
+    /**
+     * **Text:** "Tajikistan"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:220
+     */
+    "admin.countryCodes.066b021": string;
+
+    /**
+     * **Text:** "Turkey"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:226
+     */
+    "admin.countryCodes.07c67d7": string;
+
+    /**
+     * **Text:** "Brazil"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:32
+     */
+    "admin.countryCodes.07f62b0": string;
+
+    /**
+     * **Text:** "Sri Lanka"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:131
+     */
+    "admin.countryCodes.07f8d11": string;
+
+    /**
+     * **Text:** "Malaysia"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:159
+     */
+    "admin.countryCodes.0845041": string;
+
+    /**
+     * **Text:** "Cameroon"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:48
+     */
+    "admin.countryCodes.085807f": string;
+
+    /**
+     * **Text:** "Gibraltar"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:84
+     */
+    "admin.countryCodes.097ced5": string;
+
+    /**
+     * **Text:** "Democratic Republic of the Congo"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:41
+     */
+    "admin.countryCodes.098c642": string;
+
+    /**
+     * **Text:** "French Polynesia"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:176
+     */
+    "admin.countryCodes.0b6e276": string;
+
+    /**
+     * **Text:** "Trinidad and Tobago"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:227
+     */
+    "admin.countryCodes.0c0177b": string;
+
+    /**
+     * **Text:** "Cambodia"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:118
+     */
+    "admin.countryCodes.0c2cb01": string;
+
+    /**
+     * **Text:** "British Virgin Islands"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:240
+     */
+    "admin.countryCodes.0c47dda": string;
+
+    /**
+     * **Text:** "Cuba"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:52
+     */
+    "admin.countryCodes.0d0b4e4": string;
+
+    /**
+     * **Text:** "Saint Pierre and Miquelon"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:181
+     */
+    "admin.countryCodes.0d7ea61": string;
+
+    /**
+     * **Text:** "Saint Kitts and Nevis"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:121
+     */
+    "admin.countryCodes.0e89123": string;
+
+    /**
+     * **Text:** "Samoa"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:245
+     */
+    "admin.countryCodes.0ea781c": string;
+
+    /**
+     * **Text:** "Antigua and Barbuda"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:5
+     */
+    "admin.countryCodes.100c476": string;
+
+    /**
+     * **Text:** "China"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:49
+     */
+    "admin.countryCodes.1043682": string;
+
+    /**
+     * **Text:** "Estonia"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:65
+     */
+    "admin.countryCodes.10aeba6": string;
+
+    /**
+     * **Text:** "Kuwait"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:124
+     */
+    "admin.countryCodes.10c3c2e": string;
+
+    /**
+     * **Text:** "Christmas Island"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:55
+     */
+    "admin.countryCodes.10d025c": string;
+
+    /**
+     * **Text:** "Montserrat"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:153
+     */
+    "admin.countryCodes.127bcfe": string;
+
+    /**
+     * **Text:** "Rwanda"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:193
+     */
+    "admin.countryCodes.12c8f8f": string;
+
+    /**
+     * **Text:** "Moldova"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:140
+     */
+    "admin.countryCodes.14ad63a": string;
+
+    /**
+     * **Text:** "Botswana"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:36
+     */
+    "admin.countryCodes.1672f60": string;
+
+    /**
+     * **Text:** "Iran"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:109
+     */
+    "admin.countryCodes.18d4e17": string;
+
+    /**
+     * **Text:** "Albania"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:7
+     */
+    "admin.countryCodes.1af00b8": string;
+
+    /**
+     * **Text:** "Czech Republic"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:57
+     */
+    "admin.countryCodes.1c769ec": string;
+
+    /**
+     * **Text:** "Åland Islands"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:16
+     */
+    "admin.countryCodes.1d28e30": string;
+
+    /**
+     * **Text:** "American Samoa"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:12
+     */
+    "admin.countryCodes.1eb48c0": string;
+
+    /**
+     * **Text:** "Hong Kong"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:96
+     */
+    "admin.countryCodes.1ed8c7e": string;
+
+    /**
+     * **Text:** "Yemen"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:246
+     */
+    "admin.countryCodes.21c1903": string;
+
+    /**
+     * **Text:** "Switzerland"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:44
+     */
+    "admin.countryCodes.2275583": string;
+
+    /**
+     * **Text:** "Angola"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:9
+     */
+    "admin.countryCodes.22b9653": string;
+
+    /**
+     * **Text:** "San Marino"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:205
+     */
+    "admin.countryCodes.230450a": string;
+
+    /**
+     * **Text:** "New Zealand"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:172
+     */
+    "admin.countryCodes.2898e16": string;
+
+    /**
+     * **Text:** "Libya"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:137
+     */
+    "admin.countryCodes.2aa2fce": string;
+
+    /**
+     * **Text:** "French Guiana"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:81
+     */
+    "admin.countryCodes.2b457cd": string;
+
+    /**
+     * **Text:** "Ecuador"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:64
+     */
+    "admin.countryCodes.2ca26c6": string;
+
+    /**
+     * **Text:** "Niger"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:163
+     */
+    "admin.countryCodes.2cbebc5": string;
+
+    /**
+     * **Text:** "Armenia"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:8
+     */
+    "admin.countryCodes.2ddc563": string;
+
+    /**
+     * **Text:** "Heard and McDonald Islands"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:97
+     */
+    "admin.countryCodes.2e3166f": string;
+
+    /**
+     * **Text:** "Vietnam"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:242
+     */
+    "admin.countryCodes.2e5e810": string;
+
+    /**
+     * **Text:** "Bangladesh"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:20
+     */
+    "admin.countryCodes.2f1d47e": string;
+
+    /**
+     * **Text:** "Tuvalu"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:228
+     */
+    "admin.countryCodes.30b1ff9": string;
+
+    /**
+     * **Text:** "Algeria"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:63
+     */
+    "admin.countryCodes.30e2302": string;
+
+    /**
+     * **Text:** "Tonga"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:225
+     */
+    "admin.countryCodes.310bc32": string;
+
+    /**
+     * **Text:** "Russia"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:192
+     */
+    "admin.countryCodes.33a3d8e": string;
+
+    /**
+     * **Text:** "Isle of Man"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:105
+     */
+    "admin.countryCodes.34096f9": string;
+
+    /**
+     * **Text:** "Belgium"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:21
+     */
+    "admin.countryCodes.348841e": string;
+
+    /**
+     * **Text:** "Israel"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:104
+     */
+    "admin.countryCodes.3552ac0": string;
+
+    /**
+     * **Text:** "Guadeloupe"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:88
+     */
+    "admin.countryCodes.35c9de3": string;
+
+    /**
+     * **Text:** "Senegal"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:206
+     */
+    "admin.countryCodes.364e5f6": string;
+
+    /**
+     * **Text:** "British Indian Ocean Territory"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:107
+     */
+    "admin.countryCodes.397d494": string;
+
+    /**
+     * **Text:** "Tokelau"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:221
+     */
+    "admin.countryCodes.39fc150": string;
+
+    /**
+     * **Text:** "Netherlands"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:167
+     */
+    "admin.countryCodes.3a386c1": string;
+
+    /**
+     * **Text:** "South Africa"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:248
+     */
+    "admin.countryCodes.3e049d7": string;
+
+    /**
+     * **Text:** "Andorra"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:2
+     */
+    "admin.countryCodes.3e340be": string;
+
+    /**
+     * **Text:** "Togo"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:218
+     */
+    "admin.countryCodes.4080343": string;
+
+    /**
+     * **Text:** "Chad"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:216
+     */
+    "admin.countryCodes.4256e51": string;
+
+    /**
+     * **Text:** "Jamaica"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:113
+     */
+    "admin.countryCodes.42c298b": string;
+
+    /**
+     * **Text:** "Guatemala"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:92
+     */
+    "admin.countryCodes.45a15a2": string;
+
+    /**
+     * **Text:** "Tunisia"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:224
+     */
+    "admin.countryCodes.4609682": string;
+
+    /**
+     * **Text:** "Djibouti"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:59
+     */
+    "admin.countryCodes.4678a57": string;
+
+    /**
+     * **Text:** "Georgia"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:80
+     */
+    "admin.countryCodes.4691492": string;
+
+    /**
+     * **Text:** "Greenland"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:85
+     */
+    "admin.countryCodes.48e1029": string;
+
+    /**
+     * **Text:** "Niue"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:171
+     */
+    "admin.countryCodes.4956c20": string;
+
+    /**
+     * **Text:** "United States"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:234
+     */
+    "admin.countryCodes.49dca65": string;
+
+    /**
+     * **Text:** "Uzbekistan"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:236
+     */
+    "admin.countryCodes.4bc2f1c": string;
+
+    /**
+     * **Text:** "Belarus"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:37
+     */
+    "admin.countryCodes.4bef16d": string;
+
+    /**
+     * **Text:** "Svalbard and Jan Mayen"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:202
+     */
+    "admin.countryCodes.4bfb49f": string;
+
+    /**
+     * **Text:** "Portugal"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:185
+     */
+    "admin.countryCodes.4c7de2c": string;
+
+    /**
+     * **Text:** "Norfolk Island"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:164
+     */
+    "admin.countryCodes.4d0dfb8": string;
+
+    /**
+     * **Text:** "Hungary"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:101
+     */
+    "admin.countryCodes.504be30": string;
+
+    /**
+     * **Text:** "Peru"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:175
+     */
+    "admin.countryCodes.508731a": string;
+
+    /**
+     * **Text:** "Egypt"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:66
+     */
+    "admin.countryCodes.557c159": string;
+
+    /**
+     * **Text:** "Qatar"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:188
+     */
+    "admin.countryCodes.55ccc50": string;
+
+    /**
+     * **Text:** "Slovenia"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:201
+     */
+    "admin.countryCodes.56059e7": string;
+
+    /**
+     * **Text:** "Cook Islands"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:46
+     */
+    "admin.countryCodes.56850f3": string;
+
+    /**
+     * **Text:** "Nauru"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:170
+     */
+    "admin.countryCodes.57e9008": string;
+
+    /**
+     * **Text:** "Ukraine"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:231
+     */
+    "admin.countryCodes.580eedc": string;
+
+    /**
+     * **Text:** "Ghana"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:83
+     */
+    "admin.countryCodes.583201c": string;
+
+    /**
+     * **Text:** "Bahamas"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:33
+     */
+    "admin.countryCodes.58f91a2": string;
+
+    /**
+     * **Text:** "Iceland"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:110
+     */
+    "admin.countryCodes.595d6d9": string;
+
+    /**
+     * **Text:** "Italy"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:111
+     */
+    "admin.countryCodes.5a9cf67": string;
+
+    /**
+     * **Text:** "Lesotho"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:133
+     */
+    "admin.countryCodes.5c2e474": string;
+
+    /**
+     * **Text:** "Guam"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:93
+     */
+    "admin.countryCodes.5c4b321": string;
+
+    /**
+     * **Text:** "Lithuania"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:134
+     */
+    "admin.countryCodes.5c83a63": string;
+
+    /**
+     * **Text:** "Afghanistan"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:4
+     */
+    "admin.countryCodes.5dbddf9": string;
+
+    /**
+     * **Text:** "South Georgia"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:91
+     */
+    "admin.countryCodes.5ed2369": string;
+
+    /**
+     * **Text:** "Cyprus"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:56
+     */
+    "admin.countryCodes.5f1162c": string;
+
+    /**
+     * **Text:** "Malawi"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:157
+     */
+    "admin.countryCodes.611025c": string;
+
+    /**
+     * **Text:** "Timor-Leste"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:222
+     */
+    "admin.countryCodes.6303e84": string;
+
+    /**
+     * **Text:** "Cocos Islands"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:40
+     */
+    "admin.countryCodes.6348ffd": string;
+
+    /**
+     * **Text:** "Japan"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:115
+     */
+    "admin.countryCodes.6472943": string;
+
+    /**
+     * **Text:** "Northern Mariana Islands"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:150
+     */
+    "admin.countryCodes.66545d3": string;
+
+    /**
+     * **Text:** "United States Minor Outlying Islands"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:233
+     */
+    "admin.countryCodes.6691c79": string;
+
+    /**
+     * **Text:** "Bulgaria"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:23
+     */
+    "admin.countryCodes.66b86bf": string;
+
+    /**
+     * **Text:** "Fiji"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:72
+     */
+    "admin.countryCodes.679c02d": string;
+
+    /**
+     * **Text:** "Benin"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:26
+     */
+    "admin.countryCodes.69d0a7b": string;
+
+    /**
+     * **Text:** "Colombia"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:50
+     */
+    "admin.countryCodes.6b615ad": string;
+
+    /**
+     * **Text:** "Thailand"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:219
+     */
+    "admin.countryCodes.6e49e65": string;
+
+    /**
+     * **Text:** "Kyrgyzstan"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:117
+     */
+    "admin.countryCodes.6f189bf": string;
+
+    /**
+     * **Text:** "Liechtenstein"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:130
+     */
+    "admin.countryCodes.6ff080c": string;
+
+    /**
+     * **Text:** "Belize"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:38
+     */
+    "admin.countryCodes.71dc81f": string;
+
+    /**
+     * **Text:** "Malta"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:154
+     */
+    "admin.countryCodes.71e9eb1": string;
+
+    /**
+     * **Text:** "Croatia"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:99
+     */
+    "admin.countryCodes.7328d3f": string;
+
+    /**
+     * **Text:** "Republic of the Congo"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:43
+     */
+    "admin.countryCodes.7491ff1": string;
+
+    /**
+     * **Text:** "Kenya"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:116
+     */
+    "admin.countryCodes.74e1891": string;
+
+    /**
+     * **Text:** "Kazakhstan"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:126
+     */
+    "admin.countryCodes.75c02b8": string;
+
+    /**
+     * **Text:** "Guinea-Bissau"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:94
+     */
+    "admin.countryCodes.75e8f46": string;
+
+    /**
+     * **Text:** "Jersey"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:112
+     */
+    "admin.countryCodes.764a8c0": string;
+
+    /**
+     * **Text:** "Faroe Islands"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:75
+     */
+    "admin.countryCodes.773ca4d": string;
+
+    /**
+     * **Text:** "Saint Helena"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:200
+     */
+    "admin.countryCodes.794308d": string;
+
+    /**
+     * **Text:** "Bermuda"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:28
+     */
+    "admin.countryCodes.79c89fd": string;
+
+    /**
+     * **Text:** "France"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:76
+     */
+    "admin.countryCodes.7a1ca4e": string;
+
+    /**
+     * **Text:** "Montenegro"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:141
+     */
+    "admin.countryCodes.7ab597e": string;
+
+    /**
+     * **Text:** "Réunion"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:189
+     */
+    "admin.countryCodes.7cdf573": string;
+
+    /**
+     * **Text:** "Ethiopia"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:70
+     */
+    "admin.countryCodes.7d94977": string;
+
+    /**
+     * **Text:** "Gabon"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:77
+     */
+    "admin.countryCodes.7e222a7": string;
+
+    /**
+     * **Text:** "Poland"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:180
+     */
+    "admin.countryCodes.7f69649": string;
+
+    /**
+     * **Text:** "Palau"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:186
+     */
+    "admin.countryCodes.7fa6477": string;
+
+    /**
+     * **Text:** "Paraguay"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:187
+     */
+    "admin.countryCodes.7fb4d17": string;
+
+    /**
+     * **Text:** "Germany"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:58
+     */
+    "admin.countryCodes.80db4cc": string;
+
+    /**
+     * **Text:** "Kiribati"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:119
+     */
+    "admin.countryCodes.8191231": string;
+
+    /**
+     * **Text:** "Dominican Republic"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:62
+     */
+    "admin.countryCodes.81e884c": string;
+
+    /**
+     * **Text:** "Cayman Islands"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:125
+     */
+    "admin.countryCodes.83f2b33": string;
+
+    /**
+     * **Text:** "Sweden"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:198
+     */
+    "admin.countryCodes.8536371": string;
+
+    /**
+     * **Text:** "Uganda"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:232
+     */
+    "admin.countryCodes.893d538": string;
+
+    /**
+     * **Text:** "Equatorial Guinea"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:89
+     */
+    "admin.countryCodes.8994687": string;
+
+    /**
+     * **Text:** "Western Sahara"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:67
+     */
+    "admin.countryCodes.89b94e5": string;
+
+    /**
+     * **Text:** "Turks and Caicos Islands"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:215
+     */
+    "admin.countryCodes.8cef06e": string;
+
+    /**
+     * **Text:** "United Kingdom"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:78
+     */
+    "admin.countryCodes.8d23a6e": string;
+
+    /**
+     * **Text:** "Barbados"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:19
+     */
+    "admin.countryCodes.8e8dfae": string;
+
+    /**
+     * **Text:** "Spain"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:69
+     */
+    "admin.countryCodes.8ef41e6": string;
+
+    /**
+     * **Text:** "Maldives"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:156
+     */
+    "admin.countryCodes.8fb5447": string;
+
+    /**
+     * **Text:** "South Sudan"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:209
+     */
+    "admin.countryCodes.8fe5a93": string;
+
+    /**
+     * **Text:** "Monaco"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:139
+     */
+    "admin.countryCodes.935018c": string;
+
+    /**
+     * **Text:** "Bahrain"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:24
+     */
+    "admin.countryCodes.94b2859": string;
+
+    /**
+     * **Text:** "Nicaragua"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:166
+     */
+    "admin.countryCodes.94e6bd5": string;
+
+    /**
+     * **Text:** "Tanzania"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:230
+     */
+    "admin.countryCodes.9555664": string;
+
+    /**
+     * **Text:** "Bolivia"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:30
+     */
+    "admin.countryCodes.9621c07": string;
+
+    /**
+     * **Text:** "Latvia"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:136
+     */
+    "admin.countryCodes.988c816": string;
+
+    /**
+     * **Text:** "Laos"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:127
+     */
+    "admin.countryCodes.98e18f4": string;
+
+    /**
+     * **Text:** "Mongolia"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:148
+     */
+    "admin.countryCodes.99a7c06": string;
+
+    /**
+     * **Text:** "Brunei"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:29
+     */
+    "admin.countryCodes.99ebf7d": string;
+
+    /**
+     * **Text:** "Curaçao"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:54
+     */
+    "admin.countryCodes.9b1d93b": string;
+
+    /**
+     * **Text:** "Greece"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:90
+     */
+    "admin.countryCodes.9c93ad4": string;
+
+    /**
+     * **Text:** "Cape Verde"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:53
+     */
+    "admin.countryCodes.9fa6f2d": string;
+
+    /**
+     * **Text:** "Slovakia"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:203
+     */
+    "admin.countryCodes.a2ea338": string;
+
+    /**
+     * **Text:** "Anguilla"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:6
+     */
+    "admin.countryCodes.a4a0c7e": string;
+
+    /**
+     * **Text:** "Burkina Faso"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:22
+     */
+    "admin.countryCodes.a564371": string;
+
+    /**
+     * **Text:** "Macau"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:149
+     */
+    "admin.countryCodes.a5e28dc": string;
+
+    /**
+     * **Text:** "Caribbean Netherlands"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:31
+     */
+    "admin.countryCodes.a6fa4df": string;
+
+    /**
+     * **Text:** "Mexico"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:158
+     */
+    "admin.countryCodes.a7d355b": string;
+
+    /**
+     * **Text:** "Wallis and Futuna"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:244
+     */
+    "admin.countryCodes.a9f21d0": string;
+
+    /**
+     * **Text:** "Mauritius"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:155
+     */
+    "admin.countryCodes.aa8057e": string;
+
+    /**
+     * **Text:** "India"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:106
+     */
+    "admin.countryCodes.abd1492": string;
+
+    /**
+     * **Text:** "Saint Lucia"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:129
+     */
+    "admin.countryCodes.abe06aa": string;
+
+    /**
+     * **Text:** "North Korea"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:122
+     */
+    "admin.countryCodes.ae6175f": string;
+
+    /**
+     * **Text:** "Finland"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:71
+     */
+    "admin.countryCodes.aed8f53": string;
+
+    /**
+     * **Text:** "Bosnia and Herzegovina"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:18
+     */
+    "admin.countryCodes.b0772b9": string;
+
+    /**
+     * **Text:** "Vatican City"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:237
+     */
+    "admin.countryCodes.b0ce102": string;
+
+    /**
+     * **Text:** "Suriname"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:208
+     */
+    "admin.countryCodes.b1cb8ea": string;
+
+    /**
+     * **Text:** "Saint Vincent and the Grenadines"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:238
+     */
+    "admin.countryCodes.b225fd3": string;
+
+    /**
+     * **Text:** "Turkmenistan"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:223
+     */
+    "admin.countryCodes.b3dfc85": string;
+
+    /**
+     * **Text:** "Aruba"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:15
+     */
+    "admin.countryCodes.b566255": string;
+
+    /**
+     * **Text:** "Zambia"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:249
+     */
+    "admin.countryCodes.b5f9221": string;
+
+    /**
+     * **Text:** "Morocco"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:138
+     */
+    "admin.countryCodes.b675f5d": string;
+
+    /**
+     * **Text:** "Honduras"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:98
+     */
+    "admin.countryCodes.b79b5f9": string;
+
+    /**
+     * **Text:** "Guernsey"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:82
+     */
+    "admin.countryCodes.b9c48cb": string;
+
+    /**
+     * **Text:** "Myanmar"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:147
+     */
+    "admin.countryCodes.ba2039a": string;
+
+    /**
+     * **Text:** "Sint Maarten"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:212
+     */
+    "admin.countryCodes.bba28b0": string;
+
+    /**
+     * **Text:** "Somalia"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:207
+     */
+    "admin.countryCodes.bd05d32": string;
+
+    /**
+     * **Text:** "Dominica"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:61
+     */
+    "admin.countryCodes.be2a7f5": string;
+
+    /**
+     * **Text:** "Canada"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:39
+     */
+    "admin.countryCodes.be55ef3": string;
+
+    /**
+     * **Text:** "New Caledonia"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:162
+     */
+    "admin.countryCodes.be60011": string;
+
+    /**
+     * **Text:** "Norway"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:168
+     */
+    "admin.countryCodes.bea54a3": string;
+
+    /**
+     * **Text:** "Mauritania"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:152
+     */
+    "admin.countryCodes.bfb0c8d": string;
+
+    /**
+     * **Text:** "Australia"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:14
+     */
+    "admin.countryCodes.c1ef40c": string;
+
+    /**
+     * **Text:** "Panama"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:174
+     */
+    "admin.countryCodes.c3668f5": string;
+
+    /**
+     * **Text:** "Philippines"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:178
+     */
+    "admin.countryCodes.c3782c8": string;
+
+    /**
+     * **Text:** "Falkland Islands"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:73
+     */
+    "admin.countryCodes.c387e2d": string;
+
+    /**
+     * **Text:** "Oman"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:173
+     */
+    "admin.countryCodes.c3ce4bf": string;
+
+    /**
+     * **Text:** "El Salvador"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:211
+     */
+    "admin.countryCodes.c408d26": string;
+
+    /**
+     * **Text:** "Antarctica"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:10
+     */
+    "admin.countryCodes.c43f33f": string;
+
+    /**
+     * **Text:** "Denmark"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:60
+     */
+    "admin.countryCodes.c527097": string;
+
+    /**
+     * **Text:** "Vanuatu"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:243
+     */
+    "admin.countryCodes.c5b2a6d": string;
+
+    /**
+     * **Text:** "Papua New Guinea"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:177
+     */
+    "admin.countryCodes.c65742c": string;
+
+    /**
+     * **Text:** "Martinique"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:151
+     */
+    "admin.countryCodes.c65906d": string;
+
+    /**
+     * **Text:** "Gambia"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:86
+     */
+    "admin.countryCodes.c6e681b": string;
+
+    /**
+     * **Text:** "Zimbabwe"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:250
+     */
+    "admin.countryCodes.c72199a": string;
+
+    /**
+     * **Text:** "Burundi"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:25
+     */
+    "admin.countryCodes.c835bd1": string;
+
+    /**
+     * **Text:** "South Korea"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:123
+     */
+    "admin.countryCodes.c85329e": string;
+
+    /**
+     * **Text:** "Mozambique"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:160
+     */
+    "admin.countryCodes.c905482": string;
+
+    /**
+     * **Text:** "Pitcairn Islands"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:182
+     */
+    "admin.countryCodes.c95597e": string;
+
+    /**
+     * **Text:** "Singapore"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:199
+     */
+    "admin.countryCodes.c96dd81": string;
+
+    /**
+     * **Text:** "Austria"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:13
+     */
+    "admin.countryCodes.c9cab02": string;
+
+    /**
+     * **Text:** "Liberia"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:132
+     */
+    "admin.countryCodes.c9d2604": string;
+
+    /**
+     * **Text:** "North Macedonia"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:145
+     */
+    "admin.countryCodes.cd84722": string;
+
+    /**
+     * **Text:** "Syria"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:213
+     */
+    "admin.countryCodes.cf6ac29": string;
+
+    /**
+     * **Text:** "Solomon Islands"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:195
+     */
+    "admin.countryCodes.cff4c58": string;
+
+    /**
+     * **Text:** "Mayotte"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:247
+     */
+    "admin.countryCodes.d08b4a0": string;
+
+    /**
+     * **Text:** "Haiti"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:100
+     */
+    "admin.countryCodes.d090b87": string;
+
+    /**
+     * **Text:** "Seychelles"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:196
+     */
+    "admin.countryCodes.d1d6332": string;
+
+    /**
+     * **Text:** "Saint Barthélemy"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:27
+     */
+    "admin.countryCodes.d47eb13": string;
+
+    /**
+     * **Text:** "Madagascar"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:143
+     */
+    "admin.countryCodes.d680446": string;
+
+    /**
+     * **Text:** "Micronesia"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:74
+     */
+    "admin.countryCodes.d70835b": string;
+
+    /**
+     * **Text:** "Bhutan"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:34
+     */
+    "admin.countryCodes.d889e21": string;
+
+    /**
+     * **Text:** "Puerto Rico"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:183
+     */
+    "admin.countryCodes.d9aa43e": string;
+
+    /**
+     * **Text:** "Ivory Coast"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:45
+     */
+    "admin.countryCodes.d9b67db": string;
+
+    /**
+     * **Text:** "Indonesia"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:102
+     */
+    "admin.countryCodes.dbc74a3": string;
+
+    /**
+     * **Text:** "Guinea"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:87
+     */
+    "admin.countryCodes.dd591d7": string;
+
+    /**
+     * **Text:** "United Arab Emirates"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:3
+     */
+    "admin.countryCodes.dd64913": string;
+
+    /**
+     * **Text:** "Taiwan"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:229
+     */
+    "admin.countryCodes.dd76af1": string;
+
+    /**
+     * **Text:** "Iraq"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:108
+     */
+    "admin.countryCodes.de5008d": string;
+
+    /**
+     * **Text:** "Eswatini"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:214
+     */
+    "admin.countryCodes.e0568e4": string;
+
+    /**
+     * **Text:** "French Southern Territories"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:217
+     */
+    "admin.countryCodes.e059115": string;
+
+    /**
+     * **Text:** "Nepal"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:169
+     */
+    "admin.countryCodes.e15a18a": string;
+
+    /**
+     * **Text:** "Pakistan"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:179
+     */
+    "admin.countryCodes.e256731": string;
+
+    /**
+     * **Text:** "Costa Rica"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:51
+     */
+    "admin.countryCodes.e26742d": string;
+
+    /**
+     * **Text:** "U.S. Virgin Islands"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:241
+     */
+    "admin.countryCodes.e3249ec": string;
+
+    /**
+     * **Text:** "Lebanon"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:128
+     */
+    "admin.countryCodes.e34dd61": string;
+
+    /**
+     * **Text:** "Central African Republic"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:42
+     */
+    "admin.countryCodes.e509cda": string;
+
+    /**
+     * **Text:** "Comoros"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:120
+     */
+    "admin.countryCodes.e814fdb": string;
+
+    /**
+     * **Text:** "Serbia"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:191
+     */
+    "admin.countryCodes.e8739c8": string;
+
+    /**
+     * **Text:** "Jordan"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:114
+     */
+    "admin.countryCodes.e8bfe1e": string;
+
+    /**
+     * **Text:** "Argentina"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:11
+     */
+    "admin.countryCodes.ea0b937": string;
+
+    /**
+     * **Text:** "Romania"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:190
+     */
+    "admin.countryCodes.ea23726": string;
+
+    /**
+     * **Text:** "Guyana"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:95
+     */
+    "admin.countryCodes.ea3bfc2": string;
+
+    /**
+     * **Text:** "Namibia"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:161
+     */
+    "admin.countryCodes.ea5bd39": string;
+
+    /**
+     * **Text:** "Sudan"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:197
+     */
+    "admin.countryCodes.ed68d4d": string;
+
+    /**
+     * **Text:** "Luxembourg"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:135
+     */
+    "admin.countryCodes.ed76f19": string;
+
+    /**
+     * **Text:** "Saudi Arabia"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:194
+     */
+    "admin.countryCodes.ed9ad13": string;
+
+    /**
+     * **Text:** "Mali"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:146
+     */
+    "admin.countryCodes.ee5721a": string;
+
+    /**
+     * **Text:** "Azerbaijan"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:17
+     */
+    "admin.countryCodes.efa9150": string;
+
+    /**
+     * **Text:** "Palestine"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:184
+     */
+    "admin.countryCodes.f189744": string;
+
+    /**
+     * **Text:** "Sierra Leone"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:204
+     */
+    "admin.countryCodes.f405b98": string;
+
+    /**
+     * **Text:** "Chile"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:47
+     */
+    "admin.countryCodes.f5273e2": string;
+
+    /**
+     * **Text:** "Bouvet Island"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:35
+     */
+    "admin.countryCodes.f6b5c9f": string;
+
+    /**
+     * **Text:** "Uruguay"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:235
+     */
+    "admin.countryCodes.fe2403f": string;
+
+    /**
+     * **Text:** "Marshall Islands"
+     *
+     * @see apps/admin/src/utils/country-codes.ts:144
+     */
+    "admin.countryCodes.fe33c92": string;
 
     /**
      * **Text:** "No results"
@@ -1012,6 +2772,62 @@ export interface TranslationKeys {
     "admin.dialogs.exportResponses.eb649af": string;
 
     /**
+     * **Text:** "Monday"
+     *
+     * @see apps/admin/src/utils/format-day.ts:5
+     */
+    "admin.formatDay.6a00dfc": string;
+
+    /**
+     * **Text:** "Tuesday"
+     *
+     * @see apps/admin/src/utils/format-day.ts:6
+     */
+    "admin.formatDay.7d8af1d": string;
+
+    /**
+     * **Text:** "Sunday"
+     *
+     * @see apps/admin/src/utils/format-day.ts:4
+     */
+    "admin.formatDay.873fef7": string;
+
+    /**
+     * **Text:** "Unknown"
+     *
+     * @see apps/admin/src/utils/format-day.ts:12
+     */
+    "admin.formatDay.b764cdc": string;
+
+    /**
+     * **Text:** "Wednesday"
+     *
+     * @see apps/admin/src/utils/format-day.ts:7
+     */
+    "admin.formatDay.c0a6cc8": string;
+
+    /**
+     * **Text:** "Saturday"
+     *
+     * @see apps/admin/src/utils/format-day.ts:10
+     */
+    "admin.formatDay.dbe35c7": string;
+
+    /**
+     * **Text:** "Friday"
+     *
+     * @see apps/admin/src/utils/format-day.ts:9
+     */
+    "admin.formatDay.e21f3f3": string;
+
+    /**
+     * **Text:** "Thursday"
+     *
+     * @see apps/admin/src/utils/format-day.ts:8
+     */
+    "admin.formatDay.fc26620": string;
+
+    /**
      * **Text:** "Data points that shine, insights that catch the eye. Build, deploy and analyse surveys with AI assistance."
      *
      * @see apps/admin/src/app/[locale]/layout.tsx:22
@@ -1115,6 +2931,35 @@ export interface TranslationKeys {
      * @see apps/admin/src/app/[locale]/not-found.tsx:8
      */
     "admin.notFound.f08bfcf": string;
+
+    /**
+     * **Text:** "Unsupported file type. Please upload a CSV or XLSX file."
+     *
+     * @see apps/admin/src/utils/parse-import-file.ts:22
+     */
+    "admin.parseImportFile.4d65a3c": string;
+
+    /**
+     * **Text:** "XLSX file must contain at least a header row and one data row."
+     *
+     * @see apps/admin/src/utils/parse-import-file.ts:69
+     */
+    "admin.parseImportFile.cb39b10": string;
+
+    /**
+     * **Text:** "XLSX file must contain at least one worksheet."
+     *
+     * @see apps/admin/src/utils/parse-import-file.ts:57
+     * @see apps/admin/src/utils/parse-import-file.ts:62
+     */
+    "admin.parseImportFile.d850db7": string;
+
+    /**
+     * **Text:** "CSV file must contain at least a header row and one data row."
+     *
+     * @see apps/admin/src/utils/parse-import-file.ts:31
+     */
+    "admin.parseImportFile.dd0a42c": string;
 
     /**
      * **Text:** "Questions cannot be changed when the survey is complete or archived."
@@ -1360,9 +3205,11 @@ export interface TranslationKeys {
      * @see apps/admin/src/components/question-editor/import-questions.tsx:106
      * @see apps/admin/src/components/question-editor/import-questions.tsx:108
      * @see apps/admin/src/components/question-editor/import-questions.tsx:109
+     * @see apps/admin/src/components/question-editor/import-questions.tsx:110
      * @see apps/admin/src/components/question-editor/import-questions.tsx:117
      * @see apps/admin/src/components/question-editor/import-questions.tsx:119
      * @see apps/admin/src/components/question-editor/import-questions.tsx:120
+     * @see apps/admin/src/components/question-editor/import-questions.tsx:121
      */
     "admin.questionEditor.importQuestions.0049d72": string;
 
@@ -1371,9 +3218,11 @@ export interface TranslationKeys {
      *
      * @see apps/admin/src/components/question-editor/import-questions.tsx:80
      * @see apps/admin/src/components/question-editor/import-questions.tsx:81
+     * @see apps/admin/src/components/question-editor/import-questions.tsx:82
      * @see apps/admin/src/components/question-editor/import-questions.tsx:93
      * @see apps/admin/src/components/question-editor/import-questions.tsx:95
      * @see apps/admin/src/components/question-editor/import-questions.tsx:96
+     * @see apps/admin/src/components/question-editor/import-questions.tsx:97
      */
     "admin.questionEditor.importQuestions.0a26f41": string;
 
@@ -1383,6 +3232,7 @@ export interface TranslationKeys {
      * @see apps/admin/src/components/question-editor/import-questions.tsx:169
      * @see apps/admin/src/components/question-editor/import-questions.tsx:174
      * @see apps/admin/src/components/question-editor/import-questions.tsx:175
+     * @see apps/admin/src/components/question-editor/import-questions.tsx:176
      */
     "admin.questionEditor.importQuestions.103b1da": string;
 
@@ -1392,6 +3242,7 @@ export interface TranslationKeys {
      * @see apps/admin/src/components/question-editor/import-questions.tsx:182
      * @see apps/admin/src/components/question-editor/import-questions.tsx:195
      * @see apps/admin/src/components/question-editor/import-questions.tsx:196
+     * @see apps/admin/src/components/question-editor/import-questions.tsx:197
      */
     "admin.questionEditor.importQuestions.1a36e11": string;
 
@@ -1401,6 +3252,7 @@ export interface TranslationKeys {
      * @see apps/admin/src/components/question-editor/import-questions.tsx:154
      * @see apps/admin/src/components/question-editor/import-questions.tsx:159
      * @see apps/admin/src/components/question-editor/import-questions.tsx:160
+     * @see apps/admin/src/components/question-editor/import-questions.tsx:161
      */
     "admin.questionEditor.importQuestions.2646533": string;
 
@@ -1410,6 +3262,7 @@ export interface TranslationKeys {
      * @see apps/admin/src/components/question-editor/import-questions.tsx:179
      * @see apps/admin/src/components/question-editor/import-questions.tsx:190
      * @see apps/admin/src/components/question-editor/import-questions.tsx:191
+     * @see apps/admin/src/components/question-editor/import-questions.tsx:192
      */
     "admin.questionEditor.importQuestions.2eb3a14": string;
 
@@ -1419,6 +3272,7 @@ export interface TranslationKeys {
      * @see apps/admin/src/components/question-editor/import-questions.tsx:127
      * @see apps/admin/src/components/question-editor/import-questions.tsx:131
      * @see apps/admin/src/components/question-editor/import-questions.tsx:132
+     * @see apps/admin/src/components/question-editor/import-questions.tsx:133
      */
     "admin.questionEditor.importQuestions.5282570": string;
 
@@ -1428,6 +3282,7 @@ export interface TranslationKeys {
      * @see apps/admin/src/components/question-editor/import-questions.tsx:177
      * @see apps/admin/src/components/question-editor/import-questions.tsx:187
      * @see apps/admin/src/components/question-editor/import-questions.tsx:188
+     * @see apps/admin/src/components/question-editor/import-questions.tsx:189
      */
     "admin.questionEditor.importQuestions.62accab": string;
 
@@ -1445,6 +3300,7 @@ export interface TranslationKeys {
      * @see apps/admin/src/components/question-editor/import-questions.tsx:119
      * @see apps/admin/src/components/question-editor/import-questions.tsx:121
      * @see apps/admin/src/components/question-editor/import-questions.tsx:122
+     * @see apps/admin/src/components/question-editor/import-questions.tsx:123
      */
     "admin.questionEditor.importQuestions.72e92ee": string;
 
@@ -1454,6 +3310,7 @@ export interface TranslationKeys {
      * @see apps/admin/src/components/question-editor/import-questions.tsx:206
      * @see apps/admin/src/components/question-editor/import-questions.tsx:223
      * @see apps/admin/src/components/question-editor/import-questions.tsx:224
+     * @see apps/admin/src/components/question-editor/import-questions.tsx:225
      */
     "admin.questionEditor.importQuestions.83a42e5": string;
 
@@ -1463,6 +3320,7 @@ export interface TranslationKeys {
      * @see apps/admin/src/components/question-editor/import-questions.tsx:175
      * @see apps/admin/src/components/question-editor/import-questions.tsx:183
      * @see apps/admin/src/components/question-editor/import-questions.tsx:184
+     * @see apps/admin/src/components/question-editor/import-questions.tsx:185
      */
     "admin.questionEditor.importQuestions.9c870aa": string;
 
@@ -1472,6 +3330,7 @@ export interface TranslationKeys {
      * @see apps/admin/src/components/question-editor/import-questions.tsx:144
      * @see apps/admin/src/components/question-editor/import-questions.tsx:149
      * @see apps/admin/src/components/question-editor/import-questions.tsx:150
+     * @see apps/admin/src/components/question-editor/import-questions.tsx:151
      */
     "admin.questionEditor.importQuestions.b4e51ea": string;
 
@@ -1481,6 +3340,7 @@ export interface TranslationKeys {
      * @see apps/admin/src/components/question-editor/import-questions.tsx:135
      * @see apps/admin/src/components/question-editor/import-questions.tsx:139
      * @see apps/admin/src/components/question-editor/import-questions.tsx:140
+     * @see apps/admin/src/components/question-editor/import-questions.tsx:141
      */
     "admin.questionEditor.importQuestions.c987f66": string;
 
@@ -1490,6 +3350,7 @@ export interface TranslationKeys {
      * @see apps/admin/src/components/question-editor/import-questions.tsx:185
      * @see apps/admin/src/components/question-editor/import-questions.tsx:200
      * @see apps/admin/src/components/question-editor/import-questions.tsx:201
+     * @see apps/admin/src/components/question-editor/import-questions.tsx:202
      */
     "admin.questionEditor.importQuestions.d5bd045": string;
 
@@ -1914,6 +3775,7 @@ export interface TranslationKeys {
      * @see apps/admin/src/app/[locale]/(app)/respondents/[respondentId]/survey-quick-view.tsx:26
      * @see apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/settings/client.tsx:30
      * @see apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/settings/client.tsx:31
+     * @see apps/admin/src/app/api/surveys/[surveyId]/questions/export/xlsform/route.ts:27
      */
     "admin.respondents.surveyQuickView.75eb367": string;
 
@@ -2026,6 +3888,13 @@ export interface TranslationKeys {
     "admin.responseAuthenticity.overide.f81ab83": string;
 
     /**
+     * **Text:** "No answer provided"
+     *
+     * @see apps/admin/src/components/responses/answer-value.tsx:20
+     */
+    "admin.responses.answerValue.3823e06": string;
+
+    /**
      * **Text:** "Answer"
      *
      * @see apps/admin/src/components/responses/columns.tsx:40
@@ -2056,6 +3925,21 @@ export interface TranslationKeys {
      * @see apps/admin/src/components/responses/columns.tsx:72
      */
     "admin.responses.columns.fe75287": string;
+
+    /**
+     * **Text:** "selections"
+     *
+     * @see apps/admin/src/components/responses/option-distribution-chart.tsx:104
+     */
+    "admin.responses.optionDistributionChart.0de6037": string;
+
+    /**
+     * **Text:** "Selections will appear here once responses are recorded."
+     *
+     * @see apps/admin/src/components/responses/option-distribution-chart.tsx:40
+     * @see apps/admin/src/components/responses/option-distribution-chart.tsx:60
+     */
+    "admin.responses.optionDistributionChart.62a33ec": string;
 
     /**
      * **Text:** "Question not found"
@@ -2146,6 +4030,20 @@ export interface TranslationKeys {
      * @see apps/admin/src/components/responses/quick-look.tsx:82
      */
     "admin.responses.quickLook.f7e39f7": string;
+
+    /**
+     * **Text:** "You must provide a reason"
+     *
+     * @see apps/admin/src/lib/schemas/authenticity.ts:26
+     */
+    "admin.schemas.authenticity.ca22efc": string;
+
+    /**
+     * **Text:** "Reason is too long"
+     *
+     * @see apps/admin/src/lib/schemas/authenticity.ts:27
+     */
+    "admin.schemas.authenticity.e4bb96d": string;
 
     /**
      * **Text:** "Descriptions of themes identified in the answer (comma-separated)"
@@ -2627,6 +4525,433 @@ export interface TranslationKeys {
      * @see apps/admin/src/lib/schemas/constants.ts:57
      */
     "admin.schemas.constants.fb32db7": string;
+
+    /**
+     * **Text:** "Description is required"
+     *
+     * @see apps/admin/src/lib/schemas/questions.ts:176
+     * @see apps/admin/src/lib/schemas/questions.ts:181
+     */
+    "admin.schemas.questions.032d33c": string;
+
+    /**
+     * **Text:** "Must be no more than {value}"
+     *
+     * @see apps/admin/src/lib/schemas/questions.ts:133
+     * @see apps/admin/src/lib/schemas/questions.ts:138
+     */
+    "admin.schemas.questions.033b9dc": string;
+
+    /**
+     * **Text:** "Maximum selections"
+     *
+     * @see apps/admin/src/lib/schemas/questions.ts:136
+     * @see apps/admin/src/lib/schemas/questions.ts:141
+     */
+    "admin.schemas.questions.09f73f6": string;
+
+    /**
+     * **Text:** "number"
+     *
+     * @see apps/admin/src/lib/schemas/questions.ts:6
+     */
+    "admin.schemas.questions.12886f9": string;
+
+    /**
+     * **Text:** "Maximum number of characters"
+     *
+     * @see apps/admin/src/lib/schemas/questions.ts:113
+     * @see apps/admin/src/lib/schemas/questions.ts:118
+     */
+    "admin.schemas.questions.274f1d4": string;
+
+    /**
+     * **Text:** "Must be at least {value} characters"
+     *
+     * @see apps/admin/src/lib/schemas/questions.ts:109
+     * @see apps/admin/src/lib/schemas/questions.ts:114
+     */
+    "admin.schemas.questions.4f75b07": string;
+
+    /**
+     * **Text:** "Maximum numeric value"
+     *
+     * @see apps/admin/src/lib/schemas/questions.ts:129
+     * @see apps/admin/src/lib/schemas/questions.ts:134
+     */
+    "admin.schemas.questions.54b6b77": string;
+
+    /**
+     * **Text:** "Minimum length"
+     *
+     * @see apps/admin/src/lib/schemas/questions.ts:104
+     * @see apps/admin/src/lib/schemas/questions.ts:109
+     */
+    "admin.schemas.questions.54fda55": string;
+
+    /**
+     * **Text:** "You can select no more than {value} options"
+     *
+     * @see apps/admin/src/lib/schemas/questions.ts:141
+     * @see apps/admin/src/lib/schemas/questions.ts:146
+     */
+    "admin.schemas.questions.6127cfe": string;
+
+    /**
+     * **Text:** "Maximum value"
+     *
+     * @see apps/admin/src/lib/schemas/questions.ts:128
+     * @see apps/admin/src/lib/schemas/questions.ts:133
+     */
+    "admin.schemas.questions.6a30476": string;
+
+    /**
+     * **Text:** "Must be no more than {value} characters"
+     *
+     * @see apps/admin/src/lib/schemas/questions.ts:117
+     * @see apps/admin/src/lib/schemas/questions.ts:122
+     */
+    "admin.schemas.questions.6a48a6a": string;
+
+    /**
+     * **Text:** "Minimum value"
+     *
+     * @see apps/admin/src/lib/schemas/questions.ts:120
+     * @see apps/admin/src/lib/schemas/questions.ts:125
+     */
+    "admin.schemas.questions.6b537b8": string;
+
+    /**
+     * **Text:** "single_select"
+     *
+     * @see apps/admin/src/lib/schemas/questions.ts:7
+     */
+    "admin.schemas.questions.715d41a": string;
+
+    /**
+     * **Text:** "Topic is required"
+     *
+     * @see apps/admin/src/lib/schemas/questions.ts:172
+     * @see apps/admin/src/lib/schemas/questions.ts:177
+     */
+    "admin.schemas.questions.7325631": string;
+
+    /**
+     * **Text:** "multi_select"
+     *
+     * @see apps/admin/src/lib/schemas/questions.ts:8
+     */
+    "admin.schemas.questions.77cd433": string;
+
+    /**
+     * **Text:** "Cannot generate more than 10 questions"
+     *
+     * @see apps/admin/src/lib/schemas/questions.ts:181
+     * @see apps/admin/src/lib/schemas/questions.ts:186
+     */
+    "admin.schemas.questions.8284e1a": string;
+
+    /**
+     * **Text:** "URL format"
+     *
+     * @see apps/admin/src/lib/schemas/questions.ts:160
+     * @see apps/admin/src/lib/schemas/questions.ts:165
+     */
+    "admin.schemas.questions.82bef0b": string;
+
+    /**
+     * **Text:** "Topic is too long"
+     *
+     * @see apps/admin/src/lib/schemas/questions.ts:173
+     * @see apps/admin/src/lib/schemas/questions.ts:178
+     */
+    "admin.schemas.questions.8692182": string;
+
+    /**
+     * **Text:** "Minimum number of options that must be selected"
+     *
+     * @see apps/admin/src/lib/schemas/questions.ts:145
+     * @see apps/admin/src/lib/schemas/questions.ts:150
+     */
+    "admin.schemas.questions.89d7eb9": string;
+
+    /**
+     * **Text:** "Value is too long"
+     *
+     * @see apps/admin/src/lib/schemas/questions.ts:35
+     * @see apps/admin/src/lib/schemas/questions.ts:40
+     */
+    "admin.schemas.questions.95a9567": string;
+
+    /**
+     * **Text:** "text"
+     *
+     * @see apps/admin/src/lib/schemas/questions.ts:5
+     */
+    "admin.schemas.questions.982d9e3": string;
+
+    /**
+     * **Text:** "Minimum number of characters"
+     *
+     * @see apps/admin/src/lib/schemas/questions.ts:105
+     * @see apps/admin/src/lib/schemas/questions.ts:110
+     */
+    "admin.schemas.questions.a872dbe": string;
+
+    /**
+     * **Text:** "Minimum selections"
+     *
+     * @see apps/admin/src/lib/schemas/questions.ts:144
+     * @see apps/admin/src/lib/schemas/questions.ts:149
+     */
+    "admin.schemas.questions.a997f0e": string;
+
+    /**
+     * **Text:** "Maximum number of options that can be selected"
+     *
+     * @see apps/admin/src/lib/schemas/questions.ts:137
+     * @see apps/admin/src/lib/schemas/questions.ts:142
+     */
+    "admin.schemas.questions.b446126": string;
+
+    /**
+     * **Text:** "Please upload a CSV or XLSX file"
+     *
+     * @see apps/admin/src/lib/schemas/questions.ts:229
+     * @see apps/admin/src/lib/schemas/questions.ts:230
+     */
+    "admin.schemas.questions.b8c6d68": string;
+
+    /**
+     * **Text:** "Email format"
+     *
+     * @see apps/admin/src/lib/schemas/questions.ts:152
+     * @see apps/admin/src/lib/schemas/questions.ts:157
+     */
+    "admin.schemas.questions.b9ab31c": string;
+
+    /**
+     * **Text:** "Value is too short"
+     *
+     * @see apps/admin/src/lib/schemas/questions.ts:36
+     * @see apps/admin/src/lib/schemas/questions.ts:41
+     */
+    "admin.schemas.questions.ba4d857": string;
+
+    /**
+     * **Text:** "Minimum numeric value"
+     *
+     * @see apps/admin/src/lib/schemas/questions.ts:121
+     * @see apps/admin/src/lib/schemas/questions.ts:126
+     */
+    "admin.schemas.questions.c8081ac": string;
+
+    /**
+     * **Text:** "At least two options are required"
+     *
+     * @see apps/admin/src/lib/schemas/questions.ts:67
+     * @see apps/admin/src/lib/schemas/questions.ts:72
+     * @see apps/admin/src/lib/schemas/questions.ts:73
+     * @see apps/admin/src/lib/schemas/questions.ts:78
+     */
+    "admin.schemas.questions.c964008": string;
+
+    /**
+     * **Text:** "Must be a valid URL"
+     *
+     * @see apps/admin/src/lib/schemas/questions.ts:161
+     * @see apps/admin/src/lib/schemas/questions.ts:165
+     * @see apps/admin/src/lib/schemas/questions.ts:166
+     * @see apps/admin/src/lib/schemas/questions.ts:170
+     * @see apps/admin/src/lib/surveys/validation-helpers.ts:78
+     */
+    "admin.schemas.questions.cd6153b": string;
+
+    /**
+     * **Text:** "Maximum length"
+     *
+     * @see apps/admin/src/lib/schemas/questions.ts:112
+     * @see apps/admin/src/lib/schemas/questions.ts:117
+     */
+    "admin.schemas.questions.ee29a87": string;
+
+    /**
+     * **Text:** "You must select at least {value} options"
+     *
+     * @see apps/admin/src/lib/schemas/questions.ts:149
+     * @see apps/admin/src/lib/schemas/questions.ts:154
+     */
+    "admin.schemas.questions.f07e7e5": string;
+
+    /**
+     * **Text:** "Must generate at least 1 question"
+     *
+     * @see apps/admin/src/lib/schemas/questions.ts:180
+     * @see apps/admin/src/lib/schemas/questions.ts:185
+     */
+    "admin.schemas.questions.f41b8c4": string;
+
+    /**
+     * **Text:** "Must be a valid email address"
+     *
+     * @see apps/admin/src/lib/schemas/questions.ts:153
+     * @see apps/admin/src/lib/schemas/questions.ts:157
+     * @see apps/admin/src/lib/schemas/questions.ts:158
+     * @see apps/admin/src/lib/schemas/questions.ts:162
+     * @see apps/admin/src/lib/surveys/validation-helpers.ts:69
+     */
+    "admin.schemas.questions.fe9b346": string;
+
+    /**
+     * **Text:** "Must be at least {value}"
+     *
+     * @see apps/admin/src/lib/schemas/questions.ts:125
+     * @see apps/admin/src/lib/schemas/questions.ts:130
+     */
+    "admin.schemas.questions.ff73666": string;
+
+    /**
+     * **Text:** "At least two options required"
+     *
+     * @see apps/admin/src/lib/schemas/screeners.ts:53
+     */
+    "admin.schemas.screeners.0d6ab3e": string;
+
+    /**
+     * **Text:** "At least one country required"
+     *
+     * @see apps/admin/src/lib/schemas/screeners.ts:28
+     */
+    "admin.schemas.screeners.1e343a6": string;
+
+    /**
+     * **Text:** "At least one option must pass"
+     *
+     * @see apps/admin/src/lib/schemas/screeners.ts:69
+     */
+    "admin.schemas.screeners.2409af9": string;
+
+    /**
+     * **Text:** "Question is required"
+     *
+     * @see apps/admin/src/lib/schemas/screeners.ts:54
+     */
+    "admin.schemas.screeners.7ca6493": string;
+
+    /**
+     * **Text:** "Maximum responses must be greater than 0"
+     *
+     * @see apps/admin/src/lib/schemas/surveys.ts:58
+     */
+    "admin.schemas.surveys.2a2999d": string;
+
+    /**
+     * **Text:** "Campaign title is too long"
+     *
+     * @see apps/admin/src/lib/schemas/surveys.ts:18
+     */
+    "admin.schemas.surveys.4aec1b9": string;
+
+    /**
+     * **Text:** "Campaign title must be at least 2 characters if provided"
+     *
+     * @see apps/admin/src/lib/schemas/surveys.ts:20
+     */
+    "admin.schemas.surveys.5629c77": string;
+
+    /**
+     * **Text:** "You must provide a password when password protection is enabled"
+     *
+     * @see apps/admin/src/lib/schemas/surveys.ts:70
+     */
+    "admin.schemas.surveys.72bbf6e": string;
+
+    /**
+     * **Text:** "Maximum responses must be a number"
+     *
+     * @see apps/admin/src/lib/schemas/surveys.ts:52
+     */
+    "admin.schemas.surveys.8b25ee2": string;
+
+    /**
+     * **Text:** "Slug is too long"
+     *
+     * @see apps/admin/src/lib/schemas/surveys.ts:24
+     */
+    "admin.schemas.surveys.a29b94e": string;
+
+    /**
+     * **Text:** "with"
+     *
+     * @see apps/admin/src/utils/screener-summary.ts:38
+     */
+    "admin.screenerSummary.0695b56": string;
+
+    /**
+     * **Text:** "Screening for respondents who answer"
+     *
+     * @see apps/admin/src/utils/screener-summary.ts:38
+     * @see apps/admin/src/utils/screener-summary.ts:40
+     */
+    "admin.screenerSummary.179395a": string;
+
+    /**
+     * **Text:** "the age of"
+     *
+     * @see apps/admin/src/utils/screener-summary.ts:14
+     */
+    "admin.screenerSummary.3273438": string;
+
+    /**
+     * **Text:** "Screening configuration"
+     *
+     * @see apps/admin/src/utils/screener-summary.ts:43
+     */
+    "admin.screenerSummary.469ff06": string;
+
+    /**
+     * **Text:** "over"
+     *
+     * @see apps/admin/src/utils/screener-summary.ts:13
+     */
+    "admin.screenerSummary.5fb6a47": string;
+
+    /**
+     * **Text:** "Screening for respondents"
+     *
+     * @see apps/admin/src/utils/screener-summary.ts:14
+     */
+    "admin.screenerSummary.629e06a": string;
+
+    /**
+     * **Text:** "Screening for respondents in"
+     *
+     * @see apps/admin/src/utils/screener-summary.ts:22
+     * @see apps/admin/src/utils/screener-summary.ts:25
+     * @see apps/admin/src/utils/screener-summary.ts:29
+     */
+    "admin.screenerSummary.a48dcc1": string;
+
+    /**
+     * **Text:** "options"
+     *
+     * @see apps/admin/src/utils/screener-summary.ts:40
+     */
+    "admin.screenerSummary.a793ab8": string;
+
+    /**
+     * **Text:** "with one of"
+     *
+     * @see apps/admin/src/utils/screener-summary.ts:40
+     */
+    "admin.screenerSummary.cc5af0c": string;
+
+    /**
+     * **Text:** "under"
+     *
+     * @see apps/admin/src/utils/screener-summary.ts:13
+     */
+    "admin.screenerSummary.d767748": string;
 
     /**
      * **Text:** "Screener details"
@@ -3181,6 +5506,7 @@ export interface TranslationKeys {
      *
      * @see apps/admin/src/components/survey-overview/testing-overview.tsx:28
      * @see apps/admin/src/components/survey-overview/testing-overview.tsx:31
+     * @see apps/admin/src/components/survey-overview/testing-overview.tsx:34
      */
     "admin.surveyOverview.testingOverview.622675c": string;
 
@@ -3189,6 +5515,7 @@ export interface TranslationKeys {
      *
      * @see apps/admin/src/components/survey-overview/testing-overview.tsx:26
      * @see apps/admin/src/components/survey-overview/testing-overview.tsx:29
+     * @see apps/admin/src/components/survey-overview/testing-overview.tsx:32
      */
     "admin.surveyOverview.testingOverview.a63533b": string;
 
@@ -4118,6 +6445,43 @@ export interface TranslationKeys {
     "admin.surveys.settings.ec5ba0a": string;
 
     /**
+     * **Text:** "s"
+     *
+     * @see apps/admin/src/utils/time.ts:13
+     * @see apps/admin/src/utils/time.ts:14
+     * @see apps/admin/src/utils/time.ts:19
+     */
+    "admin.time.043a718": string;
+
+    /**
+     * **Text:** "min"
+     *
+     * @see apps/admin/src/utils/time.ts:3
+     * @see apps/admin/src/utils/time.ts:4
+     */
+    "admin.time.1f6fa6f": string;
+
+    /**
+     * **Text:** "m"
+     *
+     * @see apps/admin/src/utils/time.ts:8
+     * @see apps/admin/src/utils/time.ts:19
+     * @see apps/admin/src/utils/time.ts:20
+     * @see apps/admin/src/utils/time.ts:24
+     */
+    "admin.time.62c66a7": string;
+
+    /**
+     * **Text:** "h"
+     *
+     * @see apps/admin/src/utils/time.ts:8
+     * @see apps/admin/src/utils/time.ts:9
+     * @see apps/admin/src/utils/time.ts:24
+     * @see apps/admin/src/utils/time.ts:25
+     */
+    "admin.time.aaa9402": string;
+
+    /**
      * **Text:** "Response details"
      *
      * @see apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/responses/[responseId]/page.tsx:30
@@ -4196,6 +6560,7 @@ export interface TranslationKeys {
      * @see apps/admin/src/components/question-editor/import-questions.tsx:196
      * @see apps/admin/src/components/question-editor/import-questions.tsx:213
      * @see apps/admin/src/components/question-editor/import-questions.tsx:214
+     * @see apps/admin/src/components/question-editor/import-questions.tsx:215
      * @see apps/admin/src/components/question-editor/remove-question-dialog.tsx:63
      * @see apps/admin/src/components/question-editor/remove-question-dialog.tsx:65
      * @see apps/admin/src/components/response-authenticity/overide.tsx:119
@@ -4418,6 +6783,17 @@ export interface TranslationKeys {
     "common.424a94b": string;
 
     /**
+     * **Text:** "Title is too short"
+     *
+     * @see apps/admin/src/lib/schemas/campaigns.ts:16
+     * @see apps/admin/src/lib/schemas/questions.ts:53
+     * @see apps/admin/src/lib/schemas/questions.ts:58
+     * @see apps/admin/src/lib/schemas/questions.ts:242
+     * @see apps/admin/src/lib/schemas/surveys.ts:28
+     */
+    "common.4d2d2ab": string;
+
+    /**
      * **Text:** "Authenticity"
      *
      * @see apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/responses/columns.tsx:79
@@ -4466,6 +6842,14 @@ export interface TranslationKeys {
     "common.526e008": string;
 
     /**
+     * **Text:** "Name is required"
+     *
+     * @see apps/admin/src/lib/schemas/cohorts.ts:25
+     * @see apps/admin/src/lib/schemas/screeners.ts:85
+     */
+    "common.604fd1b": string;
+
+    /**
      * **Text:** "Incomplete"
      *
      * @see apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/responses/columns.tsx:31
@@ -4503,6 +6887,19 @@ export interface TranslationKeys {
      * @see apps/admin/src/components/nav/main.tsx:43
      */
     "common.7c763b8": string;
+
+    /**
+     * **Text:** "Description is too long"
+     *
+     * @see apps/admin/src/lib/schemas/campaigns.ts:10
+     * @see apps/admin/src/lib/schemas/questions.ts:44
+     * @see apps/admin/src/lib/schemas/questions.ts:49
+     * @see apps/admin/src/lib/schemas/questions.ts:177
+     * @see apps/admin/src/lib/schemas/questions.ts:182
+     * @see apps/admin/src/lib/schemas/questions.ts:244
+     * @see apps/admin/src/lib/schemas/surveys.ts:15
+     */
+    "common.7e7ecef": string;
 
     /**
      * **Text:** "Title"
@@ -4577,6 +6974,17 @@ export interface TranslationKeys {
      * @see apps/admin/src/app/[locale]/(app)/surveys/list.tsx:63
      */
     "common.920e413": string;
+
+    /**
+     * **Text:** "Title is too long"
+     *
+     * @see apps/admin/src/lib/schemas/campaigns.ts:15
+     * @see apps/admin/src/lib/schemas/questions.ts:52
+     * @see apps/admin/src/lib/schemas/questions.ts:57
+     * @see apps/admin/src/lib/schemas/questions.ts:243
+     * @see apps/admin/src/lib/schemas/surveys.ts:27
+     */
+    "common.922102c": string;
 
     /**
      * **Text:** "Email"
@@ -4833,6 +7241,7 @@ export interface TranslationKeys {
      * @see apps/admin/src/components/question-editor/export-questions.tsx:68
      * @see apps/admin/src/components/question-editor/export-questions.tsx:77
      * @see apps/admin/src/components/question-editor/export-questions.tsx:78
+     * @see apps/admin/src/lib/schemas/export-utils.ts:67
      */
     "common.e94d3ee": string;
 
@@ -4845,6 +7254,14 @@ export interface TranslationKeys {
      * @see apps/admin/src/components/question-editor/remove-question-dialog.tsx:42
      */
     "common.eebdd24": string;
+
+    /**
+     * **Text:** "Name must be less than 255 characters"
+     *
+     * @see apps/admin/src/lib/schemas/cohorts.ts:26
+     * @see apps/admin/src/lib/schemas/screeners.ts:86
+     */
+    "common.fb966c7": string;
 
     /**
      * **Text:** "Include all fields"
@@ -4868,6 +7285,8 @@ export type TranslationKey = keyof TranslationKeys;
  */
 export type TranslationText =
     | "Welcome back"
+    | "XLSForm export failed"
+    | "Unauthorized"
     | "Terms of Service"
     | "Privacy Policy"
     | "and"
@@ -4910,6 +7329,255 @@ export type TranslationText =
     | "Create cohort"
     | "Assigned"
     | "Assigned by"
+    | "São Tomé and Príncipe"
+    | "Saint Martin"
+    | "Eritrea"
+    | "Venezuela"
+    | "Ireland"
+    | "Nigeria"
+    | "Grenada"
+    | "Tajikistan"
+    | "Turkey"
+    | "Brazil"
+    | "Sri Lanka"
+    | "Malaysia"
+    | "Cameroon"
+    | "Gibraltar"
+    | "Democratic Republic of the Congo"
+    | "French Polynesia"
+    | "Trinidad and Tobago"
+    | "Cambodia"
+    | "British Virgin Islands"
+    | "Cuba"
+    | "Saint Pierre and Miquelon"
+    | "Saint Kitts and Nevis"
+    | "Samoa"
+    | "Antigua and Barbuda"
+    | "China"
+    | "Estonia"
+    | "Kuwait"
+    | "Christmas Island"
+    | "Montserrat"
+    | "Rwanda"
+    | "Moldova"
+    | "Botswana"
+    | "Iran"
+    | "Albania"
+    | "Czech Republic"
+    | "Åland Islands"
+    | "American Samoa"
+    | "Hong Kong"
+    | "Yemen"
+    | "Switzerland"
+    | "Angola"
+    | "San Marino"
+    | "New Zealand"
+    | "Libya"
+    | "French Guiana"
+    | "Ecuador"
+    | "Niger"
+    | "Armenia"
+    | "Heard and McDonald Islands"
+    | "Vietnam"
+    | "Bangladesh"
+    | "Tuvalu"
+    | "Algeria"
+    | "Tonga"
+    | "Russia"
+    | "Isle of Man"
+    | "Belgium"
+    | "Israel"
+    | "Guadeloupe"
+    | "Senegal"
+    | "British Indian Ocean Territory"
+    | "Tokelau"
+    | "Netherlands"
+    | "South Africa"
+    | "Andorra"
+    | "Togo"
+    | "Chad"
+    | "Jamaica"
+    | "Guatemala"
+    | "Tunisia"
+    | "Djibouti"
+    | "Georgia"
+    | "Greenland"
+    | "Niue"
+    | "United States"
+    | "Uzbekistan"
+    | "Belarus"
+    | "Svalbard and Jan Mayen"
+    | "Portugal"
+    | "Norfolk Island"
+    | "Hungary"
+    | "Peru"
+    | "Egypt"
+    | "Qatar"
+    | "Slovenia"
+    | "Cook Islands"
+    | "Nauru"
+    | "Ukraine"
+    | "Ghana"
+    | "Bahamas"
+    | "Iceland"
+    | "Italy"
+    | "Lesotho"
+    | "Guam"
+    | "Lithuania"
+    | "Afghanistan"
+    | "South Georgia"
+    | "Cyprus"
+    | "Malawi"
+    | "Timor-Leste"
+    | "Cocos Islands"
+    | "Japan"
+    | "Northern Mariana Islands"
+    | "United States Minor Outlying Islands"
+    | "Bulgaria"
+    | "Fiji"
+    | "Benin"
+    | "Colombia"
+    | "Thailand"
+    | "Kyrgyzstan"
+    | "Liechtenstein"
+    | "Belize"
+    | "Malta"
+    | "Croatia"
+    | "Republic of the Congo"
+    | "Kenya"
+    | "Kazakhstan"
+    | "Guinea-Bissau"
+    | "Jersey"
+    | "Faroe Islands"
+    | "Saint Helena"
+    | "Bermuda"
+    | "France"
+    | "Montenegro"
+    | "Réunion"
+    | "Ethiopia"
+    | "Gabon"
+    | "Poland"
+    | "Palau"
+    | "Paraguay"
+    | "Germany"
+    | "Kiribati"
+    | "Dominican Republic"
+    | "Cayman Islands"
+    | "Sweden"
+    | "Uganda"
+    | "Equatorial Guinea"
+    | "Western Sahara"
+    | "Turks and Caicos Islands"
+    | "United Kingdom"
+    | "Barbados"
+    | "Spain"
+    | "Maldives"
+    | "South Sudan"
+    | "Monaco"
+    | "Bahrain"
+    | "Nicaragua"
+    | "Tanzania"
+    | "Bolivia"
+    | "Latvia"
+    | "Laos"
+    | "Mongolia"
+    | "Brunei"
+    | "Curaçao"
+    | "Greece"
+    | "Cape Verde"
+    | "Slovakia"
+    | "Anguilla"
+    | "Burkina Faso"
+    | "Macau"
+    | "Caribbean Netherlands"
+    | "Mexico"
+    | "Wallis and Futuna"
+    | "Mauritius"
+    | "India"
+    | "Saint Lucia"
+    | "North Korea"
+    | "Finland"
+    | "Bosnia and Herzegovina"
+    | "Vatican City"
+    | "Suriname"
+    | "Saint Vincent and the Grenadines"
+    | "Turkmenistan"
+    | "Aruba"
+    | "Zambia"
+    | "Morocco"
+    | "Honduras"
+    | "Guernsey"
+    | "Myanmar"
+    | "Sint Maarten"
+    | "Somalia"
+    | "Dominica"
+    | "Canada"
+    | "New Caledonia"
+    | "Norway"
+    | "Mauritania"
+    | "Australia"
+    | "Panama"
+    | "Philippines"
+    | "Falkland Islands"
+    | "Oman"
+    | "El Salvador"
+    | "Antarctica"
+    | "Denmark"
+    | "Vanuatu"
+    | "Papua New Guinea"
+    | "Martinique"
+    | "Gambia"
+    | "Zimbabwe"
+    | "Burundi"
+    | "South Korea"
+    | "Mozambique"
+    | "Pitcairn Islands"
+    | "Singapore"
+    | "Austria"
+    | "Liberia"
+    | "North Macedonia"
+    | "Syria"
+    | "Solomon Islands"
+    | "Mayotte"
+    | "Haiti"
+    | "Seychelles"
+    | "Saint Barthélemy"
+    | "Madagascar"
+    | "Micronesia"
+    | "Bhutan"
+    | "Puerto Rico"
+    | "Ivory Coast"
+    | "Indonesia"
+    | "Guinea"
+    | "United Arab Emirates"
+    | "Taiwan"
+    | "Iraq"
+    | "Eswatini"
+    | "French Southern Territories"
+    | "Nepal"
+    | "Pakistan"
+    | "Costa Rica"
+    | "U.S. Virgin Islands"
+    | "Lebanon"
+    | "Central African Republic"
+    | "Comoros"
+    | "Serbia"
+    | "Jordan"
+    | "Argentina"
+    | "Romania"
+    | "Guyana"
+    | "Namibia"
+    | "Sudan"
+    | "Luxembourg"
+    | "Saudi Arabia"
+    | "Mali"
+    | "Azerbaijan"
+    | "Palestine"
+    | "Sierra Leone"
+    | "Chile"
+    | "Bouvet Island"
+    | "Uruguay"
+    | "Marshall Islands"
     | "No results"
     | "Desc"
     | "Hide"
@@ -4985,6 +7653,14 @@ export type TranslationText =
     | "Include all answer fields"
     | "Include answers"
     | "Apply the active filters to the export."
+    | "Monday"
+    | "Tuesday"
+    | "Sunday"
+    | "Unknown"
+    | "Wednesday"
+    | "Saturday"
+    | "Friday"
+    | "Thursday"
     | "Data points that shine, insights that catch the eye. Build, deploy and analyse surveys with AI assistance."
     | "ai"
     | "research"
@@ -4999,6 +7675,10 @@ export type TranslationText =
     | "Log out"
     | "Are you sure you want to log out? You will need to sign in again to access your account."
     | "Sorry, the page you are looking for does not exist."
+    | "Unsupported file type. Please upload a CSV or XLSX file."
+    | "XLSX file must contain at least a header row and one data row."
+    | "XLSX file must contain at least one worksheet."
+    | "CSV file must contain at least a header row and one data row."
     | "Questions cannot be changed when the survey is complete or archived."
     | "Your survey has been published and you can only edit the text content of existing questions and options. Structural changes such as adding or removing questions, changing question types, or modifying options are not allowed to ensure the integrity of the survey."
     | "Questions updated"
@@ -5105,10 +7785,13 @@ export type TranslationText =
     | "Override authenticity score"
     | "Authenticity score overridden successfully"
     | "Reason"
+    | "No answer provided"
     | "Answer"
     | "Answer skipped"
     | "Theme"
     | "Started at"
+    | "selections"
+    | "Selections will appear here once responses are recorded."
     | "Question not found"
     | "Awaiting responses"
     | "Co-occurrence patterns for selected options"
@@ -5119,6 +7802,8 @@ export type TranslationText =
     | "This chart shows the distribution of selections for this question."
     | "Percentages show how often each pair of options was selected together"
     | "Theme categorisation"
+    | "You must provide a reason"
+    | "Reason is too long"
     | "Descriptions of themes identified in the answer (comma-separated)"
     | "Source of the respondent"
     | "Whether the survey was completed"
@@ -5179,6 +7864,61 @@ export type TranslationText =
     | "Analysis Theme Sentiments"
     | "Whether this question was skipped"
     | "Authenticity percentage (0-100)"
+    | "Description is required"
+    | "Must be no more than {value}"
+    | "Maximum selections"
+    | "number"
+    | "Maximum number of characters"
+    | "Must be at least {value} characters"
+    | "Maximum numeric value"
+    | "Minimum length"
+    | "You can select no more than {value} options"
+    | "Maximum value"
+    | "Must be no more than {value} characters"
+    | "Minimum value"
+    | "single_select"
+    | "Topic is required"
+    | "multi_select"
+    | "Cannot generate more than 10 questions"
+    | "URL format"
+    | "Topic is too long"
+    | "Minimum number of options that must be selected"
+    | "Value is too long"
+    | "text"
+    | "Minimum number of characters"
+    | "Minimum selections"
+    | "Maximum number of options that can be selected"
+    | "Please upload a CSV or XLSX file"
+    | "Email format"
+    | "Value is too short"
+    | "Minimum numeric value"
+    | "At least two options are required"
+    | "Must be a valid URL"
+    | "Maximum length"
+    | "You must select at least {value} options"
+    | "Must generate at least 1 question"
+    | "Must be a valid email address"
+    | "Must be at least {value}"
+    | "At least two options required"
+    | "At least one country required"
+    | "At least one option must pass"
+    | "Question is required"
+    | "Maximum responses must be greater than 0"
+    | "Campaign title is too long"
+    | "Campaign title must be at least 2 characters if provided"
+    | "You must provide a password when password protection is enabled"
+    | "Maximum responses must be a number"
+    | "Slug is too long"
+    | "with"
+    | "Screening for respondents who answer"
+    | "the age of"
+    | "Screening configuration"
+    | "over"
+    | "Screening for respondents"
+    | "Screening for respondents in"
+    | "options"
+    | "with one of"
+    | "under"
     | "Screener details"
     | "All screeners"
     | "Screener created successfully"
@@ -5353,6 +8093,10 @@ export type TranslationText =
     | "Manage your survey settings, including access controls and publishing status."
     | "Details"
     | "Access"
+    | "s"
+    | "min"
+    | "m"
+    | "h"
     | "Response details"
     | "No themes generated"
     | "Fetching details..."
@@ -5373,16 +8117,20 @@ export type TranslationText =
     | "Home"
     | "Updated at"
     | "Commonly used format for data exchange"
+    | "Title is too short"
     | "Authenticity"
     | "Description"
+    | "Name is required"
     | "Incomplete"
     | "Created at"
     | "Surveys"
+    | "Description is too long"
     | "Title"
     | "Export successful"
     | "Survey is locked"
     | "Summary"
     | "Status"
+    | "Title is too long"
     | "Email"
     | "Screener not found"
     | "Gender"
@@ -5401,4 +8149,5 @@ export type TranslationText =
     | "Location country"
     | "Export failed"
     | "Confirm"
+    | "Name must be less than 255 characters"
     | "Include all fields";
