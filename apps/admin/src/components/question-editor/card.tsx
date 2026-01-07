@@ -8,6 +8,7 @@ import {TrashIcon} from '@phosphor-icons/react/dist/ssr/Trash';
 import {useSetAtom} from 'jotai';
 import {use} from 'react';
 import {useFormContext} from 'react-hook-form';
+import {useI18n} from '@/hooks/use-i18n';
 import {removeQuestionIndexAtom} from '@/lib/store';
 import {isDraftSurvey} from '@/lib/surveys/disabled-rules';
 import HighlightChange from '../highlight-change';
@@ -19,6 +20,7 @@ import QuestionTypeSelect from './type-select';
 import {QuestionEditorContext} from './wrapper';
 
 const QuestionCard: React.FC = () => {
+    const {t} = useI18n();
     const {control} = useFormContext();
     const {questionIndex} = use(QuestionContext);
     const {survey} = use(QuestionEditorContext);
@@ -34,7 +36,7 @@ const QuestionCard: React.FC = () => {
                             <div className="flex items-center gap-2">
                                 <div className="inline-flex flex-row gap-x-4">
                                     <Heading3 className="text-lg">
-                                        Question {questionIndex + 1}
+                                        {t('Question')} {questionIndex + 1}
                                     </Heading3>
                                     <span>
                                         <QuestionRequiredStatus />
@@ -62,7 +64,7 @@ const QuestionCard: React.FC = () => {
                             >
                                 <FormField
                                     fieldType="input"
-                                    label="Title"
+                                    label={t('Title')}
                                     control={control}
                                     name={`questions.${questionIndex}.title`}
                                 />
@@ -75,7 +77,7 @@ const QuestionCard: React.FC = () => {
                             <div className="md:col-span-12 2xl:col-span-12">
                                 <FormField
                                     fieldType="input"
-                                    label="Description"
+                                    label={t('Description')}
                                     control={control}
                                     name={`questions.${questionIndex}.description`}
                                 />

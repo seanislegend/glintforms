@@ -11,6 +11,7 @@ import {use} from 'react';
 import {useFieldArray, useFormContext, useWatch} from 'react-hook-form';
 import SortItemsDialog, {type SortItem} from '@/components/sort-items';
 import useHighlight from '@/hooks/use-highlight';
+import {useI18n} from '@/hooks/use-i18n';
 import {MAX_QUESTION_OPTIONS} from '@/lib/schemas/constants';
 import type {QuestionOption, QuestionsUpdate} from '@/lib/schemas/questions';
 import {isDraftSurvey} from '@/lib/surveys/disabled-rules';
@@ -20,6 +21,7 @@ import useQuestionEditor from './use-question-editor';
 import {QuestionEditorContext} from './wrapper';
 
 const QuestionOptions: React.FC = () => {
+    const {t} = useI18n();
     const {questionIndex} = use(QuestionContext);
     const {survey} = use(QuestionEditorContext);
     const {control, getValues, setValue} = useFormContext<QuestionsUpdate>();
@@ -47,7 +49,7 @@ const QuestionOptions: React.FC = () => {
         <ToggleVisibility visible={showOptions}>
             <Spacer size="sm" />
             <HighlightChange id={`options-${questionIndex}`}>
-                <Heading4>Answer options</Heading4>
+                <Heading4>{t('Answer options')}</Heading4>
                 <div className="space-y-2 mb-4">
                     {fields.map((option, optionIndex) => {
                         return (
@@ -60,7 +62,7 @@ const QuestionOptions: React.FC = () => {
                                         control={control}
                                         fieldType="input"
                                         name={`questions.${questionIndex}.options.${optionIndex}.value`}
-                                        placeholder="Enter option value"
+                                        placeholder={t('Enter option value')}
                                     />
                                 </div>
                                 {isDraft && (
@@ -90,8 +92,10 @@ const QuestionOptions: React.FC = () => {
                     )}
                     {isDraft && fields.length > 1 && (
                         <SortItemsDialog
-                            ctaLabel="Reorder options"
-                            description="Drag and drop options to change their order. The order will be saved when you click 'Save order'."
+                            ctaLabel={t('Reorder options')}
+                            description={t(
+                                "Drag and drop options to change their order. The order will be saved when you click 'Save order'."
+                            )}
                             getItems={() => {
                                 const options = getValues(`questions.${questionIndex}.options`);
                                 return options.map((option: QuestionOption, index: number) => ({
@@ -100,7 +104,7 @@ const QuestionOptions: React.FC = () => {
                                 }));
                             }}
                             onSorted={handleReorderOptions}
-                            title="Reorder options"
+                            title={t('Reorder options')}
                         />
                     )}
                 </div>

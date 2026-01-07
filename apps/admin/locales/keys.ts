@@ -1,7 +1,7 @@
 /**
  * Auto-generated translation keys
  * Do not edit manually - run `bun translation extract` to regenerate
- * Generated: 2026-01-06T23:59:24.375Z
+ * Generated: 2026-01-07T01:35:20.306Z
  */
 
 export interface TranslationKeys {
@@ -85,9 +85,39 @@ export interface TranslationKeys {
     "admin.auth.signIn.d668348": string;
 
     /**
+     * **Text:** "Inactive"
+     *
+     * @see apps/admin/src/components/badges/campaign-status.tsx:17
+     */
+    "admin.badges.campaignStatus.ac7c949": string;
+
+    /**
+     * **Text:** "Positive"
+     *
+     * @see apps/admin/src/components/badges/sentiment.tsx:17
+     */
+    "admin.badges.sentiment.14e9f4e": string;
+
+    /**
+     * **Text:** "Neutral"
+     *
+     * @see apps/admin/src/components/badges/sentiment.tsx:19
+     */
+    "admin.badges.sentiment.1c6ac69": string;
+
+    /**
+     * **Text:** "Negative"
+     *
+     * @see apps/admin/src/components/badges/sentiment.tsx:18
+     */
+    "admin.badges.sentiment.9f7bdab": string;
+
+    /**
      * **Text:** "Created At"
      *
+     * @see apps/admin/src/app/[locale]/(app)/campaigns/columns.tsx:48
      * @see apps/admin/src/app/[locale]/(app)/campaigns/columns.tsx:49
+     * @see apps/admin/src/app/[locale]/(app)/surveys/columns.tsx:56
      * @see apps/admin/src/app/[locale]/(app)/surveys/columns.tsx:57
      */
     "admin.campaigns.columns.3d44337": string;
@@ -162,6 +192,7 @@ export interface TranslationKeys {
     /**
      * **Text:** "Are you sure you want to remove this respondent from the cohort? This action cannot be undone."
      *
+     * @see apps/admin/src/app/[locale]/(app)/cohorts/[cohortId]/cohort-respondents.tsx:79
      * @see apps/admin/src/app/[locale]/(app)/cohorts/[cohortId]/cohort-respondents.tsx:80
      * @see apps/admin/src/app/[locale]/(app)/cohorts/[cohortId]/cohort-respondents.tsx:81
      */
@@ -171,6 +202,7 @@ export interface TranslationKeys {
      * **Text:** "Confirm remove"
      *
      * @see apps/admin/src/app/[locale]/(app)/cohorts/[cohortId]/cohort-respondents.tsx:89
+     * @see apps/admin/src/app/[locale]/(app)/cohorts/[cohortId]/cohort-respondents.tsx:90
      * @see apps/admin/src/app/[locale]/(app)/cohorts/[cohortId]/cohort-respondents.tsx:91
      * @see apps/admin/src/app/[locale]/(app)/cohorts/[cohortId]/cohort-respondents.tsx:92
      */
@@ -195,6 +227,7 @@ export interface TranslationKeys {
     /**
      * **Text:** "No respondents in this cohort"
      *
+     * @see apps/admin/src/app/[locale]/(app)/cohorts/[cohortId]/cohort-respondents.tsx:64
      * @see apps/admin/src/app/[locale]/(app)/cohorts/[cohortId]/cohort-respondents.tsx:65
      * @see apps/admin/src/app/[locale]/(app)/cohorts/[cohortId]/cohort-respondents.tsx:66
      */
@@ -203,6 +236,7 @@ export interface TranslationKeys {
     /**
      * **Text:** "Add respondents to this cohort using the button above."
      *
+     * @see apps/admin/src/app/[locale]/(app)/cohorts/[cohortId]/cohort-respondents.tsx:63
      * @see apps/admin/src/app/[locale]/(app)/cohorts/[cohortId]/cohort-respondents.tsx:64
      * @see apps/admin/src/app/[locale]/(app)/cohorts/[cohortId]/cohort-respondents.tsx:65
      */
@@ -212,6 +246,7 @@ export interface TranslationKeys {
      * **Text:** "Remove"
      *
      * @see apps/admin/src/app/[locale]/(app)/cohorts/[cohortId]/columns.tsx:37
+     * @see apps/admin/src/app/[locale]/(app)/cohorts/[cohortId]/columns.tsx:40
      */
     "admin.cohorts.columns.c3812fc": string;
 
@@ -339,6 +374,13 @@ export interface TranslationKeys {
     "admin.cohorts.respondentColumns.f5ecade": string;
 
     /**
+     * **Text:** "No results"
+     *
+     * @see apps/admin/src/components/data-table/index.tsx:154
+     */
+    "admin.dataTable.a43619f": string;
+
+    /**
      * **Text:** "Desc"
      *
      * @see apps/admin/src/components/data-table/column-header.tsx:58
@@ -358,6 +400,27 @@ export interface TranslationKeys {
      * @see apps/admin/src/components/data-table/column-header.tsx:54
      */
     "admin.dataTable.columnHeader.cddeba5": string;
+
+    /**
+     * **Text:** "Clear filters"
+     *
+     * @see apps/admin/src/components/data-table/faceted-filter.tsx:143
+     */
+    "admin.dataTable.facetedFilter.7179ea0": string;
+
+    /**
+     * **Text:** "No results found"
+     *
+     * @see apps/admin/src/components/data-table/faceted-filter.tsx:90
+     */
+    "admin.dataTable.facetedFilter.7d7e360": string;
+
+    /**
+     * **Text:** "selected"
+     *
+     * @see apps/admin/src/components/data-table/faceted-filter.tsx:65
+     */
+    "admin.dataTable.facetedFilter.d7cbbb6": string;
 
     /**
      * **Text:** "Page"
@@ -418,6 +481,7 @@ export interface TranslationKeys {
     /**
      * **Text:** "Open menu"
      *
+     * @see apps/admin/src/components/data-table/row-actions-with-confirmation.tsx:95
      * @see apps/admin/src/components/data-table/row-actions.tsx:52
      * @see apps/admin/src/components/data-table/row-actions.tsx:54
      */
@@ -426,10 +490,39 @@ export interface TranslationKeys {
     /**
      * **Text:** "Delete"
      *
+     * @see apps/admin/src/components/data-table/row-actions-with-confirmation.tsx:111
      * @see apps/admin/src/components/data-table/row-actions.tsx:67
      * @see apps/admin/src/components/data-table/row-actions.tsx:69
      */
     "admin.dataTable.rowActions.e2d0a54": string;
+
+    /**
+     * **Text:** "Are you sure you want to perform this action?"
+     *
+     * @see apps/admin/src/components/data-table/row-actions-with-confirmation.tsx:61
+     */
+    "admin.dataTable.rowActionsWithConfirmation.2aacf1b": string;
+
+    /**
+     * **Text:** "Confirm action"
+     *
+     * @see apps/admin/src/components/data-table/row-actions-with-confirmation.tsx:58
+     */
+    "admin.dataTable.rowActionsWithConfirmation.b49a960": string;
+
+    /**
+     * **Text:** "Are you sure you want to delete this item? This action cannot be undone"
+     *
+     * @see apps/admin/src/components/data-table/row-actions-with-confirmation.tsx:76
+     */
+    "admin.dataTable.rowActionsWithConfirmation.c1726c3": string;
+
+    /**
+     * **Text:** "Confirm delete"
+     *
+     * @see apps/admin/src/components/data-table/row-actions-with-confirmation.tsx:73
+     */
+    "admin.dataTable.rowActionsWithConfirmation.da00fa9": string;
 
     /**
      * **Text:** "Type to filter data..."
@@ -801,6 +894,7 @@ export interface TranslationKeys {
      *
      * @see apps/admin/src/components/dialogs/export-responses/field-selector.tsx:26
      * @see apps/admin/src/components/dialogs/export-responses/field-selector.tsx:27
+     * @see apps/admin/src/components/question-editor/export-field-selector.tsx:29
      */
     "admin.dialogs.exportResponses.283ceaf": string;
 
@@ -818,6 +912,7 @@ export interface TranslationKeys {
      * @see apps/admin/src/components/dialogs/export-responses/field-selector.tsx:27
      * @see apps/admin/src/components/dialogs/export-responses/field-selector.tsx:29
      * @see apps/admin/src/components/dialogs/export-responses/field-selector.tsx:30
+     * @see apps/admin/src/components/question-editor/export-field-selector.tsx:28
      */
     "admin.dialogs.exportResponses.360a871": string;
 
@@ -1095,6 +1190,7 @@ export interface TranslationKeys {
      * @see apps/admin/src/components/question-editor/editor-form.tsx:158
      * @see apps/admin/src/components/question-editor/editor-form.tsx:164
      * @see apps/admin/src/components/question-editor/editor-form.tsx:165
+     * @see apps/admin/src/components/question-editor/footer.tsx:48
      */
     "admin.questionEditor.editorForm.f9496b7": string;
 
@@ -1139,6 +1235,28 @@ export interface TranslationKeys {
      * @see apps/admin/src/components/question-editor/export-questions.tsx:141
      */
     "admin.questionEditor.exportQuestions.c810c40": string;
+
+    /**
+     * **Text:** "Drag and drop questions to change their order. The order will be saved when you click 'Save order'."
+     *
+     * @see apps/admin/src/components/question-editor/footer.tsx:54
+     */
+    "admin.questionEditor.footer.0d3d9bf": string;
+
+    /**
+     * **Text:** "Save questions"
+     *
+     * @see apps/admin/src/components/question-editor/footer.tsx:74
+     */
+    "admin.questionEditor.footer.8662488": string;
+
+    /**
+     * **Text:** "Reorder questions"
+     *
+     * @see apps/admin/src/components/question-editor/footer.tsx:53
+     * @see apps/admin/src/components/question-editor/footer.tsx:66
+     */
+    "admin.questionEditor.footer.b0bec38": string;
 
     /**
      * **Text:** "Failed to generate questions"
@@ -1376,6 +1494,35 @@ export interface TranslationKeys {
     "admin.questionEditor.importQuestions.d5bd045": string;
 
     /**
+     * **Text:** "Reorder options"
+     *
+     * @see apps/admin/src/components/question-editor/options.tsx:95
+     * @see apps/admin/src/components/question-editor/options.tsx:107
+     */
+    "admin.questionEditor.options.0a623c5": string;
+
+    /**
+     * **Text:** "Enter option value"
+     *
+     * @see apps/admin/src/components/question-editor/options.tsx:65
+     */
+    "admin.questionEditor.options.3c44dab": string;
+
+    /**
+     * **Text:** "Drag and drop options to change their order. The order will be saved when you click 'Save order'."
+     *
+     * @see apps/admin/src/components/question-editor/options.tsx:96
+     */
+    "admin.questionEditor.options.b4c5de7": string;
+
+    /**
+     * **Text:** "Answer options"
+     *
+     * @see apps/admin/src/components/question-editor/options.tsx:52
+     */
+    "admin.questionEditor.options.f3f32cc": string;
+
+    /**
      * **Text:** "Remove question"
      *
      * @see apps/admin/src/components/question-editor/remove-question-dialog.tsx:54
@@ -1390,6 +1537,118 @@ export interface TranslationKeys {
      * @see apps/admin/src/components/question-editor/remove-question-dialog.tsx:59
      */
     "admin.questionEditor.removeQuestionDialog.a221882": string;
+
+    /**
+     * **Text:** "Optional"
+     *
+     * @see apps/admin/src/components/question-editor/required-status.tsx:18
+     */
+    "admin.questionEditor.requiredStatus.59be713": string;
+
+    /**
+     * **Text:** "Randomise order"
+     *
+     * @see apps/admin/src/components/question-editor/settings.tsx:45
+     */
+    "admin.questionEditor.settings.009b403": string;
+
+    /**
+     * **Text:** "If the question is randomised, the options will be displayed in a random order."
+     *
+     * @see apps/admin/src/components/question-editor/settings.tsx:42
+     */
+    "admin.questionEditor.settings.08d803a": string;
+
+    /**
+     * **Text:** "Is required"
+     *
+     * @see apps/admin/src/components/question-editor/settings.tsx:36
+     */
+    "admin.questionEditor.settings.89cf326": string;
+
+    /**
+     * **Text:** "Allow other"
+     *
+     * @see apps/admin/src/components/question-editor/settings.tsx:52
+     */
+    "admin.questionEditor.settings.ce2d297": string;
+
+    /**
+     * **Text:** "If the user is allowed to enter a custom value, they will be able to enter a value that is not in the list of options."
+     *
+     * @see apps/admin/src/components/question-editor/settings.tsx:49
+     */
+    "admin.questionEditor.settings.d4cb4e0": string;
+
+    /**
+     * **Text:** "If the question is required, the user will not be able to submit the survey until they have answered the question."
+     *
+     * @see apps/admin/src/components/question-editor/settings.tsx:33
+     */
+    "admin.questionEditor.settings.e3f77e8": string;
+
+    /**
+     * **Text:** "Single select"
+     *
+     * @see apps/admin/src/components/question-editor/type-select.tsx:23
+     */
+    "admin.questionEditor.typeSelect.66bc810": string;
+
+    /**
+     * **Text:** "Multi select"
+     *
+     * @see apps/admin/src/components/question-editor/type-select.tsx:24
+     */
+    "admin.questionEditor.typeSelect.8053e99": string;
+
+    /**
+     * **Text:** "Number input"
+     *
+     * @see apps/admin/src/components/question-editor/type-select.tsx:22
+     */
+    "admin.questionEditor.typeSelect.ef76dca": string;
+
+    /**
+     * **Text:** "Text input"
+     *
+     * @see apps/admin/src/components/question-editor/type-select.tsx:21
+     */
+    "admin.questionEditor.typeSelect.f9be71e": string;
+
+    /**
+     * **Text:** "Validation rules"
+     *
+     * @see apps/admin/src/components/question-editor/validations.tsx:40
+     */
+    "admin.questionEditor.validations.64e2965": string;
+
+    /**
+     * **Text:** "Add validation rule"
+     *
+     * @see apps/admin/src/components/question-editor/validations.tsx:60
+     */
+    "admin.questionEditor.validations.d3e563e": string;
+
+    /**
+     * **Text:** "Select rule"
+     *
+     * @see apps/admin/src/components/question-editor/validations-rule.tsx:88
+     */
+    "admin.questionEditor.validationsRule.5280c37": string;
+
+    /**
+     * **Text:** "Enter value"
+     *
+     * @see apps/admin/src/components/question-editor/validations-rule.tsx:67
+     */
+    "admin.questionEditor.validationsRule.917c702": string;
+
+    /**
+     * **Text:** "Enter number"
+     *
+     * @see apps/admin/src/components/question-editor/validations-rule.tsx:66
+     */
+    "admin.questionEditor.validationsRule.d007357": string;
 
     /**
      * **Text:** "Respondent details"
@@ -1410,6 +1669,7 @@ export interface TranslationKeys {
     /**
      * **Text:** "Campaigns"
      *
+     * @see apps/admin/src/app/[locale]/(app)/respondents/columns.tsx:66
      * @see apps/admin/src/app/[locale]/(app)/respondents/columns.tsx:67
      * @see apps/admin/src/components/nav/main.tsx:24
      * @see apps/admin/src/components/nav/main.tsx:41
@@ -1499,10 +1759,13 @@ export interface TranslationKeys {
      * @see apps/admin/src/app/[locale]/(app)/respondents/[respondentId]/respondent-details.tsx:48
      * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:86
      * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:87
+     * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:92
      * @see apps/admin/src/components/cohorts/cohort-details.tsx:39
      * @see apps/admin/src/components/cohorts/cohort-details.tsx:40
+     * @see apps/admin/src/components/data-table/row-actions-with-confirmation.tsx:124
      * @see apps/admin/src/components/data-table/row-actions.tsx:80
      * @see apps/admin/src/components/data-table/row-actions.tsx:82
+     * @see apps/admin/src/components/response-authenticity/overide.tsx:82
      */
     "admin.respondents.respondentDetails.464c4ff": string;
 
@@ -1520,6 +1783,7 @@ export interface TranslationKeys {
      * @see apps/admin/src/app/[locale]/(app)/respondents/[respondentId]/respondent-details.tsx:113
      * @see apps/admin/src/app/[locale]/(app)/respondents/[respondentId]/respondent-details.tsx:123
      * @see apps/admin/src/app/[locale]/(app)/respondents/[respondentId]/respondent-details.tsx:124
+     * @see apps/admin/src/components/response-authenticity/overide.tsx:103
      */
     "admin.respondents.respondentDetails.6d88c51": string;
 
@@ -1639,6 +1903,7 @@ export interface TranslationKeys {
      * @see apps/admin/src/app/[locale]/(app)/respondents/[respondentId]/survey-quick-view.tsx:109
      * @see apps/admin/src/app/[locale]/(app)/respondents/[respondentId]/survey-quick-view.tsx:117
      * @see apps/admin/src/app/[locale]/(app)/respondents/[respondentId]/survey-quick-view.tsx:118
+     * @see apps/admin/src/app/[locale]/(app)/respondents/[respondentId]/survey-quick-view.tsx:119
      */
     "admin.respondents.surveyQuickView.07c5aac": string;
 
@@ -1658,6 +1923,7 @@ export interface TranslationKeys {
      * @see apps/admin/src/app/[locale]/(app)/respondents/[respondentId]/survey-quick-view.tsx:116
      * @see apps/admin/src/app/[locale]/(app)/respondents/[respondentId]/survey-quick-view.tsx:125
      * @see apps/admin/src/app/[locale]/(app)/respondents/[respondentId]/survey-quick-view.tsx:126
+     * @see apps/admin/src/app/[locale]/(app)/respondents/[respondentId]/survey-quick-view.tsx:127
      */
     "admin.respondents.surveyQuickView.7c94147": string;
 
@@ -1667,6 +1933,7 @@ export interface TranslationKeys {
      * @see apps/admin/src/app/[locale]/(app)/respondents/[respondentId]/survey-quick-view.tsx:108
      * @see apps/admin/src/app/[locale]/(app)/respondents/[respondentId]/survey-quick-view.tsx:116
      * @see apps/admin/src/app/[locale]/(app)/respondents/[respondentId]/survey-quick-view.tsx:117
+     * @see apps/admin/src/app/[locale]/(app)/respondents/[respondentId]/survey-quick-view.tsx:118
      */
     "admin.respondents.surveyQuickView.9a17141": string;
 
@@ -1694,6 +1961,69 @@ export interface TranslationKeys {
      * @see apps/admin/src/app/[locale]/(app)/respondents/[respondentId]/survey-quick-view.tsx:25
      */
     "admin.respondents.surveyQuickView.d2d2e1d": string;
+
+    /**
+     * **Text:** "Generating..."
+     *
+     * @see apps/admin/src/components/response-authenticity/missing.tsx:52
+     */
+    "admin.responseAuthenticity.missing.49286f3": string;
+
+    /**
+     * **Text:** "Generate an authenticity score to analyse this response"
+     *
+     * @see apps/admin/src/components/response-authenticity/missing.tsx:43
+     */
+    "admin.responseAuthenticity.missing.8383d77": string;
+
+    /**
+     * **Text:** "Generate score"
+     *
+     * @see apps/admin/src/components/response-authenticity/missing.tsx:52
+     */
+    "admin.responseAuthenticity.missing.c90ff67": string;
+
+    /**
+     * **Text:** "Score generated successfully"
+     *
+     * @see apps/admin/src/components/response-authenticity/missing.tsx:36
+     */
+    "admin.responseAuthenticity.missing.f39d56e": string;
+
+    /**
+     * **Text:** "No authenticity score available"
+     *
+     * @see apps/admin/src/components/response-authenticity/missing.tsx:44
+     */
+    "admin.responseAuthenticity.missing.f9a60f7": string;
+
+    /**
+     * **Text:** "Set the authenticity score percentage (0-100)"
+     *
+     * @see apps/admin/src/components/response-authenticity/overide.tsx:100
+     */
+    "admin.responseAuthenticity.overide.04292b7": string;
+
+    /**
+     * **Text:** "Override authenticity score"
+     *
+     * @see apps/admin/src/components/response-authenticity/overide.tsx:88
+     */
+    "admin.responseAuthenticity.overide.09b00ee": string;
+
+    /**
+     * **Text:** "Authenticity score overridden successfully"
+     *
+     * @see apps/admin/src/components/response-authenticity/overide.tsx:63
+     */
+    "admin.responseAuthenticity.overide.92d994b": string;
+
+    /**
+     * **Text:** "Reason"
+     *
+     * @see apps/admin/src/components/response-authenticity/overide.tsx:109
+     */
+    "admin.responseAuthenticity.overide.f81ab83": string;
 
     /**
      * **Text:** "Answer"
@@ -1818,6 +2148,487 @@ export interface TranslationKeys {
     "admin.responses.quickLook.f7e39f7": string;
 
     /**
+     * **Text:** "Descriptions of themes identified in the answer (comma-separated)"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:121
+     * @see apps/admin/src/lib/schemas/constants.ts:125
+     */
+    "admin.schemas.constants.095066c": string;
+
+    /**
+     * **Text:** "Source of the respondent"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:38
+     * @see apps/admin/src/lib/schemas/constants.ts:42
+     */
+    "admin.schemas.constants.10cc480": string;
+
+    /**
+     * **Text:** "Whether the survey was completed"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:43
+     * @see apps/admin/src/lib/schemas/constants.ts:47
+     */
+    "admin.schemas.constants.198d152": string;
+
+    /**
+     * **Text:** "Analysis Themes"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:115
+     * @see apps/admin/src/lib/schemas/constants.ts:119
+     */
+    "admin.schemas.constants.1d15d1a": string;
+
+    /**
+     * **Text:** "Options for the question"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:170
+     * @see apps/admin/src/lib/schemas/constants.ts:189
+     */
+    "admin.schemas.constants.1d7d3e9": string;
+
+    /**
+     * **Text:** "Started At"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:67
+     * @see apps/admin/src/lib/schemas/constants.ts:71
+     */
+    "admin.schemas.constants.1ec632c": string;
+
+    /**
+     * **Text:** "Answer Value"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:95
+     * @see apps/admin/src/lib/schemas/constants.ts:99
+     */
+    "admin.schemas.constants.245a03e": string;
+
+    /**
+     * **Text:** "Unique identifier for the answer"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:86
+     * @see apps/admin/src/lib/schemas/constants.ts:90
+     */
+    "admin.schemas.constants.24e1873": string;
+
+    /**
+     * **Text:** "Email of the respondent"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:33
+     * @see apps/admin/src/lib/schemas/constants.ts:37
+     */
+    "admin.schemas.constants.25cf6b4": string;
+
+    /**
+     * **Text:** "When the survey was completed"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:73
+     * @see apps/admin/src/lib/schemas/constants.ts:77
+     */
+    "admin.schemas.constants.29608a5": string;
+
+    /**
+     * **Text:** "Title of the question"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:91
+     * @see apps/admin/src/lib/schemas/constants.ts:95
+     * @see apps/admin/src/lib/schemas/constants.ts:148
+     * @see apps/admin/src/lib/schemas/constants.ts:159
+     */
+    "admin.schemas.constants.2985f0b": string;
+
+    /**
+     * **Text:** "Analysis Theme Descriptions"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:120
+     * @see apps/admin/src/lib/schemas/constants.ts:124
+     */
+    "admin.schemas.constants.2a1ccae": string;
+
+    /**
+     * **Text:** "When the survey was started"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:68
+     * @see apps/admin/src/lib/schemas/constants.ts:72
+     */
+    "admin.schemas.constants.2c7004a": string;
+
+    /**
+     * **Text:** "XLSForm"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:143
+     * @see apps/admin/src/lib/schemas/constants.ts:147
+     */
+    "admin.schemas.constants.3daaa61": string;
+
+    /**
+     * **Text:** "Respondent Name"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:27
+     * @see apps/admin/src/lib/schemas/constants.ts:31
+     */
+    "admin.schemas.constants.426cf1b": string;
+
+    /**
+     * **Text:** "Name of the respondent"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:28
+     * @see apps/admin/src/lib/schemas/constants.ts:32
+     */
+    "admin.schemas.constants.43d37c6": string;
+
+    /**
+     * **Text:** "Allow Other"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:162
+     * @see apps/admin/src/lib/schemas/constants.ts:178
+     */
+    "admin.schemas.constants.4581299": string;
+
+    /**
+     * **Text:** "Required"
+     *
+     * @see apps/admin/src/components/question-editor/required-status.tsx:15
+     * @see apps/admin/src/lib/schemas/constants.ts:157
+     * @see apps/admin/src/lib/schemas/constants.ts:173
+     */
+    "admin.schemas.constants.4850b17": string;
+
+    /**
+     * **Text:** "Respondent Email"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:32
+     * @see apps/admin/src/lib/schemas/constants.ts:36
+     */
+    "admin.schemas.constants.48521d0": string;
+
+    /**
+     * **Text:** "Excel"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:142
+     * @see apps/admin/src/lib/schemas/constants.ts:146
+     */
+    "admin.schemas.constants.48d5363": string;
+
+    /**
+     * **Text:** "Whether the authenticity score was manually overridden"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:58
+     * @see apps/admin/src/lib/schemas/constants.ts:62
+     */
+    "admin.schemas.constants.5156afe": string;
+
+    /**
+     * **Text:** "Whether the response was verified as authentic"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:48
+     * @see apps/admin/src/lib/schemas/constants.ts:52
+     */
+    "admin.schemas.constants.6f7796a": string;
+
+    /**
+     * **Text:** "Override Reason"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:62
+     * @see apps/admin/src/lib/schemas/constants.ts:66
+     */
+    "admin.schemas.constants.72b37ce": string;
+
+    /**
+     * **Text:** "Ended At"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:72
+     * @see apps/admin/src/lib/schemas/constants.ts:76
+     */
+    "admin.schemas.constants.7e5400a": string;
+
+    /**
+     * **Text:** "Campaign title"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:11
+     */
+    "admin.schemas.constants.8240509": string;
+
+    /**
+     * **Text:** "Reason for manual override"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:63
+     * @see apps/admin/src/lib/schemas/constants.ts:67
+     */
+    "admin.schemas.constants.851a442": string;
+
+    /**
+     * **Text:** "Randomise Options Order"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:167
+     * @see apps/admin/src/lib/schemas/constants.ts:183
+     */
+    "admin.schemas.constants.85ab515": string;
+
+    /**
+     * **Text:** "Question Name"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:90
+     * @see apps/admin/src/lib/schemas/constants.ts:94
+     */
+    "admin.schemas.constants.861d6d3": string;
+
+    /**
+     * **Text:** "Respondent Source"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:37
+     * @see apps/admin/src/lib/schemas/constants.ts:41
+     */
+    "admin.schemas.constants.8b90bb3": string;
+
+    /**
+     * **Text:** "When the answer was last updated"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:111
+     * @see apps/admin/src/lib/schemas/constants.ts:115
+     */
+    "admin.schemas.constants.8be8974": string;
+
+    /**
+     * **Text:** "Whether the question is required"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:158
+     * @see apps/admin/src/lib/schemas/constants.ts:174
+     */
+    "admin.schemas.constants.8d83cfa": string;
+
+    /**
+     * **Text:** "Authenticity Status"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:47
+     * @see apps/admin/src/lib/schemas/constants.ts:51
+     */
+    "admin.schemas.constants.91548bd": string;
+
+    /**
+     * **Text:** "Title of the campaign"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:12
+     */
+    "admin.schemas.constants.92605c9": string;
+
+    /**
+     * **Text:** "Description of the question"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:152
+     * @see apps/admin/src/lib/schemas/constants.ts:164
+     */
+    "admin.schemas.constants.92fd8a9": string;
+
+    /**
+     * **Text:** "Response ID"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:17
+     * @see apps/admin/src/lib/schemas/constants.ts:21
+     */
+    "admin.schemas.constants.9539177": string;
+
+    /**
+     * **Text:** "Answer ID"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:85
+     * @see apps/admin/src/lib/schemas/constants.ts:89
+     */
+    "admin.schemas.constants.9630caa": string;
+
+    /**
+     * **Text:** "Whether the question allows other answers"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:163
+     * @see apps/admin/src/lib/schemas/constants.ts:179
+     */
+    "admin.schemas.constants.9a74b6f": string;
+
+    /**
+     * **Text:** "Score Overridden"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:57
+     * @see apps/admin/src/lib/schemas/constants.ts:61
+     */
+    "admin.schemas.constants.9b2e436": string;
+
+    /**
+     * **Text:** "When the answer was created"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:106
+     * @see apps/admin/src/lib/schemas/constants.ts:110
+     */
+    "admin.schemas.constants.a499649": string;
+
+    /**
+     * **Text:** "Unique identifier for the question"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:147
+     * @see apps/admin/src/lib/schemas/constants.ts:154
+     */
+    "admin.schemas.constants.a7a1dbc": string;
+
+    /**
+     * **Text:** "Identifier for the respondent"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:23
+     * @see apps/admin/src/lib/schemas/constants.ts:27
+     */
+    "admin.schemas.constants.b19c105": string;
+
+    /**
+     * **Text:** "Answer Created At"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:105
+     * @see apps/admin/src/lib/schemas/constants.ts:109
+     */
+    "admin.schemas.constants.b2b69a8": string;
+
+    /**
+     * **Text:** "Survey name"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:14
+     * @see apps/admin/src/lib/schemas/constants.ts:16
+     */
+    "admin.schemas.constants.b630b86": string;
+
+    /**
+     * **Text:** "How long the survey was completed in seconds"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:78
+     * @see apps/admin/src/lib/schemas/constants.ts:82
+     */
+    "admin.schemas.constants.b848a50": string;
+
+    /**
+     * **Text:** "The actual answer provided"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:96
+     * @see apps/admin/src/lib/schemas/constants.ts:100
+     */
+    "admin.schemas.constants.bb9e680": string;
+
+    /**
+     * **Text:** "Sentiments of themes identified in the answer (comma-separated)"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:126
+     * @see apps/admin/src/lib/schemas/constants.ts:130
+     */
+    "admin.schemas.constants.bcd3119": string;
+
+    /**
+     * **Text:** "Unique identifier for the response"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:18
+     * @see apps/admin/src/lib/schemas/constants.ts:22
+     */
+    "admin.schemas.constants.c213407": string;
+
+    /**
+     * **Text:** "Completion Status"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:42
+     * @see apps/admin/src/lib/schemas/constants.ts:46
+     */
+    "admin.schemas.constants.cf11ff7": string;
+
+    /**
+     * **Text:** "Name of the survey"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:14
+     * @see apps/admin/src/lib/schemas/constants.ts:17
+     */
+    "admin.schemas.constants.d18853d": string;
+
+    /**
+     * **Text:** "Type of the question"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:154
+     * @see apps/admin/src/lib/schemas/constants.ts:169
+     */
+    "admin.schemas.constants.d644946": string;
+
+    /**
+     * **Text:** "Themes identified in the answer (comma-separated)"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:116
+     * @see apps/admin/src/lib/schemas/constants.ts:120
+     */
+    "admin.schemas.constants.d7516f8": string;
+
+    /**
+     * **Text:** "JSON"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:141
+     * @see apps/admin/src/lib/schemas/constants.ts:145
+     */
+    "admin.schemas.constants.db1a21a": string;
+
+    /**
+     * **Text:** "Was Skipped"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:100
+     * @see apps/admin/src/lib/schemas/constants.ts:104
+     */
+    "admin.schemas.constants.dc937c0": string;
+
+    /**
+     * **Text:** "Authenticity Score"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:52
+     * @see apps/admin/src/lib/schemas/constants.ts:56
+     */
+    "admin.schemas.constants.dd020a1": string;
+
+    /**
+     * **Text:** "Whether the options should be randomised"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:168
+     * @see apps/admin/src/lib/schemas/constants.ts:184
+     */
+    "admin.schemas.constants.e3a8c31": string;
+
+    /**
+     * **Text:** "CSV"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:140
+     * @see apps/admin/src/lib/schemas/constants.ts:144
+     */
+    "admin.schemas.constants.eb6b42f": string;
+
+    /**
+     * **Text:** "Answer Updated At"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:110
+     * @see apps/admin/src/lib/schemas/constants.ts:114
+     */
+    "admin.schemas.constants.ef92d92": string;
+
+    /**
+     * **Text:** "Analysis Theme Sentiments"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:125
+     * @see apps/admin/src/lib/schemas/constants.ts:129
+     */
+    "admin.schemas.constants.f67e976": string;
+
+    /**
+     * **Text:** "Whether this question was skipped"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:101
+     * @see apps/admin/src/lib/schemas/constants.ts:105
+     */
+    "admin.schemas.constants.f715b06": string;
+
+    /**
+     * **Text:** "Authenticity percentage (0-100)"
+     *
+     * @see apps/admin/src/lib/schemas/constants.ts:53
+     * @see apps/admin/src/lib/schemas/constants.ts:57
+     */
+    "admin.schemas.constants.fb32db7": string;
+
+    /**
      * **Text:** "Screener details"
      *
      * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/page.tsx:21
@@ -1870,6 +2681,7 @@ export interface TranslationKeys {
      *
      * @see apps/admin/src/app/[locale]/(app)/screeners/form-selection-fields.tsx:48
      * @see apps/admin/src/app/[locale]/(app)/screeners/form-selection-fields.tsx:49
+     * @see apps/admin/src/components/question-editor/card.tsx:39
      */
     "admin.screeners.formSelectionFields.289aff1": string;
 
@@ -1878,6 +2690,8 @@ export interface TranslationKeys {
      *
      * @see apps/admin/src/app/[locale]/(app)/screeners/form-selection-fields.tsx:51
      * @see apps/admin/src/app/[locale]/(app)/screeners/form-selection-fields.tsx:52
+     * @see apps/admin/src/lib/schemas/constants.ts:170
+     * @see apps/admin/src/lib/schemas/constants.ts:188
      */
     "admin.screeners.formSelectionFields.d0db8b5": string;
 
@@ -1920,6 +2734,7 @@ export interface TranslationKeys {
      *
      * @see apps/admin/src/app/[locale]/(app)/screeners/form-type-fields.tsx:63
      * @see apps/admin/src/app/[locale]/(app)/screeners/form-type-fields.tsx:68
+     * @see apps/admin/src/app/[locale]/(app)/screeners/form-type-fields.tsx:73
      */
     "admin.screeners.formTypeFields.7a66e45": string;
 
@@ -1956,6 +2771,7 @@ export interface TranslationKeys {
      * @see apps/admin/src/app/[locale]/(app)/screeners/form-type-fields.tsx:64
      * @see apps/admin/src/app/[locale]/(app)/screeners/form-type-fields.tsx:66
      * @see apps/admin/src/app/[locale]/(app)/screeners/form-type-fields.tsx:71
+     * @see apps/admin/src/app/[locale]/(app)/screeners/form-type-fields.tsx:76
      */
     "admin.screeners.formTypeFields.ab940ea": string;
 
@@ -1965,6 +2781,7 @@ export interface TranslationKeys {
      * @see apps/admin/src/app/[locale]/(app)/screeners/form-type-fields.tsx:65
      * @see apps/admin/src/app/[locale]/(app)/screeners/form-type-fields.tsx:69
      * @see apps/admin/src/app/[locale]/(app)/screeners/form-type-fields.tsx:74
+     * @see apps/admin/src/app/[locale]/(app)/screeners/form-type-fields.tsx:79
      */
     "admin.screeners.formTypeFields.b5742da": string;
 
@@ -2006,6 +2823,7 @@ export interface TranslationKeys {
      * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:151
      * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:157
      * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:158
+     * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:163
      */
     "admin.screeners.screenerDetails.02a77ac": string;
 
@@ -2014,6 +2832,7 @@ export interface TranslationKeys {
      *
      * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:72
      * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:73
+     * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:78
      * @see apps/admin/src/components/screeners/summary.tsx:27
      * @see apps/admin/src/components/screeners/summary.tsx:28
      */
@@ -2023,6 +2842,7 @@ export interface TranslationKeys {
      * **Text:** "passes"
      *
      * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:55
+     * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:65
      */
     "admin.screeners.screenerDetails.2c28ec0": string;
 
@@ -2031,6 +2851,7 @@ export interface TranslationKeys {
      *
      * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:82
      * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:83
+     * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:88
      */
     "admin.screeners.screenerDetails.34878e9": string;
 
@@ -2040,6 +2861,7 @@ export interface TranslationKeys {
      * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:150
      * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:156
      * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:157
+     * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:162
      */
     "admin.screeners.screenerDetails.9e18a47": string;
 
@@ -2049,6 +2871,7 @@ export interface TranslationKeys {
      * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:114
      * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:118
      * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:119
+     * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:124
      */
     "admin.screeners.screenerDetails.b332c34": string;
 
@@ -2058,6 +2881,7 @@ export interface TranslationKeys {
      * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:140
      * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:146
      * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:147
+     * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:152
      */
     "admin.screeners.screenerDetails.f40dab8": string;
 
@@ -2943,6 +3767,7 @@ export interface TranslationKeys {
      * @see apps/admin/src/app/[locale]/(app)/surveys/list.tsx:64
      * @see apps/admin/src/app/[locale]/(app)/surveys/list.tsx:66
      * @see apps/admin/src/app/[locale]/(app)/surveys/list.tsx:67
+     * @see apps/admin/src/components/badges/campaign-status.tsx:16
      * @see apps/admin/src/components/badges/survey-status.tsx:26
      * @see apps/admin/src/components/badges/survey-status.tsx:52
      */
@@ -3031,6 +3856,7 @@ export interface TranslationKeys {
      * @see apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/navbar.tsx:73
      * @see apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/navbar.tsx:74
      * @see apps/admin/src/components/nav/secondary.tsx:22
+     * @see apps/admin/src/components/question-editor/settings.tsx:63
      */
     "admin.surveys.navbar.74a883a": string;
 
@@ -3066,6 +3892,7 @@ export interface TranslationKeys {
      *
      * @see apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/responses/list.tsx:48
      * @see apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/responses/list.tsx:49
+     * @see apps/admin/src/components/badges/authenticity-status.tsx:18
      */
     "admin.surveys.responses.09230b3": string;
 
@@ -3117,6 +3944,8 @@ export interface TranslationKeys {
      * @see apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/responses/[responseId]/response-details.tsx:77
      * @see apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/responses/[responseId]/response-details.tsx:81
      * @see apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/responses/[responseId]/response-details.tsx:82
+     * @see apps/admin/src/lib/schemas/constants.ts:22
+     * @see apps/admin/src/lib/schemas/constants.ts:26
      */
     "admin.surveys.responses.2d5b220": string;
 
@@ -3126,6 +3955,8 @@ export interface TranslationKeys {
      * @see apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/responses/[responseId]/response-details.tsx:101
      * @see apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/responses/[responseId]/response-details.tsx:105
      * @see apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/responses/[responseId]/response-details.tsx:106
+     * @see apps/admin/src/lib/schemas/constants.ts:77
+     * @see apps/admin/src/lib/schemas/constants.ts:81
      */
     "admin.surveys.responses.4fc52a3": string;
 
@@ -3134,6 +3965,7 @@ export interface TranslationKeys {
      *
      * @see apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/responses/list.tsx:49
      * @see apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/responses/list.tsx:50
+     * @see apps/admin/src/components/badges/authenticity-status.tsx:18
      */
     "admin.surveys.responses.6be36ca": string;
 
@@ -3152,6 +3984,7 @@ export interface TranslationKeys {
      * @see apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/responses/[responseId]/response-details.tsx:113
      * @see apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/responses/[responseId]/response-details.tsx:114
      * @see apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/responses/columns.tsx:96
+     * @see apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/responses/columns.tsx:98
      */
     "admin.surveys.responses.7cdc804": string;
 
@@ -3219,6 +4052,7 @@ export interface TranslationKeys {
      *
      * @see apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/responses/list.tsx:47
      * @see apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/responses/list.tsx:48
+     * @see apps/admin/src/components/badges/authenticity-status.tsx:18
      */
     "admin.surveys.responses.ebdf8cc": string;
 
@@ -3229,6 +4063,7 @@ export interface TranslationKeys {
      * @see apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/responses/[responseId]/response-details.tsx:109
      * @see apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/responses/[responseId]/response-details.tsx:110
      * @see apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/responses/columns.tsx:88
+     * @see apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/responses/columns.tsx:90
      */
     "admin.surveys.responses.ecbc89c": string;
 
@@ -3327,6 +4162,7 @@ export interface TranslationKeys {
      * @see apps/admin/src/app/[locale]/(app)/surveys/create/form.tsx:95
      * @see apps/admin/src/app/[locale]/(app)/surveys/create/form.tsx:97
      * @see apps/admin/src/app/[locale]/(app)/surveys/create/form.tsx:99
+     * @see apps/admin/src/components/response-authenticity/overide.tsx:122
      */
     "common.155f816": string;
 
@@ -3336,6 +4172,7 @@ export interface TranslationKeys {
      * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/edit/form.tsx:132
      * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/edit/form.tsx:133
      * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:26
+     * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:31
      * @see apps/admin/src/app/[locale]/(app)/screeners/columns.tsx:17
      * @see apps/admin/src/app/[locale]/(app)/screeners/create/form.tsx:75
      * @see apps/admin/src/app/[locale]/(app)/screeners/create/form.tsx:76
@@ -3361,6 +4198,7 @@ export interface TranslationKeys {
      * @see apps/admin/src/components/question-editor/import-questions.tsx:214
      * @see apps/admin/src/components/question-editor/remove-question-dialog.tsx:63
      * @see apps/admin/src/components/question-editor/remove-question-dialog.tsx:65
+     * @see apps/admin/src/components/response-authenticity/overide.tsx:119
      * @see apps/admin/src/components/sort-items.tsx:178
      * @see apps/admin/src/components/sort-items.tsx:181
      * @see apps/admin/src/components/survey-settings/password-field.tsx:37
@@ -3411,6 +4249,7 @@ export interface TranslationKeys {
     /**
      * **Text:** "Campaign"
      *
+     * @see apps/admin/src/app/[locale]/(app)/campaigns/columns.tsx:24
      * @see apps/admin/src/app/[locale]/(app)/campaigns/columns.tsx:25
      * @see apps/admin/src/app/[locale]/(app)/respondents/[respondentId]/survey-columns.tsx:42
      * @see apps/admin/src/app/[locale]/(app)/respondents/[respondentId]/survey-quick-view.tsx:61
@@ -3419,6 +4258,7 @@ export interface TranslationKeys {
      * @see apps/admin/src/app/[locale]/(app)/respondents/list.tsx:89
      * @see apps/admin/src/app/[locale]/(app)/respondents/list.tsx:91
      * @see apps/admin/src/app/[locale]/(app)/respondents/list.tsx:92
+     * @see apps/admin/src/app/[locale]/(app)/surveys/columns.tsx:33
      * @see apps/admin/src/app/[locale]/(app)/surveys/columns.tsx:34
      * @see apps/admin/src/app/[locale]/(app)/surveys/create/form.tsx:60
      * @see apps/admin/src/app/[locale]/(app)/surveys/create/form.tsx:62
@@ -3434,6 +4274,7 @@ export interface TranslationKeys {
      *
      * @see apps/admin/src/app/[locale]/(app)/cohorts/[cohortId]/page.tsx:32
      * @see apps/admin/src/app/[locale]/(app)/cohorts/[cohortId]/page.tsx:33
+     * @see apps/admin/src/app/[locale]/(app)/cohorts/columns.tsx:44
      * @see apps/admin/src/app/[locale]/(app)/cohorts/columns.tsx:45
      * @see apps/admin/src/components/nav/main.tsx:26
      * @see apps/admin/src/components/nav/main.tsx:43
@@ -3478,6 +4319,7 @@ export interface TranslationKeys {
     /**
      * **Text:** "Last updated"
      *
+     * @see apps/admin/src/app/[locale]/(app)/cohorts/columns.tsx:52
      * @see apps/admin/src/app/[locale]/(app)/cohorts/columns.tsx:53
      * @see apps/admin/src/app/[locale]/(app)/respondents/[respondentId]/respondent-details.tsx:95
      * @see apps/admin/src/app/[locale]/(app)/respondents/[respondentId]/respondent-details.tsx:103
@@ -3488,27 +4330,36 @@ export interface TranslationKeys {
      * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:128
      * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:134
      * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:135
+     * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:140
      * @see apps/admin/src/app/[locale]/(app)/screeners/columns.tsx:74
+     * @see apps/admin/src/app/[locale]/(app)/screeners/columns.tsx:77
      * @see apps/admin/src/components/cohorts/cohort-details.tsx:69
      * @see apps/admin/src/components/cohorts/cohort-details.tsx:73
      * @see apps/admin/src/components/cohorts/cohort-details.tsx:74
+     * @see apps/admin/src/components/response-authenticity/overide.tsx:91
      */
     "common.382ac5f": string;
 
     /**
      * **Text:** "ID"
      *
+     * @see apps/admin/src/app/[locale]/(app)/campaigns/columns.tsx:15
      * @see apps/admin/src/app/[locale]/(app)/campaigns/columns.tsx:16
+     * @see apps/admin/src/app/[locale]/(app)/cohorts/columns.tsx:14
      * @see apps/admin/src/app/[locale]/(app)/cohorts/columns.tsx:15
      * @see apps/admin/src/app/[locale]/(app)/respondents/[respondentId]/survey-quick-view.tsx:54
      * @see apps/admin/src/app/[locale]/(app)/respondents/[respondentId]/survey-quick-view.tsx:55
+     * @see apps/admin/src/app/[locale]/(app)/respondents/columns.tsx:16
      * @see apps/admin/src/app/[locale]/(app)/respondents/columns.tsx:17
      * @see apps/admin/src/app/[locale]/(app)/screeners/columns.tsx:28
+     * @see apps/admin/src/app/[locale]/(app)/surveys/columns.tsx:15
      * @see apps/admin/src/app/[locale]/(app)/surveys/columns.tsx:16
      * @see apps/admin/src/components/respondents/summary.tsx:36
      * @see apps/admin/src/components/respondents/summary.tsx:37
      * @see apps/admin/src/components/screeners/summary.tsx:38
      * @see apps/admin/src/components/screeners/summary.tsx:39
+     * @see apps/admin/src/lib/schemas/constants.ts:147
+     * @see apps/admin/src/lib/schemas/constants.ts:153
      */
     "common.3843971": string;
 
@@ -3518,6 +4369,7 @@ export interface TranslationKeys {
      * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/edit/form.tsx:131
      * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/edit/form.tsx:132
      * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:24
+     * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:29
      * @see apps/admin/src/app/[locale]/(app)/screeners/columns.tsx:15
      * @see apps/admin/src/app/[locale]/(app)/screeners/create/form.tsx:74
      * @see apps/admin/src/app/[locale]/(app)/screeners/create/form.tsx:75
@@ -3533,6 +4385,7 @@ export interface TranslationKeys {
      *
      * @see apps/admin/src/app/[locale]/(app)/@breadcrumbs/[...segments]/page.tsx:125
      * @see apps/admin/src/app/[locale]/(app)/@breadcrumbs/[...segments]/page.tsx:126
+     * @see apps/admin/src/app/[locale]/(app)/@breadcrumbs/[...segments]/page.tsx:127
      * @see apps/admin/src/app/[locale]/(app)/@breadcrumbs/page.tsx:10
      * @see apps/admin/src/app/[locale]/(app)/@breadcrumbs/page.tsx:14
      */
@@ -3542,6 +4395,8 @@ export interface TranslationKeys {
      * **Text:** "Updated at"
      *
      * @see apps/admin/src/app/[locale]/(app)/cohorts/[cohortId]/columns.tsx:25
+     * @see apps/admin/src/app/[locale]/(app)/cohorts/[cohortId]/columns.tsx:26
+     * @see apps/admin/src/app/[locale]/(app)/respondents/columns.tsx:155
      * @see apps/admin/src/app/[locale]/(app)/respondents/columns.tsx:156
      * @see apps/admin/src/components/respondents/summary.tsx:48
      * @see apps/admin/src/components/respondents/summary.tsx:51
@@ -3566,6 +4421,7 @@ export interface TranslationKeys {
      * **Text:** "Authenticity"
      *
      * @see apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/responses/columns.tsx:79
+     * @see apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/responses/columns.tsx:80
      * @see apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/responses/list.tsx:45
      * @see apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/responses/list.tsx:46
      */
@@ -3576,6 +4432,7 @@ export interface TranslationKeys {
      *
      * @see apps/admin/src/app/[locale]/(app)/cohorts/[cohortId]/edit/form.tsx:89
      * @see apps/admin/src/app/[locale]/(app)/cohorts/[cohortId]/edit/form.tsx:90
+     * @see apps/admin/src/app/[locale]/(app)/cohorts/columns.tsx:32
      * @see apps/admin/src/app/[locale]/(app)/cohorts/columns.tsx:33
      * @see apps/admin/src/app/[locale]/(app)/cohorts/form.tsx:63
      * @see apps/admin/src/app/[locale]/(app)/cohorts/form.tsx:64
@@ -3586,7 +4443,9 @@ export interface TranslationKeys {
      * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:105
      * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:109
      * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:110
+     * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:115
      * @see apps/admin/src/app/[locale]/(app)/screeners/columns.tsx:54
+     * @see apps/admin/src/app/[locale]/(app)/screeners/columns.tsx:55
      * @see apps/admin/src/app/[locale]/(app)/screeners/create/form.tsx:65
      * @see apps/admin/src/app/[locale]/(app)/screeners/create/form.tsx:66
      * @see apps/admin/src/app/[locale]/(app)/surveys/create/form.tsx:85
@@ -3595,11 +4454,14 @@ export interface TranslationKeys {
      * @see apps/admin/src/components/cohorts/cohort-details.tsx:54
      * @see apps/admin/src/components/cohorts/cohort-details.tsx:56
      * @see apps/admin/src/components/cohorts/cohort-details.tsx:57
+     * @see apps/admin/src/components/question-editor/card.tsx:80
      * @see apps/admin/src/components/question-editor/generate-questions-dialog.tsx:150
      * @see apps/admin/src/components/question-editor/generate-questions-dialog.tsx:156
      * @see apps/admin/src/components/question-editor/generate-questions-dialog.tsx:157
      * @see apps/admin/src/components/survey-settings/details.tsx:88
      * @see apps/admin/src/components/survey-settings/details.tsx:89
+     * @see apps/admin/src/lib/schemas/constants.ts:151
+     * @see apps/admin/src/lib/schemas/constants.ts:163
      */
     "common.526e008": string;
 
@@ -3632,8 +4494,10 @@ export interface TranslationKeys {
      * @see apps/admin/src/app/[locale]/(app)/respondents/[respondentId]/respondent-details.tsx:145
      * @see apps/admin/src/app/[locale]/(app)/respondents/[respondentId]/respondent-details.tsx:155
      * @see apps/admin/src/app/[locale]/(app)/respondents/[respondentId]/respondent-details.tsx:156
+     * @see apps/admin/src/app/[locale]/(app)/respondents/columns.tsx:110
      * @see apps/admin/src/app/[locale]/(app)/respondents/columns.tsx:111
      * @see apps/admin/src/app/[locale]/(app)/screeners/columns.tsx:66
+     * @see apps/admin/src/app/[locale]/(app)/screeners/columns.tsx:68
      * @see apps/admin/src/components/nav/main.tsx:25
      * @see apps/admin/src/components/nav/main.tsx:42
      * @see apps/admin/src/components/nav/main.tsx:43
@@ -3647,12 +4511,16 @@ export interface TranslationKeys {
      * @see apps/admin/src/app/[locale]/(app)/campaigns/create/form.tsx:55
      * @see apps/admin/src/app/[locale]/(app)/respondents/[respondentId]/survey-quick-view.tsx:40
      * @see apps/admin/src/app/[locale]/(app)/respondents/[respondentId]/survey-quick-view.tsx:41
+     * @see apps/admin/src/app/[locale]/(app)/surveys/columns.tsx:24
      * @see apps/admin/src/app/[locale]/(app)/surveys/columns.tsx:25
      * @see apps/admin/src/app/[locale]/(app)/surveys/create/form.tsx:79
      * @see apps/admin/src/app/[locale]/(app)/surveys/create/form.tsx:81
      * @see apps/admin/src/app/[locale]/(app)/surveys/create/form.tsx:83
+     * @see apps/admin/src/components/question-editor/card.tsx:67
      * @see apps/admin/src/components/survey-settings/details.tsx:76
      * @see apps/admin/src/components/survey-settings/details.tsx:77
+     * @see apps/admin/src/lib/schemas/constants.ts:148
+     * @see apps/admin/src/lib/schemas/constants.ts:158
      */
     "common.7e8cd20": string;
 
@@ -3693,6 +4561,7 @@ export interface TranslationKeys {
     /**
      * **Text:** "Status"
      *
+     * @see apps/admin/src/app/[locale]/(app)/campaigns/columns.tsx:36
      * @see apps/admin/src/app/[locale]/(app)/campaigns/columns.tsx:37
      * @see apps/admin/src/app/[locale]/(app)/respondents/[respondentId]/survey-quick-view.tsx:70
      * @see apps/admin/src/app/[locale]/(app)/respondents/[respondentId]/survey-quick-view.tsx:72
@@ -3701,6 +4570,7 @@ export interface TranslationKeys {
      * @see apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/responses/[responseId]/response-details.tsx:99
      * @see apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/responses/[responseId]/response-details.tsx:100
      * @see apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/responses/columns.tsx:70
+     * @see apps/admin/src/app/[locale]/(app)/surveys/columns.tsx:45
      * @see apps/admin/src/app/[locale]/(app)/surveys/columns.tsx:46
      * @see apps/admin/src/app/[locale]/(app)/surveys/list.tsx:60
      * @see apps/admin/src/app/[locale]/(app)/surveys/list.tsx:62
@@ -3735,6 +4605,7 @@ export interface TranslationKeys {
      * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/edit/form.tsx:104
      * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:73
      * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:74
+     * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:79
      * @see apps/admin/src/components/screeners/summary.tsx:28
      * @see apps/admin/src/components/screeners/summary.tsx:29
      */
@@ -3746,6 +4617,7 @@ export interface TranslationKeys {
      * @see apps/admin/src/app/[locale]/(app)/respondents/[respondentId]/respondent-details.tsx:64
      * @see apps/admin/src/app/[locale]/(app)/respondents/[respondentId]/respondent-details.tsx:69
      * @see apps/admin/src/app/[locale]/(app)/respondents/[respondentId]/respondent-details.tsx:70
+     * @see apps/admin/src/app/[locale]/(app)/respondents/columns.tsx:140
      * @see apps/admin/src/app/[locale]/(app)/respondents/columns.tsx:141
      * @see apps/admin/src/app/[locale]/(app)/respondents/list.tsx:106
      * @see apps/admin/src/app/[locale]/(app)/respondents/list.tsx:108
@@ -3814,10 +4686,14 @@ export interface TranslationKeys {
      * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:99
      * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:102
      * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:103
+     * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:108
      * @see apps/admin/src/app/[locale]/(app)/screeners/columns.tsx:46
      * @see apps/admin/src/app/[locale]/(app)/screeners/create/form.tsx:71
      * @see apps/admin/src/app/[locale]/(app)/screeners/create/form.tsx:72
+     * @see apps/admin/src/components/question-editor/type-select.tsx:29
      * @see apps/admin/src/components/survey-insights/screener-failures.tsx:47
+     * @see apps/admin/src/lib/schemas/constants.ts:154
+     * @see apps/admin/src/lib/schemas/constants.ts:168
      */
     "common.baaddf7": string;
 
@@ -3827,6 +4703,7 @@ export interface TranslationKeys {
      * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/edit/form.tsx:133
      * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/edit/form.tsx:134
      * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:28
+     * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:33
      * @see apps/admin/src/app/[locale]/(app)/screeners/columns.tsx:19
      * @see apps/admin/src/app/[locale]/(app)/screeners/create/form.tsx:76
      * @see apps/admin/src/app/[locale]/(app)/screeners/create/form.tsx:77
@@ -3845,6 +4722,7 @@ export interface TranslationKeys {
      * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:121
      * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:126
      * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:127
+     * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:132
      * @see apps/admin/src/components/cohorts/cohort-details.tsx:62
      * @see apps/admin/src/components/cohorts/cohort-details.tsx:65
      * @see apps/admin/src/components/cohorts/cohort-details.tsx:66
@@ -3868,6 +4746,7 @@ export interface TranslationKeys {
      *
      * @see apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/answers/question-card.tsx:50
      * @see apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/answers/question-card.tsx:51
+     * @see apps/admin/src/components/data-table/row-actions-with-confirmation.tsx:132
      * @see apps/admin/src/components/data-table/row-actions.tsx:88
      * @see apps/admin/src/components/data-table/row-actions.tsx:90
      */
@@ -3879,18 +4758,21 @@ export interface TranslationKeys {
      * @see apps/admin/src/app/[locale]/(app)/cohorts/[cohortId]/edit/form.tsx:83
      * @see apps/admin/src/app/[locale]/(app)/cohorts/[cohortId]/edit/form.tsx:84
      * @see apps/admin/src/app/[locale]/(app)/cohorts/[cohortId]/respondent-columns.tsx:20
+     * @see apps/admin/src/app/[locale]/(app)/cohorts/columns.tsx:23
      * @see apps/admin/src/app/[locale]/(app)/cohorts/columns.tsx:24
      * @see apps/admin/src/app/[locale]/(app)/cohorts/form.tsx:57
      * @see apps/admin/src/app/[locale]/(app)/cohorts/form.tsx:58
      * @see apps/admin/src/app/[locale]/(app)/respondents/[respondentId]/respondent-details.tsx:56
      * @see apps/admin/src/app/[locale]/(app)/respondents/[respondentId]/respondent-details.tsx:57
      * @see apps/admin/src/app/[locale]/(app)/respondents/[respondentId]/respondent-details.tsx:58
+     * @see apps/admin/src/app/[locale]/(app)/respondents/columns.tsx:25
      * @see apps/admin/src/app/[locale]/(app)/respondents/columns.tsx:26
      * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/edit/form.tsx:115
      * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/edit/form.tsx:116
      * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:95
      * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:96
      * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:97
+     * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:102
      * @see apps/admin/src/app/[locale]/(app)/screeners/columns.tsx:37
      * @see apps/admin/src/app/[locale]/(app)/screeners/create/form.tsx:58
      * @see apps/admin/src/app/[locale]/(app)/screeners/create/form.tsx:59
@@ -3921,6 +4803,7 @@ export interface TranslationKeys {
      * @see apps/admin/src/app/[locale]/(app)/respondents/[respondentId]/respondent-details.tsx:129
      * @see apps/admin/src/app/[locale]/(app)/respondents/[respondentId]/respondent-details.tsx:139
      * @see apps/admin/src/app/[locale]/(app)/respondents/[respondentId]/respondent-details.tsx:140
+     * @see apps/admin/src/app/[locale]/(app)/respondents/columns.tsx:34
      * @see apps/admin/src/app/[locale]/(app)/respondents/columns.tsx:35
      * @see apps/admin/src/components/nav/main.tsx:27
      * @see apps/admin/src/components/nav/main.tsx:44
@@ -3993,6 +4876,10 @@ export type TranslationText =
     | "Login"
     | "Enter your email address. We'll send you an email containing your login link."
     | "Success! Check your email for the login link"
+    | "Inactive"
+    | "Positive"
+    | "Neutral"
+    | "Negative"
     | "Created At"
     | "Campaign created successfully"
     | "All campaigns"
@@ -4023,9 +4910,13 @@ export type TranslationText =
     | "Create cohort"
     | "Assigned"
     | "Assigned by"
+    | "No results"
     | "Desc"
     | "Hide"
     | "Asc"
+    | "Clear filters"
+    | "No results found"
+    | "selected"
     | "Page"
     | "Rows per page"
     | "of"
@@ -4036,6 +4927,10 @@ export type TranslationText =
     | "Go to last page"
     | "Open menu"
     | "Delete"
+    | "Are you sure you want to perform this action?"
+    | "Confirm action"
+    | "Are you sure you want to delete this item? This action cannot be undone"
+    | "Confirm delete"
     | "Type to filter data..."
     | "Empty"
     | "Reset"
@@ -4118,6 +5013,9 @@ export type TranslationText =
     | "Export Questions"
     | "Export questions"
     | "Select format"
+    | "Drag and drop questions to change their order. The order will be saved when you click 'Save order'."
+    | "Save questions"
+    | "Reorder questions"
     | "Failed to generate questions"
     | "Number of questions"
     | "Generate questions"
@@ -4143,8 +5041,28 @@ export type TranslationText =
     | "Remove File"
     | "Size:"
     | "You'll receive warnings if any data couldn't be converted"
+    | "Reorder options"
+    | "Enter option value"
+    | "Drag and drop options to change their order. The order will be saved when you click 'Save order'."
+    | "Answer options"
     | "Remove question"
     | "Are you sure you want to remove this question?"
+    | "Optional"
+    | "Randomise order"
+    | "If the question is randomised, the options will be displayed in a random order."
+    | "Is required"
+    | "Allow other"
+    | "If the user is allowed to enter a custom value, they will be able to enter a value that is not in the list of options."
+    | "If the question is required, the user will not be able to submit the survey until they have answered the question."
+    | "Single select"
+    | "Multi select"
+    | "Number input"
+    | "Text input"
+    | "Validation rules"
+    | "Add validation rule"
+    | "Select rule"
+    | "Enter value"
+    | "Enter number"
     | "Respondent details"
     | "View respondent details, surveys, and authenticity scores."
     | "Campaigns"
@@ -4178,6 +5096,15 @@ export type TranslationText =
     | "Survey information"
     | "Launched"
     | "The survey you're looking for doesn't exist or has been removed."
+    | "Generating..."
+    | "Generate an authenticity score to analyse this response"
+    | "Generate score"
+    | "Score generated successfully"
+    | "No authenticity score available"
+    | "Set the authenticity score percentage (0-100)"
+    | "Override authenticity score"
+    | "Authenticity score overridden successfully"
+    | "Reason"
     | "Answer"
     | "Answer skipped"
     | "Theme"
@@ -4192,6 +5119,66 @@ export type TranslationText =
     | "This chart shows the distribution of selections for this question."
     | "Percentages show how often each pair of options was selected together"
     | "Theme categorisation"
+    | "Descriptions of themes identified in the answer (comma-separated)"
+    | "Source of the respondent"
+    | "Whether the survey was completed"
+    | "Analysis Themes"
+    | "Options for the question"
+    | "Started At"
+    | "Answer Value"
+    | "Unique identifier for the answer"
+    | "Email of the respondent"
+    | "When the survey was completed"
+    | "Title of the question"
+    | "Analysis Theme Descriptions"
+    | "When the survey was started"
+    | "XLSForm"
+    | "Respondent Name"
+    | "Name of the respondent"
+    | "Allow Other"
+    | "Required"
+    | "Respondent Email"
+    | "Excel"
+    | "Whether the authenticity score was manually overridden"
+    | "Whether the response was verified as authentic"
+    | "Override Reason"
+    | "Ended At"
+    | "Campaign title"
+    | "Reason for manual override"
+    | "Randomise Options Order"
+    | "Question Name"
+    | "Respondent Source"
+    | "When the answer was last updated"
+    | "Whether the question is required"
+    | "Authenticity Status"
+    | "Title of the campaign"
+    | "Description of the question"
+    | "Response ID"
+    | "Answer ID"
+    | "Whether the question allows other answers"
+    | "Score Overridden"
+    | "When the answer was created"
+    | "Unique identifier for the question"
+    | "Identifier for the respondent"
+    | "Answer Created At"
+    | "Survey name"
+    | "How long the survey was completed in seconds"
+    | "The actual answer provided"
+    | "Sentiments of themes identified in the answer (comma-separated)"
+    | "Unique identifier for the response"
+    | "Completion Status"
+    | "Name of the survey"
+    | "Type of the question"
+    | "Themes identified in the answer (comma-separated)"
+    | "JSON"
+    | "Was Skipped"
+    | "Authenticity Score"
+    | "Whether the options should be randomised"
+    | "CSV"
+    | "Answer Updated At"
+    | "Analysis Theme Sentiments"
+    | "Whether this question was skipped"
+    | "Authenticity percentage (0-100)"
     | "Screener details"
     | "All screeners"
     | "Screener created successfully"

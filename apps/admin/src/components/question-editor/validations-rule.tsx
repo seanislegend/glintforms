@@ -6,6 +6,7 @@ import Button from '@glint/ui/button';
 import {TrashIcon} from '@phosphor-icons/react/dist/ssr/Trash';
 import {use, useCallback} from 'react';
 import {useFormContext, useWatch} from 'react-hook-form';
+import {useI18n} from '@/hooks/use-i18n';
 import {
     type QuestionsUpdate,
     type QuestionType,
@@ -23,6 +24,7 @@ interface Props {
 }
 
 const QuestionValidations: React.FC<Props> = ({isDraft, onRemove, questionType, ruleIndex}) => {
+    const {t} = useI18n();
     const {questionIndex} = use(QuestionContext);
     const {control} = useFormContext<QuestionsUpdate>();
     const rules = useWatch({name: `questions.${questionIndex}.validations`});
@@ -55,15 +57,18 @@ const QuestionValidations: React.FC<Props> = ({isDraft, onRemove, questionType, 
         [questionType, rules]
     );
 
-    const getPlaceholder = useCallback((type: ValidationRuleType) => {
-        const config = validationRuleConfigs[type];
-        if (!config?.requiresValue) return 'N/A';
-        return config.valueType === 'number'
-            ? config.valueType === 'number'
-                ? 'Enter number'
-                : 'Enter value'
-            : 'N/A';
-    }, []);
+    const getPlaceholder = useCallback(
+        (type: ValidationRuleType) => {
+            const config = validationRuleConfigs[type];
+            if (!config?.requiresValue) return 'N/A';
+            return config.valueType === 'number'
+                ? config.valueType === 'number'
+                    ? t('Enter number')
+                    : t('Enter value')
+                : 'N/A';
+        },
+        [t]
+    );
 
     const config = rule.type ? validationRuleConfigs[rule.type] : null;
 
@@ -80,7 +85,7 @@ const QuestionValidations: React.FC<Props> = ({isDraft, onRemove, questionType, 
                             label: validationRuleConfigs[type].label,
                             value: type
                         }))}
-                        placeholder="Select rule"
+                        placeholder={t('Select rule')}
                     />
                 </div>
                 <div className="@md/rule:w-[calc(50%-20px)] w-full">

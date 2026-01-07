@@ -1,5 +1,5 @@
 {
-  "generated": "2026-01-06T23:59:24.375Z",
+  "generated": "2026-01-07T01:35:20.306Z",
   "keys": {
     "admin.6621249": {
       "added": "2026-01-06T20:43:32.516Z",
@@ -164,13 +164,65 @@
       ],
       "text": "Success! Check your email for the login link"
     },
+    "admin.badges.campaignStatus.ac7c949": {
+      "added": "2026-01-07T01:35:20.314Z",
+      "hash": "ac7c949f1211b7814bdd28a698e6c04e05e1a83f9f86e7ad43d2086d00e98afd",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/badges/campaign-status.tsx",
+          "line": 17
+        }
+      ],
+      "text": "Inactive"
+    },
+    "admin.badges.sentiment.14e9f4e": {
+      "added": "2026-01-07T01:35:20.314Z",
+      "hash": "14e9f4e33cfe528659fd19eb54f49e70abc9232c0439e52e8ecbc0a160f8285f",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/badges/sentiment.tsx",
+          "line": 17
+        }
+      ],
+      "text": "Positive"
+    },
+    "admin.badges.sentiment.1c6ac69": {
+      "added": "2026-01-07T01:35:20.315Z",
+      "hash": "1c6ac69f1e5db9c36e9f549d72ef77d23ceab19c557a7eb3a27c7f06f4484b44",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/badges/sentiment.tsx",
+          "line": 19
+        }
+      ],
+      "text": "Neutral"
+    },
+    "admin.badges.sentiment.9f7bdab": {
+      "added": "2026-01-07T01:35:20.314Z",
+      "hash": "9f7bdabb344db3f84c06366f045184d9a2ae82b8bf97c4b2ee6e413fe4ee5e68",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/badges/sentiment.tsx",
+          "line": 18
+        }
+      ],
+      "text": "Negative"
+    },
     "admin.campaigns.columns.3d44337": {
       "added": "2026-01-06T19:54:14.499Z",
       "hash": "3d44337010bfbdf7eea614f64842ccdf0c2104adfdba8114a192b786bcf6abdc",
       "occurrences": [
         {
           "file": "apps/admin/src/app/[locale]/(app)/campaigns/columns.tsx",
+          "line": 48
+        },
+        {
+          "file": "apps/admin/src/app/[locale]/(app)/campaigns/columns.tsx",
           "line": 49
+        },
+        {
+          "file": "apps/admin/src/app/[locale]/(app)/surveys/columns.tsx",
+          "line": 56
         },
         {
           "file": "apps/admin/src/app/[locale]/(app)/surveys/columns.tsx",
@@ -317,6 +369,10 @@
       "occurrences": [
         {
           "file": "apps/admin/src/app/[locale]/(app)/cohorts/[cohortId]/cohort-respondents.tsx",
+          "line": 79
+        },
+        {
+          "file": "apps/admin/src/app/[locale]/(app)/cohorts/[cohortId]/cohort-respondents.tsx",
           "line": 80
         },
         {
@@ -333,6 +389,10 @@
         {
           "file": "apps/admin/src/app/[locale]/(app)/cohorts/[cohortId]/cohort-respondents.tsx",
           "line": 89
+        },
+        {
+          "file": "apps/admin/src/app/[locale]/(app)/cohorts/[cohortId]/cohort-respondents.tsx",
+          "line": 90
         },
         {
           "file": "apps/admin/src/app/[locale]/(app)/cohorts/[cohortId]/cohort-respondents.tsx",
@@ -381,6 +441,10 @@
       "occurrences": [
         {
           "file": "apps/admin/src/app/[locale]/(app)/cohorts/[cohortId]/cohort-respondents.tsx",
+          "line": 64
+        },
+        {
+          "file": "apps/admin/src/app/[locale]/(app)/cohorts/[cohortId]/cohort-respondents.tsx",
           "line": 65
         },
         {
@@ -394,6 +458,10 @@
       "added": "2026-01-06T19:54:14.500Z",
       "hash": "8dc4158cc15339be80cea319809149b7f6d4c4669b0fb03ae57c84170b99e96b",
       "occurrences": [
+        {
+          "file": "apps/admin/src/app/[locale]/(app)/cohorts/[cohortId]/cohort-respondents.tsx",
+          "line": 63
+        },
         {
           "file": "apps/admin/src/app/[locale]/(app)/cohorts/[cohortId]/cohort-respondents.tsx",
           "line": 64
@@ -412,6 +480,10 @@
         {
           "file": "apps/admin/src/app/[locale]/(app)/cohorts/[cohortId]/columns.tsx",
           "line": 37
+        },
+        {
+          "file": "apps/admin/src/app/[locale]/(app)/cohorts/[cohortId]/columns.tsx",
+          "line": 40
         }
       ],
       "text": "Remove"
@@ -670,6 +742,17 @@
       ],
       "text": "Assigned by"
     },
+    "admin.dataTable.a43619f": {
+      "added": "2026-01-07T01:35:20.314Z",
+      "hash": "a43619f321175f57a27f2a38da381fd367f6806093031b1f82960bcbf542729d",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/data-table/index.tsx",
+          "line": 154
+        }
+      ],
+      "text": "No results"
+    },
     "admin.dataTable.columnHeader.5c4419a": {
       "added": "2026-01-06T23:59:24.378Z",
       "hash": "5c4419a6999d2a7a29e0e1d00876b4c5992d56d1dbc9a03ecc515eaa554b7f04",
@@ -702,6 +785,39 @@
         }
       ],
       "text": "Asc"
+    },
+    "admin.dataTable.facetedFilter.7179ea0": {
+      "added": "2026-01-07T01:35:20.314Z",
+      "hash": "7179ea0035fca783ec62b7185659b68c75f2a7c12b909306a57183dc9b3fa44b",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/data-table/faceted-filter.tsx",
+          "line": 143
+        }
+      ],
+      "text": "Clear filters"
+    },
+    "admin.dataTable.facetedFilter.7d7e360": {
+      "added": "2026-01-07T01:35:20.314Z",
+      "hash": "7d7e360586090927c7aeee67c8a46d8354694e7aa4b722ff5b421347f798057a",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/data-table/faceted-filter.tsx",
+          "line": 90
+        }
+      ],
+      "text": "No results found"
+    },
+    "admin.dataTable.facetedFilter.d7cbbb6": {
+      "added": "2026-01-07T01:35:20.314Z",
+      "hash": "d7cbbb688b2e506c022e95cef8c4f629a29b9b36a6e50324e70dff466dbb95af",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/data-table/faceted-filter.tsx",
+          "line": 65
+        }
+      ],
+      "text": "selected"
     },
     "admin.dataTable.pagination.0a30a81": {
       "added": "2026-01-06T23:58:17.425Z",
@@ -796,6 +912,10 @@
       "hash": "b40b3713b43dc702682dc967ea5c2dbe20ae414c30baf100d162a8250a928065",
       "occurrences": [
         {
+          "file": "apps/admin/src/components/data-table/row-actions-with-confirmation.tsx",
+          "line": 95
+        },
+        {
           "file": "apps/admin/src/components/data-table/row-actions.tsx",
           "line": 52
         },
@@ -811,6 +931,10 @@
       "hash": "e2d0a54968ead24efc0dffa6ac78fc606dceec34a0f586177a74a54cc2272cf8",
       "occurrences": [
         {
+          "file": "apps/admin/src/components/data-table/row-actions-with-confirmation.tsx",
+          "line": 111
+        },
+        {
           "file": "apps/admin/src/components/data-table/row-actions.tsx",
           "line": 67
         },
@@ -820,6 +944,50 @@
         }
       ],
       "text": "Delete"
+    },
+    "admin.dataTable.rowActionsWithConfirmation.2aacf1b": {
+      "added": "2026-01-07T01:35:20.314Z",
+      "hash": "2aacf1b4b294803a19ebb151e26ab75fe82f4ccf73306000be337e09bd02174b",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/data-table/row-actions-with-confirmation.tsx",
+          "line": 61
+        }
+      ],
+      "text": "Are you sure you want to perform this action?"
+    },
+    "admin.dataTable.rowActionsWithConfirmation.b49a960": {
+      "added": "2026-01-07T01:35:20.314Z",
+      "hash": "b49a9604ce16487ecd778be47833a71c0f867511073e0b9cfe2bd27641fb4c85",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/data-table/row-actions-with-confirmation.tsx",
+          "line": 58
+        }
+      ],
+      "text": "Confirm action"
+    },
+    "admin.dataTable.rowActionsWithConfirmation.c1726c3": {
+      "added": "2026-01-07T01:35:20.314Z",
+      "hash": "c1726c3e49780242f305686992a6469773f99a36707384f2b3ee7bc46d5e3ebe",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/data-table/row-actions-with-confirmation.tsx",
+          "line": 76
+        }
+      ],
+      "text": "Are you sure you want to delete this item? This action cannot be undone"
+    },
+    "admin.dataTable.rowActionsWithConfirmation.da00fa9": {
+      "added": "2026-01-07T01:35:20.314Z",
+      "hash": "da00fa968bd87b3d4050f126cf7e32435f86531842dc5606fdd52c97cbed81fe",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/data-table/row-actions-with-confirmation.tsx",
+          "line": 73
+        }
+      ],
+      "text": "Confirm delete"
     },
     "admin.dataTable.toolbar.22c4fde": {
       "added": "2026-01-06T20:43:32.510Z",
@@ -1612,6 +1780,10 @@
         {
           "file": "apps/admin/src/components/dialogs/export-responses/field-selector.tsx",
           "line": 27
+        },
+        {
+          "file": "apps/admin/src/components/question-editor/export-field-selector.tsx",
+          "line": 29
         }
       ],
       "text": "Only fields that are selected will be included in the export. If you want to include all fields, enable the 'Include all fields' switch."
@@ -1646,6 +1818,10 @@
         {
           "file": "apps/admin/src/components/dialogs/export-responses/field-selector.tsx",
           "line": 30
+        },
+        {
+          "file": "apps/admin/src/components/question-editor/export-field-selector.tsx",
+          "line": 28
         }
       ],
       "text": "Select fields to include"
@@ -2176,6 +2352,10 @@
         {
           "file": "apps/admin/src/components/question-editor/editor-form.tsx",
           "line": 165
+        },
+        {
+          "file": "apps/admin/src/components/question-editor/footer.tsx",
+          "line": 48
         }
       ],
       "text": "Add question"
@@ -2262,6 +2442,43 @@
         }
       ],
       "text": "Select format"
+    },
+    "admin.questionEditor.footer.0d3d9bf": {
+      "added": "2026-01-07T01:35:20.317Z",
+      "hash": "0d3d9bf396a903ea1f1891c1c7861d9809c4f6fbc727ce8a88a9794d9025a19f",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/question-editor/footer.tsx",
+          "line": 54
+        }
+      ],
+      "text": "Drag and drop questions to change their order. The order will be saved when you click 'Save order'."
+    },
+    "admin.questionEditor.footer.8662488": {
+      "added": "2026-01-07T01:35:20.317Z",
+      "hash": "86624883e0245af8bcdfbe0e747b147ca26a0c29e2e65f04c2b5b0df5c9af7ef",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/question-editor/footer.tsx",
+          "line": 74
+        }
+      ],
+      "text": "Save questions"
+    },
+    "admin.questionEditor.footer.b0bec38": {
+      "added": "2026-01-07T01:35:20.317Z",
+      "hash": "b0bec386c1a19f11274768239fb0b9320c67d16f44bc3bdfffdb45b70c1b7d07",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/question-editor/footer.tsx",
+          "line": 53
+        },
+        {
+          "file": "apps/admin/src/components/question-editor/footer.tsx",
+          "line": 66
+        }
+      ],
+      "text": "Reorder questions"
     },
     "admin.questionEditor.generateQuestionsDialog.101fde3": {
       "added": "2026-01-06T20:43:32.512Z",
@@ -2778,6 +2995,54 @@
       ],
       "text": "You'll receive warnings if any data couldn't be converted"
     },
+    "admin.questionEditor.options.0a623c5": {
+      "added": "2026-01-07T01:35:20.317Z",
+      "hash": "0a623c54f522028c2e23f68cc518cc5535c399f24dd68d45d06b630d98dd25f4",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/question-editor/options.tsx",
+          "line": 95
+        },
+        {
+          "file": "apps/admin/src/components/question-editor/options.tsx",
+          "line": 107
+        }
+      ],
+      "text": "Reorder options"
+    },
+    "admin.questionEditor.options.3c44dab": {
+      "added": "2026-01-07T01:35:20.317Z",
+      "hash": "3c44dab212cf22a4c6e2cdd3191427d2a04be7f065485b2db9adcc4135651143",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/question-editor/options.tsx",
+          "line": 65
+        }
+      ],
+      "text": "Enter option value"
+    },
+    "admin.questionEditor.options.b4c5de7": {
+      "added": "2026-01-07T01:35:20.317Z",
+      "hash": "b4c5de7dc5a28cc34f171b8565a563a08e5d5155cb7b3f5ea7557994693565cc",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/question-editor/options.tsx",
+          "line": 96
+        }
+      ],
+      "text": "Drag and drop options to change their order. The order will be saved when you click 'Save order'."
+    },
+    "admin.questionEditor.options.f3f32cc": {
+      "added": "2026-01-07T01:35:20.317Z",
+      "hash": "f3f32cc3f49b447f30e94b51e752ba1f7e64c4159444acce9ca406606c625655",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/question-editor/options.tsx",
+          "line": 52
+        }
+      ],
+      "text": "Answer options"
+    },
     "admin.questionEditor.removeQuestionDialog.9d22dca": {
       "added": "2026-01-06T20:43:32.512Z",
       "hash": "9d22dcacc4b31be8932f0e510bb37c712d3603f3fc8081f5036a9b95acfe56f9",
@@ -2807,6 +3072,182 @@
         }
       ],
       "text": "Are you sure you want to remove this question?"
+    },
+    "admin.questionEditor.requiredStatus.59be713": {
+      "added": "2026-01-07T01:35:20.317Z",
+      "hash": "59be71333c960fd08e7e4fe9862206d9355f0a9884121a5b50ef8b36efdfe4cf",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/question-editor/required-status.tsx",
+          "line": 18
+        }
+      ],
+      "text": "Optional"
+    },
+    "admin.questionEditor.settings.009b403": {
+      "added": "2026-01-07T01:35:20.319Z",
+      "hash": "009b4031171888f81bb88eb9b7d1cef02744fb053894abe0afe050e4a1e0a540",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/question-editor/settings.tsx",
+          "line": 45
+        }
+      ],
+      "text": "Randomise order"
+    },
+    "admin.questionEditor.settings.08d803a": {
+      "added": "2026-01-07T01:35:20.319Z",
+      "hash": "08d803ac5f44bbfdb1ffbf468b80e33ac0bdf3e87dd13dce3d7f0373cf5cd160",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/question-editor/settings.tsx",
+          "line": 42
+        }
+      ],
+      "text": "If the question is randomised, the options will be displayed in a random order."
+    },
+    "admin.questionEditor.settings.89cf326": {
+      "added": "2026-01-07T01:35:20.319Z",
+      "hash": "89cf32607e10c78c12413945be457446d766fce76de94a4829f413d9b1ed0600",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/question-editor/settings.tsx",
+          "line": 36
+        }
+      ],
+      "text": "Is required"
+    },
+    "admin.questionEditor.settings.ce2d297": {
+      "added": "2026-01-07T01:35:20.319Z",
+      "hash": "ce2d2977ed4202971acc63a4fd234079ec44074921a979ae12cc3270ee8a01bf",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/question-editor/settings.tsx",
+          "line": 52
+        }
+      ],
+      "text": "Allow other"
+    },
+    "admin.questionEditor.settings.d4cb4e0": {
+      "added": "2026-01-07T01:35:20.319Z",
+      "hash": "d4cb4e0005566efd2c33deeb78b6e2e55b57fa91012e869c299f21f876ad8011",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/question-editor/settings.tsx",
+          "line": 49
+        }
+      ],
+      "text": "If the user is allowed to enter a custom value, they will be able to enter a value that is not in the list of options."
+    },
+    "admin.questionEditor.settings.e3f77e8": {
+      "added": "2026-01-07T01:35:20.319Z",
+      "hash": "e3f77e839001effc14f007bf9d2b6c7c88a757d9d5658f43b51736888b8d079d",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/question-editor/settings.tsx",
+          "line": 33
+        }
+      ],
+      "text": "If the question is required, the user will not be able to submit the survey until they have answered the question."
+    },
+    "admin.questionEditor.typeSelect.66bc810": {
+      "added": "2026-01-07T01:35:20.319Z",
+      "hash": "66bc81044cda307f9d02c0dce545a762a9bb0c5a327434eb748a0294944b691e",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/question-editor/type-select.tsx",
+          "line": 23
+        }
+      ],
+      "text": "Single select"
+    },
+    "admin.questionEditor.typeSelect.8053e99": {
+      "added": "2026-01-07T01:35:20.319Z",
+      "hash": "8053e99521ecd5b71057c45a0921824c104662e8fcbad38abc9f77e990748e32",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/question-editor/type-select.tsx",
+          "line": 24
+        }
+      ],
+      "text": "Multi select"
+    },
+    "admin.questionEditor.typeSelect.ef76dca": {
+      "added": "2026-01-07T01:35:20.319Z",
+      "hash": "ef76dcaf4bfd2edc84a3f584b8468f5d134017eba614aa9d554e5f5f3d44a8ac",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/question-editor/type-select.tsx",
+          "line": 22
+        }
+      ],
+      "text": "Number input"
+    },
+    "admin.questionEditor.typeSelect.f9be71e": {
+      "added": "2026-01-07T01:35:20.319Z",
+      "hash": "f9be71e0f6c7c2476fc693ea6d441d938ae54a3a548edfd2becab8c200775f8a",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/question-editor/type-select.tsx",
+          "line": 21
+        }
+      ],
+      "text": "Text input"
+    },
+    "admin.questionEditor.validations.64e2965": {
+      "added": "2026-01-07T01:35:20.317Z",
+      "hash": "64e29653cfc87afb272b0a0518b763064da0ff2ae1d41e4d97eff2f4fb39e616",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/question-editor/validations.tsx",
+          "line": 40
+        }
+      ],
+      "text": "Validation rules"
+    },
+    "admin.questionEditor.validations.d3e563e": {
+      "added": "2026-01-07T01:35:20.317Z",
+      "hash": "d3e563e309a5402e4986e94d74e5231360a8c046a9b6d00cd470e9eb69fb50a1",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/question-editor/validations.tsx",
+          "line": 60
+        }
+      ],
+      "text": "Add validation rule"
+    },
+    "admin.questionEditor.validationsRule.5280c37": {
+      "added": "2026-01-07T01:35:20.318Z",
+      "hash": "5280c37f20cff1004e688a5c298800718111056ffa64acba3e3c31bf1015acca",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/question-editor/validations-rule.tsx",
+          "line": 88
+        }
+      ],
+      "text": "Select rule"
+    },
+    "admin.questionEditor.validationsRule.917c702": {
+      "added": "2026-01-07T01:35:20.318Z",
+      "hash": "917c702de8fa5089a9e41bf4cd1515d8ed3b6d0e9f2e77ec25ab2dc788856414",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/question-editor/validations-rule.tsx",
+          "line": 67
+        }
+      ],
+      "text": "Enter value"
+    },
+    "admin.questionEditor.validationsRule.d007357": {
+      "added": "2026-01-07T01:35:20.318Z",
+      "hash": "d007357c6060af717b69af129d8032570d8053ee54f5aa3c190cb15fb7fc3cd2",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/question-editor/validations-rule.tsx",
+          "line": 66
+        }
+      ],
+      "text": "Enter number"
     },
     "admin.respondents.8faaf7c": {
       "added": "2026-01-06T19:54:14.499Z",
@@ -2842,6 +3283,10 @@
       "added": "2026-01-06T19:54:14.499Z",
       "hash": "30e9a089397b25b0b83545562dd8010a20d27d10f9ec2bd2e3c89b97810c0806",
       "occurrences": [
+        {
+          "file": "apps/admin/src/app/[locale]/(app)/respondents/columns.tsx",
+          "line": 66
+        },
         {
           "file": "apps/admin/src/app/[locale]/(app)/respondents/columns.tsx",
           "line": 67
@@ -3029,6 +3474,10 @@
           "line": 87
         },
         {
+          "file": "apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx",
+          "line": 92
+        },
+        {
           "file": "apps/admin/src/components/cohorts/cohort-details.tsx",
           "line": 39
         },
@@ -3037,11 +3486,19 @@
           "line": 40
         },
         {
+          "file": "apps/admin/src/components/data-table/row-actions-with-confirmation.tsx",
+          "line": 124
+        },
+        {
           "file": "apps/admin/src/components/data-table/row-actions.tsx",
           "line": 80
         },
         {
           "file": "apps/admin/src/components/data-table/row-actions.tsx",
+          "line": 82
+        },
+        {
+          "file": "apps/admin/src/components/response-authenticity/overide.tsx",
           "line": 82
         }
       ],
@@ -3077,6 +3534,10 @@
         {
           "file": "apps/admin/src/app/[locale]/(app)/respondents/[respondentId]/respondent-details.tsx",
           "line": 124
+        },
+        {
+          "file": "apps/admin/src/components/response-authenticity/overide.tsx",
+          "line": 103
         }
       ],
       "text": "Authenticity score"
@@ -3349,6 +3810,10 @@
         {
           "file": "apps/admin/src/app/[locale]/(app)/respondents/[respondentId]/survey-quick-view.tsx",
           "line": 118
+        },
+        {
+          "file": "apps/admin/src/app/[locale]/(app)/respondents/[respondentId]/survey-quick-view.tsx",
+          "line": 119
         }
       ],
       "text": "View the details of a survey."
@@ -3391,6 +3856,10 @@
         {
           "file": "apps/admin/src/app/[locale]/(app)/respondents/[respondentId]/survey-quick-view.tsx",
           "line": 126
+        },
+        {
+          "file": "apps/admin/src/app/[locale]/(app)/respondents/[respondentId]/survey-quick-view.tsx",
+          "line": 127
         }
       ],
       "text": "Fetching survey..."
@@ -3410,6 +3879,10 @@
         {
           "file": "apps/admin/src/app/[locale]/(app)/respondents/[respondentId]/survey-quick-view.tsx",
           "line": 117
+        },
+        {
+          "file": "apps/admin/src/app/[locale]/(app)/respondents/[respondentId]/survey-quick-view.tsx",
+          "line": 118
         }
       ],
       "text": "Survey details"
@@ -3462,6 +3935,105 @@
         }
       ],
       "text": "The survey you're looking for doesn't exist or has been removed."
+    },
+    "admin.responseAuthenticity.missing.49286f3": {
+      "added": "2026-01-07T01:35:20.316Z",
+      "hash": "49286f33b674a0a6ae415811c6602fb5b12a3e6e2205130bd026d7ca163ccc40",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/response-authenticity/missing.tsx",
+          "line": 52
+        }
+      ],
+      "text": "Generating..."
+    },
+    "admin.responseAuthenticity.missing.8383d77": {
+      "added": "2026-01-07T01:35:20.316Z",
+      "hash": "8383d77e60ef68c9e04590cff779e226ad18f9f65578d10e5a130044c18493a0",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/response-authenticity/missing.tsx",
+          "line": 43
+        }
+      ],
+      "text": "Generate an authenticity score to analyse this response"
+    },
+    "admin.responseAuthenticity.missing.c90ff67": {
+      "added": "2026-01-07T01:35:20.316Z",
+      "hash": "c90ff671174969138eedfc2f52ca85fc3404e0138eac6b217cae7f8e5d92f70b",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/response-authenticity/missing.tsx",
+          "line": 52
+        }
+      ],
+      "text": "Generate score"
+    },
+    "admin.responseAuthenticity.missing.f39d56e": {
+      "added": "2026-01-07T01:35:20.316Z",
+      "hash": "f39d56ec419c71f759871a899d5fbb4001680981125c5865f422fb5cddccbd64",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/response-authenticity/missing.tsx",
+          "line": 36
+        }
+      ],
+      "text": "Score generated successfully"
+    },
+    "admin.responseAuthenticity.missing.f9a60f7": {
+      "added": "2026-01-07T01:35:20.316Z",
+      "hash": "f9a60f7e234e69034abb07ed9fbc86a81c36023d76475a997bfd67b8984fb2b6",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/response-authenticity/missing.tsx",
+          "line": 44
+        }
+      ],
+      "text": "No authenticity score available"
+    },
+    "admin.responseAuthenticity.overide.04292b7": {
+      "added": "2026-01-07T01:35:20.316Z",
+      "hash": "04292b71c2069f03b5f53f075f8fdf20f63230df57dba2f7ae611b2729c50439",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/response-authenticity/overide.tsx",
+          "line": 100
+        }
+      ],
+      "text": "Set the authenticity score percentage (0-100)"
+    },
+    "admin.responseAuthenticity.overide.09b00ee": {
+      "added": "2026-01-07T01:35:20.316Z",
+      "hash": "09b00ee6b1a8e194b81226da6657431ab8e45683ff9e0915b87ba2112828e4c8",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/response-authenticity/overide.tsx",
+          "line": 88
+        }
+      ],
+      "text": "Override authenticity score"
+    },
+    "admin.responseAuthenticity.overide.92d994b": {
+      "added": "2026-01-07T01:35:20.316Z",
+      "hash": "92d994b51503c66c0faa286ffbf6857105e773846067c13861ad4733feef146d",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/response-authenticity/overide.tsx",
+          "line": 63
+        }
+      ],
+      "text": "Authenticity score overridden successfully"
+    },
+    "admin.responseAuthenticity.overide.f81ab83": {
+      "added": "2026-01-07T01:35:20.316Z",
+      "hash": "f81ab834de5f84918dc040b884267c2b61cb1a52d46442de10e97f35a94d0500",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/response-authenticity/overide.tsx",
+          "line": 109
+        }
+      ],
+      "text": "Reason"
     },
     "admin.responses.columns.b2a3aa6": {
       "added": "2026-01-06T20:43:32.513Z",
@@ -3713,6 +4285,910 @@
       ],
       "text": "Theme categorisation"
     },
+    "admin.schemas.constants.095066c": {
+      "added": "2026-01-07T01:20:48.084Z",
+      "hash": "095066cf3dbcd588484bbb88f7975c8bd1cba9447548047059da02588bee122f",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 121
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 125
+        }
+      ],
+      "text": "Descriptions of themes identified in the answer (comma-separated)"
+    },
+    "admin.schemas.constants.10cc480": {
+      "added": "2026-01-07T01:20:48.082Z",
+      "hash": "10cc4807b30f09f920843ba580d41dc480dd54fe13d902bbfec18d831c83b502",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 38
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 42
+        }
+      ],
+      "text": "Source of the respondent"
+    },
+    "admin.schemas.constants.198d152": {
+      "added": "2026-01-07T01:20:48.082Z",
+      "hash": "198d1522df081d3f2cf766d69b00363726496528a564a09ddee8a8e05016bc1e",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 43
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 47
+        }
+      ],
+      "text": "Whether the survey was completed"
+    },
+    "admin.schemas.constants.1d15d1a": {
+      "added": "2026-01-07T01:20:48.084Z",
+      "hash": "1d15d1ac131236f36e56fdcf33fd69ba483bbc76dc2757f5def5fb0cea35f4a4",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 115
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 119
+        }
+      ],
+      "text": "Analysis Themes"
+    },
+    "admin.schemas.constants.1d7d3e9": {
+      "added": "2026-01-07T01:20:48.084Z",
+      "hash": "1d7d3e9b6c44cbf0c6334ed3fc2ca24a72aa56350c4a3a299fef893b031717bf",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 170
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 189
+        }
+      ],
+      "text": "Options for the question"
+    },
+    "admin.schemas.constants.1ec632c": {
+      "added": "2026-01-07T01:20:48.083Z",
+      "hash": "1ec632ca650b72a707ca3779cafafffe92354fbc61911f4fd24f9386ff614298",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 67
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 71
+        }
+      ],
+      "text": "Started At"
+    },
+    "admin.schemas.constants.245a03e": {
+      "added": "2026-01-07T01:20:48.083Z",
+      "hash": "245a03e309f2f0a3a3f0a516a06e1553591f1fe4e0c8e3b21dd790d9081bc190",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 95
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 99
+        }
+      ],
+      "text": "Answer Value"
+    },
+    "admin.schemas.constants.24e1873": {
+      "added": "2026-01-07T01:20:48.083Z",
+      "hash": "24e1873cab5ae9e7c0388efad0dd421a674ce029fa3c8725ec7537cb70775ab6",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 86
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 90
+        }
+      ],
+      "text": "Unique identifier for the answer"
+    },
+    "admin.schemas.constants.25cf6b4": {
+      "added": "2026-01-07T01:20:48.082Z",
+      "hash": "25cf6b41ddba8c00b08f7fc1b2c3fd83cf3e0d0ad82fe7a063bb4f4b17f6fd21",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 33
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 37
+        }
+      ],
+      "text": "Email of the respondent"
+    },
+    "admin.schemas.constants.29608a5": {
+      "added": "2026-01-07T01:20:48.083Z",
+      "hash": "29608a5551b52a98ac2d11a31baede2c4bfe375ea795639d265aaecdbdc770ef",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 73
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 77
+        }
+      ],
+      "text": "When the survey was completed"
+    },
+    "admin.schemas.constants.2985f0b": {
+      "added": "2026-01-07T01:20:48.083Z",
+      "hash": "2985f0b1084892f4401424c663e444485f649583260978d3ed22e395991fd705",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 91
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 95
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 148
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 159
+        }
+      ],
+      "text": "Title of the question"
+    },
+    "admin.schemas.constants.2a1ccae": {
+      "added": "2026-01-07T01:20:48.084Z",
+      "hash": "2a1ccae8d3d02a22ceb35955a1603180fb2754ca3651a9deb702a58b762348cd",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 120
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 124
+        }
+      ],
+      "text": "Analysis Theme Descriptions"
+    },
+    "admin.schemas.constants.2c7004a": {
+      "added": "2026-01-07T01:20:48.083Z",
+      "hash": "2c7004a7d8948e70c28b2db39f23b2436432ab45f879ba822c9914bd8a13e580",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 68
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 72
+        }
+      ],
+      "text": "When the survey was started"
+    },
+    "admin.schemas.constants.3daaa61": {
+      "added": "2026-01-07T01:20:48.084Z",
+      "hash": "3daaa611a85d98fda2f35a285525a9ef9b5c00ad715616c90133d8ddbe413809",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 143
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 147
+        }
+      ],
+      "text": "XLSForm"
+    },
+    "admin.schemas.constants.426cf1b": {
+      "added": "2026-01-07T01:20:48.082Z",
+      "hash": "426cf1babab27762a70017b134637c2c61c3f6fb2601abc5f8086caefe227a67",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 27
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 31
+        }
+      ],
+      "text": "Respondent Name"
+    },
+    "admin.schemas.constants.43d37c6": {
+      "added": "2026-01-07T01:20:48.082Z",
+      "hash": "43d37c63e33d0769d7404479097b11bd75ac208f106cbfcdbdab81e322a2623e",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 28
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 32
+        }
+      ],
+      "text": "Name of the respondent"
+    },
+    "admin.schemas.constants.4581299": {
+      "added": "2026-01-07T01:20:48.084Z",
+      "hash": "458129998903fdbbf38f57f0b7d289ec34dd8a5568e281d0a8e3ac57ff388c7b",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 162
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 178
+        }
+      ],
+      "text": "Allow Other"
+    },
+    "admin.schemas.constants.4850b17": {
+      "added": "2026-01-07T01:20:48.084Z",
+      "hash": "4850b174b713d88cfc63de107830d5388929020e78abc91fc19bba7a6821625f",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/question-editor/required-status.tsx",
+          "line": 15
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 157
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 173
+        }
+      ],
+      "text": "Required"
+    },
+    "admin.schemas.constants.48521d0": {
+      "added": "2026-01-07T01:20:48.082Z",
+      "hash": "48521d0cfb5c34050f29d6e81e4d4f7f2aa67f376776c6ab6993acb8712868b0",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 32
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 36
+        }
+      ],
+      "text": "Respondent Email"
+    },
+    "admin.schemas.constants.48d5363": {
+      "added": "2026-01-07T01:20:48.084Z",
+      "hash": "48d53635551c8fd4564251d49f4e6eba58c2774469144e4346310955fbadbf4c",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 142
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 146
+        }
+      ],
+      "text": "Excel"
+    },
+    "admin.schemas.constants.5156afe": {
+      "added": "2026-01-07T01:20:48.083Z",
+      "hash": "5156afe0faf68978a170e7308645fad5b9c2440790a259aacc1a10157f8e8673",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 58
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 62
+        }
+      ],
+      "text": "Whether the authenticity score was manually overridden"
+    },
+    "admin.schemas.constants.6f7796a": {
+      "added": "2026-01-07T01:20:48.082Z",
+      "hash": "6f7796a0a104e2cd5619840525fd5c4584caea6a899bf3506a3c875d8ff2a05a",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 48
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 52
+        }
+      ],
+      "text": "Whether the response was verified as authentic"
+    },
+    "admin.schemas.constants.72b37ce": {
+      "added": "2026-01-07T01:20:48.083Z",
+      "hash": "72b37ce6a5e5174760004d59c447b48e995b1e10b2e875fd9a9bf9827be15186",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 62
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 66
+        }
+      ],
+      "text": "Override Reason"
+    },
+    "admin.schemas.constants.7e5400a": {
+      "added": "2026-01-07T01:20:48.083Z",
+      "hash": "7e5400a171a99509550ca9426760b199a11e8b2e38a0a591e24a891bce1c76ae",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 72
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 76
+        }
+      ],
+      "text": "Ended At"
+    },
+    "admin.schemas.constants.8240509": {
+      "added": "2026-01-07T01:20:48.082Z",
+      "hash": "8240509cf0d6d928893bae91001d26ae86eca0470ae6e4787aefa563dca0fd22",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 11
+        }
+      ],
+      "text": "Campaign title"
+    },
+    "admin.schemas.constants.851a442": {
+      "added": "2026-01-07T01:20:48.083Z",
+      "hash": "851a4424892eda264be4d6919aea75db938c4ffab143629386c0ef155b0f3741",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 63
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 67
+        }
+      ],
+      "text": "Reason for manual override"
+    },
+    "admin.schemas.constants.85ab515": {
+      "added": "2026-01-07T01:20:48.084Z",
+      "hash": "85ab515a6d47e9490bd8bcf943c1e1cc5b373410d1e8c31400b66358e67397b7",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 167
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 183
+        }
+      ],
+      "text": "Randomise Options Order"
+    },
+    "admin.schemas.constants.861d6d3": {
+      "added": "2026-01-07T01:20:48.083Z",
+      "hash": "861d6d3a2f09cd9c1df5a98e5a667621f6f163f14341d0ccb87962f16b91716a",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 90
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 94
+        }
+      ],
+      "text": "Question Name"
+    },
+    "admin.schemas.constants.8b90bb3": {
+      "added": "2026-01-07T01:20:48.082Z",
+      "hash": "8b90bb3d2d425ae8a8647df8fe582a3a55dceb02cf2ddf9f021497ceaf2f0348",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 37
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 41
+        }
+      ],
+      "text": "Respondent Source"
+    },
+    "admin.schemas.constants.8be8974": {
+      "added": "2026-01-07T01:20:48.084Z",
+      "hash": "8be8974bdb2831196a6d1b0163342f93eaede18ae87c9fd367e6aa72043cf323",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 111
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 115
+        }
+      ],
+      "text": "When the answer was last updated"
+    },
+    "admin.schemas.constants.8d83cfa": {
+      "added": "2026-01-07T01:20:48.084Z",
+      "hash": "8d83cfa7d036075d5486cb1f0a44379a72788c65b10241cb63801f6100681112",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 158
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 174
+        }
+      ],
+      "text": "Whether the question is required"
+    },
+    "admin.schemas.constants.91548bd": {
+      "added": "2026-01-07T01:20:48.082Z",
+      "hash": "91548bd0aff1f4b5a0715f031af2fc4d62e74f8defe26e927a7f639fc0fa47e4",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 47
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 51
+        }
+      ],
+      "text": "Authenticity Status"
+    },
+    "admin.schemas.constants.92605c9": {
+      "added": "2026-01-07T01:20:48.082Z",
+      "hash": "92605c9270e15d88657e0178d9c2e29de8dc9e198ff9e139c76d6c8d3cb5d8fa",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 12
+        }
+      ],
+      "text": "Title of the campaign"
+    },
+    "admin.schemas.constants.92fd8a9": {
+      "added": "2026-01-07T01:20:48.084Z",
+      "hash": "92fd8a95346a67ad485ad17253c02c141f7d9a22b187c9b4dfcac50f15405299",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 152
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 164
+        }
+      ],
+      "text": "Description of the question"
+    },
+    "admin.schemas.constants.9539177": {
+      "added": "2026-01-07T01:20:48.082Z",
+      "hash": "9539177fda42ed102a5bcaf5ba42916ae2ffe48f76215c34f3207e1ef4040f03",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 17
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 21
+        }
+      ],
+      "text": "Response ID"
+    },
+    "admin.schemas.constants.9630caa": {
+      "added": "2026-01-07T01:20:48.083Z",
+      "hash": "9630caa8bcd1c5bcb3dc2dd65e6639f0a357cecc8c6a2c3637f4e0c4997381a6",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 85
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 89
+        }
+      ],
+      "text": "Answer ID"
+    },
+    "admin.schemas.constants.9a74b6f": {
+      "added": "2026-01-07T01:20:48.084Z",
+      "hash": "9a74b6fe98ad5712f02d58c660a7c62bc6b11270356ae7fc6e7b045aa2482086",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 163
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 179
+        }
+      ],
+      "text": "Whether the question allows other answers"
+    },
+    "admin.schemas.constants.9b2e436": {
+      "added": "2026-01-07T01:20:48.083Z",
+      "hash": "9b2e4366e84b482170e502133b3b26650c4e199bf0f2b6b25fd22df84192b32b",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 57
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 61
+        }
+      ],
+      "text": "Score Overridden"
+    },
+    "admin.schemas.constants.a499649": {
+      "added": "2026-01-07T01:20:48.083Z",
+      "hash": "a4996497084b075cd77c3e20b7ce5db3dad754d891af6ef8e3fb234d40e9d615",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 106
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 110
+        }
+      ],
+      "text": "When the answer was created"
+    },
+    "admin.schemas.constants.a7a1dbc": {
+      "added": "2026-01-07T01:20:48.084Z",
+      "hash": "a7a1dbc19cead141fde8e1096389e012849e0e2bf858f8b594bb29f399add70c",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 147
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 154
+        }
+      ],
+      "text": "Unique identifier for the question"
+    },
+    "admin.schemas.constants.b19c105": {
+      "added": "2026-01-07T01:20:48.082Z",
+      "hash": "b19c105d28dbb41eceb274188770668d0155d5fee2347436ed143db61cdd74e2",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 23
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 27
+        }
+      ],
+      "text": "Identifier for the respondent"
+    },
+    "admin.schemas.constants.b2b69a8": {
+      "added": "2026-01-07T01:20:48.083Z",
+      "hash": "b2b69a80e2e6787a2938fe1461c5a61e4bae9ea4f24c8a8e24d28bcf1c3070ca",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 105
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 109
+        }
+      ],
+      "text": "Answer Created At"
+    },
+    "admin.schemas.constants.b630b86": {
+      "added": "2026-01-07T01:20:48.082Z",
+      "hash": "b630b86a9bb1099cd03c07c20b0d2f9a6d7f0d501c47f3aa889d76e57f0f2b7b",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 14
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 16
+        }
+      ],
+      "text": "Survey name"
+    },
+    "admin.schemas.constants.b848a50": {
+      "added": "2026-01-07T01:20:48.083Z",
+      "hash": "b848a503dfca7572bdcade82b2a573108d939d6f5fda61d05068e128518c5e29",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 78
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 82
+        }
+      ],
+      "text": "How long the survey was completed in seconds"
+    },
+    "admin.schemas.constants.bb9e680": {
+      "added": "2026-01-07T01:20:48.083Z",
+      "hash": "bb9e68033f01ecc2c6be9de0f4330ef1851eb5742dc81097f1cc807b3454975d",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 96
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 100
+        }
+      ],
+      "text": "The actual answer provided"
+    },
+    "admin.schemas.constants.bcd3119": {
+      "added": "2026-01-07T01:20:48.084Z",
+      "hash": "bcd3119e1e6ddad4af301e516d6e76723c7f8fee38b35e2f064625e5cd03e788",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 126
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 130
+        }
+      ],
+      "text": "Sentiments of themes identified in the answer (comma-separated)"
+    },
+    "admin.schemas.constants.c213407": {
+      "added": "2026-01-07T01:20:48.082Z",
+      "hash": "c2134073a1e3f71339d915fb94cd65832e51104421a8e4e2baa55216aa0a4a12",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 18
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 22
+        }
+      ],
+      "text": "Unique identifier for the response"
+    },
+    "admin.schemas.constants.cf11ff7": {
+      "added": "2026-01-07T01:20:48.082Z",
+      "hash": "cf11ff7c31a52551557ea7ab1eb4835891fa4ee2cfd90b18a17947775a0d3fc3",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 42
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 46
+        }
+      ],
+      "text": "Completion Status"
+    },
+    "admin.schemas.constants.d18853d": {
+      "added": "2026-01-07T01:20:48.082Z",
+      "hash": "d18853de293ffc463ccedafe15f979d78c31dcf7f10cdde449d5bcb8153a5095",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 14
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 17
+        }
+      ],
+      "text": "Name of the survey"
+    },
+    "admin.schemas.constants.d644946": {
+      "added": "2026-01-07T01:20:48.084Z",
+      "hash": "d644946d9e02ec017e4e41136e83d09b5f5def08e9b387bb9c0db99d7d78fc26",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 154
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 169
+        }
+      ],
+      "text": "Type of the question"
+    },
+    "admin.schemas.constants.d7516f8": {
+      "added": "2026-01-07T01:20:48.084Z",
+      "hash": "d7516f8b24d56854e5a29d1e37e4cbcbf5b5ad57d3afa45a646df3e3095a1797",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 116
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 120
+        }
+      ],
+      "text": "Themes identified in the answer (comma-separated)"
+    },
+    "admin.schemas.constants.db1a21a": {
+      "added": "2026-01-07T01:20:48.084Z",
+      "hash": "db1a21a0bc2ef8fbe13ac4cf044e8c9116d29137d5ed8b916ab63dcb2d4290df",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 141
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 145
+        }
+      ],
+      "text": "JSON"
+    },
+    "admin.schemas.constants.dc937c0": {
+      "added": "2026-01-07T01:20:48.083Z",
+      "hash": "dc937c0d5c358b4de9de90f24003298cf81c55ba7ab16f885e0fc76f8d4bf2bd",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 100
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 104
+        }
+      ],
+      "text": "Was Skipped"
+    },
+    "admin.schemas.constants.dd020a1": {
+      "added": "2026-01-07T01:20:48.082Z",
+      "hash": "dd020a1e5fab13a0d204ef59cd712a4086a5d9c338f8aba93158b7ef7222a7bf",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 52
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 56
+        }
+      ],
+      "text": "Authenticity Score"
+    },
+    "admin.schemas.constants.e3a8c31": {
+      "added": "2026-01-07T01:20:48.084Z",
+      "hash": "e3a8c31870979b94c42e91a058023bdf578abb1ca17c17c836d9a0ca1f52b5d5",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 168
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 184
+        }
+      ],
+      "text": "Whether the options should be randomised"
+    },
+    "admin.schemas.constants.eb6b42f": {
+      "added": "2026-01-07T01:20:48.084Z",
+      "hash": "eb6b42f54c42d2832e296319f7fdad64d46aecd1ec19b0e9c80b85b7cfc6dcae",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 140
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 144
+        }
+      ],
+      "text": "CSV"
+    },
+    "admin.schemas.constants.ef92d92": {
+      "added": "2026-01-07T01:20:48.083Z",
+      "hash": "ef92d92205a7f4e9c824cf80e267f3273264a87b9cb5914bdccb0ede10262508",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 110
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 114
+        }
+      ],
+      "text": "Answer Updated At"
+    },
+    "admin.schemas.constants.f67e976": {
+      "added": "2026-01-07T01:20:48.084Z",
+      "hash": "f67e976aad0229dce77d601cfa286ab3d3255a436d717b4f1fa61c475af342cb",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 125
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 129
+        }
+      ],
+      "text": "Analysis Theme Sentiments"
+    },
+    "admin.schemas.constants.f715b06": {
+      "added": "2026-01-07T01:20:48.083Z",
+      "hash": "f715b0684352b53be3dcd18e77252f998454b30cb4c2c243a31ff9c9ab1d9194",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 101
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 105
+        }
+      ],
+      "text": "Whether this question was skipped"
+    },
+    "admin.schemas.constants.fb32db7": {
+      "added": "2026-01-07T01:20:48.083Z",
+      "hash": "fb32db7f5e1436cef4e70ca74254510943a19ad5ecd6afa87c725ce3c4eab065",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 53
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 57
+        }
+      ],
+      "text": "Authenticity percentage (0-100)"
+    },
     "admin.screeners.0a1eb60": {
       "added": "2026-01-06T19:59:16.427Z",
       "hash": "0a1eb6013dd5885023f143094ec0f27d587a91655dbc55451eaa20a26274a224",
@@ -3814,6 +5290,10 @@
         {
           "file": "apps/admin/src/app/[locale]/(app)/screeners/form-selection-fields.tsx",
           "line": 49
+        },
+        {
+          "file": "apps/admin/src/components/question-editor/card.tsx",
+          "line": 39
         }
       ],
       "text": "Question"
@@ -3829,6 +5309,14 @@
         {
           "file": "apps/admin/src/app/[locale]/(app)/screeners/form-selection-fields.tsx",
           "line": 52
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 170
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 188
         }
       ],
       "text": "Options"
@@ -3912,6 +5400,10 @@
         {
           "file": "apps/admin/src/app/[locale]/(app)/screeners/form-type-fields.tsx",
           "line": 68
+        },
+        {
+          "file": "apps/admin/src/app/[locale]/(app)/screeners/form-type-fields.tsx",
+          "line": 73
         }
       ],
       "text": "Only allow respondents to access the survey if they are older or younger than the specified age."
@@ -3988,6 +5480,10 @@
         {
           "file": "apps/admin/src/app/[locale]/(app)/screeners/form-type-fields.tsx",
           "line": 71
+        },
+        {
+          "file": "apps/admin/src/app/[locale]/(app)/screeners/form-type-fields.tsx",
+          "line": 76
         }
       ],
       "text": "Only allow respondents to access the survey if they are in the specified countries."
@@ -4007,6 +5503,10 @@
         {
           "file": "apps/admin/src/app/[locale]/(app)/screeners/form-type-fields.tsx",
           "line": 74
+        },
+        {
+          "file": "apps/admin/src/app/[locale]/(app)/screeners/form-type-fields.tsx",
+          "line": 79
         }
       ],
       "text": "Only allow respondents to access the survey if they answer the question correctly."
@@ -4086,6 +5586,10 @@
         {
           "file": "apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx",
           "line": 158
+        },
+        {
+          "file": "apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx",
+          "line": 163
         }
       ],
       "text": "No surveys assigned"
@@ -4101,6 +5605,10 @@
         {
           "file": "apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx",
           "line": 73
+        },
+        {
+          "file": "apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx",
+          "line": 78
         },
         {
           "file": "apps/admin/src/components/screeners/summary.tsx",
@@ -4120,6 +5628,10 @@
         {
           "file": "apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx",
           "line": 55
+        },
+        {
+          "file": "apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx",
+          "line": 65
         }
       ],
       "text": "passes"
@@ -4135,6 +5647,10 @@
         {
           "file": "apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx",
           "line": 83
+        },
+        {
+          "file": "apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx",
+          "line": 88
         }
       ],
       "text": "Screener information"
@@ -4154,6 +5670,10 @@
         {
           "file": "apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx",
           "line": 157
+        },
+        {
+          "file": "apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx",
+          "line": 162
         }
       ],
       "text": "This screener hasn't been assigned to any surveys yet."
@@ -4173,6 +5693,10 @@
         {
           "file": "apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx",
           "line": 119
+        },
+        {
+          "file": "apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx",
+          "line": 124
         }
       ],
       "text": "Configuration"
@@ -4192,6 +5716,10 @@
         {
           "file": "apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx",
           "line": 147
+        },
+        {
+          "file": "apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx",
+          "line": 152
         }
       ],
       "text": "Used in surveys"
@@ -5898,6 +7426,10 @@
           "line": 67
         },
         {
+          "file": "apps/admin/src/components/badges/campaign-status.tsx",
+          "line": 16
+        },
+        {
           "file": "apps/admin/src/components/badges/survey-status.tsx",
           "line": 26
         },
@@ -6112,6 +7644,10 @@
         {
           "file": "apps/admin/src/components/nav/secondary.tsx",
           "line": 22
+        },
+        {
+          "file": "apps/admin/src/components/question-editor/settings.tsx",
+          "line": 63
         }
       ],
       "text": "Settings"
@@ -6184,6 +7720,10 @@
         {
           "file": "apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/responses/list.tsx",
           "line": 49
+        },
+        {
+          "file": "apps/admin/src/components/badges/authenticity-status.tsx",
+          "line": 18
         }
       ],
       "text": "Fail"
@@ -6286,6 +7826,14 @@
         {
           "file": "apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/responses/[responseId]/response-details.tsx",
           "line": 82
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 22
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 26
         }
       ],
       "text": "Respondent ID"
@@ -6305,6 +7853,14 @@
         {
           "file": "apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/responses/[responseId]/response-details.tsx",
           "line": 106
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 77
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 81
         }
       ],
       "text": "Duration"
@@ -6320,6 +7876,10 @@
         {
           "file": "apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/responses/list.tsx",
           "line": 50
+        },
+        {
+          "file": "apps/admin/src/components/badges/authenticity-status.tsx",
+          "line": 18
         }
       ],
       "text": "Missing"
@@ -6358,6 +7918,10 @@
         {
           "file": "apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/responses/columns.tsx",
           "line": 96
+        },
+        {
+          "file": "apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/responses/columns.tsx",
+          "line": 98
         }
       ],
       "text": "Ended"
@@ -6490,6 +8054,10 @@
         {
           "file": "apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/responses/list.tsx",
           "line": 48
+        },
+        {
+          "file": "apps/admin/src/components/badges/authenticity-status.tsx",
+          "line": 18
         }
       ],
       "text": "Pass"
@@ -6513,6 +8081,10 @@
         {
           "file": "apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/responses/columns.tsx",
           "line": 88
+        },
+        {
+          "file": "apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/responses/columns.tsx",
+          "line": 90
         }
       ],
       "text": "Started"
@@ -6735,6 +8307,10 @@
         {
           "file": "apps/admin/src/app/[locale]/(app)/surveys/create/form.tsx",
           "line": 99
+        },
+        {
+          "file": "apps/admin/src/components/response-authenticity/overide.tsx",
+          "line": 122
         }
       ],
       "text": "Submit"
@@ -6754,6 +8330,10 @@
         {
           "file": "apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx",
           "line": 26
+        },
+        {
+          "file": "apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx",
+          "line": 31
         },
         {
           "file": "apps/admin/src/app/[locale]/(app)/screeners/columns.tsx",
@@ -6837,6 +8417,10 @@
         {
           "file": "apps/admin/src/components/question-editor/remove-question-dialog.tsx",
           "line": 65
+        },
+        {
+          "file": "apps/admin/src/components/response-authenticity/overide.tsx",
+          "line": 119
         },
         {
           "file": "apps/admin/src/components/sort-items.tsx",
@@ -6972,6 +8556,10 @@
       "occurrences": [
         {
           "file": "apps/admin/src/app/[locale]/(app)/campaigns/columns.tsx",
+          "line": 24
+        },
+        {
+          "file": "apps/admin/src/app/[locale]/(app)/campaigns/columns.tsx",
           "line": 25
         },
         {
@@ -7001,6 +8589,10 @@
         {
           "file": "apps/admin/src/app/[locale]/(app)/respondents/list.tsx",
           "line": 92
+        },
+        {
+          "file": "apps/admin/src/app/[locale]/(app)/surveys/columns.tsx",
+          "line": 33
         },
         {
           "file": "apps/admin/src/app/[locale]/(app)/surveys/columns.tsx",
@@ -7044,6 +8636,10 @@
         {
           "file": "apps/admin/src/app/[locale]/(app)/cohorts/[cohortId]/page.tsx",
           "line": 33
+        },
+        {
+          "file": "apps/admin/src/app/[locale]/(app)/cohorts/columns.tsx",
+          "line": 44
         },
         {
           "file": "apps/admin/src/app/[locale]/(app)/cohorts/columns.tsx",
@@ -7155,6 +8751,10 @@
       "occurrences": [
         {
           "file": "apps/admin/src/app/[locale]/(app)/cohorts/columns.tsx",
+          "line": 52
+        },
+        {
+          "file": "apps/admin/src/app/[locale]/(app)/cohorts/columns.tsx",
           "line": 53
         },
         {
@@ -7194,8 +8794,16 @@
           "line": 135
         },
         {
+          "file": "apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx",
+          "line": 140
+        },
+        {
           "file": "apps/admin/src/app/[locale]/(app)/screeners/columns.tsx",
           "line": 74
+        },
+        {
+          "file": "apps/admin/src/app/[locale]/(app)/screeners/columns.tsx",
+          "line": 77
         },
         {
           "file": "apps/admin/src/components/cohorts/cohort-details.tsx",
@@ -7208,6 +8816,10 @@
         {
           "file": "apps/admin/src/components/cohorts/cohort-details.tsx",
           "line": 74
+        },
+        {
+          "file": "apps/admin/src/components/response-authenticity/overide.tsx",
+          "line": 91
         }
       ],
       "text": "Last updated"
@@ -7218,7 +8830,15 @@
       "occurrences": [
         {
           "file": "apps/admin/src/app/[locale]/(app)/campaigns/columns.tsx",
+          "line": 15
+        },
+        {
+          "file": "apps/admin/src/app/[locale]/(app)/campaigns/columns.tsx",
           "line": 16
+        },
+        {
+          "file": "apps/admin/src/app/[locale]/(app)/cohorts/columns.tsx",
+          "line": 14
         },
         {
           "file": "apps/admin/src/app/[locale]/(app)/cohorts/columns.tsx",
@@ -7234,11 +8854,19 @@
         },
         {
           "file": "apps/admin/src/app/[locale]/(app)/respondents/columns.tsx",
+          "line": 16
+        },
+        {
+          "file": "apps/admin/src/app/[locale]/(app)/respondents/columns.tsx",
           "line": 17
         },
         {
           "file": "apps/admin/src/app/[locale]/(app)/screeners/columns.tsx",
           "line": 28
+        },
+        {
+          "file": "apps/admin/src/app/[locale]/(app)/surveys/columns.tsx",
+          "line": 15
         },
         {
           "file": "apps/admin/src/app/[locale]/(app)/surveys/columns.tsx",
@@ -7259,6 +8887,14 @@
         {
           "file": "apps/admin/src/components/screeners/summary.tsx",
           "line": 39
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 147
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 153
         }
       ],
       "text": "ID"
@@ -7278,6 +8914,10 @@
         {
           "file": "apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx",
           "line": 24
+        },
+        {
+          "file": "apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx",
+          "line": 29
         },
         {
           "file": "apps/admin/src/app/[locale]/(app)/screeners/columns.tsx",
@@ -7323,6 +8963,10 @@
           "line": 126
         },
         {
+          "file": "apps/admin/src/app/[locale]/(app)/@breadcrumbs/[...segments]/page.tsx",
+          "line": 127
+        },
+        {
           "file": "apps/admin/src/app/[locale]/(app)/@breadcrumbs/page.tsx",
           "line": 10
         },
@@ -7340,6 +8984,14 @@
         {
           "file": "apps/admin/src/app/[locale]/(app)/cohorts/[cohortId]/columns.tsx",
           "line": 25
+        },
+        {
+          "file": "apps/admin/src/app/[locale]/(app)/cohorts/[cohortId]/columns.tsx",
+          "line": 26
+        },
+        {
+          "file": "apps/admin/src/app/[locale]/(app)/respondents/columns.tsx",
+          "line": 155
         },
         {
           "file": "apps/admin/src/app/[locale]/(app)/respondents/columns.tsx",
@@ -7404,6 +9056,10 @@
           "line": 79
         },
         {
+          "file": "apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/responses/columns.tsx",
+          "line": 80
+        },
+        {
           "file": "apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/responses/list.tsx",
           "line": 45
         },
@@ -7425,6 +9081,10 @@
         {
           "file": "apps/admin/src/app/[locale]/(app)/cohorts/[cohortId]/edit/form.tsx",
           "line": 90
+        },
+        {
+          "file": "apps/admin/src/app/[locale]/(app)/cohorts/columns.tsx",
+          "line": 32
         },
         {
           "file": "apps/admin/src/app/[locale]/(app)/cohorts/columns.tsx",
@@ -7467,8 +9127,16 @@
           "line": 110
         },
         {
+          "file": "apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx",
+          "line": 115
+        },
+        {
           "file": "apps/admin/src/app/[locale]/(app)/screeners/columns.tsx",
           "line": 54
+        },
+        {
+          "file": "apps/admin/src/app/[locale]/(app)/screeners/columns.tsx",
+          "line": 55
         },
         {
           "file": "apps/admin/src/app/[locale]/(app)/screeners/create/form.tsx",
@@ -7503,6 +9171,10 @@
           "line": 57
         },
         {
+          "file": "apps/admin/src/components/question-editor/card.tsx",
+          "line": 80
+        },
+        {
           "file": "apps/admin/src/components/question-editor/generate-questions-dialog.tsx",
           "line": 150
         },
@@ -7521,6 +9193,14 @@
         {
           "file": "apps/admin/src/components/survey-settings/details.tsx",
           "line": 89
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 151
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 163
         }
       ],
       "text": "Description"
@@ -7601,11 +9281,19 @@
         },
         {
           "file": "apps/admin/src/app/[locale]/(app)/respondents/columns.tsx",
+          "line": 110
+        },
+        {
+          "file": "apps/admin/src/app/[locale]/(app)/respondents/columns.tsx",
           "line": 111
         },
         {
           "file": "apps/admin/src/app/[locale]/(app)/screeners/columns.tsx",
           "line": 66
+        },
+        {
+          "file": "apps/admin/src/app/[locale]/(app)/screeners/columns.tsx",
+          "line": 68
         },
         {
           "file": "apps/admin/src/components/nav/main.tsx",
@@ -7644,6 +9332,10 @@
         },
         {
           "file": "apps/admin/src/app/[locale]/(app)/surveys/columns.tsx",
+          "line": 24
+        },
+        {
+          "file": "apps/admin/src/app/[locale]/(app)/surveys/columns.tsx",
           "line": 25
         },
         {
@@ -7659,12 +9351,24 @@
           "line": 83
         },
         {
+          "file": "apps/admin/src/components/question-editor/card.tsx",
+          "line": 67
+        },
+        {
           "file": "apps/admin/src/components/survey-settings/details.tsx",
           "line": 76
         },
         {
           "file": "apps/admin/src/components/survey-settings/details.tsx",
           "line": 77
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 148
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 158
         }
       ],
       "text": "Title"
@@ -7760,6 +9464,10 @@
       "occurrences": [
         {
           "file": "apps/admin/src/app/[locale]/(app)/campaigns/columns.tsx",
+          "line": 36
+        },
+        {
+          "file": "apps/admin/src/app/[locale]/(app)/campaigns/columns.tsx",
           "line": 37
         },
         {
@@ -7789,6 +9497,10 @@
         {
           "file": "apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/responses/columns.tsx",
           "line": 70
+        },
+        {
+          "file": "apps/admin/src/app/[locale]/(app)/surveys/columns.tsx",
+          "line": 45
         },
         {
           "file": "apps/admin/src/app/[locale]/(app)/surveys/columns.tsx",
@@ -7893,6 +9605,10 @@
           "line": 74
         },
         {
+          "file": "apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx",
+          "line": 79
+        },
+        {
           "file": "apps/admin/src/components/screeners/summary.tsx",
           "line": 28
         },
@@ -7918,6 +9634,10 @@
         {
           "file": "apps/admin/src/app/[locale]/(app)/respondents/[respondentId]/respondent-details.tsx",
           "line": 70
+        },
+        {
+          "file": "apps/admin/src/app/[locale]/(app)/respondents/columns.tsx",
+          "line": 140
         },
         {
           "file": "apps/admin/src/app/[locale]/(app)/respondents/columns.tsx",
@@ -8107,6 +9827,10 @@
           "line": 103
         },
         {
+          "file": "apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx",
+          "line": 108
+        },
+        {
           "file": "apps/admin/src/app/[locale]/(app)/screeners/columns.tsx",
           "line": 46
         },
@@ -8119,8 +9843,20 @@
           "line": 72
         },
         {
+          "file": "apps/admin/src/components/question-editor/type-select.tsx",
+          "line": 29
+        },
+        {
           "file": "apps/admin/src/components/survey-insights/screener-failures.tsx",
           "line": 47
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 154
+        },
+        {
+          "file": "apps/admin/src/lib/schemas/constants.ts",
+          "line": 168
         }
       ],
       "text": "Type"
@@ -8140,6 +9876,10 @@
         {
           "file": "apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx",
           "line": 28
+        },
+        {
+          "file": "apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx",
+          "line": 33
         },
         {
           "file": "apps/admin/src/app/[locale]/(app)/screeners/columns.tsx",
@@ -8195,6 +9935,10 @@
         {
           "file": "apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx",
           "line": 127
+        },
+        {
+          "file": "apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx",
+          "line": 132
         },
         {
           "file": "apps/admin/src/components/cohorts/cohort-details.tsx",
@@ -8255,6 +9999,10 @@
           "line": 51
         },
         {
+          "file": "apps/admin/src/components/data-table/row-actions-with-confirmation.tsx",
+          "line": 132
+        },
+        {
           "file": "apps/admin/src/components/data-table/row-actions.tsx",
           "line": 88
         },
@@ -8283,6 +10031,10 @@
         },
         {
           "file": "apps/admin/src/app/[locale]/(app)/cohorts/columns.tsx",
+          "line": 23
+        },
+        {
+          "file": "apps/admin/src/app/[locale]/(app)/cohorts/columns.tsx",
           "line": 24
         },
         {
@@ -8307,6 +10059,10 @@
         },
         {
           "file": "apps/admin/src/app/[locale]/(app)/respondents/columns.tsx",
+          "line": 25
+        },
+        {
+          "file": "apps/admin/src/app/[locale]/(app)/respondents/columns.tsx",
           "line": 26
         },
         {
@@ -8328,6 +10084,10 @@
         {
           "file": "apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx",
           "line": 97
+        },
+        {
+          "file": "apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx",
+          "line": 102
         },
         {
           "file": "apps/admin/src/app/[locale]/(app)/screeners/columns.tsx",
@@ -8414,6 +10174,10 @@
         {
           "file": "apps/admin/src/app/[locale]/(app)/respondents/[respondentId]/respondent-details.tsx",
           "line": 140
+        },
+        {
+          "file": "apps/admin/src/app/[locale]/(app)/respondents/columns.tsx",
+          "line": 34
         },
         {
           "file": "apps/admin/src/app/[locale]/(app)/respondents/columns.tsx",

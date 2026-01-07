@@ -4,6 +4,7 @@ import Button from '@glint/ui/button';
 import EmptyPanel from '@glint/ui/empty-panel';
 import {useMutation, useQueryClient} from '@tanstack/react-query';
 import {toast} from 'sonner';
+import {useI18n} from '@/hooks/use-i18n';
 import {useTRPC} from '@/lib/trpc/react';
 
 interface Props {
@@ -17,6 +18,7 @@ const MissingAuthenticityScore: React.FC<React.PropsWithChildren<Props>> = ({
     responseId,
     surveyId
 }) => {
+    const {t} = useI18n();
     const trpc = useTRPC();
     const queryClient = useQueryClient();
     const generateMutation = useMutation(
@@ -31,15 +33,15 @@ const MissingAuthenticityScore: React.FC<React.PropsWithChildren<Props>> = ({
                 await queryClient.invalidateQueries({
                     queryKey: trpc.responses.getStats.queryKey(surveyId)
                 });
-                toast.success('Score generated successfully');
+                toast.success(t('Score generated successfully'));
             }
         })
     );
 
     return (
         <EmptyPanel
-            text="Generate an authenticity score to analyse this response"
-            title="No authenticity score available"
+            text={t('Generate an authenticity score to analyse this response')}
+            title={t('No authenticity score available')}
         >
             {campaignId && (
                 <Button
@@ -47,7 +49,7 @@ const MissingAuthenticityScore: React.FC<React.PropsWithChildren<Props>> = ({
                     onClick={() => generateMutation.mutate({responseId, surveyId, campaignId})}
                     pending={generateMutation.isPending}
                 >
-                    {generateMutation.isPending ? 'Generating...' : 'Generate score'}
+                    {generateMutation.isPending ? t('Generating...') : t('Generate score')}
                 </Button>
             )}
         </EmptyPanel>

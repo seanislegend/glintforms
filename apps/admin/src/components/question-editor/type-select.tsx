@@ -8,23 +8,25 @@ import {ListChecksIcon} from '@phosphor-icons/react/dist/ssr/ListChecks';
 import {TextAaIcon} from '@phosphor-icons/react/dist/ssr/TextAa';
 import {use} from 'react';
 import {useFormContext} from 'react-hook-form';
+import {useI18n} from '@/hooks/use-i18n';
 import type {QuestionsUpdate, QuestionType} from '@/lib/schemas/questions';
 import {QuestionContext} from './provider';
 
-const questionTypes: {value: QuestionType; label: string; icon: React.ReactNode}[] = [
-    {value: 'text', label: 'Text input', icon: <TextAaIcon className="h-4 w-4" />},
-    {value: 'number', label: 'Number input', icon: <HashIcon className="h-4 w-4" />},
-    {value: 'single_select', label: 'Single select', icon: <CheckSquareIcon className="h-4 w-4" />},
-    {value: 'multi_select', label: 'Multi select', icon: <ListChecksIcon className="h-4 w-4" />}
-];
-
 const QuestionTypeSelect: React.FC = () => {
+    const {t} = useI18n();
     const {questionIndex} = use(QuestionContext);
     const {control} = useFormContext<QuestionsUpdate>();
 
+    const questionTypes: {value: QuestionType; label: string; icon: React.ReactNode}[] = [
+        {value: 'text', label: t('Text input'), icon: <TextAaIcon className="h-4 w-4" />},
+        {value: 'number', label: t('Number input'), icon: <HashIcon className="h-4 w-4" />},
+        {value: 'single_select', label: t('Single select'), icon: <CheckSquareIcon className="h-4 w-4" />},
+        {value: 'multi_select', label: t('Multi select'), icon: <ListChecksIcon className="h-4 w-4" />}
+    ];
+
     return (
         <FormField
-            label="Type"
+            label={t('Type')}
             control={control}
             name={`questions.${questionIndex}.type`}
             render={({field}) => (

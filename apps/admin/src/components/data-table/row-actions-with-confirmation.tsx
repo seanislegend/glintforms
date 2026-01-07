@@ -9,6 +9,7 @@ import type {Row} from '@tanstack/react-table';
 import Link from '@glint/ui/link';
 import {useState} from 'react';
 import ConfirmationDialog from '@/components/dialogs/confirmation';
+import {useI18n} from '@/hooks/use-i18n';
 
 interface Action {
     label: string;
@@ -42,6 +43,7 @@ export const DataTableRowActionsWithConfirmation = <TData,>({
     detailsUrl,
     editUrl
 }: React.PropsWithChildren<DataTableRowActionsProps<TData>>) => {
+    const {t} = useI18n();
     const [confirmAction, setConfirmAction] = useState<{
         action: () => void;
         title: string;
@@ -53,10 +55,10 @@ export const DataTableRowActionsWithConfirmation = <TData,>({
         if (action.requiresConfirmation) {
             setConfirmAction({
                 action: action.onClick,
-                title: action.confirmationTitle || 'Confirm Action',
+                title: action.confirmationTitle || t('Confirm action'),
                 description:
                     action.confirmationDescription ||
-                    'Are you sure you want to perform this action?',
+                    t('Are you sure you want to perform this action?'),
                 variant: 'default'
             });
         } else {
@@ -68,10 +70,10 @@ export const DataTableRowActionsWithConfirmation = <TData,>({
         if (deleteAction) {
             setConfirmAction({
                 action: deleteAction.onClick,
-                title: deleteAction.confirmationTitle || 'Confirm Delete',
+                title: deleteAction.confirmationTitle || t('Confirm delete'),
                 description:
                     deleteAction.confirmationDescription ||
-                    'Are you sure you want to delete this item? This action cannot be undone.',
+                    t('Are you sure you want to delete this item? This action cannot be undone'),
                 variant: 'destructive'
             });
         }
@@ -90,7 +92,7 @@ export const DataTableRowActionsWithConfirmation = <TData,>({
                                     variant="outline"
                                 >
                                     <DotsThreeIcon weight="bold" />
-                                    <span className="sr-only">Open menu</span>
+                                    <span className="sr-only">{t('Open menu')}</span>
                                 </Button>
                             }
                         />
@@ -106,7 +108,7 @@ export const DataTableRowActionsWithConfirmation = <TData,>({
                             {deleteAction && actions.length > 0 && <MenuSeparator />}
                             {deleteAction && (
                                 <MenuItem onClick={handleDeleteAction} variant="destructive">
-                                    {deleteAction.label || 'Delete'}
+                                    {deleteAction.label || t('Delete')}
                                     {deleteAction.shortcut && (
                                         <MenuShortcut>{deleteAction.shortcut}</MenuShortcut>
                                     )}
@@ -119,7 +121,7 @@ export const DataTableRowActionsWithConfirmation = <TData,>({
                     <Link href={editUrl}>
                         <Button variant="outline" size="sm">
                             <PencilSimpleIcon />
-                            <span className="sr-only">Edit</span>
+                            <span className="sr-only">{t('Edit')}</span>
                         </Button>
                     </Link>
                 )}
@@ -127,7 +129,7 @@ export const DataTableRowActionsWithConfirmation = <TData,>({
                     <Link href={detailsUrl}>
                         <Button variant="outline" size="sm">
                             <ArrowRightIcon />
-                            <span className="sr-only">View</span>
+                            <span className="sr-only">{t('View')}</span>
                         </Button>
                     </Link>
                 )}
