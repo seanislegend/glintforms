@@ -1,6 +1,7 @@
 'use client';
 
 import {Collapsible, CollapsibleContent, CollapsibleTrigger} from '@glint/ui/collapsible';
+import Link from '@glint/ui/link';
 import {
     SidebarMenuButton,
     SidebarMenuItem,
@@ -11,10 +12,10 @@ import {
 import {cn} from '@glint/ui/utils';
 import {CaretRightIcon} from '@phosphor-icons/react/dist/ssr/CaretRight';
 import {useQuery} from '@tanstack/react-query';
-import Link from '@glint/ui/link';
 import {usePathname} from 'next/navigation';
 import {useEffect, useState} from 'react';
 import {NavMainLink} from '@/components/nav/main';
+import {useI18n} from '@/hooks/use-i18n';
 import {useSession} from '@/hooks/use-session';
 import {useTRPC} from '@/lib/trpc/react';
 
@@ -28,6 +29,7 @@ interface Props {
 type ItemKey = 'campaigns' | 'cohorts' | 'screeners' | 'surveys';
 
 const SubNav: React.FC<Props> = ({href, id, Icon, title}) => {
+    const {t} = useI18n();
     const pathname = usePathname();
     const {session} = useSession();
     const trpc = useTRPC();
@@ -42,7 +44,7 @@ const SubNav: React.FC<Props> = ({href, id, Icon, title}) => {
     const hasItems = items?.[id as ItemKey] && items[id as ItemKey].length > 0;
     const itemsWithAllLink = [
         ...(items?.[id as ItemKey] || []),
-        {href, id: 'all', title: 'View all'}
+        {href, id: 'all', title: t('View all')}
     ];
     const itemsForNav = itemsWithAllLink.map(item => {
         const itemHref = item.id === 'all' ? href : `${href}/${item.id}`;
