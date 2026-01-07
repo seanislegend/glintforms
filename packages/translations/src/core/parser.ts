@@ -91,12 +91,33 @@ export const parseFile = async (filepath: string): Promise<ParseResult> => {
 
                 // check for /*i18n*/ comment before string
                 const leadingComments = node.leadingComments || [];
-                const hasI18nMarker = leadingComments.some(
+                const i18nComment = leadingComments.find(
                     (comment: any) => comment.value.trim() === 'i18n'
                 );
 
-                if (hasI18nMarker) {
+                if (i18nComment) {
+                    const i18nLine = i18nComment.loc?.start.line || node.loc?.start.line || 0;
+                    const prevLine = i18nLine - 1;
+
+                    // find comment on previous line
+                    let precedingComment: string | undefined;
+                    if (prevLine > 0) {
+                        const lines = content.split('\n');
+                        const prevLineContent = lines[prevLine - 1]?.trim() || '';
+
+                        // match single-line comments (// or /* */)
+                        const singleLineMatch = prevLineContent.match(/^\/\/\s*(.+)$/);
+                        const blockCommentMatch = prevLineContent.match(/^\/\*\s*(.+?)\s*\*\/$/);
+
+                        if (singleLineMatch) {
+                            precedingComment = singleLineMatch[1];
+                        } else if (blockCommentMatch) {
+                            precedingComment = blockCommentMatch[1];
+                        }
+                    }
+
                     extracted.push({
+                        comment: precedingComment,
                         file: filepath,
                         line: node.loc?.start.line || 0,
                         text: node.value

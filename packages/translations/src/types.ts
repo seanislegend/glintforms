@@ -1,4 +1,5 @@
 export interface ExtractedString {
+    comment?: string;
     file: string;
     line: number;
     text: string;
