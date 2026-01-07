@@ -18,54 +18,59 @@ interface Props {
     screenerId: string;
 }
 
-const getTypeLabel = (type: string) => {
-    switch (type) {
-        case 'age':
-            return t('Age');
-        case 'location':
-            return t('Location');
-        case 'selection':
-            return t('Selection');
-        default:
-            return type;
-    }
-};
-
-const renderConfig = (type: string, config: unknown) => {
-    if (type === 'age') {
-        const ageConfig = config as {operator: 'over' | 'under'; value: number};
-        return `${ageConfig.operator} ${ageConfig.value}`;
-    }
-    if (type === 'location') {
-        const locationConfig = config as {countries: string[]};
-        return locationConfig.countries.map(code => COUNTRY_CODE_LABELS[code] || code).join(', ');
-    }
-    if (type === 'selection') {
-        const selectionConfig = config as {
-            options: Array<{id: string; passes: boolean; value: string}>;
-            question: string;
-        };
-        return (
-            <div className="space-y-2">
-                <p className="text-sm font-medium">{selectionConfig.question}</p>
-                <ul className="list-disc list-inside space-y-1">
-                    {selectionConfig.options.map(opt => (
-                        <li className={`text-sm ${opt.passes ? 'font-semibold' : ''}`} key={opt.id}>
-                            {opt.value}
-                            {opt.passes && ` (${t('passes')})`}
-                        </li>
-                    ))}
-                </ul>
-            </div>
-        );
-    }
-    return JSON.stringify(config);
-};
-
 const ScreenerDetails: React.FC<Props> = ({screenerId}) => {
     const {t} = useI18n();
     const trpc = useTRPC();
     const {data: screener} = useSuspenseQuery(trpc.screeners.get.queryOptions(screenerId));
+
+    const getTypeLabel = (type: string) => {
+        switch (type) {
+            case 'age':
+                return t('Age');
+            case 'location':
+                return t('Location');
+            case 'selection':
+                return t('Selection');
+            default:
+                return type;
+        }
+    };
+
+    const renderConfig = (type: string, config: unknown) => {
+        if (type === 'age') {
+            const ageConfig = config as {operator: 'over' | 'under'; value: number};
+            return `${ageConfig.operator} ${ageConfig.value}`;
+        }
+        if (type === 'location') {
+            const locationConfig = config as {countries: string[]};
+            return locationConfig.countries
+                .map(code => COUNTRY_CODE_LABELS[code] || code)
+                .join(', ');
+        }
+        if (type === 'selection') {
+            const selectionConfig = config as {
+                options: Array<{id: string; passes: boolean; value: string}>;
+                question: string;
+            };
+            return (
+                <div className="space-y-2">
+                    <p className="text-sm font-medium">{selectionConfig.question}</p>
+                    <ul className="list-disc list-inside space-y-1">
+                        {selectionConfig.options.map(opt => (
+                            <li
+                                className={`text-sm ${opt.passes ? 'font-semibold' : ''}`}
+                                key={opt.id}
+                            >
+                                {opt.value}
+                                {opt.passes && ` (${t('passes')})`}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            );
+        }
+        return JSON.stringify(config);
+    };
 
     if (!screener) {
         return (

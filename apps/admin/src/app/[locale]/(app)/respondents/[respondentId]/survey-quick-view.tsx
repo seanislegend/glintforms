@@ -108,6 +108,7 @@ const SurveyDetails = ({surveyId}: {surveyId: string}) => {
 };
 
 const SurveyQuickView = () => {
+    const {t} = useI18n();
     const [surveyId, setSurveyId] = useQueryState('surveyId');
 
     return (
