@@ -64,22 +64,22 @@ const ScreenerLocationFields: React.FC<FieldProps> = ({control}) => {
     );
 };
 
-const screenerDescriptions: Record<string, string> = {
-    age: t(
-        'Only allow respondents to access the survey if they are older or younger than the specified age.'
-    ),
-    location: t(
-        'Only allow respondents to access the survey if they are in the specified countries.'
-    ),
-    selection: t(
-        'Only allow respondents to access the survey if they answer the question correctly.'
-    )
-};
-
 const ScreenerTypeFields: React.FC<Props> = ({defaultOptionIds}) => {
     const {t} = useI18n();
     const methods = useFormContext<ScreenerCreate>();
     const screenerType = useWatch({control: methods.control, name: 'type'});
+
+    const screenerDescriptions: Record<string, string> = {
+        age: t(
+            'Only allow respondents to access the survey if they are older or younger than the specified age.'
+        ),
+        location: t(
+            'Only allow respondents to access the survey if they are in the specified countries.'
+        ),
+        selection: t(
+            'Only allow respondents to access the survey if they answer the question correctly.'
+        )
+    };
 
     return (
         <Card>
