@@ -16,12 +16,14 @@ export const OPTIONS = () => {
     return response;
 };
 
-const handler = async (req: NextRequest) => {
+const handler = async (req: NextRequest, ctx: RouteContext<'/[locale]/api/trpc/[trpc]'>) => {
+    const params = await ctx.params;
+    const locale = params.locale as Locale;
     const response = await fetchRequestHandler({
-        endpoint: '/api/trpc',
+        endpoint: `/${locale}/api/trpc`,
         router: appRouter,
         req,
-        createContext: () => createTRPCContext({headers: req.headers}),
+        createContext: () => createTRPCContext({headers: req.headers, locale}),
         onError({error, path}) {
             console.error(`>>> tRPC Error on '${path}'`, error);
         }

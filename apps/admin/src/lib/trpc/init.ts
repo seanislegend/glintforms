@@ -6,7 +6,7 @@ import z, {ZodError} from 'zod';
 import {auth} from '@/lib/auth/server';
 import {surveyCanBeEdited} from '@/lib/surveys/status';
 
-export const createTRPCContext = async (opts: {headers: Headers}) => {
+export const createTRPCContext = async (opts: {headers: Headers; locale: Locale}) => {
     const session = await auth.api.getSession({headers: opts.headers});
     let tenant = null;
 
@@ -19,7 +19,7 @@ export const createTRPCContext = async (opts: {headers: Headers}) => {
         tenant = userData[0]?.tenantId || null;
     }
 
-    return {db, session, tenant, user: session?.user};
+    return {db, locale: opts.locale, session, tenant, user: session?.user};
 };
 
 export const t = initTRPC.context<typeof createTRPCContext>().create({

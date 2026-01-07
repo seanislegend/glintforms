@@ -50,7 +50,7 @@ const RootLayout: React.FC<React.PropsWithChildren<Props>> = async ({children, p
             <body className="bg-sidebar text-blue-900">
                 <div className="min-h-screen">
                     <I18nProvider locale={locale} translations={translations}>
-                        <AppProviders>{children}</AppProviders>
+                        <AppProviders locale={locale}>{children}</AppProviders>
                     </I18nProvider>
                 </div>
                 <Toaster richColors />

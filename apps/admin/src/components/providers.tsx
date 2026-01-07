@@ -1,8 +1,12 @@
 import {NuqsAdapter} from 'nuqs/adapters/next/app';
 import {TRPCReactProvider} from '@/lib/trpc/react';
 
-const AppProviders: React.FC<React.PropsWithChildren> = ({children}) => (
-    <TRPCReactProvider>
+interface Props {
+    locale: Locale;
+}
+
+const AppProviders: React.FC<React.PropsWithChildren<Props>> = ({children, locale}) => (
+    <TRPCReactProvider locale={locale}>
         <NuqsAdapter>{children}</NuqsAdapter>
     </TRPCReactProvider>
 );

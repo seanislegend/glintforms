@@ -2,6 +2,7 @@ import {type Database, screeners, surveyScreeners, surveys} from '@glint/databas
 import {TRPCError} from '@trpc/server';
 import {and, count, desc, eq} from 'drizzle-orm';
 import {z} from 'zod';
+import {getServerI18n} from '@/lib/i18n-server';
 import type {ScreenerList} from '@/lib/schemas/screeners';
 import {screenerCreateSchema, screenerUpdateSchema} from '@/lib/schemas/screeners';
 import {createTRPCRouter, protectedProcedure} from '../init';
@@ -100,9 +101,10 @@ export const screenersRouter = createTRPCRouter({
             })
         )
         .mutation(async ({ctx, input}) => {
+            const {t} = await getServerI18n(ctx.locale);
             const screener = await verifyScreenerAccess(ctx.db, ctx.tenant, input.id);
             if (!screener) {
-                throw new TRPCError({code: 'NOT_FOUND', message: 'Screener not found'});
+                throw new TRPCError({code: 'NOT_FOUND', message: t('Screener not found')});
             }
 
             const updateData: {
@@ -138,9 +140,10 @@ export const screenersRouter = createTRPCRouter({
             return updated;
         }),
     delete: protectedProcedure.input(z.string().uuid()).mutation(async ({ctx, input}) => {
+        const {t} = await getServerI18n(ctx.locale);
         const screener = await verifyScreenerAccess(ctx.db, ctx.tenant, input);
         if (!screener) {
-            throw new TRPCError({code: 'NOT_FOUND', message: 'Screener not found'});
+            throw new TRPCError({code: 'NOT_FOUND', message: t('Screener not found')});
         }
 
         const [usage] = await ctx.db
@@ -152,7 +155,7 @@ export const screenersRouter = createTRPCRouter({
         if (usage && usage.count > 0) {
             throw new TRPCError({
                 code: 'BAD_REQUEST',
-                message: 'Cannot delete screener that is assigned to surveys'
+                message: t('Cannot delete screener that is assigned to surveys')
             });
         }
 

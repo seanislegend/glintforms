@@ -1,7 +1,7 @@
 /**
  * Auto-generated translation keys
  * Do not edit manually - run `bun translation extract` to regenerate
- * Generated: 2026-01-07T02:46:05.041Z
+ * Generated: 2026-01-07T04:18:45.699Z
  */
 
 export interface TranslationKeys {
@@ -16,6 +16,7 @@ export interface TranslationKeys {
     /**
      * **Text:** "XLSForm export failed"
      *
+     * @see apps/admin/src/app/[locale]/api/surveys/[surveyId]/questions/export/xlsform/route.ts:48
      * @see apps/admin/src/app/api/surveys/[surveyId]/questions/export/xlsform/route.ts:48
      */
     "admin.api.surveys.291b09b": string;
@@ -23,6 +24,7 @@ export interface TranslationKeys {
     /**
      * **Text:** "Unauthorized"
      *
+     * @see apps/admin/src/app/[locale]/api/surveys/[surveyId]/questions/export/xlsform/route.ts:18
      * @see apps/admin/src/app/api/surveys/[surveyId]/questions/export/xlsform/route.ts:18
      * @see apps/admin/src/lib/schemas/export-utils.ts:32
      */
@@ -290,6 +292,8 @@ export interface TranslationKeys {
      * @see apps/admin/src/app/[locale]/(app)/cohorts/[cohortId]/edit/form.tsx:74
      * @see apps/admin/src/components/cohorts/cohort-details.tsx:26
      * @see apps/admin/src/components/cohorts/cohort-details.tsx:27
+     * @see apps/admin/src/lib/trpc/routers/cohorts.ts:108
+     * @see apps/admin/src/lib/trpc/routers/cohorts.ts:240
      */
     "admin.cohorts.edit.2093b36": string;
 
@@ -3775,7 +3779,13 @@ export interface TranslationKeys {
      * @see apps/admin/src/app/[locale]/(app)/respondents/[respondentId]/survey-quick-view.tsx:26
      * @see apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/settings/client.tsx:30
      * @see apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/settings/client.tsx:31
+     * @see apps/admin/src/app/[locale]/api/surveys/[surveyId]/questions/export/xlsform/route.ts:27
      * @see apps/admin/src/app/api/surveys/[surveyId]/questions/export/xlsform/route.ts:27
+     * @see apps/admin/src/lib/trpc/routers/surveys.ts:139
+     * @see apps/admin/src/lib/trpc/routers/surveys.ts:314
+     * @see apps/admin/src/lib/trpc/routers/surveys.ts:387
+     * @see apps/admin/src/lib/trpc/routers/surveys.ts:413
+     * @see apps/admin/src/lib/trpc/routers/surveys.ts:448
      */
     "admin.respondents.surveyQuickView.75eb367": string;
 
@@ -4863,6 +4873,7 @@ export interface TranslationKeys {
      * **Text:** "You must provide a password when password protection is enabled"
      *
      * @see apps/admin/src/lib/schemas/surveys.ts:70
+     * @see apps/admin/src/lib/trpc/routers/surveys.ts:246
      */
     "admin.schemas.surveys.72bbf6e": string;
 
@@ -6482,6 +6493,78 @@ export interface TranslationKeys {
     "admin.time.aaa9402": string;
 
     /**
+     * **Text:** "Cannot generate questions for a survey that is no longer in draft status"
+     *
+     * @see apps/admin/src/lib/trpc/routers/questions.ts:291
+     */
+    "admin.trpc.routers.05cd1c2": string;
+
+    /**
+     * **Text:** "Authenticity score not found"
+     *
+     * @see apps/admin/src/lib/trpc/routers/authenticity.ts:80
+     */
+    "admin.trpc.routers.1176459": string;
+
+    /**
+     * **Text:** "Survey not found or access denied"
+     *
+     * @see apps/admin/src/lib/trpc/routers/questions.ts:42
+     * @see apps/admin/src/lib/trpc/routers/questions.ts:286
+     */
+    "admin.trpc.routers.1b9c726": string;
+
+    /**
+     * **Text:** "This survey has no questions. Before the status can be changed, at least one question must be added."
+     *
+     * @see apps/admin/src/lib/trpc/routers/surveys.ts:152
+     */
+    "admin.trpc.routers.213e592": string;
+
+    /**
+     * **Text:** "Screener assignment not found"
+     *
+     * @see apps/admin/src/lib/trpc/routers/surveys.ts:430
+     * @see apps/admin/src/lib/trpc/routers/surveys.ts:465
+     */
+    "admin.trpc.routers.2a729eb": string;
+
+    /**
+     * **Text:** "Failed to create campaign"
+     *
+     * @see apps/admin/src/lib/trpc/routers/surveys.ts:80
+     */
+    "admin.trpc.routers.7194ed2": string;
+
+    /**
+     * **Text:** "Cannot modify survey when it is complete or archived"
+     *
+     * @see apps/admin/src/lib/trpc/routers/surveys.ts:320
+     */
+    "admin.trpc.routers.7852c59": string;
+
+    /**
+     * **Text:** "Cannot delete screener that is assigned to surveys"
+     *
+     * @see apps/admin/src/lib/trpc/routers/screeners.ts:158
+     */
+    "admin.trpc.routers.83ffb27": string;
+
+    /**
+     * **Text:** "Screener is already assigned to this survey"
+     *
+     * @see apps/admin/src/lib/trpc/routers/surveys.ts:350
+     */
+    "admin.trpc.routers.e08d9ae": string;
+
+    /**
+     * **Text:** "No campaign ID provided"
+     *
+     * @see apps/admin/src/lib/trpc/routers/surveys.ts:86
+     */
+    "admin.trpc.routers.f499eee": string;
+
+    /**
      * **Text:** "Response details"
      *
      * @see apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/responses/[responseId]/page.tsx:30
@@ -7016,6 +7099,9 @@ export interface TranslationKeys {
      * @see apps/admin/src/app/[locale]/(app)/screeners/[screenerId]/screener-details.tsx:79
      * @see apps/admin/src/components/screeners/summary.tsx:28
      * @see apps/admin/src/components/screeners/summary.tsx:29
+     * @see apps/admin/src/lib/trpc/routers/screeners.ts:107
+     * @see apps/admin/src/lib/trpc/routers/screeners.ts:146
+     * @see apps/admin/src/lib/trpc/routers/surveys.ts:332
      */
     "common.970686d": string;
 
@@ -8097,6 +8183,16 @@ export type TranslationText =
     | "min"
     | "m"
     | "h"
+    | "Cannot generate questions for a survey that is no longer in draft status"
+    | "Authenticity score not found"
+    | "Survey not found or access denied"
+    | "This survey has no questions. Before the status can be changed, at least one question must be added."
+    | "Screener assignment not found"
+    | "Failed to create campaign"
+    | "Cannot modify survey when it is complete or archived"
+    | "Cannot delete screener that is assigned to surveys"
+    | "Screener is already assigned to this survey"
+    | "No campaign ID provided"
     | "Response details"
     | "No themes generated"
     | "Fetching details..."

@@ -9,6 +9,10 @@ import SuperJSON from 'superjson';
 import type {AppRouter} from '@/lib/trpc/routers/app';
 import {createQueryClient} from './query-client';
 
+interface Props {
+    locale: Locale;
+}
+
 let clientQueryClientSingleton: QueryClient | undefined;
 
 const getQueryClient = () => {
@@ -24,7 +28,7 @@ const getQueryClient = () => {
 
 export const {useTRPC, TRPCProvider} = createTRPCContext<AppRouter>();
 
-export const TRPCReactProvider = (props: {children: React.ReactNode}) => {
+export const TRPCReactProvider = (props: React.PropsWithChildren<Props>) => {
     const queryClient = getQueryClient();
 
     const [trpcClient] = useState(() =>
@@ -37,7 +41,7 @@ export const TRPCReactProvider = (props: {children: React.ReactNode}) => {
                 }),
                 httpBatchStreamLink({
                     transformer: SuperJSON,
-                    url: `${getBaseUrl()}/api/trpc`,
+                    url: `${getBaseUrl()}/${props.locale}/api/trpc`,
                     headers() {
                         const headers = new Headers();
                         headers.set('x-trpc-source', 'nextjs-react');
