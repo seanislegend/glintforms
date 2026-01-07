@@ -6,9 +6,11 @@ import Switch from '@glint/form/switch';
 import {BasicCard} from '@glint/ui/card';
 import ToggleVisibility from '@glint/ui/toggle-visibility';
 import {useFormContext, useWatch} from 'react-hook-form';
+import {useI18n} from '@/hooks/use-i18n';
 import {QUESTION_EXPORT_FIELDS} from '@/lib/schemas/constants';
 
 const ExportQuestionsFieldSelector: React.FC = () => {
+    const {t} = useI18n();
     const {control, setValue} = useFormContext();
     const includeAllFields = useWatch({name: 'includeAllFields'});
     const selectedFields = useWatch({name: 'fields'});
@@ -23,8 +25,10 @@ const ExportQuestionsFieldSelector: React.FC = () => {
     return (
         <ToggleVisibility visible={!includeAllFields}>
             <BasicCard
-                title="Select fields to include"
-                description="Only fields that are selected will be included in the export. If you want to include all fields, enable the 'Include all fields' switch."
+                title={t('Select fields to include')}
+                description={t(
+                    "Only fields that are selected will be included in the export. If you want to include all fields, enable the 'Include all fields' switch."
+                )}
             >
                 <div className="space-y-3">
                     {QUESTION_EXPORT_FIELDS.map(field => (

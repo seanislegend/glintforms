@@ -10,9 +10,9 @@ import {
     DialogPopup,
     DialogTitle
 } from '@glint/ui/dialog';
-import {useI18n} from '@/hooks/use-i18n';
 import {useAtom, useSetAtom} from 'jotai';
 import {useFormContext, useWatch} from 'react-hook-form';
+import {useI18n} from '@/hooks/use-i18n';
 import {questionCountAtom, removeQuestionIndexAtom} from '@/lib/store';
 
 interface DialogProps {

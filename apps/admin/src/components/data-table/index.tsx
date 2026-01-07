@@ -22,6 +22,7 @@ import {arrayIncludes} from '@/components/data-table/utils';
 import {DataTablePagination} from './pagination';
 import {useFilterSearchParams, usePaginationSearchParams} from './parsers';
 import {DataTableToolbar} from './toolbar';
+import {useI18n} from '@/hooks/use-i18n';
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[];
@@ -50,6 +51,7 @@ export const DataTable = <TData, TValue>({
     tableClassName = '',
     toolbarActions
 }: DataTableProps<TData, TValue>) => {
+    const {t} = useI18n();
     const [rowSelection, setRowSelection] = useState({});
     const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
     const [filterState, setFilterState] = useFilterSearchParams();
@@ -149,7 +151,7 @@ export const DataTable = <TData, TValue>({
                         ) : (
                             <TableRow>
                                 <TableCell colSpan={columns.length} className="h-24 text-center">
-                                    No results.
+                                    {t('No results')}
                                 </TableCell>
                             </TableRow>
                         )}

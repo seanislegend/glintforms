@@ -9,6 +9,7 @@ import {useFormContext} from 'react-hook-form';
 import {QuestionEditorContext} from '@/components/question-editor/wrapper';
 import SortItemsDialog, {type SortItem} from '@/components/sort-items';
 import useHighlight from '@/hooks/use-highlight';
+import {useI18n} from '@/hooks/use-i18n';
 import type {Question} from '@/lib/schemas/questions';
 import {questionCountAtom} from '@/lib/store';
 import {getReorderButtonDisabledReason} from '@/lib/surveys/disabled-rules';
@@ -22,6 +23,7 @@ interface Props {
 }
 
 const QuestionEditorFooter: React.FC<Props> = ({isDraft, isPending, onAdd}) => {
+    const {t} = useI18n();
     const {survey} = use(QuestionEditorContext);
     const {getValues, setValue} = useFormContext();
     const questionCount = useAtomValue(questionCountAtom);
@@ -43,13 +45,15 @@ const QuestionEditorFooter: React.FC<Props> = ({isDraft, isPending, onAdd}) => {
                 {isDraft && (
                     <Button onClick={onAdd} variant="secondary">
                         <PlusIcon />
-                        Add question
+                        {t('Add question')}
                     </Button>
                 )}
                 {isDraft && questionCount > 1 && (
                     <SortItemsDialog
-                        ctaLabel="Reorder questions"
-                        description="Drag and drop questions to change their order. The order will be saved when you click 'Save order'."
+                        ctaLabel={t('Reorder questions')}
+                        description={t(
+                            "Drag and drop questions to change their order. The order will be saved when you click 'Save order'."
+                        )}
                         disabledReason={getReorderButtonDisabledReason(survey?.status)}
                         getItems={() => {
                             const questions = getValues('questions');
@@ -59,7 +63,7 @@ const QuestionEditorFooter: React.FC<Props> = ({isDraft, isPending, onAdd}) => {
                             }));
                         }}
                         onSorted={handleReorderQuestions}
-                        title="Reorder questions"
+                        title={t('Reorder questions')}
                     />
                 )}
                 <ErrorStatus />
@@ -67,7 +71,7 @@ const QuestionEditorFooter: React.FC<Props> = ({isDraft, isPending, onAdd}) => {
             {canEdit && (
                 <Button pending={isPending} type="submit">
                     <FloppyDiskIcon />
-                    Save questions
+                    {t('Save questions')}
                 </Button>
             )}
         </div>

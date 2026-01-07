@@ -12,7 +12,6 @@ import {
     DialogTitle,
     DialogTrigger
 } from '@glint/ui/dialog';
-import {useI18n} from '@/hooks/use-i18n';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {SparkleIcon} from '@phosphor-icons/react/dist/ssr/Sparkle';
 import {useMutation} from '@tanstack/react-query';
@@ -22,6 +21,7 @@ import {FormProvider, useForm, useFormContext} from 'react-hook-form';
 import {toast} from 'sonner';
 import {QuestionEditorContext} from '@/components/question-editor/wrapper';
 import useHighlight from '@/hooks/use-highlight';
+import {useI18n} from '@/hooks/use-i18n';
 import {MAX_QUESTIONS} from '@/lib/schemas/constants';
 import {type GenerateQuestionsForm, generateQuestionsSchema} from '@/lib/schemas/questions';
 import {questionCountAtom} from '@/lib/store';

@@ -1,4 +1,5 @@
 'use no memo';
+'use client';
 
 import {Badge} from '@glint/ui/badge';
 import Button from '@glint/ui/button';
@@ -17,6 +18,7 @@ import {cn} from '@glint/ui/utils';
 import {CheckIcon} from '@phosphor-icons/react/dist/ssr/Check';
 import {PlusCircleIcon} from '@phosphor-icons/react/dist/ssr/PlusCircle';
 import type {Column} from '@tanstack/react-table';
+import {useI18n} from '@/hooks/use-i18n';
 
 export interface DataTableFacetedFilterProps<TData, TValue> {
     column?: Column<TData, TValue>;
@@ -29,6 +31,7 @@ export const DataTableFacetedFilter = <TData, TValue>({
     options,
     title
 }: DataTableFacetedFilterProps<TData, TValue>) => {
+    const {t} = useI18n();
     const facets = column?.getFacetedUniqueValues();
     const filterValue = column?.getFilterValue();
     const selectedValues = new Set(
@@ -59,7 +62,7 @@ export const DataTableFacetedFilter = <TData, TValue>({
                                 <div className="hidden space-x-1 lg:flex -mr-2 -ml-3">
                                     {selectedValues.size > 2 ? (
                                         <Badge variant="secondary" className="px-1 font-normal">
-                                            {selectedValues.size} selected
+                                            {selectedValues.size} {t('selected')}
                                         </Badge>
                                     ) : (
                                         options
@@ -84,7 +87,7 @@ export const DataTableFacetedFilter = <TData, TValue>({
                 <Command>
                     <CommandInput placeholder={title} />
                     <CommandList>
-                        <CommandEmpty>No results found.</CommandEmpty>
+                        <CommandEmpty>{t('No results found')}</CommandEmpty>
                         <CommandGroup>
                             {options.map(option => {
                                 const isSelected = selectedValues.has(option.value);
@@ -137,7 +140,7 @@ export const DataTableFacetedFilter = <TData, TValue>({
                                         onSelect={() => column?.setFilterValue(undefined)}
                                         className="justify-center text-center"
                                     >
-                                        Clear filters
+                                        {t('Clear filters')}
                                     </CommandItem>
                                 </CommandGroup>
                             </>

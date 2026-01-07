@@ -6,6 +6,7 @@ import ToggleVisibility from '@glint/ui/toggle-visibility';
 import {PlusIcon} from '@phosphor-icons/react/dist/ssr/Plus';
 import {use, useMemo} from 'react';
 import {useFieldArray, useWatch} from 'react-hook-form';
+import {useI18n} from '@/hooks/use-i18n';
 import {validationRuleConfigs} from '@/lib/schemas/questions';
 import {isDraftSurvey} from '@/lib/surveys/disabled-rules';
 import {QuestionContext} from './provider';
@@ -14,6 +15,7 @@ import ValidationsRule from './validations-rule';
 import {QuestionEditorContext} from './wrapper';
 
 const QuestionValidationRules: React.FC = () => {
+    const {t} = useI18n();
     const {questionIndex} = use(QuestionContext);
     const {survey} = use(QuestionEditorContext);
     const questionType = useWatch({name: `questions.${questionIndex}.type`});
@@ -35,7 +37,7 @@ const QuestionValidationRules: React.FC = () => {
 
     return (
         <div>
-            <Heading5>Validation rules</Heading5>
+            <Heading5>{t('Validation rules')}</Heading5>
             <ToggleVisibility className="mt-2 space-y-2" initial="hidden" visible={isVisible}>
                 {fields.map((rule, ruleIndex) => (
                     <ValidationsRule
@@ -55,7 +57,7 @@ const QuestionValidationRules: React.FC = () => {
                 variant="outline"
             >
                 <PlusIcon className="!size-4" />
-                Add validation rule
+                {t('Add validation rule')}
             </Button>
         </div>
     );

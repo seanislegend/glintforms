@@ -19,6 +19,7 @@ import {useMutation, useQueryClient} from '@tanstack/react-query';
 import {useState} from 'react';
 import {FormProvider, type SubmitHandler, useForm} from 'react-hook-form';
 import {toast} from 'sonner';
+import {useI18n} from '@/hooks/use-i18n';
 import {
     type AuthenticityScoreOverride,
     authenticityScoreOverrideSchema
@@ -38,6 +39,7 @@ const OverrideAuthenticityScore: React.FC<Props> = ({
     responseId,
     scoreId
 }) => {
+    const {t} = useI18n();
     const [isDialogOpen, setIsDialogOpen] = useState(false);
 
     const queryClient = useQueryClient();
@@ -58,7 +60,7 @@ const OverrideAuthenticityScore: React.FC<Props> = ({
                     queryKey: trpc.authenticity.get.queryKey({responseId})
                 });
                 methods.reset();
-                toast.success('Authenticity score overridden successfully');
+                toast.success(t('Authenticity score overridden successfully'));
                 setIsDialogOpen(false);
             },
             onError: error => {
@@ -77,16 +79,16 @@ const OverrideAuthenticityScore: React.FC<Props> = ({
                 render={
                     <Button className="w-full" size="sm" variant="outline">
                         <PencilIcon className="w-4 h-4" />
-                        Edit
+                        {t('Edit')}
                     </Button>
                 }
             />
             <DialogPopup>
                 <DialogHeader>
-                    <DialogTitle>Override Authenticity Score</DialogTitle>
+                    <DialogTitle>{t('Override authenticity score')}</DialogTitle>
                     {lastUpdated && (
                         <DialogDescription>
-                            Last updated: <RelativeDate date={new Date(lastUpdated)} />
+                            {t('Last updated')}: <RelativeDate date={new Date(lastUpdated)} />
                         </DialogDescription>
                     )}
                 </DialogHeader>
@@ -95,16 +97,16 @@ const OverrideAuthenticityScore: React.FC<Props> = ({
                         <div className="space-y-4">
                             <FormField
                                 control={methods.control}
-                                description="Set the authenticity score percentage (0-100)"
+                                description={t('Set the authenticity score percentage (0-100)')}
                                 fieldProps={{max: '100', min: '0', type: 'number'}}
                                 fieldType="input"
-                                label="Authenticity Score (%)"
+                                label={t('Authenticity score')}
                                 name="originalScore"
                             />
                             <FormField
                                 control={methods.control}
                                 fieldType="textarea"
-                                label="Reason"
+                                label={t('Reason')}
                                 name="overrideReason"
                             />
                         </div>
@@ -114,10 +116,10 @@ const OverrideAuthenticityScore: React.FC<Props> = ({
                                 type="button"
                                 variant="secondary"
                             >
-                                Cancel
+                                {t('Cancel')}
                             </Button>
                             <Button pending={overrideMutation.status === 'pending'} type="submit">
-                                Submit
+                                {t('Submit')}
                             </Button>
                         </DialogFooter>
                     </form>

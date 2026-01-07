@@ -14,13 +14,13 @@ import {
     DialogTitle,
     DialogTrigger
 } from '@glint/ui/dialog';
-import {useI18n} from '@/hooks/use-i18n';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {TrashIcon} from '@phosphor-icons/react/dist/ssr/Trash';
 import {UploadSimpleIcon} from '@phosphor-icons/react/dist/ssr/UploadSimple';
 import {useCallback, useState} from 'react';
 import {FormProvider, type SubmitHandler, useForm} from 'react-hook-form';
 import {toast} from 'sonner';
+import {useI18n} from '@/hooks/use-i18n';
 import {type ImportQuestions, importQuestionsSchema, type Question} from '@/lib/schemas/questions';
 
 interface Props {
@@ -97,7 +97,7 @@ const ImportQuestionsDialog: React.FC<Props> = ({onImport, surveyId}) => {
                 setIsImporting(false);
             }
         },
-        [surveyId, onImport]
+        [surveyId, onImport, t]
     );
 
     return (

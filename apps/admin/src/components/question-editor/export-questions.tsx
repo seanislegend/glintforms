@@ -13,7 +13,6 @@ import {
     SheetTitle,
     SheetTrigger
 } from '@glint/ui/sheet';
-import {useI18n} from '@/hooks/use-i18n';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {BracketsCurlyIcon} from '@phosphor-icons/react/dist/ssr/BracketsCurly';
 import {DownloadSimpleIcon} from '@phosphor-icons/react/dist/ssr/DownloadSimple';
@@ -24,6 +23,7 @@ import {useCallback, useState} from 'react';
 import {FormProvider, type SubmitHandler, useForm} from 'react-hook-form';
 import {toast} from 'sonner';
 import ExportQuestionsFieldSelector from '@/components/question-editor/export-field-selector';
+import {useI18n} from '@/hooks/use-i18n';
 import {type QuestionsExport, questionsExportSchema} from '@/lib/schemas/questions';
 
 interface Props {
@@ -79,7 +79,7 @@ const ImportQuestionsDialog: React.FC<Props> = ({surveyId}) => {
         } finally {
             setIsExporting(false);
         }
-    }, [surveyId, methods.getValues]);
+    }, [surveyId, methods.getValues, t]);
 
     return (
         <Sheet open={isOpen} onOpenChange={handleOpenChange}>
