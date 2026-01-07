@@ -1,5 +1,6 @@
-import Link, {type LinkProps} from 'next/link';
+import type {LinkProps} from 'next/link';
 import {cn} from '../lib/utils';
+import Link from './link';
 
 interface Props extends React.PropsWithChildren<LinkProps> {
     className?: string;
