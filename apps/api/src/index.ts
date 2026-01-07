@@ -3,6 +3,8 @@ import './instrument';
 import {Hono} from 'hono';
 import {secureHeaders} from 'hono/secure-headers';
 import 'dotenv/config';
+import {DEFAULT_LOCALE, LOCALES} from '@glint/translations/constants';
+import {languageDetector} from 'hono/language';
 import {logger} from 'hono/logger';
 import type {ServerContext} from 'src/types/server.js';
 import {corsMiddleware} from './middleware/cors.js';
@@ -15,6 +17,12 @@ const app = new Hono<ServerContext>().basePath('/v1');
 
 app.onError(errorMiddleware);
 
+app.use(
+    languageDetector({
+        supportedLanguages: LOCALES,
+        fallbackLanguage: DEFAULT_LOCALE
+    })
+);
 app.use(logger());
 app.use(secureHeaders());
 app.use('*', securityMiddleware);

@@ -1,0 +1,28 @@
+{
+  "generated": "2026-01-07T18:54:57.961Z",
+  "keys": {
+    "api.routes.surveys.0227f46": {
+      "added": "2026-01-07T18:53:28.099Z",
+      "hash": "0227f46af7e0cf468a3edbb5c0dbae72d643151aafe626fbffd861a8c19d8c62",
+      "occurrences": [
+        {
+          "file": "apps/api/src/routes/surveys.ts",
+          "line": 218
+        }
+      ],
+      "text": "You do not meet the requirements for this survey."
+    },
+    "api.routes.surveys.264687e": {
+      "added": "2026-01-07T18:54:57.961Z",
+      "hash": "264687e95cc3cecde08cb4a2bd7df5388ce25deea65cde892c49d534d2f525d6",
+      "occurrences": [
+        {
+          "file": "apps/api/src/routes/surveys.ts",
+          "line": 149
+        }
+      ],
+      "text": "Failed to create response submission"
+    }
+  },
+  "version": "1.0.0"
+}
