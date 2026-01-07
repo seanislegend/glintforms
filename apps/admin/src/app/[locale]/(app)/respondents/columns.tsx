@@ -7,11 +7,10 @@ import {Fragment} from 'react';
 import {DataTableColumnHeader} from '@/components/data-table/column-header';
 import {DataTableRowActions} from '@/components/data-table/row-actions';
 import RecordId from '@/components/record-id';
-import {t} from '@/lib/i18n';
 import type {RespondentList} from '@/lib/schemas/respondents';
 import {humanise} from '@/utils/humanise';
 
-export const columns: ColumnDef<RespondentList>[] = [
+export const createColumns = (t: (text: string) => string): ColumnDef<RespondentList>[] => [
     {
         accessorKey: 'id',
         header: ({column}) => <DataTableColumnHeader column={column} title={t('ID')} />,

@@ -9,7 +9,7 @@ import {DataTable} from '@/components/data-table';
 import {useI18n} from '@/hooks/use-i18n';
 import type {ScreenerList} from '@/lib/schemas/screeners';
 import {useTRPC} from '@/lib/trpc/react';
-import {columns} from './columns';
+import {createColumns} from './columns';
 
 const ScreenersList: React.FC = () => {
     const {t} = useI18n();
@@ -44,7 +44,7 @@ const ScreenersList: React.FC = () => {
 
     return (
         <DataTable
-            columns={columns}
+            columns={createColumns(t)}
             data={screeners as ScreenerList[]}
             inputFilterKey="name"
             toolbarActions={renderCreateButton}

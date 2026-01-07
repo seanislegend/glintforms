@@ -14,7 +14,7 @@ import {DataTable} from '@/components/data-table';
 import FormDialog from '@/components/form-dialog';
 import {useI18n} from '@/hooks/use-i18n';
 import {useTRPC} from '@/lib/trpc/react';
-import {columns} from './columns';
+import {createColumns} from './columns';
 
 const CreateSurveyForm = lazy(() => import('./create/form'));
 
@@ -56,7 +56,7 @@ const SurveyList: React.FC = () => {
 
     return (
         <DataTable
-            columns={columns}
+            columns={createColumns(t)}
             data={surveys}
             facetedFilters={{
                 status: {

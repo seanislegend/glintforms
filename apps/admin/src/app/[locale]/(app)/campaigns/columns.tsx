@@ -7,10 +7,9 @@ import CampaignStatusBadge from '@/components/badges/campaign-status';
 import {DataTableColumnHeader} from '@/components/data-table/column-header';
 import {DataTableRowActions} from '@/components/data-table/row-actions';
 import RecordId from '@/components/record-id';
-import {t} from '@/lib/i18n';
 import type {CampaignList} from '@/lib/schemas/campaigns';
 
-export const columns: ColumnDef<CampaignList>[] = [
+export const createColumns = (t: (text: string) => string): ColumnDef<CampaignList>[] => [
     {
         accessorKey: 'id',
         header: ({column}) => <DataTableColumnHeader column={column} title={t('ID')} />,

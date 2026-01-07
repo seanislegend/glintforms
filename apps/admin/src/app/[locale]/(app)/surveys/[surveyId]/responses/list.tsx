@@ -6,7 +6,7 @@ import {DataTable} from '@/components/data-table';
 import ExportResponsesDialog from '@/components/dialogs/export-responses';
 import {useI18n} from '@/hooks/use-i18n';
 import {useTRPC} from '@/lib/trpc/react';
-import {columns} from './columns';
+import {createColumns} from './columns';
 import ResponseQuickView from './response-quick-view';
 
 interface Props {
@@ -32,7 +32,7 @@ const ResponsesList: React.FC<Props> = ({surveyId}) => {
     return (
         <>
             <DataTable
-                columns={columns}
+                columns={createColumns(t)}
                 data={data.responses}
                 facetedFilters={{
                     was_completed: {
