@@ -1,5 +1,3 @@
-import 'server-only';
-
 export interface I18nConfig<Locale extends string> {
     defaultLocale: Locale;
     locales: readonly Locale[];
