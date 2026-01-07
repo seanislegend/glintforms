@@ -7,7 +7,7 @@ import {GeistSans} from 'geist/font/sans';
 import AppProviders from '@/components/providers';
 import {I18nProvider} from '@/components/providers/i18n-provider';
 import {getLocale} from '@/get-locales';
-import {i18n, type Locale} from '@/i18n-config';
+import {i18n, type Locale} from '@glint/translations';
 import {getServerI18n} from '@/lib/i18n-server';
 
 interface Props {
