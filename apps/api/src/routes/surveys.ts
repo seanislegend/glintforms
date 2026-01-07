@@ -4,6 +4,7 @@ import {createResponseSchema} from '@glint/schemas';
 import {tasks} from '@trigger.dev/sdk';
 import {asc, eq} from 'drizzle-orm';
 import {Hono} from 'hono';
+import {getServerI18n} from '@/lib/i18n-server';
 import {InvalidBodyError} from '@/middleware/errors';
 import type {ServerContext} from '@/types/server';
 import {
@@ -82,6 +83,7 @@ router.post(
     verifyScreenerTokenIfRequired,
     verifyIdempotency,
     async c => {
+        const {t} = await getServerI18n(c.get('language'));
         const survey = c.get('survey');
         const allQuestions = await db
             .select()
@@ -144,7 +146,7 @@ router.post(
             .returning();
 
         if (!submission) {
-            throw new Error('Failed to create response submission');
+            throw new Error(t('Failed to create response submission'));
         }
 
         await tasks.trigger('process-response-submission', {
@@ -157,6 +159,7 @@ router.post(
 
 // screener validation endpoint
 router.post('/:idOrSlug/screeners', verifySurveyIsActive, async c => {
+    const {t} = await getServerI18n(c.get('language'));
     const survey = c.get('survey');
     const body = await c.req.json();
     const screenerRows = await getSurveyScreeners(survey.id);
@@ -212,7 +215,7 @@ router.post('/:idOrSlug/screeners', verifySurveyIsActive, async c => {
                     ok: false,
                     message:
                         screenerRow.failureMessage ||
-                        'You do not meet the requirements for this survey.',
+                        t('You do not meet the requirements for this survey.'),
                     passed: false
                 },
                 403
