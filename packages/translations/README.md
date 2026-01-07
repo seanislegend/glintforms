@@ -149,6 +149,7 @@ Paths are normalized:
 t('static string')
 t("static string")
 t(`static string`)
+/*i18n*/ 'marked string' // for static constants
 ```
 
 ### Ignores (with warnings)
@@ -158,6 +159,24 @@ t(variable)
 t(`string with ${interpolation}`)
 t(condition ? 'a' : 'b')
 ```
+
+### Marking static strings with comments
+
+Use `/*i18n*/` before strings in constants/configs that can't use runtime `t()`:
+
+```typescript
+export const FIELDS = [
+    {key: 'id', label: /*i18n*/ 'Response ID'},
+    {key: 'name', label: /*i18n*/ 'Name'}
+];
+
+// in component, translate manually:
+export const Table = ({field}) => (
+    <th>{t(field.label)}</th>
+);
+```
+
+Comment markers have zero runtime overhead - strings remain plain text.
 
 ## File structure
 

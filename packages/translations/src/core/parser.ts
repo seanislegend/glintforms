@@ -85,6 +85,23 @@ export const parseFile = async (filepath: string): Promise<ParseResult> => {
                         reason: `t() called with ${arg.type} (only string literals supported)`
                     });
                 }
+            },
+            StringLiteral(path: any) {
+                const node = path.node as StringLiteral;
+
+                // check for /*i18n*/ comment before string
+                const leadingComments = node.leadingComments || [];
+                const hasI18nMarker = leadingComments.some(
+                    (comment: any) => comment.value.trim() === 'i18n'
+                );
+
+                if (hasI18nMarker) {
+                    extracted.push({
+                        file: filepath,
+                        line: node.loc?.start.line || 0,
+                        text: node.value
+                    });
+                }
             }
         });
 
