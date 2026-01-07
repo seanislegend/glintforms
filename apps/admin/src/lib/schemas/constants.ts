@@ -6,80 +6,128 @@ export const MAX_QUESTION_OPTIONS = 20;
 export const MAX_RESPONSE_HARD_LIMIT = 1000;
 
 export const RESPONSE_EXPORT_FIELDS = [
-    {key: 'campaign', label: 'Campaign title', description: 'Title of the campaign'},
-    {key: 'survey', label: 'Survey name', description: 'Name of the survey'},
-    {key: 'id', label: 'Response ID', description: 'Unique identifier for the response'},
-    {key: 'respondent_id', label: 'Respondent ID', description: 'Identifier for the respondent'},
-    {key: 'respondent_name', label: 'Respondent Name', description: 'Name of the respondent'},
-    {key: 'respondent_email', label: 'Respondent Email', description: 'Email of the respondent'},
-    {key: 'respondent_source', label: 'Respondent Source', description: 'Source of the respondent'},
+    {
+        key: 'campaign',
+        label: /*i18n*/ 'Campaign title',
+        description: /*i18n*/ 'Title of the campaign'
+    },
+    {
+        key: 'survey',
+        label: /*i18n*/ 'Survey name',
+        description: /*i18n*/ 'Name of the survey'
+    },
+    {
+        key: 'id',
+        label: /*i18n*/ 'Response ID',
+        description: /*i18n*/ 'Unique identifier for the response'
+    },
+    {
+        key: 'respondent_id',
+        label: /*i18n*/ 'Respondent ID',
+        description: /*i18n*/ 'Identifier for the respondent'
+    },
+    {
+        key: 'respondent_name',
+        label: /*i18n*/ 'Respondent Name',
+        description: /*i18n*/ 'Name of the respondent'
+    },
+    {
+        key: 'respondent_email',
+        label: /*i18n*/ 'Respondent Email',
+        description: /*i18n*/ 'Email of the respondent'
+    },
+    {
+        key: 'respondent_source',
+        label: /*i18n*/ 'Respondent Source',
+        description: /*i18n*/ 'Source of the respondent'
+    },
     {
         key: 'was_completed',
-        label: 'Completion Status',
-        description: 'Whether the survey was completed'
+        label: /*i18n*/ 'Completion Status',
+        description: /*i18n*/ 'Whether the survey was completed'
     },
     {
         key: 'authenticity_is_pass',
-        label: 'Authenticity Status',
-        description: 'Whether the response was verified as authentic'
+        label: /*i18n*/ 'Authenticity Status',
+        description: /*i18n*/ 'Whether the response was verified as authentic'
     },
     {
         key: 'authenticity_percentage',
-        label: 'Authenticity Score',
-        description: 'Authenticity percentage (0-100)'
+        label: /*i18n*/ 'Authenticity Score',
+        description: /*i18n*/ 'Authenticity percentage (0-100)'
     },
     {
         key: 'authenticity_is_overridden',
-        label: 'Score Overridden',
-        description: 'Whether the authenticity score was manually overridden'
+        label: /*i18n*/ 'Score Overridden',
+        description: /*i18n*/ 'Whether the authenticity score was manually overridden'
     },
     {
         key: 'authenticity_override_reason',
-        label: 'Override Reason',
-        description: 'Reason for manual override'
+        label: /*i18n*/ 'Override Reason',
+        description: /*i18n*/ 'Reason for manual override'
     },
-    {key: 'started_at', label: 'Started At', description: 'When the survey was started'},
-    {key: 'ended_at', label: 'Ended At', description: 'When the survey was completed'},
+    {
+        key: 'started_at',
+        label: /*i18n*/ 'Started At',
+        description: /*i18n*/ 'When the survey was started'
+    },
+    {
+        key: 'ended_at',
+        label: /*i18n*/ 'Ended At',
+        description: /*i18n*/ 'When the survey was completed'
+    },
     {
         key: 'duration',
-        label: 'Duration',
-        description: 'How long the survey was completed in seconds'
+        label: /*i18n*/ 'Duration',
+        description: /*i18n*/ 'How long the survey was completed in seconds'
     }
 ];
 
 export const ANSWER_EXPORT_FIELDS = [
-    {key: 'answer_id', label: 'Answer ID', description: 'Unique identifier for the answer'},
-    {key: 'question_name', label: 'Question Name', description: 'Title of the question'},
-    {key: 'answer_value', label: 'Answer Value', description: 'The actual answer provided'},
+    {
+        key: 'answer_id',
+        label: /*i18n*/ 'Answer ID',
+        description: /*i18n*/ 'Unique identifier for the answer'
+    },
+    {
+        key: 'question_name',
+        label: /*i18n*/ 'Question Name',
+        description: /*i18n*/ 'Title of the question'
+    },
+    {
+        key: 'answer_value',
+        label: /*i18n*/ 'Answer Value',
+        description: /*i18n*/ 'The actual answer provided'
+    },
     {
         key: 'answer_was_skipped',
-        label: 'Was Skipped',
-        description: 'Whether this question was skipped'
+        label: /*i18n*/ 'Was Skipped',
+        description: /*i18n*/ 'Whether this question was skipped'
     },
     {
         key: 'answer_created_at',
-        label: 'Answer Created At',
-        description: 'When the answer was created'
+        label: /*i18n*/ 'Answer Created At',
+        description: /*i18n*/ 'When the answer was created'
     },
     {
         key: 'answer_updated_at',
-        label: 'Answer Updated At',
-        description: 'When the answer was last updated'
+        label: /*i18n*/ 'Answer Updated At',
+        description: /*i18n*/ 'When the answer was last updated'
     },
     {
         key: 'analysis_themes',
-        label: 'Analysis Themes',
-        description: 'Themes identified in the answer (comma-separated)'
+        label: /*i18n*/ 'Analysis Themes',
+        description: /*i18n*/ 'Themes identified in the answer (comma-separated)'
     },
     {
         key: 'analysis_themes_descriptions',
-        label: 'Analysis Theme Descriptions',
-        description: 'Descriptions of themes identified in the answer (comma-separated)'
+        label: /*i18n*/ 'Analysis Theme Descriptions',
+        description: /*i18n*/ 'Descriptions of themes identified in the answer (comma-separated)'
     },
     {
         key: 'analysis_themes_sentiments',
-        label: 'Analysis Theme Sentiments',
-        description: 'Sentiments of themes identified in the answer (comma-separated)'
+        label: /*i18n*/ 'Analysis Theme Sentiments',
+        description: /*i18n*/ 'Sentiments of themes identified in the answer (comma-separated)'
     }
 ];
 
@@ -93,29 +141,53 @@ export const CONTENT_TYPES = {
 };
 
 export const EXPORT_FORMATS = {
-    csv: 'CSV',
-    json: 'JSON',
-    excel: 'Excel',
-    xlsform: 'XLSForm'
+    csv: /*i18n*/ 'CSV',
+    json: /*i18n*/ 'JSON',
+    excel: /*i18n*/ 'Excel',
+    xlsform: /*i18n*/ 'XLSForm'
 } as const;
 
 export const QUESTION_EXPORT_FIELDS = [
-    {key: 'id', label: 'ID', description: 'Unique identifier for the question'},
-    {key: 'title', label: 'Title', description: 'Title of the question'},
-    {key: 'description', label: 'Description', description: 'Description of the question'},
-    {key: 'type', label: 'Type', description: 'Type of the question'},
-    {key: 'required', label: 'Required', description: 'Whether the question is required'},
+    {
+        key: 'id',
+        label: /*i18n*/ 'ID',
+        description: /*i18n*/ 'Unique identifier for the question'
+    },
+    {
+        key: 'title',
+        label: /*i18n*/ 'Title',
+        description: /*i18n*/ 'Title of the question'
+    },
+    {
+        key: 'description',
+        label: /*i18n*/ 'Description',
+        description: /*i18n*/ 'Description of the question'
+    },
+    {
+        key: 'type',
+        label: /*i18n*/ 'Type',
+        description: /*i18n*/ 'Type of the question'
+    },
+    {
+        key: 'required',
+        label: /*i18n*/ 'Required',
+        description: /*i18n*/ 'Whether the question is required'
+    },
     {
         key: 'allow_other',
-        label: 'Allow Other',
-        description: 'Whether the question allows other answers'
+        label: /*i18n*/ 'Allow Other',
+        description: /*i18n*/ 'Whether the question allows other answers'
     },
     {
         key: 'randomise_options_order',
-        label: 'Randomise Options Order',
-        description: 'Whether the options should be randomised'
+        label: /*i18n*/ 'Randomise Options Order',
+        description: /*i18n*/ 'Whether the options should be randomised'
     },
-    {key: 'options', label: 'Options', description: 'Options for the question'}
+    {
+        key: 'options',
+        label: /*i18n*/ 'Options',
+        description: /*i18n*/ 'Options for the question'
+    }
 ];
 
 export const AUTHENTICITY_THRESHOLD = 70;
