@@ -1,7 +1,7 @@
 import {ArrowLeftIcon} from '@phosphor-icons/react/dist/ssr/ArrowLeft';
-import Link from 'next/link';
 import Condition from './condition';
 import {Heading2} from './heading';
+import Link from './link';
 
 interface Props {
     actions?: React.ReactNode;
