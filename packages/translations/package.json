@@ -28,6 +28,10 @@
         "./keys": {
             "types": "./locales/keys.ts",
             "default": "./locales/keys.ts"
+        },
+        "./server": {
+            "types": "./dist/src/runtime/server.d.ts",
+            "default": "./dist/src/runtime/server.js"
         }
     },
     "scripts": {

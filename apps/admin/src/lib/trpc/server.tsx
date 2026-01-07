@@ -4,7 +4,7 @@ import type {TRPCQueryOptions} from '@trpc/tanstack-react-query';
 import {createTRPCOptionsProxy} from '@trpc/tanstack-react-query';
 import {headers} from 'next/headers';
 import {cache} from 'react';
-import {i18n, type Locale} from '@/i18n-config';
+import {i18n, type Locale} from '@glint/translations';
 import {createTRPCContext} from '@/lib/trpc/init';
 import type {AppRouter} from '@/lib/trpc/routers/app';
 import {appRouter} from '@/lib/trpc/routers/app';

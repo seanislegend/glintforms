@@ -1,7 +1,7 @@
 'use client';
 
 import {createContext, type ReactNode, useContext, useMemo} from 'react';
-import type {Locale} from '@/i18n-config';
+import type {Locale} from '@glint/translations';
 import {loadLocale, setLocale, t as tBase} from '@/lib/i18n';
 
 interface I18nContextValue {
