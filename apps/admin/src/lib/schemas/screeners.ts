@@ -25,7 +25,7 @@ const ageScreenerConfigSchema = z.object({
 
 // location screener config
 const locationScreenerConfigSchema = z.object({
-    countries: z.array(z.string().min(1)).min(1, 'at least one country required')
+    countries: z.array(z.string().min(1)).min(1, /* i18n */ 'At least one country required')
 });
 
 // selection screener config input schema (accepts optional ids)
@@ -50,8 +50,8 @@ const selectionScreenerConfigOutputSchema = z.object({
                 value: z.string().min(1)
             })
         )
-        .min(2, 'at least two options required'),
-    question: z.string().min(1, 'question is required')
+        .min(2, /* i18n */ 'At least two options required'),
+    question: z.string().min(1, /* i18n */ 'Question is required')
 });
 
 // selection screener config with transform
@@ -66,7 +66,7 @@ const selectionScreenerConfigSchema = selectionScreenerConfigInputSchema
     }))
     .pipe(selectionScreenerConfigOutputSchema)
     .refine(data => data.options.some(opt => opt.passes), {
-        message: 'at least one option must pass',
+        message: /* i18n */ 'At least one option must pass',
         path: ['options']
     });
 
@@ -82,8 +82,8 @@ export const screenerCreateSchema = z
         description: z.string().optional(),
         name: z
             .string()
-            .min(1, 'name is required')
-            .max(255, 'name must be less than 255 characters')
+            .min(1, /* i18n */ 'Name is required')
+            .max(255, /* i18n */ 'Name must be less than 255 characters')
     })
     .and(screenerConfigSchema);
 

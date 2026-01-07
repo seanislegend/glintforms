@@ -1,3 +1,4 @@
+import {useI18n} from '@/hooks/use-i18n';
 import ResponseAnswerValueRevision from './answer-value-revision';
 
 interface Props {
@@ -12,10 +13,11 @@ interface Props {
 }
 
 const ResponseAnswerValue: React.FC<Props> = ({answer, question}) => {
+    const {t} = useI18n();
     const {metadata, value} = answer;
 
     if (!value) {
-        return <span className="text-muted-foreground">No answer provided</span>;
+        return <span className="text-muted-foreground">{t('No answer provided')}</span>;
     }
 
     const options = question.options.reduce(

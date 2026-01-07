@@ -1,9 +1,12 @@
+'use client';
+
 import {Badge} from '@glint/ui/badge';
 import {CheckSquareIcon} from '@phosphor-icons/react/dist/ssr/CheckSquare';
 import {FileIcon} from '@phosphor-icons/react/dist/ssr/File';
 import {HashIcon} from '@phosphor-icons/react/dist/ssr/Hash';
 import {ListChecksIcon} from '@phosphor-icons/react/dist/ssr/ListChecks';
 import {TextAaIcon} from '@phosphor-icons/react/dist/ssr/TextAa';
+import {useI18n} from '@/hooks/use-i18n';
 import type {QuestionType} from '@/lib/schemas/questions';
 
 interface Props {
@@ -27,6 +30,8 @@ const TEXT_SIZE_MAP = {
 } as const;
 
 const QuestionTypeBadge: React.FC<Props> = ({size = 'md', type}) => {
+    const {t} = useI18n();
+
     const TypeIcon = TYPE_ICONS[type as keyof typeof TYPE_ICONS] || FileIcon;
     const iconSize = ICON_SIZE_MAP[size];
     const textSize = TEXT_SIZE_MAP[size];
@@ -34,7 +39,7 @@ const QuestionTypeBadge: React.FC<Props> = ({size = 'md', type}) => {
     return (
         <Badge className={textSize} variant="outline">
             <TypeIcon className={iconSize} />
-            {type}
+            {t(type).replace('_', ' ')}
         </Badge>
     );
 };

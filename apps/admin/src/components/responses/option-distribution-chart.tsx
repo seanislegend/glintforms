@@ -4,6 +4,7 @@ import {type ChartConfig, ChartContainer, ChartTooltip} from '@glint/ui/chart';
 import EmptyPanel from '@glint/ui/empty-panel';
 import clsx from 'clsx';
 import {Bar, BarChart, Cell, LabelList, XAxis, YAxis} from 'recharts';
+import {useI18n} from '@/hooks/use-i18n';
 
 const colorPalette = [
     'var(--chart-1)',
@@ -37,9 +38,10 @@ interface Props {
 const OptionDistributionChart: React.FC<Props> = ({
     className,
     data,
-    emptyMessage = 'Selections will appear here once responses are recorded.',
+    emptyMessage,
     showCount = true
 }) => {
+    const {t} = useI18n();
     const chartData = data.filter(option => !!option.label);
     const maxCount = Math.max(...chartData.map(option => option.count));
     const chartDataWithMax = chartData.map(option => ({
@@ -51,7 +53,13 @@ const OptionDistributionChart: React.FC<Props> = ({
     if (chartData.length === 0 || hasNoAnswers) {
         return (
             <span className="min-h-full flex">
-                <EmptyPanel className="w-full" text={emptyMessage} />
+                <EmptyPanel
+                    className="w-full"
+                    text={
+                        emptyMessage ||
+                        t('Selections will appear here once responses are recorded.')
+                    }
+                />
             </span>
         );
     }
@@ -92,7 +100,9 @@ const OptionDistributionChart: React.FC<Props> = ({
                         return (
                             <div className="border-border/50 bg-background grid min-w-[8rem] items-start gap-1.5 rounded-lg border px-2.5 py-1.5 text-xs shadow-xl">
                                 <div className="font-medium">{item.payload.label}</div>
-                                <div className="text-muted-foreground">{item.value} selections</div>
+                                <div className="text-muted-foreground">
+                                    {item.value} {t('selections')}
+                                </div>
                             </div>
                         );
                     }}

@@ -12,17 +12,20 @@ export type SurveyList = {
 
 export const surveyInsertSchema = z.object({
     campaignId: z.string().optional(),
-    description: z.string().max(1000, 'Description is too long').optional(),
+    description: z.string().max(1000, /* i18n */ 'Description is too long').optional(),
     newCampaignTitle: z
         .string()
-        .max(200, 'Campaign title is too long')
+        .max(200, /* i18n */ 'Campaign title is too long')
         .refine(val => val === '' || val.length >= 2, {
-            message: 'Campaign title must be at least 2 characters if provided'
+            message: /* i18n */ 'Campaign title must be at least 2 characters if provided'
         })
         .optional(),
     settings: z.record(z.string(), z.union([z.string(), z.number(), z.boolean()])).optional(),
-    slug: z.string().max(200, 'Slug is too long').optional(),
-    title: z.string().max(200, 'Title is too long').min(2, 'Title is too short')
+    slug: z.string().max(200, /* i18n */ 'Slug is too long').optional(),
+    title: z
+        .string()
+        .max(200, /* i18n */ 'Title is too long')
+        .min(2, /* i18n */ 'Title is too short')
 });
 
 export type SurveyInsert = z.infer<typeof surveyInsertSchema>;
@@ -46,13 +49,13 @@ export const surveySettingsSchema = z
         maxResponses: z
             .string()
             .refine(val => val === '' || !Number.isNaN(Number(val)), {
-                message: 'Maximum responses must be a number'
+                message: /* i18n */ 'Maximum responses must be a number'
             })
             .refine(val => val === '' || Number(val) <= MAX_RESPONSE_HARD_LIMIT, {
-                message: `Maximum responses must be less than ${MAX_RESPONSE_HARD_LIMIT}`
+                message: /* i18n */ `Maximum responses must be less than ${MAX_RESPONSE_HARD_LIMIT}`
             })
             .refine(val => val === '' || Number(val) > 0, {
-                message: 'Maximum responses must be greater than 0'
+                message: /* i18n */ 'Maximum responses must be greater than 0'
             }),
         password: z.string().nullable()
     })
@@ -63,7 +66,8 @@ export const surveySettingsSchema = z
             if (!data.hasPassword || data.changePassword) {
                 ctx.addIssue({
                     code: 'custom',
-                    message: 'You must provide a password when password protection is enabled',
+                    message:
+                        /* i18n */ 'You must provide a password when password protection is enabled',
                     path: ['password']
                 });
             }

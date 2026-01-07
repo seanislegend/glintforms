@@ -19,7 +19,7 @@ export const parseImportFile = async (file: File): Promise<ParsedRow[]> => {
     ) {
         return parseXlsxFile(file);
     } else {
-        throw new Error('Unsupported file type. Please upload a CSV or XLSX file.');
+        throw new Error(/* i18n */ 'Unsupported file type. Please upload a CSV or XLSX file.');
     }
 };
 
@@ -28,7 +28,7 @@ const parseCsvFile = async (file: File): Promise<ParsedRow[]> => {
     const lines = text.split('\n').filter(line => line.trim());
 
     if (lines.length < 2) {
-        throw new Error('CSV file must contain at least a header row and one data row.');
+        throw new Error(/* i18n */ 'CSV file must contain at least a header row and one data row.');
     }
 
     const headers = lines[0]?.split(',').map(header => header.trim().replace(/"/g, '')) ?? [];
@@ -54,18 +54,20 @@ const parseXlsxFile = async (file: File): Promise<ParsedRow[]> => {
     const sheetName = workbook.SheetNames[0];
 
     if (!sheetName) {
-        throw new Error('XLSX file must contain at least one worksheet.');
+        throw new Error(/* i18n */ 'XLSX file must contain at least one worksheet.');
     }
 
     const worksheet = workbook.Sheets[sheetName];
     if (!worksheet) {
-        throw new Error('XLSX file must contain at least one worksheet.');
+        throw new Error(/* i18n */ 'XLSX file must contain at least one worksheet.');
     }
 
     const jsonData = XLSX.utils.sheet_to_json(worksheet, {header: 1});
 
     if (jsonData.length < 2) {
-        throw new Error('XLSX file must contain at least a header row and one data row.');
+        throw new Error(
+            /* i18n */ 'XLSX file must contain at least a header row and one data row.'
+        );
     }
 
     const headers = (jsonData[0] as string[]).map(header => String(header).trim());

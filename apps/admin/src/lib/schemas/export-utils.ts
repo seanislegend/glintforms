@@ -1,5 +1,6 @@
 import {type NextRequest, NextResponse} from 'next/server';
 import {getSession} from '@/lib/auth/server';
+import {getServerI18n} from '@/lib/i18n-server';
 import {CONTENT_TYPES} from '@/lib/schemas/constants';
 import {exportSchema} from '@/lib/schemas/export';
 import {generateCSV} from '@/utils/generate-csv';
@@ -23,9 +24,12 @@ interface ExportOptions {
 
 export const createExportHandler = <T>(config: ExportConfig<T>) => {
     return async (request: NextRequest, {params}: {params: Promise<{surveyId: string}>}) => {
+        const locale = request.headers.get('accept-language');
+        const {t} = await getServerI18n(locale);
+
         try {
             const session = await getSession();
-            if (!session) return NextResponse.json({error: 'Unauthorized'}, {status: 401});
+            if (!session) return NextResponse.json({error: t('Unauthorized')}, {status: 401});
 
             const {surveyId} = await params;
             const body = await request.json();
@@ -60,7 +64,7 @@ export const createExportHandler = <T>(config: ExportConfig<T>) => {
             });
         } catch (error) {
             console.error('Export error:', error);
-            return NextResponse.json({error: 'Export failed'}, {status: 500});
+            return NextResponse.json({error: t('Export failed')}, {status: 500});
         }
     };
 };

@@ -29,7 +29,7 @@ interface Props {
 }
 
 const ImportQuestionsDialog: React.FC<Props> = ({onImport, surveyId}) => {
-    const {t} = useI18n();
+    const {locale, t} = useI18n();
     const [isOpen, setIsOpen] = useState(false);
     const [isImporting, setIsImporting] = useState(false);
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -73,6 +73,7 @@ const ImportQuestionsDialog: React.FC<Props> = ({onImport, surveyId}) => {
 
                 const response = await fetch(`/api/surveys/${surveyId}/questions/import`, {
                     method: 'POST',
+                    headers: {'Accept-Language': locale, 'Content-Type': 'multipart/form-data'},
                     body: formData
                 });
 
@@ -97,7 +98,7 @@ const ImportQuestionsDialog: React.FC<Props> = ({onImport, surveyId}) => {
                 setIsImporting(false);
             }
         },
-        [surveyId, onImport, t]
+        [surveyId, onImport, t, locale]
     );
 
     return (

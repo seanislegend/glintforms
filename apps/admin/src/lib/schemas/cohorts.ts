@@ -20,7 +20,10 @@ export type CohortDetails = typeof cohorts.$inferSelect & {
 
 export const cohortCreateSchema = z.object({
     description: z.string().optional(),
-    name: z.string().min(1, 'Name is required').max(255, 'Name must be less than 255 characters')
+    name: z
+        .string()
+        .min(1, /* i18n */ 'Name is required')
+        .max(255, /* i18n */ 'Name must be less than 255 characters')
 });
 
 export const cohortUpdateSchema = cohortCreateSchema.partial();

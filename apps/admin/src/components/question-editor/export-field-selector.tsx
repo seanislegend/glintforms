@@ -55,11 +55,11 @@ const ExportQuestionsFieldSelector: React.FC = () => {
                                                 className="text-sm font-medium"
                                                 htmlFor={field.name}
                                             >
-                                                {fieldText?.label}
+                                                {t(fieldText?.label || '')}
                                             </Label>
                                             {fieldText?.description && (
                                                 <p className="text-xs text-muted-foreground">
-                                                    {fieldText.description}
+                                                    {t(fieldText.description)}
                                                 </p>
                                             )}
                                         </div>

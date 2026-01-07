@@ -54,7 +54,7 @@ const QuestionEditorFooter: React.FC<Props> = ({isDraft, isPending, onAdd}) => {
                         description={t(
                             "Drag and drop questions to change their order. The order will be saved when you click 'Save order'."
                         )}
-                        disabledReason={getReorderButtonDisabledReason(survey?.status)}
+                        disabledReason={t(getReorderButtonDisabledReason(survey?.status) || '')}
                         getItems={() => {
                             const questions = getValues('questions');
                             return questions.map((question: Question, index: number) => ({
