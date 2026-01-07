@@ -1,5 +1,5 @@
 {
-  "generated": "2026-01-06T23:52:32.000Z",
+  "generated": "2026-01-06T23:59:24.375Z",
   "keys": {
     "admin.6621249": {
       "added": "2026-01-06T20:43:32.516Z",
@@ -669,6 +669,127 @@
         }
       ],
       "text": "Assigned by"
+    },
+    "admin.dataTable.columnHeader.5c4419a": {
+      "added": "2026-01-06T23:59:24.378Z",
+      "hash": "5c4419a6999d2a7a29e0e1d00876b4c5992d56d1dbc9a03ecc515eaa554b7f04",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/data-table/column-header.tsx",
+          "line": 58
+        }
+      ],
+      "text": "Desc"
+    },
+    "admin.dataTable.columnHeader.ac20a57": {
+      "added": "2026-01-06T23:59:24.378Z",
+      "hash": "ac20a57bfde0bbc40bfe70895eb1cfacc944aaff06ca784053623c569b3e1b3d",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/data-table/column-header.tsx",
+          "line": 63
+        }
+      ],
+      "text": "Hide"
+    },
+    "admin.dataTable.columnHeader.cddeba5": {
+      "added": "2026-01-06T23:59:24.378Z",
+      "hash": "cddeba5cfc9a05ad4415f0d25b1c9be2d44103e5b12352a2a811f0c7ebffffe7",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/data-table/column-header.tsx",
+          "line": 54
+        }
+      ],
+      "text": "Asc"
+    },
+    "admin.dataTable.pagination.0a30a81": {
+      "added": "2026-01-06T23:58:17.425Z",
+      "hash": "0a30a815d67d7dd2018fe18f4e995a26f3b753369cd4327e9b6034b50a2cd153",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/data-table/pagination.tsx",
+          "line": 47
+        }
+      ],
+      "text": "Page"
+    },
+    "admin.dataTable.pagination.141b69f": {
+      "added": "2026-01-06T23:58:17.425Z",
+      "hash": "141b69f95916694982e525599db8205af7ecd6ced92d36c8aec6c5a9daa1e90e",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/data-table/pagination.tsx",
+          "line": 27
+        }
+      ],
+      "text": "Rows per page"
+    },
+    "admin.dataTable.pagination.28391d3": {
+      "added": "2026-01-06T23:58:17.426Z",
+      "hash": "28391d3bc64ec15cbb090426b04aa6b7649c3cc85f11230bb0105e02d15e3624",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/data-table/pagination.tsx",
+          "line": 47
+        }
+      ],
+      "text": "of"
+    },
+    "admin.dataTable.pagination.2865e0f": {
+      "added": "2026-01-06T23:58:17.426Z",
+      "hash": "2865e0f438b48b92d7793a9d7cc8663915b284de7a1dfd8f7f1bbd6e8533f832",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/data-table/pagination.tsx",
+          "line": 66
+        }
+      ],
+      "text": "Go to previous page"
+    },
+    "admin.dataTable.pagination.3f08c16": {
+      "added": "2026-01-06T23:58:17.425Z",
+      "hash": "3f08c166d713abcf6a3088d7542da836adb6c60354b9e496300fc93aa4c87335",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/data-table/pagination.tsx",
+          "line": 23
+        }
+      ],
+      "text": "total items"
+    },
+    "admin.dataTable.pagination.5f0497c": {
+      "added": "2026-01-06T23:58:17.426Z",
+      "hash": "5f0497cf59ee37cb22588108919610c1e0259c773c39bb100c4e716c68e472c4",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/data-table/pagination.tsx",
+          "line": 57
+        }
+      ],
+      "text": "Go to first page"
+    },
+    "admin.dataTable.pagination.7e021af": {
+      "added": "2026-01-06T23:58:17.426Z",
+      "hash": "7e021afbf6ac45b7c0f095f6649538dd0a03e0572b5416eb579067343926d945",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/data-table/pagination.tsx",
+          "line": 75
+        }
+      ],
+      "text": "Go to next page"
+    },
+    "admin.dataTable.pagination.8db5b65": {
+      "added": "2026-01-06T23:58:17.426Z",
+      "hash": "8db5b659bf924a80347ed5f102404fb4b0fbac5c57643e7b3cd04af3daf4b06c",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/data-table/pagination.tsx",
+          "line": 84
+        }
+      ],
+      "text": "Go to last page"
     },
     "admin.dataTable.rowActions.b40b371": {
       "added": "2026-01-06T20:43:32.509Z",
@@ -1817,6 +1938,28 @@
         }
       ],
       "text": "Dashboard"
+    },
+    "admin.nav.secondary.c349345": {
+      "added": "2026-01-06T23:58:17.425Z",
+      "hash": "c349345d8b4816a442f7826cc5bcc69628075dc2de6771adc1fce02b1fd940b9",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/nav/secondary.tsx",
+          "line": 23
+        }
+      ],
+      "text": "Get Help"
+    },
+    "admin.nav.sub.30a6421": {
+      "added": "2026-01-06T23:58:17.425Z",
+      "hash": "30a64216eaeac5d3a328c11bf5e3269d10a3ca0d50aa7a8b99337ab429b73cb2",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/nav/sub.tsx",
+          "line": 47
+        }
+      ],
+      "text": "View all"
     },
     "admin.nav.user.2e9d08c": {
       "added": "2026-01-06T20:43:32.511Z",
@@ -4220,6 +4363,10 @@
         {
           "file": "apps/admin/src/components/survey-insights/responses-chart-tooltip.tsx",
           "line": 65
+        },
+        {
+          "file": "apps/admin/src/components/survey-overview/stats.tsx",
+          "line": 60
         }
       ],
       "text": "Completion rate"
@@ -4435,6 +4582,120 @@
         }
       ],
       "text": "You're all caught up!"
+    },
+    "admin.surveyOverview.stats.21ae958": {
+      "added": "2026-01-06T23:54:21.501Z",
+      "hash": "21ae95815cb425606eb195250610d073afc58351a870b761c2ce6ddba84da3e9",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/survey-overview/stats.tsx",
+          "line": 55
+        }
+      ],
+      "text": "Percentage of screened respondents who completed the survey"
+    },
+    "admin.surveyOverview.stats.2ae69e3": {
+      "added": "2026-01-06T23:54:21.501Z",
+      "hash": "2ae69e341aeaae60a1d3a214707e5a863bc13b00104c694b93628e8b6d59a1c8",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/survey-overview/stats.tsx",
+          "line": 37
+        }
+      ],
+      "text": "Failed screener attempts"
+    },
+    "admin.surveyOverview.stats.4533ce5": {
+      "added": "2026-01-06T23:54:21.502Z",
+      "hash": "4533ce5f9c19704f2b2ac86801823f2c4ca46974737c94040765d7d8e55544b8",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/survey-overview/stats.tsx",
+          "line": 71
+        }
+      ],
+      "text": "Average completion time of completed responses"
+    },
+    "admin.surveyOverview.stats.8ddf2ea": {
+      "added": "2026-01-06T23:54:21.502Z",
+      "hash": "8ddf2eac6d1f1a602011e1877ffeba46af005eb1230d669583534bbd9dd63140",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/survey-overview/stats.tsx",
+          "line": 74
+        }
+      ],
+      "text": "Avg. completion time"
+    },
+    "admin.surveyOverview.stats.a099a2b": {
+      "added": "2026-01-06T23:54:21.502Z",
+      "hash": "a099a2be6e816ebcc7c0cffd7ed6e4739d7e451aa48e0b464647e7a7d2fe9184",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/survey-overview/stats.tsx",
+          "line": 67
+        }
+      ],
+      "text": "Avg. authenticity score"
+    },
+    "admin.surveyOverview.stats.b794c21": {
+      "added": "2026-01-06T23:54:21.502Z",
+      "hash": "b794c218b1efc6b5daa8ac6511d9e21cc85a75a8e070325d743234ede29ebfbd",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/survey-overview/stats.tsx",
+          "line": 64
+        }
+      ],
+      "text": "Average authenticity score of completed responses"
+    },
+    "admin.surveyOverview.stats.bea2f40": {
+      "added": "2026-01-06T23:54:21.502Z",
+      "hash": "bea2f400919501fd2dc41371fb4cc1908ec8d9c627594ea79de53d6ec56d6c32",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/survey-overview/stats.tsx",
+          "line": 56
+        }
+      ],
+      "text": "Percentage of respondents who completed the survey"
+    },
+    "admin.surveyOverview.stats.da7e4b7": {
+      "added": "2026-01-06T23:54:21.501Z",
+      "hash": "da7e4b7d2cf65f6a83f91dde59f913a09c62648ea379ca6f321993174ea4dd46",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/survey-overview/stats.tsx",
+          "line": 45
+        },
+        {
+          "file": "apps/admin/src/components/survey-overview/stats.tsx",
+          "line": 49
+        }
+      ],
+      "text": "Total responses"
+    },
+    "admin.surveyOverview.stats.e5688f9": {
+      "added": "2026-01-06T23:54:21.501Z",
+      "hash": "e5688f9c42e5f8c99c7dd0378afa62e46fc74cc1303db0b9532e8b8325dee35e",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/survey-overview/stats.tsx",
+          "line": 44
+        }
+      ],
+      "text": "Total respondents who passed the screener"
+    },
+    "admin.surveyOverview.stats.fb41332": {
+      "added": "2026-01-06T23:54:21.501Z",
+      "hash": "fb41332d73b47f769c855cf765f396dcc109e2d26c351a561e803fe461387bc6",
+      "occurrences": [
+        {
+          "file": "apps/admin/src/components/survey-overview/stats.tsx",
+          "line": 34
+        }
+      ],
+      "text": "Total respondents who failed the screener"
     },
     "admin.surveyOverview.testingOverview.622675c": {
       "added": "2026-01-06T20:43:32.510Z",
@@ -5847,6 +6108,10 @@
         {
           "file": "apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/navbar.tsx",
           "line": 74
+        },
+        {
+          "file": "apps/admin/src/components/nav/secondary.tsx",
+          "line": 22
         }
       ],
       "text": "Settings"

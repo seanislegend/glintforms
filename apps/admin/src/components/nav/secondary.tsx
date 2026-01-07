@@ -1,3 +1,6 @@
+'use client';
+
+import Link from '@glint/ui/link';
 import {
     SidebarGroup,
     SidebarGroupContent,
@@ -7,17 +10,19 @@ import {
 } from '@glint/ui/sidebar';
 import {GearIcon} from '@phosphor-icons/react/dist/ssr/Gear';
 import {InfoIcon} from '@phosphor-icons/react/dist/ssr/Info';
-import Link from '@glint/ui/link';
 import type * as React from 'react';
-
-const data: NavItem[] = [
-    {Icon: GearIcon, title: 'Settings', url: '/settings'},
-    {Icon: InfoIcon, title: 'Get Help', url: '/help'}
-];
+import {useI18n} from '@/hooks/use-i18n';
 
 const NavSecondary: React.FC<React.ComponentPropsWithoutRef<typeof SidebarGroup>> = ({
     ...props
 }) => {
+    const {t} = useI18n();
+
+    const data: NavItem[] = [
+        {Icon: GearIcon, title: t('Settings'), url: '/settings'},
+        {Icon: InfoIcon, title: t('Get Help'), url: '/help'}
+    ];
+
     return (
         <SidebarGroup {...props}>
             <SidebarGroupContent>

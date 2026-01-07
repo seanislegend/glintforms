@@ -1,4 +1,5 @@
 'use no memo';
+'use client';
 
 import {Select, SelectItem, SelectPopup, SelectTrigger, SelectValue} from '@glint/form/select';
 import Button from '@glint/ui/button';
@@ -7,20 +8,23 @@ import {CaretDoubleRightIcon} from '@phosphor-icons/react/dist/ssr/CaretDoubleRi
 import {CaretLeftIcon} from '@phosphor-icons/react/dist/ssr/CaretLeft';
 import {CaretRightIcon} from '@phosphor-icons/react/dist/ssr/CaretRight';
 import type {Table} from '@tanstack/react-table';
+import {useI18n} from '@/hooks/use-i18n';
 
 interface DataTablePaginationProps<TData> {
     table: Table<TData>;
 }
 
 export const DataTablePagination = <TData,>({table}: DataTablePaginationProps<TData>) => {
+    const {t} = useI18n();
+
     return (
         <div className="flex items-center justify-between px-2">
             <div className="flex-1 text-sm text-muted-foreground">
-                {table.getFilteredRowModel().rows.length} total items
+                {table.getFilteredRowModel().rows.length} {t('total items')}
             </div>
             <div className="flex items-center space-x-6 lg:space-x-8">
                 <div className="flex items-center space-x-2">
-                    <p className="text-sm font-medium">Rows per page</p>
+                    <p className="text-sm font-medium">{t('Rows per page')}</p>
                     <Select
                         value={`${table.getState().pagination.pageSize}`}
                         onValueChange={value => {
@@ -40,7 +44,8 @@ export const DataTablePagination = <TData,>({table}: DataTablePaginationProps<TD
                     </Select>
                 </div>
                 <div className="flex w-[100px] items-center justify-center text-sm font-medium">
-                    Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
+                    {t('Page')} {table.getState().pagination.pageIndex + 1} {t('of')}{' '}
+                    {table.getPageCount()}
                 </div>
                 <div className="flex items-center space-x-2">
                     <Button
@@ -49,7 +54,7 @@ export const DataTablePagination = <TData,>({table}: DataTablePaginationProps<TD
                         onClick={() => table.setPageIndex(0)}
                         disabled={!table.getCanPreviousPage()}
                     >
-                        <span className="sr-only">Go to first page</span>
+                        <span className="sr-only">{t('Go to first page')}</span>
                         <CaretDoubleLeftIcon className="size-4" />
                     </Button>
                     <Button
@@ -58,7 +63,7 @@ export const DataTablePagination = <TData,>({table}: DataTablePaginationProps<TD
                         onClick={() => table.previousPage()}
                         disabled={!table.getCanPreviousPage()}
                     >
-                        <span className="sr-only">Go to previous page</span>
+                        <span className="sr-only">{t('Go to previous page')}</span>
                         <CaretLeftIcon className="size-4" />
                     </Button>
                     <Button
@@ -67,7 +72,7 @@ export const DataTablePagination = <TData,>({table}: DataTablePaginationProps<TD
                         onClick={() => table.nextPage()}
                         disabled={!table.getCanNextPage()}
                     >
-                        <span className="sr-only">Go to next page</span>
+                        <span className="sr-only">{t('Go to next page')}</span>
                         <CaretRightIcon className="size-4" />
                     </Button>
                     <Button
@@ -76,7 +81,7 @@ export const DataTablePagination = <TData,>({table}: DataTablePaginationProps<TD
                         onClick={() => table.setPageIndex(table.getPageCount() - 1)}
                         disabled={!table.getCanNextPage()}
                     >
-                        <span className="sr-only">Go to last page</span>
+                        <span className="sr-only">{t('Go to last page')}</span>
                         <CaretDoubleRightIcon className="size-4" />
                     </Button>
                 </div>

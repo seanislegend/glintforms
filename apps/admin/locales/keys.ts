@@ -1,7 +1,7 @@
 /**
  * Auto-generated translation keys
  * Do not edit manually - run `bun translation extract` to regenerate
- * Generated: 2026-01-06T23:52:32.000Z
+ * Generated: 2026-01-06T23:59:24.375Z
  */
 
 export interface TranslationKeys {
@@ -337,6 +337,83 @@ export interface TranslationKeys {
      * @see apps/admin/src/app/[locale]/(app)/cohorts/[cohortId]/respondent-columns.tsx:49
      */
     "admin.cohorts.respondentColumns.f5ecade": string;
+
+    /**
+     * **Text:** "Desc"
+     *
+     * @see apps/admin/src/components/data-table/column-header.tsx:58
+     */
+    "admin.dataTable.columnHeader.5c4419a": string;
+
+    /**
+     * **Text:** "Hide"
+     *
+     * @see apps/admin/src/components/data-table/column-header.tsx:63
+     */
+    "admin.dataTable.columnHeader.ac20a57": string;
+
+    /**
+     * **Text:** "Asc"
+     *
+     * @see apps/admin/src/components/data-table/column-header.tsx:54
+     */
+    "admin.dataTable.columnHeader.cddeba5": string;
+
+    /**
+     * **Text:** "Page"
+     *
+     * @see apps/admin/src/components/data-table/pagination.tsx:47
+     */
+    "admin.dataTable.pagination.0a30a81": string;
+
+    /**
+     * **Text:** "Rows per page"
+     *
+     * @see apps/admin/src/components/data-table/pagination.tsx:27
+     */
+    "admin.dataTable.pagination.141b69f": string;
+
+    /**
+     * **Text:** "of"
+     *
+     * @see apps/admin/src/components/data-table/pagination.tsx:47
+     */
+    "admin.dataTable.pagination.28391d3": string;
+
+    /**
+     * **Text:** "Go to previous page"
+     *
+     * @see apps/admin/src/components/data-table/pagination.tsx:66
+     */
+    "admin.dataTable.pagination.2865e0f": string;
+
+    /**
+     * **Text:** "total items"
+     *
+     * @see apps/admin/src/components/data-table/pagination.tsx:23
+     */
+    "admin.dataTable.pagination.3f08c16": string;
+
+    /**
+     * **Text:** "Go to first page"
+     *
+     * @see apps/admin/src/components/data-table/pagination.tsx:57
+     */
+    "admin.dataTable.pagination.5f0497c": string;
+
+    /**
+     * **Text:** "Go to next page"
+     *
+     * @see apps/admin/src/components/data-table/pagination.tsx:75
+     */
+    "admin.dataTable.pagination.7e021af": string;
+
+    /**
+     * **Text:** "Go to last page"
+     *
+     * @see apps/admin/src/components/data-table/pagination.tsx:84
+     */
+    "admin.dataTable.pagination.8db5b65": string;
 
     /**
      * **Text:** "Open menu"
@@ -896,6 +973,20 @@ export interface TranslationKeys {
      * @see apps/admin/src/components/nav/main.tsx:41
      */
     "admin.nav.main.67b6964": string;
+
+    /**
+     * **Text:** "Get Help"
+     *
+     * @see apps/admin/src/components/nav/secondary.tsx:23
+     */
+    "admin.nav.secondary.c349345": string;
+
+    /**
+     * **Text:** "View all"
+     *
+     * @see apps/admin/src/components/nav/sub.tsx:47
+     */
+    "admin.nav.sub.30a6421": string;
 
     /**
      * **Text:** "Confirm logout"
@@ -2065,6 +2156,7 @@ export interface TranslationKeys {
      * **Text:** "Completion rate"
      *
      * @see apps/admin/src/components/survey-insights/responses-chart-tooltip.tsx:65
+     * @see apps/admin/src/components/survey-overview/stats.tsx:60
      */
     "admin.surveyInsights.responsesChartTooltip.85a9d6f": string;
 
@@ -2188,6 +2280,77 @@ export interface TranslationKeys {
      * @see apps/admin/src/components/survey-overview/recent-activity.tsx:30
      */
     "admin.surveyOverview.recentActivity.ee1a1e3": string;
+
+    /**
+     * **Text:** "Percentage of screened respondents who completed the survey"
+     *
+     * @see apps/admin/src/components/survey-overview/stats.tsx:55
+     */
+    "admin.surveyOverview.stats.21ae958": string;
+
+    /**
+     * **Text:** "Failed screener attempts"
+     *
+     * @see apps/admin/src/components/survey-overview/stats.tsx:37
+     */
+    "admin.surveyOverview.stats.2ae69e3": string;
+
+    /**
+     * **Text:** "Average completion time of completed responses"
+     *
+     * @see apps/admin/src/components/survey-overview/stats.tsx:71
+     */
+    "admin.surveyOverview.stats.4533ce5": string;
+
+    /**
+     * **Text:** "Avg. completion time"
+     *
+     * @see apps/admin/src/components/survey-overview/stats.tsx:74
+     */
+    "admin.surveyOverview.stats.8ddf2ea": string;
+
+    /**
+     * **Text:** "Avg. authenticity score"
+     *
+     * @see apps/admin/src/components/survey-overview/stats.tsx:67
+     */
+    "admin.surveyOverview.stats.a099a2b": string;
+
+    /**
+     * **Text:** "Average authenticity score of completed responses"
+     *
+     * @see apps/admin/src/components/survey-overview/stats.tsx:64
+     */
+    "admin.surveyOverview.stats.b794c21": string;
+
+    /**
+     * **Text:** "Percentage of respondents who completed the survey"
+     *
+     * @see apps/admin/src/components/survey-overview/stats.tsx:56
+     */
+    "admin.surveyOverview.stats.bea2f40": string;
+
+    /**
+     * **Text:** "Total responses"
+     *
+     * @see apps/admin/src/components/survey-overview/stats.tsx:45
+     * @see apps/admin/src/components/survey-overview/stats.tsx:49
+     */
+    "admin.surveyOverview.stats.da7e4b7": string;
+
+    /**
+     * **Text:** "Total respondents who passed the screener"
+     *
+     * @see apps/admin/src/components/survey-overview/stats.tsx:44
+     */
+    "admin.surveyOverview.stats.e5688f9": string;
+
+    /**
+     * **Text:** "Total respondents who failed the screener"
+     *
+     * @see apps/admin/src/components/survey-overview/stats.tsx:34
+     */
+    "admin.surveyOverview.stats.fb41332": string;
 
     /**
      * **Text:** "While your survey is in testing mode, you can test it by sending requests to the API. Any responses you receive will be discarded when you move to active mode."
@@ -2867,6 +3030,7 @@ export interface TranslationKeys {
      *
      * @see apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/navbar.tsx:73
      * @see apps/admin/src/app/[locale]/(app)/surveys/[surveyId]/navbar.tsx:74
+     * @see apps/admin/src/components/nav/secondary.tsx:22
      */
     "admin.surveys.navbar.74a883a": string;
 
@@ -3859,6 +4023,17 @@ export type TranslationText =
     | "Create cohort"
     | "Assigned"
     | "Assigned by"
+    | "Desc"
+    | "Hide"
+    | "Asc"
+    | "Page"
+    | "Rows per page"
+    | "of"
+    | "Go to previous page"
+    | "total items"
+    | "Go to first page"
+    | "Go to next page"
+    | "Go to last page"
     | "Open menu"
     | "Delete"
     | "Type to filter data..."
@@ -3923,6 +4098,8 @@ export type TranslationText =
     | "data collection"
     | "Glint - An AI-assisted survey platform"
     | "Dashboard"
+    | "Get Help"
+    | "View all"
     | "Confirm logout"
     | "Log out"
     | "Are you sure you want to log out? You will need to sign in again to access your account."
@@ -4073,6 +4250,16 @@ export type TranslationText =
     | "Recent Activity"
     | "No recent activity"
     | "You're all caught up!"
+    | "Percentage of screened respondents who completed the survey"
+    | "Failed screener attempts"
+    | "Average completion time of completed responses"
+    | "Avg. completion time"
+    | "Avg. authenticity score"
+    | "Average authenticity score of completed responses"
+    | "Percentage of respondents who completed the survey"
+    | "Total responses"
+    | "Total respondents who passed the screener"
+    | "Total respondents who failed the screener"
     | "While your survey is in testing mode, you can test it by sending requests to the API. Any responses you receive will be discarded when you move to active mode."
     | "Test your survey"
     | "Unknown error"

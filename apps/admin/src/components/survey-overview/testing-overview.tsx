@@ -2,8 +2,8 @@
 
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@glint/ui/card';
 import Spinner from '@glint/ui/spinner';
-import {useI18n} from '@/hooks/use-i18n';
 import {useQuery} from '@tanstack/react-query';
+import {useI18n} from '@/hooks/use-i18n';
 
 interface Props {
     surveyId: string;

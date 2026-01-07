@@ -1,3 +1,5 @@
+'use client';
+
 import Button from '@glint/ui/button';
 import {Menu, MenuItem, MenuPopup, MenuSeparator, MenuTrigger} from '@glint/ui/menu';
 import {cn} from '@glint/ui/utils';
@@ -6,6 +8,7 @@ import {ArrowUpIcon} from '@phosphor-icons/react/dist/ssr/ArrowUp';
 import {CaretUpDownIcon} from '@phosphor-icons/react/dist/ssr/CaretUpDown';
 import {EyeSlashIcon} from '@phosphor-icons/react/dist/ssr/EyeSlash';
 import type {Column} from '@tanstack/react-table';
+import {useI18n} from '@/hooks/use-i18n';
 
 interface DataTableColumnHeaderProps<TData, TValue> extends React.HTMLAttributes<HTMLDivElement> {
     column: Column<TData, TValue>;
@@ -17,6 +20,8 @@ export const DataTableColumnHeader = <TData, TValue>({
     title,
     className
 }: DataTableColumnHeaderProps<TData, TValue>) => {
+    const {t} = useI18n();
+
     if (!column.getCanSort()) {
         return <div className={cn(className)}>{title}</div>;
     }
@@ -46,16 +51,16 @@ export const DataTableColumnHeader = <TData, TValue>({
                     <MenuPopup>
                         <MenuItem onClick={() => column.toggleSorting(false)}>
                             <ArrowUpIcon className="size-4" />
-                            Asc
+                            {t('Asc')}
                         </MenuItem>
                         <MenuItem onClick={() => column.toggleSorting(true)}>
                             <ArrowDownIcon className="size-4" />
-                            Desc
+                            {t('Desc')}
                         </MenuItem>
                         <MenuSeparator />
                         <MenuItem onClick={() => column.toggleVisibility(false)}>
                             <EyeSlashIcon className="size-4" />
-                            Hide
+                            {t('Hide')}
                         </MenuItem>
                     </MenuPopup>
                 </Menu>

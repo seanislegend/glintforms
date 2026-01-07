@@ -2,6 +2,7 @@
 
 import {useSuspenseQuery} from '@tanstack/react-query';
 import StatCard from '@/components/stat-card';
+import {useI18n} from '@/hooks/use-i18n';
 import {useTRPC} from '@/lib/trpc/react';
 
 interface Props {
@@ -23,51 +24,54 @@ export const SurveyResponsesStatsCards: React.FC<CardProps> = ({
     failedScreenerAttempts,
     totalResponses
 }) => {
+    const {t} = useI18n();
     const hasScreeners = !!(failedScreenerAttempts && failedScreenerAttempts > 0);
 
     return (
         <div className="flex gap-4 mb-8 animate-in fade-in duration-300 flex-wrap [&_>div]:flex-grow 2xl:[&_>div]:flex-1">
             {hasScreeners && (
                 <StatCard
-                    label="Total respondents who failed the screener"
+                    label={t('Total respondents who failed the screener')}
                     icon="screener"
                     theme="red"
-                    title="Failed Screener Attempts"
+                    title={t('Failed screener attempts')}
                     value={failedScreenerAttempts}
                 />
             )}
             <StatCard
                 label={
-                    hasScreeners ? 'Total respondents who passed the screener' : 'Total responses'
+                    hasScreeners
+                        ? t('Total respondents who passed the screener')
+                        : t('Total responses')
                 }
                 icon="users"
                 theme="blue"
-                title="Total Responses"
+                title={t('Total responses')}
                 value={totalResponses}
             />
             <StatCard
                 label={
                     hasScreeners
-                        ? 'Percentage of screened respondents who completed the survey'
-                        : 'Percentage of respondents who completed the survey'
+                        ? t('Percentage of screened respondents who completed the survey')
+                        : t('Percentage of respondents who completed the survey')
                 }
                 icon="completion"
                 theme="green"
-                title="Completion Rate"
+                title={t('Completion rate')}
                 value={completionRate}
             />
             <StatCard
-                label="Average authenticity score of completed responses"
+                label={t('Average authenticity score of completed responses')}
                 icon="authenticity"
                 theme="orange"
-                title="Avg. Authenticity Score"
+                title={t('Avg. authenticity score')}
                 value={avgAuthenticityScore ? `${avgAuthenticityScore}%` : undefined}
             />
             <StatCard
-                label="Average completion time of completed responses"
+                label={t('Average completion time of completed responses')}
                 icon="time"
                 theme="yellow"
-                title="Avg. Completion Time"
+                title={t('Avg. completion time')}
                 value={avgCompletionTimeMinutes}
             />
         </div>
